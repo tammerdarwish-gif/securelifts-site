@@ -1,24 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { FaPhoneAlt, FaCalendarCheck } from "react-icons/fa";
+import { FaCalendarCheck } from "react-icons/fa";
 
 export default function BookServicePage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-  name: "",
-  phone: "",
-  email: "",
-  address: "",
-  city: "",
-  zip: "",
-  service: "Type of Service Needed",
-  preferredDate: "",
-  preferredTime: "",
-  message: "",
-});
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    city: "",
+    zip: "",
+    service: "Type of Service Needed",
+    preferredDate: "",
+    preferredTime: "",
+    message: "",
+  });
 
   const timeSlots = [
     "8:00 AM - 10:00 AM",
@@ -48,29 +48,48 @@ export default function BookServicePage() {
         headers: {
           "Content-Type": "application/json",
         },
-       body: JSON.stringify({
-  name: formData.name,
-  phone: formData.phone,
-  email: formData.email,
-  address: formData.address,
-  city: formData.city,
-  zip: formData.zip,
-  service: formData.service,
-  date: formData.preferredDate,
-  time: formData.preferredTime,
-  message: formData.message,
-}),
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          address: formData.address,
+          city: formData.city,
+          zip: formData.zip,
+          service: formData.service,
+          date: formData.preferredDate,
+          time: formData.preferredTime,
+          message: formData.message,
+        }),
       });
 
-      const data = await res.json();
+      const rawText = await res.text();
+
+      let data: any = {};
+      try {
+        data = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        data = { error: rawText || `HTTP ${res.status}` };
+      }
+
+      if (!res.ok) {
+        alert(
+          `Form error: ${data?.error || data?.message || `HTTP ${res.status}`}`
+        );
+        return;
+      }
 
       if (data.success) {
         setSubmitted(true);
       } else {
-        alert("Something went wrong. Please call us at (866) 828-1818.");
+        alert(
+          `Form error: ${data?.error || data?.message || "Unknown server error"}`
+        );
       }
-    } catch {
-      alert("Something went wrong. Please call us at (866) 828-1818.");
+    } catch (error: any) {
+      console.error("BOOK SERVICE SUBMIT ERROR:", error);
+      alert(
+        `Submit failed: ${error?.message || "Network or server error"}`
+      );
     } finally {
       setLoading(false);
     }
@@ -112,61 +131,61 @@ export default function BookServicePage() {
           onSubmit={handleSubmit}
           className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
         >
-         <div className="grid gap-6 md:grid-cols-2">
-  <input
-    required
-    name="name"
-    value={formData.name}
-    onChange={handleChange}
-    placeholder="Full Name"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
+          <div className="grid gap-6 md:grid-cols-2">
+            <input
+              required
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Full Name"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
 
-  <input
-    required
-    type="tel"
-    name="phone"
-    value={formData.phone}
-    onChange={handleChange}
-    placeholder="Phone Number"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
+            <input
+              required
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
 
-  <input
-    type="email"
-    name="email"
-    value={formData.email}
-    onChange={handleChange}
-    placeholder="Email Address"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
 
-  <input
-    required
-    name="address"
-    value={formData.address}
-    onChange={handleChange}
-    placeholder="Service Address"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
+            <input
+              required
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Service Address"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
 
-  <input
-    required
-    name="city"
-    value={formData.city}
-    onChange={handleChange}
-    placeholder="City"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
+            <input
+              required
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              placeholder="City"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
 
-  <input
-    name="zip"
-    value={formData.zip}
-    onChange={handleChange}
-    placeholder="ZIP Code"
-    className="rounded-xl border border-slate-300 px-4 py-4"
-  />
-</div>
+            <input
+              name="zip"
+              value={formData.zip}
+              onChange={handleChange}
+              placeholder="ZIP Code"
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            />
+          </div>
 
           <div className="mt-6 grid gap-6">
             <select
