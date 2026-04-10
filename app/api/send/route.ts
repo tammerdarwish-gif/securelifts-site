@@ -1,9 +1,19 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      console.error("Missing RESEND_API_KEY");
+      return Response.json(
+        { success: false, error: "Server email configuration is missing." },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
     const body = await req.json();
 
     const {
@@ -37,6 +47,9 @@ export async function POST(req: Request) {
     return Response.json({ success: true, result });
   } catch (error) {
     console.error("SEND ERROR:", error);
-    return Response.json({ success: false, error: "Email failed to send" }, { status: 500 });
+    return Response.json(
+      { success: false, error: "Email failed to send." },
+      { status: 500 }
+    );
   }
 }
