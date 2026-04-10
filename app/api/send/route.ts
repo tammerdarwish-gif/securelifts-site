@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     } = body ?? {};
 
     const result = await resend.emails.send({
-      from: "SecureLifts <onboarding@resend.dev>",
+from: "SecureLifts <bookings@send.securelifts.com>",
       to: "info@securelifts.com",
       subject: "New Service Request - SecureLifts",
       html: `
