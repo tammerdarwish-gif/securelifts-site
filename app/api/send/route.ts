@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     if (!apiKey) {
       console.error("Missing RESEND_API_KEY");
       return Response.json(
-        { success: false, error: "Server email configuration is missing." },
+        { success: false, error: "Missing API key" },
         { status: 500 }
       );
     }
@@ -20,7 +20,9 @@ export async function POST(req: Request) {
       name,
       phone,
       email,
+      address,
       city,
+      zip,
       service,
       date,
       time,
@@ -28,7 +30,7 @@ export async function POST(req: Request) {
     } = body;
 
     const result = await resend.emails.send({
-      from: "SecureLifts <bookings@send.securelifts.com>",
+      from: "SecureLifts <onboarding@resend.dev>",
       to: "info@securelifts.com",
       subject: "New Service Request - SecureLifts",
       html: `
@@ -36,7 +38,9 @@ export async function POST(req: Request) {
         <p><strong>Name:</strong> ${name || ""}</p>
         <p><strong>Phone:</strong> ${phone || ""}</p>
         <p><strong>Email:</strong> ${email || ""}</p>
+        <p><strong>Service Address:</strong> ${address || ""}</p>
         <p><strong>City:</strong> ${city || ""}</p>
+        <p><strong>ZIP Code:</strong> ${zip || ""}</p>
         <p><strong>Service:</strong> ${service || ""}</p>
         <p><strong>Preferred Date:</strong> ${date || ""}</p>
         <p><strong>Preferred Time:</strong> ${time || ""}</p>
