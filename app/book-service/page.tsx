@@ -3,35 +3,56 @@
 import { useState } from "react";
 import { FaCalendarCheck } from "react-icons/fa";
 
+type FormDataState = {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  zip: string;
+  service: string;
+  preferredDate: string;
+  preferredTime: string;
+  message: string;
+};
+
+type SendApiResponse = {
+  success?: boolean;
+  error?: string;
+  message?: string;
+};
+
+const TIME_SLOTS = [
+  "8:00 AM - 10:00 AM",
+  "10:00 AM - 12:00 PM",
+  "12:00 PM - 2:00 PM",
+  "2:00 PM - 4:00 PM",
+  "4:00 PM - 6:00 PM",
+];
+
+const INITIAL_FORM_DATA: FormDataState = {
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  city: "",
+  zip: "",
+  service: "Type of Service Needed",
+  preferredDate: "",
+  preferredTime: "",
+  message: "",
+};
+
 export default function BookServicePage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    city: "",
-    zip: "",
-    service: "Type of Service Needed",
-    preferredDate: "",
-    preferredTime: "",
-    message: "",
-  });
-
-  const timeSlots = [
-    "8:00 AM - 10:00 AM",
-    "10:00 AM - 12:00 PM",
-    "12:00 PM - 2:00 PM",
-    "2:00 PM - 4:00 PM",
-    "4:00 PM - 6:00 PM",
-  ];
+  const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -43,7 +64,7 @@ export default function BookServicePage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,34 +83,32 @@ export default function BookServicePage() {
         }),
       });
 
-      const rawText = await res.text();
+      let data: SendApiResponse = {};
 
-      let data: any = {};
       try {
-        data = rawText ? JSON.parse(rawText) : {};
+        data = (await response.json()) as SendApiResponse;
       } catch {
-        data = { error: rawText || `HTTP ${res.status}` };
+        data = {
+          success: false,
+          error: `HTTP ${response.status}`,
+        };
       }
 
-      if (!res.ok) {
-        alert(
-          `Form error: ${data?.error || data?.message || `HTTP ${res.status}`}`
-        );
+      if (!response.ok || !data.success) {
+        const errorMessage =
+          data.error ||
+          data.message ||
+          `Request failed with status ${response.status}`;
+        alert(`Form error: ${errorMessage}`);
         return;
       }
 
-      if (data.success) {
-        setSubmitted(true);
-      } else {
-        alert(
-          `Form error: ${data?.error || data?.message || "Unknown server error"}`
-        );
-      }
-    } catch (error: any) {
+      setSubmitted(true);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Network or server error";
       console.error("BOOK SERVICE SUBMIT ERROR:", error);
-      alert(
-        `Submit failed: ${error?.message || "Network or server error"}`
-      );
+      alert(`Submit failed: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -102,7 +121,9 @@ export default function BookServicePage() {
           <div className="mx-auto inline-flex rounded-full bg-red-50 p-5 text-red-600">
             <FaCalendarCheck className="text-3xl" />
           </div>
+
           <h1 className="mt-6 text-4xl font-black">Request Received</h1>
+
           <p className="mt-4 text-lg text-slate-600">
             Thank you. SecureLifts received your service request and will contact
             you shortly to confirm details.
@@ -119,6 +140,7 @@ export default function BookServicePage() {
           <h1 className="text-4xl font-black md:text-6xl">
             Book Garage Door Service
           </h1>
+
           <p className="mt-5 max-w-2xl text-lg text-slate-300">
             Fill out the form below and our team will reach out to schedule your
             service request.
@@ -220,7 +242,7 @@ export default function BookServicePage() {
                 className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-center"
               >
                 <option value="">Preferred Time Slot</option>
-                {timeSlots.map((slot) => (
+                {TIME_SLOTS.map((slot) => (
                   <option key={slot} value={slot}>
                     {slot}
                   </option>
@@ -251,9 +273,11 @@ export default function BookServicePage() {
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
             Need Immediate Help?
           </p>
+
           <h2 className="mt-3 text-3xl font-black">
             Call now for faster service
           </h2>
+
           <p className="mt-4 leading-7 text-slate-600">
             For urgent issues like broken springs, stuck doors, or garage doors
             that won’t open, calling is the fastest path.
