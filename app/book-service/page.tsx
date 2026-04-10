@@ -5,10 +5,71 @@ import { FaPhoneAlt, FaCalendarCheck } from "react-icons/fa";
 
 export default function BookServicePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    city: "",
+    service: "Type of Service Needed",
+    preferredDate: "",
+    preferredTime: "",
+    message: "",
+  });
+
+  const timeSlots = [
+    "8:00 AM - 10:00 AM",
+    "10:00 AM - 12:00 PM",
+    "12:00 PM - 2:00 PM",
+    "2:00 PM - 4:00 PM",
+    "4:00 PM - 6:00 PM",
+  ];
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          city: formData.city,
+          service: formData.service,
+          date: formData.preferredDate,
+          time: formData.preferredTime,
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong. Please call us at (866) 828-1818.");
+      }
+    } catch {
+      alert("Something went wrong. Please call us at (866) 828-1818.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -50,28 +111,45 @@ export default function BookServicePage() {
           <div className="grid gap-6 md:grid-cols-2">
             <input
               required
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Full Name"
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
             <input
               required
               type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
               placeholder="Phone Number"
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email Address"
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
             <input
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
               placeholder="City"
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
           </div>
 
           <div className="mt-6 grid gap-6">
-            <select className="rounded-xl border border-slate-300 px-4 py-4">
+            <select
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              className="rounded-xl border border-slate-300 px-4 py-4"
+            >
               <option>Type of Service Needed</option>
               <option>Broken Spring Repair</option>
               <option>Garage Door Repair</option>
@@ -82,8 +160,35 @@ export default function BookServicePage() {
               <option>Commercial Door Service</option>
             </select>
 
+            <div className="grid gap-6 md:grid-cols-2">
+              <input
+                type="date"
+                name="preferredDate"
+                value={formData.preferredDate}
+                onChange={handleChange}
+                className="rounded-xl border border-slate-300 px-4 py-4 text-center"
+              />
+
+              <select
+                name="preferredTime"
+                value={formData.preferredTime}
+                onChange={handleChange}
+                className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-center"
+              >
+                <option value="">Preferred Time Slot</option>
+                {timeSlots.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <textarea
               rows={5}
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Describe the issue"
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
@@ -91,9 +196,10 @@ export default function BookServicePage() {
 
           <button
             type="submit"
-            className="mt-6 rounded-xl bg-red-600 px-8 py-4 font-bold text-white"
+            disabled={loading}
+            className="mt-6 rounded-xl bg-red-600 px-8 py-4 font-bold text-white transition hover:bg-red-700 disabled:opacity-70"
           >
-            Submit Service Request
+            {loading ? "Sending..." : "Submit Service Request"}
           </button>
         </form>
 
@@ -109,12 +215,12 @@ export default function BookServicePage() {
             that won’t open, calling is the fastest path.
           </p>
 
-   <a
-  href="tel:18668281818"
-  className="inline-flex items-center justify-center rounded-xl bg-red-600 px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
->
-  Call (866) 828-1818
-</a>
+          <a
+            href="tel:18668281818"
+            className="mt-6 inline-flex items-center justify-center rounded-xl bg-red-600 px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
+          >
+            Call (866) 828-1818
+          </a>
         </div>
       </section>
     </main>

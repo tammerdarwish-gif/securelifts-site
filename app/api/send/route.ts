@@ -17,25 +17,26 @@ export async function POST(req: Request) {
       message,
     } = body;
 
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "SecureLifts <bookings@send.securelifts.com>",
       to: "info@securelifts.com",
       subject: "New Service Request - SecureLifts",
       html: `
         <h2>New Service Request</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>City:</strong> ${city}</p>
-        <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Preferred Date:</strong> ${date}</p>
-        <p><strong>Preferred Time:</strong> ${time}</p>
-        <p><strong>Message:</strong> ${message}</p>
+        <p><strong>Name:</strong> ${name || ""}</p>
+        <p><strong>Phone:</strong> ${phone || ""}</p>
+        <p><strong>Email:</strong> ${email || ""}</p>
+        <p><strong>City:</strong> ${city || ""}</p>
+        <p><strong>Service:</strong> ${service || ""}</p>
+        <p><strong>Preferred Date:</strong> ${date || ""}</p>
+        <p><strong>Preferred Time:</strong> ${time || ""}</p>
+        <p><strong>Message:</strong> ${message || ""}</p>
       `,
     });
 
-    return Response.json({ success: true });
+    return Response.json({ success: true, result });
   } catch (error) {
-    return Response.json({ success: false, error });
+    console.error("SEND ERROR:", error);
+    return Response.json({ success: false, error: "Email failed to send" }, { status: 500 });
   }
 }
