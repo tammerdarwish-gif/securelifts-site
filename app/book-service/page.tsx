@@ -1,3 +1,63 @@
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          address: formData.address,
+          city: formData.city,
+          zip: formData.zip,
+          service: formData.service,
+          date: formData.preferredDate,
+          time: formData.preferredTime,
+          message: formData.message,
+        }),
+      });
+
+      const rawText = await response.text();
+
+      let data: SendApiResponse = {};
+
+      try {
+        data = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        data = {
+          success: false,
+          error: rawText || `HTTP ${response.status}`,
+        };
+      }
+
+      if (!response.ok) {
+        alert(
+          `Form error: ${data.error || data.message || `HTTP ${response.status}`}`
+        );
+        return;
+      }
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        alert(
+          `Form error: ${data.error || data.message || "Unknown server error"}`
+        );
+      }
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Network or server error";
+      console.error("BOOK SERVICE SUBMIT ERROR:", error);
+      alert(`Submit failed: ${message}`);
+    } finally {
+      setLoading(false);
+    }
+  }
 "use client";
 
 import { useState } from "react";
@@ -83,31 +143,39 @@ export default function BookServicePage() {
         }),
       });
 
+      const rawText = await response.text();
+
       let data: SendApiResponse = {};
 
       try {
-        data = (await response.json()) as SendApiResponse;
+        data = rawText ? (JSON.parse(rawText) as SendApiResponse) : {};
       } catch {
         data = {
           success: false,
-          error: `HTTP ${response.status}`,
+          error: rawText || `HTTP ${response.status}`,
         };
       }
 
-      if (!response.ok || !data.success) {
-        const errorMessage =
-          data.error ||
-          data.message ||
-          `Request failed with status ${response.status}`;
-        alert(`Form error: ${errorMessage}`);
+      if (!response.ok) {
+        alert(
+          `Form error: ${data.error || data.message || `HTTP ${response.status}`}`
+        );
         return;
       }
 
-      setSubmitted(true);
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        alert(
+          `Form error: ${data.error || data.message || "Unknown server error"}`
+        );
+      }
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Network or server error";
+
       console.error("BOOK SERVICE SUBMIT ERROR:", error);
+
       alert(`Submit failed: ${message}`);
     } finally {
       setLoading(false);
