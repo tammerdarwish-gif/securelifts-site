@@ -33,13 +33,12 @@ export async function POST(req: Request) {
     } = body ?? {};
 
     const result = await resend.emails.send({
-from: "SecureLifts <bookings@send.securelifts.com>",
+      from: "SecureLifts <bookings@send.securelifts.com>",
       to: "info@securelifts.com",
       subject: "New Service Request - SecureLifts",
       html: `
         <div style="font-family: Arial, Helvetica, sans-serif; color: #111827; line-height: 1.6;">
           <h2 style="margin-bottom: 16px;">New Service Request</h2>
-
           <p><strong>Name:</strong> ${name || ""}</p>
           <p><strong>Phone:</strong> ${phone || ""}</p>
           <p><strong>Email:</strong> ${email || ""}</p>
