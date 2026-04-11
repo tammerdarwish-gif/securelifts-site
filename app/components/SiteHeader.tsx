@@ -18,20 +18,23 @@ export default function SiteHeader() {
           />
         </Link>
 
-        <div className="flex shrink-0 items-center gap-4">
-          <a
-            href="tel:18668281818"
-className="inline-flex h-12 min-w-[190px] items-center justify-center rounded-xl bg-red-600 px-6 text-base font-semibold text-white whitespace-nowrap transition hover:bg-red-700"          >
-            <span className="text-white">Call (866) 828-1818</span>
-          </a>
+<div className="hidden md:flex shrink-0 items-center gap-4">
+  <a
+    href="tel:18668281818"
+    className="inline-flex h-12 min-w-[190px] items-center justify-center rounded-xl bg-red-600 px-6 text-base font-semibold text-white whitespace-nowrap transition hover:bg-red-700"
+  >
+    <span className="text-white">Call (866) 828-1818</span>
+  </a>
 
-          <Link
-            href="/book-service"
-className="inline-flex h-12 min-w-[145px] items-center justify-center rounded-xl border border-gray-300 bg-white px-6 text-base font-semibold text-gray-900 whitespace-nowrap transition hover:bg-gray-50"          >
-            Book Service
-          </Link>
-        </div>
+  <Link
+    href="/book-service"
+    className="inline-flex h-12 min-w-[145px] items-center justify-center rounded-xl border border-gray-300 bg-white px-6 text-base font-semibold text-gray-900 whitespace-nowrap transition hover:bg-gray-50"
+  >
+    Book Service
+  </Link>
+</div>
       </div>
+      
     </header>
   );
 }
