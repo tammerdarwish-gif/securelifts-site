@@ -579,11 +579,11 @@ export default function CustomHurricaneGarageDoorsPage() {
               Call (866) 828-1818
             </a>
 
-            <Link
+        <Link
   href="/book-service"
-  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-lg transition hover:bg-gray-100"
+  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition hover:bg-gray-100"
 >
-  <span className="text-slate-900">Book Service</span>
+  Book Service
 </Link>
           </div>
         </div>

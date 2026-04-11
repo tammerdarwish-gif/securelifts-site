@@ -16,14 +16,14 @@ export default function StickyCTA() {
         <div className="grid grid-cols-2 gap-2">
           <a
             href="tel:18668281818"
-            className="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
+            className="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-red-700"
           >
             Call Now
           </a>
 
           <Link
             href="/book-service"
-            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
+            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-gray-800"
           >
             Book Service
           </Link>
