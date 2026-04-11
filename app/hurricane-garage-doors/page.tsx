@@ -360,11 +360,12 @@ export default function HurricaneGarageDoorsPage() {
 
           <div className="grid gap-6 md:grid-cols-2">
             {styleOptions.map((item) => (
-              <div
+              <Link
                 key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+                href={item.href}
+                className="group block rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500/30"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-2xl">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-2xl transition group-hover:scale-105">
                   {item.icon}
                 </div>
 
@@ -374,13 +375,10 @@ export default function HurricaneGarageDoorsPage() {
 
                 <p className="mb-5 leading-7 text-gray-700">{item.text}</p>
 
-                <Link
-                  href={item.href}
-                  className="inline-flex items-center font-semibold text-red-600 transition hover:text-red-700"
-                >
+                <span className="inline-flex items-center font-semibold text-red-600 transition group-hover:text-red-700">
                   Explore this style →
-                </Link>
-              </div>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
