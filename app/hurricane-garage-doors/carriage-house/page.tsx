@@ -82,14 +82,17 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
   const compareStyles = [
     {
       title: "Traditional Hurricane Garage Doors",
+      text: "Classic raised-panel hurricane garage doors with timeless curb appeal and a clean, familiar look.",
       href: "/hurricane-garage-doors/traditional",
     },
     {
       title: "Modern Hurricane Garage Doors",
+      text: "Clean, contemporary hurricane garage doors with sleek lines and a more architectural appearance.",
       href: "/hurricane-garage-doors/modern",
     },
     {
       title: "Custom Hurricane Garage Doors",
+      text: "Tailored hurricane garage doors designed around your home’s exact style, finish, and design goals.",
       href: "/hurricane-garage-doors/custom",
     },
   ];
@@ -271,14 +274,22 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
               styles before making the final call.
             </p>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {compareStyles.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="rounded-xl border border-gray-200 bg-white px-5 py-4 font-semibold text-gray-900 transition hover:border-red-200 hover:shadow-sm"
+                  className="group block rounded-2xl border border-gray-200 bg-white px-5 py-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-red-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-500/30"
                 >
-                  {item.title}
+                  <h4 className="mb-2 text-lg font-semibold text-gray-900">
+                    {item.title}
+                  </h4>
+
+                  <p className="mb-4 leading-7 text-gray-700">{item.text}</p>
+
+                  <span className="inline-flex items-center font-semibold text-red-600 transition group-hover:text-red-700">
+                    Explore this style →
+                  </span>
                 </Link>
               ))}
             </div>
