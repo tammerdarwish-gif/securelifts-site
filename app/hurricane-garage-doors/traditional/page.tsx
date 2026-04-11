@@ -6,6 +6,7 @@ import ServiceSchema from "../../components/ServiceSchema";
 import FAQSchema from "../../components/FAQSchema";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema";
+import ReviewTrustSection from "../../components/ReviewTrustSection";
 export const metadata: Metadata = {
   title: "Traditional Hurricane Garage Doors in South Florida | SecureLifts",
   description:
@@ -209,19 +210,28 @@ export default function TraditionalHurricaneGarageDoorsPage() {
       {/* TRUST BAR */}
       <section className="bg-white px-6 py-8">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
+              Trusted Service
+            </p>
             <p className="text-lg font-semibold text-gray-900">
-              ⭐ Trusted by South Florida homeowners
+              Trusted by South Florida Homeowners
             </p>
           </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
+              Storm Ready
+            </p>
             <p className="text-lg font-semibold text-gray-900">
-              🛡 Built for hurricane conditions
+              Built for Hurricane Conditions
             </p>
           </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
+              Premium Work
+            </p>
             <p className="text-lg font-semibold text-gray-900">
-              ⚡ Fast quotes and clean installations
+              Fast Quotes &amp; Clean Installations
             </p>
           </div>
         </div>
@@ -442,6 +452,29 @@ export default function TraditionalHurricaneGarageDoorsPage() {
           </div>
         </div>
       </section>
+
+      <ReviewTrustSection
+        heading="Why South Florida Homeowners Choose SecureLifts"
+        intro="When South Florida homeowners invest in stronger garage doors, they want a company that communicates clearly, installs cleanly, and delivers results that actually hold up."
+        reviews={[
+          {
+            name: "Michael R.",
+            text: "Fast response, professional service, and the garage door works better than ever.",
+          },
+          {
+            name: "Jessica T.",
+            text: "They showed up on time, explained everything clearly, and got it done right.",
+          },
+          {
+            name: "Daniel P.",
+            text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
+          },
+          {
+            name: "Alicia T.",
+            text: "The whole process felt organized and professional from the estimate to the final install.",
+          },
+        ]}
+      />
 
       {/* FAQ */}
       <section className="bg-gray-50 px-6 py-20">
