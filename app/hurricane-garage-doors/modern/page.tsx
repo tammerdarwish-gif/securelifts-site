@@ -82,14 +82,17 @@ export default function ModernHurricaneGarageDoorsPage() {
   const compareStyles = [
     {
       title: "Traditional Hurricane Garage Doors",
+      text: "Classic raised-panel hurricane garage doors with timeless curb appeal and a clean, familiar look.",
       href: "/hurricane-garage-doors/traditional",
     },
     {
       title: "Carriage House Hurricane Garage Doors",
+      text: "Decorative carriage-style hurricane garage doors with premium character, warmth, and upscale curb appeal.",
       href: "/hurricane-garage-doors/carriage-house",
     },
     {
       title: "Custom Hurricane Garage Doors",
+      text: "Tailored hurricane garage doors designed around your home’s exact style, finish, and design goals.",
       href: "/hurricane-garage-doors/custom",
     },
   ];
@@ -265,14 +268,22 @@ export default function ModernHurricaneGarageDoorsPage() {
               making the final decision.
             </p>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {compareStyles.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="rounded-xl border border-gray-200 bg-white px-5 py-4 font-semibold text-gray-900 transition hover:border-red-200 hover:shadow-sm"
+                  className="group block rounded-2xl border border-gray-200 bg-white px-5 py-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-red-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-500/30"
                 >
-                  {item.title}
+                  <h4 className="mb-2 text-lg font-semibold text-gray-900">
+                    {item.title}
+                  </h4>
+
+                  <p className="mb-4 leading-7 text-gray-700">{item.text}</p>
+
+                  <span className="inline-flex items-center font-semibold text-red-600 transition group-hover:text-red-700">
+                    Explore this style →
+                  </span>
                 </Link>
               ))}
             </div>
@@ -508,12 +519,12 @@ export default function ModernHurricaneGarageDoorsPage() {
               Call (866) 828-1818
             </a>
 
-           <Link
-  href="/book-service"
-  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-lg transition hover:bg-gray-100"
->
-  <span className="text-slate-900">Book Service</span>
-</Link>
+            <Link
+              href="/book-service"
+              className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition hover:bg-gray-100"
+            >
+              Book Service
+            </Link>
           </div>
         </div>
       </section>
