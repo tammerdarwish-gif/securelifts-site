@@ -35,19 +35,21 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="sl-container">
         <div className="flex min-h-[82px] items-center justify-between gap-4">
-         import Image from "next/image";
-import Link from "next/link";
+          <Link
+            href="/"
+            className="flex shrink-0 items-center"
+            aria-label="SecureLifts Home"
+          >
+            <Image
+              src="/logo.png"
+              alt="SecureLifts Garage Doors"
+              width={180}
+              height={60}
+              priority
+              className="h-auto w-[150px] md:w-[180px]"
+            />
+          </Link>
 
-<Link href="/" className="flex items-center gap-3">
-  <Image
-    src="/logo.png"
-    alt="SecureLifts Garage Doors"
-    width={180}
-    height={60}
-    priority
-    className="h-auto w-[150px] md:w-[180px]"
-  />
-</Link>
           <nav className="hidden items-center gap-8 lg:flex">
             <div className="group relative">
               <button
