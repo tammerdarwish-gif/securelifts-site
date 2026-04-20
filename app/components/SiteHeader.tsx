@@ -5,17 +5,6 @@ import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-<Link href="/" className="flex items-center gap-3">
-  <Image
-    src="/logo.png"
-    alt="SecureLifts Garage Doors"
-    width={180}
-    height={60}
-    priority
-    className="h-auto w-[150px] md:w-[180px]"
-  />
-</Link>
-
 const serviceLinks = [
   { label: "Garage Door Repair", href: "/garage-door-repair" },
   { label: "Garage Door Installation", href: "/garage-door-installation" },
@@ -47,9 +36,14 @@ export default function SiteHeader() {
       <div className="sl-container">
         <div className="flex min-h-[82px] items-center justify-between gap-4">
           <Link href="/" className="flex shrink-0 items-center" aria-label="SecureLifts Home">
-            <span className="text-2xl font-black tracking-tight text-slate-900 md:text-3xl">
-              SecureLifts
-            </span>
+            <Image
+              src="/logo.png"
+              alt="SecureLifts Garage Doors"
+              width={180}
+              height={60}
+              priority
+              className="h-auto w-[150px] md:w-[180px]"
+            />
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
