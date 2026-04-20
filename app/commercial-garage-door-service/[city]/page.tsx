@@ -1,9 +1,8 @@
-"use client";
-
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { notFound, useParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import {
   FaCheckCircle,
   FaShieldAlt,
@@ -13,12 +12,14 @@ import {
   FaWarehouse,
   FaIndustry,
   FaGoogle,
+  FaArrowRight,
 } from "react-icons/fa";
 
-const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/search?q=Securelifts";
+import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
 
-const cityData = {
+const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=Securelifts";
+
+const cityOverrides = {
   "west-palm-beach": {
     city: "West Palm Beach",
     county: "Palm Beach County",
@@ -115,7 +116,7 @@ const cityData = {
       "Commercial service centers",
     ],
   },
-  "jupiter": {
+  jupiter: {
     city: "Jupiter",
     county: "Palm Beach County",
     nearby:
@@ -154,7 +155,7 @@ const cityData = {
       "Mixed-use buildings",
     ],
   },
-  "hollywood": {
+  hollywood: {
     city: "Hollywood",
     county: "Broward County",
     nearby:
@@ -233,16 +234,108 @@ const cityData = {
   },
 } as const;
 
-type CityKey = keyof typeof cityData;
+type OverrideKey = keyof typeof cityOverrides;
+type CommercialCityData = {
+  city: string;
+  county: string;
+  nearby: string;
+  intro: string;
+  propertiesLeft: string[];
+  propertiesRight: string[];
+};
 
-export default function CommercialGarageDoorServiceCityPage() {
-  const params = useParams();
-  const citySlug = Array.isArray(params?.city) ? params.city[0] : params?.city;
-  const data = citySlug ? cityData[citySlug as CityKey] : undefined;
+function normalizeCounty(county?: string) {
+  if (county === "Palm Beach") return "Palm Beach County";
+  if (county === "Broward") return "Broward County";
+  if (county === "Miami-Dade") return "Miami-Dade County";
+  return "South Florida";
+}
+
+function getCommercialCityData(slug: string): CommercialCityData | undefined {
+  const override = cityOverrides[slug as OverrideKey];
+
+  if (override) {
+    return {
+      city: override.city,
+      county: override.county,
+      nearby: override.nearby,
+      intro: override.intro,
+      propertiesLeft: [...override.propertiesLeft],
+      propertiesRight: [...override.propertiesRight],
+    };
+  }
+
+  const base = getCityData(slug) as
+    | { city?: string; county?: string; nearbyAreas?: string[] }
+    | undefined;
+
+  if (!base?.city) return undefined;
+
+  const county = normalizeCounty(base.county);
+  const nearby =
+    base.nearbyAreas && base.nearbyAreas.length > 0
+      ? base.nearbyAreas.join(", ")
+      : `nearby ${county} business areas`;
+
+  return {
+    city: base.city,
+    county,
+    nearby,
+    intro: `${base.city} commercial properties need dependable garage door service that keeps access open, protects workflow, and lowers avoidable downtime.`,
+    propertiesLeft: [
+      "Warehouses",
+      "Commercial plazas",
+      "Storage facilities",
+      "Retail buildings",
+    ],
+    propertiesRight: [
+      "Industrial units",
+      "Service properties",
+      "Auto facilities",
+      "Business park spaces",
+    ],
+  };
+}
+
+export async function generateStaticParams() {
+  return getAllCitySlugs().map((city) => ({ city }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ city: string }>;
+}): Promise<Metadata> {
+  const { city } = await params;
+  const data = getCommercialCityData(city);
+
+  if (!data) {
+    return {
+      title: "Commercial Garage Door Service | SecureLifts",
+      description: "Commercial garage door service by SecureLifts.",
+    };
+  }
+
+  return {
+    title: `Commercial Garage Door Service in ${data.city} | SecureLifts`,
+    description: `SecureLifts provides commercial garage door service in ${data.city}, including repair, maintenance, overhead door support, and fast service for business properties.`,
+    alternates: {
+      canonical: `https://securelifts.com/commercial-garage-door-service/${city}`,
+    },
+  };
+}
+
+export default async function CommercialGarageDoorServiceCityPage({
+  params,
+}: {
+  params: Promise<{ city: string }>;
+}) {
+  const { city } = await params;
+  const data = getCommercialCityData(city);
 
   if (!data) notFound();
 
-  const siteUrl = `https://securelifts.com/commercial-garage-door-service/${citySlug}`;
+  const siteUrl = `https://securelifts.com/commercial-garage-door-service/${city}`;
 
   const schema = {
     "@context": "https://schema.org",
@@ -377,15 +470,40 @@ export default function CommercialGarageDoorServiceCityPage() {
     },
   ];
 
+  const relatedLinks = [
+    {
+      href: `/commercial-garage-door-repair/${city}`,
+      label: `Commercial Garage Door Repair in ${data.city}`,
+    },
+    {
+      href: `/commercial-garage-door-installation/${city}`,
+      label: `Commercial Garage Door Installation in ${data.city}`,
+    },
+    {
+      href: `/commercial-garage-door-maintenance/${city}`,
+      label: `Commercial Garage Door Maintenance in ${data.city}`,
+    },
+    {
+      href: `/commercial-overhead-door-repair/${city}`,
+      label: `Commercial Overhead Door Repair in ${data.city}`,
+    },
+    {
+      href: `/garage-door-repair/${city}`,
+      label: `Garage Door Repair in ${data.city}`,
+    },
+    {
+      href: `/emergency-garage-door-repair/${city}`,
+      label: `Emergency Garage Door Repair in ${data.city}`,
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <Script
-        id={`schema-commercial-garage-door-service-${citySlug}`}
+        id={`schema-commercial-garage-door-service-${city}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-
-      
 
       <section className="bg-slate-950 py-28 text-white">
         <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 md:grid-cols-2">
@@ -409,6 +527,25 @@ export default function CommercialGarageDoorServiceCityPage() {
               We serve businesses across {data.city}, {data.nearby}, with
               commercial service built to keep access moving and downtime lower.
             </p>
+
+            <div className="mt-6 grid gap-3 text-sm text-slate-300 md:grid-cols-2">
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Commercial repair and service support
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Preventive maintenance options
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Built for heavy daily use
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Service across {data.county}
+              </div>
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <a
@@ -452,6 +589,23 @@ export default function CommercialGarageDoorServiceCityPage() {
               priority
             />
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+            Commercial Garage Door Service
+          </p>
+          <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            Service that keeps business access moving in {data.city}
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-slate-600">
+            SecureLifts provides commercial garage door service in {data.city} for warehouses, retail spaces, industrial buildings, and service properties that need dependable access and lower downtime.
+          </p>
+          <p className="mt-4 text-lg leading-8 text-slate-600">
+            The goal is not just fixing a single issue. The goal is keeping the door system reliable so the property can operate with fewer interruptions, safer movement, and better long-term performance.
+          </p>
         </div>
       </section>
 
@@ -594,8 +748,7 @@ export default function CommercialGarageDoorServiceCityPage() {
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              SecureLifts supports a wide range of commercial properties across{" "}
-              {data.city} and nearby areas in {data.county}.
+              SecureLifts supports a wide range of commercial properties across {data.city} and nearby areas in {data.county}.
             </p>
           </div>
 
@@ -626,7 +779,7 @@ export default function CommercialGarageDoorServiceCityPage() {
       <section className="border-t border-slate-100 py-28">
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="mb-12 text-4xl font-black md:text-5xl">
-            Why SecureLifts
+            Why SecureLifts for commercial garage door service in {data.city}
           </h2>
 
           <div className="grid gap-10 md:grid-cols-2">
@@ -688,6 +841,33 @@ export default function CommercialGarageDoorServiceCityPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+            Related Services
+          </p>
+          <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            More garage door services in {data.city}
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-slate-600">
+            Explore additional residential and commercial garage door services available in {data.city}, including repairs, installations, and emergency service.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {relatedLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+            >
+              <span>{item.label}</span>
+              <FaArrowRight className="text-red-600" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="bg-red-600 py-28 text-white">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <h2 className="text-4xl font-black md:text-5xl">
@@ -695,8 +875,7 @@ export default function CommercialGarageDoorServiceCityPage() {
           </h2>
 
           <p className="mt-5 text-lg text-red-50">
-            Call SecureLifts for commercial service that helps keep your
-            property moving, your access reliable, and your downtime lower.
+            Call SecureLifts for commercial service that helps keep your property moving, your access reliable, and your downtime lower.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

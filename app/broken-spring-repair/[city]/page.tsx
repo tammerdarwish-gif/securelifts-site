@@ -12,7 +12,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-import { getCityData } from "@/lib/cityPages";
+import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
 
 function formatCityName(slug: string) {
   return slug
@@ -22,7 +22,7 @@ function formatCityName(slug: string) {
 }
 
 export function generateStaticParams() {
-  return [];
+  return getAllCitySlugs().map((city) => ({ city }));
 }
 
 type CityPageData = {
@@ -136,34 +136,35 @@ export default async function CityPage({
     },
   ];
 
-  const highlightCards = [
-    {
-      icon: <FaBolt className="text-2xl" />,
-      title: "Safe spring replacement",
-      text: "Garage door springs are under high tension. We replace them using the right process and the right hardware.",
-    },
-    {
-      icon: <FaTools className="text-2xl" />,
-      title: "Fast diagnosis",
-      text: "We confirm whether the problem is truly the spring or if there are additional issues affecting the door system.",
-    },
-    {
-      icon: <FaShieldAlt className="text-2xl" />,
-      title: "Professional service",
-      text: "Homeowners get clear communication, clean workmanship, and a repair experience that feels organized from start to finish.",
-    },
-  ];const relatedLinks = [
+const highlightCards = [
+  {
+    icon: <FaBolt className="text-2xl" />,
+    title: "Safe spring replacement",
+    text: "Garage door springs are under high tension. We replace them using the right process and the right hardware.",
+  },
+  {
+    icon: <FaTools className="text-2xl" />,
+    title: "Fast diagnosis",
+    text: "We confirm whether the problem is truly the spring or if there are additional issues affecting the door system.",
+  },
+  {
+    icon: <FaShieldAlt className="text-2xl" />,
+    title: "Professional service",
+    text: "Homeowners get clear communication, clean workmanship, and a repair experience that feels organized from start to finish.",
+  },
+];
+
+const relatedLinks = [
   {
     href: `/garage-door-repair/${city}`,
     label: `Garage Door Repair in ${cityName}`,
   },
-  
   {
     href: `/garage-door-opener-repair/${city}`,
     label: `Garage Door Opener Repair in ${cityName}`,
   },
   {
-    href: `/off-track-garage-door-repair/${city}`,
+    href: `/garage-door-off-track-repair/${city}`,
     label: `Off-Track Garage Door Repair in ${cityName}`,
   },
   {
@@ -177,6 +178,25 @@ export default async function CityPage({
   {
     href: `/garage-door-replacement/${city}`,
     label: `Garage Door Replacement in ${cityName}`,
+  },
+];
+
+const popularServices = [
+  {
+    href: `/garage-door-repair/${city}`,
+    label: `Garage Door Repair in ${cityName}`,
+  },
+  {
+    href: `/broken-spring-repair/${city}`,
+    label: `Broken Spring Repair in ${cityName}`,
+  },
+  {
+    href: `/garage-door-opener-repair/${city}`,
+    label: `Garage Door Opener Repair in ${cityName}`,
+  },
+  {
+    href: `/emergency-garage-door-repair/${city}`,
+    label: `Emergency Garage Door Service in ${cityName}`,
   },
 ];
 
@@ -212,6 +232,35 @@ export default async function CityPage({
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           {/* LEFT CONTENT */}
           <div className="max-w-3xl">
+            <div className="mt-10 max-w-3xl">
+              <h2 className="text-3xl font-black leading-tight text-slate-900">
+                Broken Spring Problems We See in {cityName}
+              </h2>
+
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                Homeowners in {cityName} often deal with garage door spring failures caused by
+                heat, humidity, daily wear, and aging hardware. When a spring breaks, the door
+                can become extremely heavy, unsafe to use, and more likely to damage other parts
+                of the system.
+              </p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Aging torsion and extension springs",
+                  "Doors that feel suddenly heavy",
+                  "Openers straining against broken springs",
+                  "Uneven lifting caused by spring failure",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  >
+                    <FaCheckCircle className="mt-1 text-red-600" />
+                    <span className="font-medium text-slate-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
             <p className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">
               <FaMapMarkerAlt className="text-red-500" />
               Broken Spring Repair in {cityName}
@@ -331,7 +380,37 @@ export default async function CityPage({
             </div>
           </div>
         </div>
+        <div className="mt-12 max-w-3xl">
+          <h3 className="text-2xl font-black">
+            Trusted Garage Door Service in {cityName}
+          </h3>
+
+          <p className="mt-4 text-lg leading-8 text-slate-600">
+            SecureLifts provides professional garage door repair across {cityName},
+            with fast response times and clean, reliable workmanship homeowners trust.
+          </p>
+        </div>
+
+        <div className="mt-12">
+          <h3 className="text-2xl font-black">
+            Popular Services in {cityName}
+          </h3>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {popularServices.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+              >
+                <span>{item.label}</span>
+                <FaArrowRight className="text-red-600" />
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
+
 
       {/* WHY */}
       <section className="bg-slate-50">
@@ -463,32 +542,32 @@ export default async function CityPage({
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-6 py-20">
-  <div className="max-w-3xl">
-    <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-      Related Services
-    </p>
-    <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-      More garage door services in {cityName}
-    </h2>
-    <p className="mt-5 text-lg leading-8 text-slate-600">
-      Explore other garage door services available in {cityName}, from urgent
-      repairs to full replacement and new installation.
-    </p>
-  </div>
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+            Related Services
+          </p>
+          <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            More garage door services in {cityName}
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-slate-600">
+            Explore other garage door services available in {cityName}, from urgent
+            repairs to full replacement and new installation.
+          </p>
+        </div>
 
-  <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-    {relatedLinks.map((item) => (
-      <Link
-        key={item.href}
-        href={item.href}
-        className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
-      >
-        <span>{item.label}</span>
-        <FaArrowRight className="text-red-600" />
-      </Link>
-    ))}
-  </div>
-</section>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {relatedLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+            >
+              <span>{item.label}</span>
+              <FaArrowRight className="text-red-600" />
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="bg-red-600 px-6 py-20 text-white">

@@ -21,7 +21,7 @@ function formatCityName(slug: string) {
     .join(" ");
 }
 export function generateStaticParams() {
-  return [];
+  return getAllCitySlugs().map((city) => ({ city }));
 }
 
 type CityPageData = {

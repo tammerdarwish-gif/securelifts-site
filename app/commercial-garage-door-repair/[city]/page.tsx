@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
 import {
   FaPhoneAlt,
   FaCheckCircle,
@@ -10,6 +11,9 @@ import {
   FaWarehouse,
   FaIndustry,
 } from "react-icons/fa";
+
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
 
 const cityData = {
   "west-palm-beach": {
@@ -220,13 +224,94 @@ const cityData = {
       "Auto properties",
       "Business parks",
     ],
-  },
+  }
+  ,"davie": {
+    city: "Davie",
+    county: "Broward County",
+    nearby: "Fort Lauderdale, Hollywood, Plantation, and surrounding Broward areas",
+    intro:
+      "Davie commercial properties need reliable garage door repair to keep daily operations moving and prevent costly downtime.",
+    propertiesLeft: [
+      "Warehouses",
+      "Commercial plazas",
+      "Storage facilities",
+      "Service buildings",
+    ],
+    propertiesRight: [
+      "Auto shops",
+      "Industrial spaces",
+      "Retail properties",
+      "Mixed-use commercial buildings",
+    ],
+  }
 } as const;
 
 type CityKey = keyof typeof cityData;
 
+type BaseCityData = {
+  city: string;
+  county: string;
+  nearby: string;
+  intro: string;
+  propertiesLeft: string[];
+  propertiesRight: string[];
+};
+
+function normalizeCounty(county?: string) {
+  if (county === "Palm Beach") return "Palm Beach County";
+  if (county === "Broward") return "Broward County";
+  if (county === "Miami-Dade") return "Miami-Dade County";
+  return "South Florida";
+}
+
+function getCommercialCityData(slug: string): BaseCityData | undefined {
+  const override = cityData[slug as CityKey];
+
+  if (override) {
+    return {
+      city: override.city,
+      county: override.county,
+      nearby: override.nearby,
+      intro: override.intro,
+      propertiesLeft: [...override.propertiesLeft],
+      propertiesRight: [...override.propertiesRight],
+    };
+  }
+
+  const base = getCityData(slug) as
+    | { city?: string; county?: string; nearbyAreas?: string[] }
+    | undefined;
+
+  if (!base?.city) return undefined;
+
+  const county = normalizeCounty(base.county);
+  const nearby =
+    base.nearbyAreas && base.nearbyAreas.length > 0
+      ? base.nearbyAreas.join(", ")
+      : `nearby ${county} business areas`;
+
+  return {
+    city: base.city,
+    county,
+    nearby,
+    intro: `${base.city} commercial properties need fast, dependable garage door repair that keeps access open, reduces downtime, and supports daily business operations.`,
+    propertiesLeft: [
+      "Warehouses",
+      "Commercial plazas",
+      "Storage facilities",
+      "Retail buildings",
+    ],
+    propertiesRight: [
+      "Industrial units",
+      "Service properties",
+      "Auto facilities",
+      "Business park spaces",
+    ],
+  };
+}
+
 export async function generateStaticParams() {
-  return Object.keys(cityData).map((city) => ({ city }));
+  return getAllCitySlugs().map((city) => ({ city }));
 }
 
 export default async function CommercialGarageDoorRepairCityPage({
@@ -235,7 +320,7 @@ export default async function CommercialGarageDoorRepairCityPage({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const data = cityData[city as CityKey];
+  const data = getCommercialCityData(city);
 
   if (!data) notFound();
 
@@ -514,6 +599,69 @@ export default async function CommercialGarageDoorRepairCityPage({
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* RELATED SERVICES */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+            Related Services
+          </p>
+
+          <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            More garage door services in {data.city}
+          </h2>
+
+          <p className="mt-5 text-lg leading-8 text-slate-600">
+            Explore additional residential and commercial garage door services
+            available in {data.city}, including repairs, installations, and
+            emergency service.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <Link
+            href={`/garage-door-repair/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Garage Door Repair in {data.city}</span>
+          </Link>
+
+          <Link
+            href={`/garage-door-installation/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Garage Door Installation in {data.city}</span>
+          </Link>
+
+          <Link
+            href={`/garage-door-opener-repair/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Opener Repair in {data.city}</span>
+          </Link>
+
+          <Link
+            href={`/broken-spring-repair/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Broken Spring Repair in {data.city}</span>
+          </Link>
+
+          <Link
+            href={`/emergency-garage-door-repair/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Emergency Garage Door Repair in {data.city}</span>
+          </Link>
+
+          <Link
+            href={`/commercial-garage-door-installation/${city}`}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+          >
+            <span>Commercial Installation in {data.city}</span>
+          </Link>
         </div>
       </section>
 

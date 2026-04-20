@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -11,7 +12,9 @@ import {
   FaIndustry,
 } from "react-icons/fa";
 
-const cityData = {
+import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+
+const cityOverrides = {
   "west-palm-beach": {
     city: "West Palm Beach",
     county: "Palm Beach County",
@@ -107,7 +110,7 @@ const cityData = {
       "Commercial service centers",
     ],
   },
-  "jupiter": {
+  jupiter: {
     city: "Jupiter",
     county: "Palm Beach County",
     nearby: "Palm Beach Gardens, North Palm Beach, and surrounding northern markets",
@@ -145,7 +148,7 @@ const cityData = {
       "Mixed-use buildings",
     ],
   },
-  "hollywood": {
+  hollywood: {
     city: "Hollywood",
     county: "Broward County",
     nearby: "Fort Lauderdale, Pembroke Pines, and surrounding Broward locations",
@@ -164,7 +167,7 @@ const cityData = {
       "Mixed-use commercial spaces",
     ],
   },
-  "miami": {
+  miami: {
     city: "Miami",
     county: "Miami-Dade County",
     nearby: "Doral, Hialeah, Kendall, and surrounding Miami-Dade markets",
@@ -183,7 +186,7 @@ const cityData = {
       "Commercial multi-bay spaces",
     ],
   },
-  "hialeah": {
+  hialeah: {
     city: "Hialeah",
     county: "Miami-Dade County",
     nearby: "Miami, Doral, Medley, and nearby industrial corridors",
@@ -202,7 +205,7 @@ const cityData = {
       "Business properties",
     ],
   },
-  "doral": {
+  doral: {
     city: "Doral",
     county: "Miami-Dade County",
     nearby: "Miami, Hialeah, and surrounding logistics-heavy business markets",
@@ -223,10 +226,94 @@ const cityData = {
   },
 } as const;
 
-type CityKey = keyof typeof cityData;
+type OverrideKey = keyof typeof cityOverrides;
+type BaseCityData = {
+  city: string;
+  county: string;
+  nearby: string;
+  intro: string;
+  propertiesLeft: string[];
+  propertiesRight: string[];
+};
+
+function normalizeCounty(county?: string) {
+  if (county === "Palm Beach") return "Palm Beach County";
+  if (county === "Broward") return "Broward County";
+  if (county === "Miami-Dade") return "Miami-Dade County";
+  return "South Florida";
+}
+
+function getCommercialCityData(slug: string): BaseCityData | undefined {
+  const override = cityOverrides[slug as OverrideKey];
+  if (override) {
+    return {
+      city: override.city,
+      county: override.county,
+      nearby: override.nearby,
+      intro: override.intro,
+      propertiesLeft: [...override.propertiesLeft],
+      propertiesRight: [...override.propertiesRight],
+    };
+  }
+
+  const base = getCityData(slug) as
+    | { city?: string; county?: string; nearbyAreas?: string[] }
+    | undefined;
+
+  if (!base?.city) return undefined;
+
+  const county = normalizeCounty(base.county);
+  const nearby =
+    base.nearbyAreas && base.nearbyAreas.length > 0
+      ? base.nearbyAreas.join(", ")
+      : `nearby ${county} business areas`;
+
+  return {
+    city: base.city,
+    county,
+    nearby,
+    intro: `${base.city} commercial properties need garage door installation that supports daily use, stronger reliability, and a more professional finished result.`,
+    propertiesLeft: [
+      "Warehouses",
+      "Commercial plazas",
+      "Storage facilities",
+      "Retail buildings",
+    ],
+    propertiesRight: [
+      "Industrial units",
+      "Service properties",
+      "Auto facilities",
+      "Business park spaces",
+    ],
+  };
+}
 
 export async function generateStaticParams() {
-  return Object.keys(cityData).map((city) => ({ city }));
+  return getAllCitySlugs().map((city) => ({ city }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ city: string }>;
+}): Promise<Metadata> {
+  const { city } = await params;
+  const data = getCommercialCityData(city);
+
+  if (!data) {
+    return {
+      title: "Commercial Garage Door Installation | SecureLifts",
+      description: "Commercial garage door installation services by SecureLifts.",
+    };
+  }
+
+  return {
+    title: `Commercial Garage Door Installation in ${data.city} | SecureLifts`,
+    description: `SecureLifts provides commercial garage door installation in ${data.city} for warehouses, retail buildings, industrial properties, service facilities, and other business properties that need long-term performance.`,
+    alternates: {
+      canonical: `https://securelifts.com/commercial-garage-door-installation/${city}`,
+    },
+  };
 }
 
 export default async function CommercialGarageDoorInstallationCityPage({
@@ -235,7 +322,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const data = cityData[city as CityKey];
+  const data = getCommercialCityData(city);
 
   if (!data) notFound();
 
@@ -284,10 +371,24 @@ export default async function CommercialGarageDoorInstallationCityPage({
     },
   ];
 
+  const installReasons = [
+    "The current commercial door system is aging or unreliable",
+    "Repair costs are stacking up too often",
+    "The property needs stronger daily performance",
+    "Access, security, or appearance needs to improve",
+    `You need dependable installation service in ${data.city}`,
+    "You want a better long-term solution for the property",
+  ];
+
+  const operatingNeeds = [
+    "Frequent opening and closing throughout the day",
+    "Shipping and receiving access that needs to stay consistent",
+    "Security and access control that cannot be unreliable",
+    "Weather exposure that affects door performance over time",
+  ];
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      
-
       {/* HERO */}
       <section className="bg-slate-950 py-32 text-white">
         <div className="mx-auto max-w-7xl px-6">
@@ -301,9 +402,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
             </h1>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-              {data.intro} SecureLifts installs commercial garage door systems
-              for business owners, managers, and property operators who need
-              stronger performance, better access, and dependable long-term use.
+              {data.intro} SecureLifts provides commercial garage door installation in {data.city} designed for durability, operational efficiency, and long-term performance. Our team installs overhead, sectional, and roll-up door systems that match the demands of local businesses.
             </p>
 
             <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
@@ -312,17 +411,36 @@ export default async function CommercialGarageDoorInstallationCityPage({
               operates.
             </p>
 
+            <div className="mt-6 grid gap-3 text-sm text-slate-300 md:grid-cols-2">
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Commercial-grade door systems
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Installation for warehouses & retail
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Built for heavy daily use
+              </div>
+              <div className="flex items-center gap-2">
+                <FaCheckCircle className="text-red-500" />
+                Service across {data.county}
+              </div>
+            </div>
+
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="tel:8668281818"
-                className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white hover:bg-red-700"
+                className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white transition hover:bg-red-700"
               >
                 Call (866) 828-1818
               </a>
 
               <Link
                 href="/book-service"
-                className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+                className="rounded-xl border border-white px-8 py-4 font-bold transition hover:bg-white hover:text-black"
               >
                 Book Service
               </Link>
@@ -343,6 +461,24 @@ export default async function CommercialGarageDoorInstallationCityPage({
               </span>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SEO INTRO */}
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+            Commercial Garage Doors
+          </p>
+          <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            Professional garage door installation in {data.city}
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-slate-600">
+            SecureLifts installs commercial garage door systems across {data.city} for warehouses, retail spaces, industrial buildings, and service properties. Every installation is built around real usage, ensuring smoother operation, stronger durability, and fewer disruptions.
+          </p>
+          <p className="mt-4 text-lg leading-8 text-slate-600">
+            Whether your business needs a new system for expansion or replacement, our commercial garage door installation service in {data.city} focuses on long-term performance, proper alignment, and dependable daily function.
+          </p>
         </div>
       </section>
 
@@ -367,14 +503,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
           </div>
 
           <div className="grid gap-4">
-            {[
-              "The current commercial door system is aging or unreliable",
-              "Repair costs are stacking up too often",
-              "The property needs stronger daily performance",
-              "Access, security, or appearance needs to improve",
-              `You need dependable installation service in ${data.city}`,
-              "You want a better long-term solution for the property",
-            ].map((item) => (
+            {installReasons.map((item) => (
               <div
                 key={item}
                 className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4"
@@ -436,9 +565,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              SecureLifts supports a wide range of commercial properties across{" "}
-              {data.city} and nearby areas in {data.county}, with installation
-              tailored to the building type and operational demand.
+              SecureLifts supports a wide range of commercial properties across {data.city} and nearby areas in {data.county}, with installation tailored to the building type and operational demand.
             </p>
           </div>
 
@@ -474,7 +601,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
       <section className="border-t border-slate-100 py-28">
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="mb-12 text-4xl font-black md:text-5xl">
-            Why SecureLifts
+            Why SecureLifts for commercial garage door installation in {data.city}
           </h2>
 
           <div className="grid gap-10 md:grid-cols-2">
@@ -526,8 +653,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
           </h2>
 
           <p className="mt-5 text-lg text-red-50">
-            Call SecureLifts for commercial installation service that improves
-            access, supports operations, and delivers a stronger long-term system.
+            SecureLifts delivers commercial garage door installation in {data.city} focused on durability, performance, and long-term reliability. Call now or book service to get a system built for your business.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -540,7 +666,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
 
             <Link
               href="/book-service"
-              className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+              className="rounded-xl border border-white px-8 py-4 font-bold transition hover:bg-white hover:text-black"
             >
               Book Service
             </Link>

@@ -27,16 +27,19 @@ export default function Home() {
       title: "Garage Door Repair",
       text: "Fast diagnosis and repair for broken doors, damaged panels, off-track systems, noisy operation, and sudden breakdowns.",
       icon: <FaTools className="text-3xl" />,
+      href: "/garage-door-repair",
     },
     {
       title: "Spring Replacement",
       text: "Safe replacement of torsion and extension springs with high-cycle hardware built for longer life and smoother operation.",
       icon: <FaBolt className="text-3xl" />,
+      href: "/broken-spring-repair",
     },
     {
       title: "Garage Door Installation",
       text: "Professional installation of premium garage doors that improve curb appeal, security, and long-term performance.",
       icon: <FaShieldAlt className="text-3xl" />,
+      href: "/garage-door-installation",
     },
   ];
 
@@ -64,6 +67,45 @@ export default function Home() {
     },
   ];
 
+  const caseStudies = [
+    {
+      title: "Coconut Grove Case Study",
+      slug: "/portfolio/garage-door-installation-coconut-grove",
+      location: "Coconut Grove, FL",
+      value: "$15,685",
+      summary:
+        "Premium garage door installation with three Clopay Gallery Steel doors for a high-end residential property.",
+      image: "/images/reviews/coconut-grove-case-study.jpg",
+    },
+    {
+      title: "Miami Beach Case Study",
+      slug: "/portfolio/garage-door-installation-miami-beach",
+      location: "Miami Beach, FL",
+      value: "$23,450",
+      summary:
+        "Full-view garage door installation project featuring a premium door and wall-mount opener setup.",
+      image: "/images/reviews/miami-beach-case-study.jpg",
+    },
+    {
+      title: "Pinecrest Case Study",
+      slug: "/portfolio/garage-door-installation-pinecrest",
+      location: "Pinecrest, FL",
+      value: "$20,454",
+      summary:
+        "Premium installation project with Raynor Encore 200 doors for a strong curb-appeal upgrade.",
+      image: "/images/reviews/pinecrest-case-study.jpg",
+    },
+    {
+      title: "Coconut Creek Case Study",
+      slug: "/portfolio/garage-door-installation-coconut-creek",
+      location: "Coconut Creek, FL",
+      value: "$4,088",
+      summary:
+        "Trade Mark white long-panel installation showing a more budget-conscious but still clean finished result.",
+      image: "/images/reviews/coconut-creek-case-study.jpg",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <ServiceSchema
@@ -75,7 +117,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/securelifts-van.jpg"
+            src="/images/about/about-securelifts-team.jpg"
             alt="SecureLifts garage door service van in South Florida"
             fill
             priority
@@ -98,7 +140,8 @@ export default function Home() {
             </p>
 
             <h1 className="text-4xl font-black leading-tight md:text-6xl">
-              Garage Door Repair, Installation, and Hurricane-Rated Upgrades in South Florida
+              Garage Door Repair, Installation, and Hurricane-Rated Upgrades in
+              South Florida
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
@@ -191,10 +234,10 @@ export default function Home() {
 
               <div className="mt-6">
                 <Link
-                  href="/book-service"
+                  href={service.href}
                   className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
                 >
-                  Book this service <FaArrowRight className="text-sm" />
+                  Explore service <FaArrowRight className="text-sm" />
                 </Link>
               </div>
             </motion.div>
@@ -232,7 +275,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative height: 420px;overflow-hidden rounded-3xl border border-gray-200 shadow-xl">
+          <div className="relative h-[420px] overflow-hidden rounded-3xl border border-gray-200 shadow-xl">
             <Image
               src="/securelifts-van.jpg"
               alt="SecureLifts service van parked for a garage door service call"
@@ -269,6 +312,83 @@ export default function Home() {
                 <p className="mt-5 font-bold text-white">{review.name}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 px-4 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+                Real Project Proof
+              </p>
+              <h2 className="text-4xl font-black md:text-5xl">
+                Real Projects Across South Florida
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                These case studies show the level of work SecureLifts handles,
+                from premium custom installs to strong value-focused garage door
+                upgrades.
+              </p>
+            </div>
+
+            <Link
+              href="/reviews"
+              className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
+            >
+              See all reviews & case studies <FaArrowRight className="text-sm" />
+            </Link>
+          </div>
+
+          <div className="mt-10 overflow-x-auto pb-4">
+            <div className="flex w-max gap-6 pl-1 pr-8">
+              {caseStudies.map((study) => (
+                <Link
+                  key={study.title}
+                  href={study.slug}
+                  className="group flex w-[320px] shrink-0 flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+
+                  <div className="flex min-h-[320px] flex-1 flex-col p-6">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">
+                      {study.location}
+                    </p>
+
+                    <h3 className="mt-3 text-2xl font-bold text-slate-900">
+                      {study.title}
+                    </h3>
+
+                    <p className="mt-4 flex-1 leading-7 text-slate-600">
+                      {study.summary}
+                    </p>
+
+                    <div className="mt-5 flex items-end justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                          Project Value
+                        </p>
+                        <p className="mt-1 text-lg font-bold text-slate-900">
+                          {study.value}
+                        </p>
+                      </div>
+
+                      <span className="whitespace-nowrap text-sm font-semibold text-red-600">
+                        View Case Study →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

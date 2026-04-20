@@ -1,9 +1,11 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { getAllCitySlugs } from "@/lib/cityPages";
 
 const baseUrl = "https://securelifts.com";
 
-const staticPages = [
+const staticPaths = [
   "",
+  "/locations",
   "/book-service",
 
   "/garage-door-repair",
@@ -16,6 +18,7 @@ const staticPages = [
   "/garage-door-roller-replacement",
   "/broken-spring-repair",
   "/spring-replacement",
+  "/emergency-garage-door-repair",
 
   "/hurricane-garage-doors",
   "/impact-rated-garage-doors",
@@ -74,25 +77,16 @@ const stormCities = [
   "stuart",
   "port-st-lucie",
 ];
-
-const coreServiceCities = [
-  "west-palm-beach",
-  "boca-raton",
-  "delray-beach",
-  "boynton-beach",
-  "wellington",
-  "miami",
-  "fort-lauderdale",
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const pages: MetadataRoute.Sitemap = staticPages.map((path) => ({
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: now,
   }));
 
+  // Hurricane / storm city pages
   const stormCityPages: MetadataRoute.Sitemap = stormCities.flatMap((city) => [
     {
       url: `${baseUrl}/hurricane-garage-doors/${city}`,
@@ -112,7 +106,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]);
 
-  const coreCityPages: MetadataRoute.Sitemap = coreServiceCities.flatMap((city) => [
+  // Core service pages (ALL cities, not limited list)
+  const allCities = getAllCitySlugs();
+
+  const coreCityPages: MetadataRoute.Sitemap = allCities.flatMap((city) => [
     {
       url: `${baseUrl}/garage-door-repair/${city}`,
       lastModified: now,
@@ -122,14 +119,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
     },
     {
+      url: `${baseUrl}/garage-door-maintenance/${city}`,
+      lastModified: now,
+    },
+    {
       url: `${baseUrl}/garage-door-opener-repair/${city}`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/garage-door-off-track-repair/${city}`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/garage-door-cable-repair/${city}`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/garage-door-panel-replacement/${city}`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/garage-door-roller-replacement/${city}`,
       lastModified: now,
     },
     {
       url: `${baseUrl}/broken-spring-repair/${city}`,
       lastModified: now,
     },
+    {
+      url: `${baseUrl}/spring-replacement/${city}`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/emergency-garage-door-repair/${city}`,
+      lastModified: now,
+    },
   ]);
 
-  return [...pages, ...stormCityPages, ...coreCityPages];
+  return [...staticPages, ...stormCityPages, ...coreCityPages];
 }
