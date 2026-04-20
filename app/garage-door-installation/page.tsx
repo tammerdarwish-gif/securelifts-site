@@ -27,13 +27,13 @@ const doorTypes = [
   {
     title: "Modern Garage Doors",
     text: "Clean lines, glass options, and upscale finishes for high-end homes and contemporary architecture.",
-    href: "/book-service",
+    href: "/hurricane-garage-doors/modern",
     image: "/images/reviews/miami-beach-case-study.jpg",
   },
   {
     title: "Traditional Garage Doors",
     text: "Classic raised-panel and long-panel styles that work well for most homes and neighborhoods.",
-    href: "/book-service",
+    href: "/hurricane-garage-doors/traditional",
     image: "/images/reviews/coconut-creek-case-study.jpg",
   },
   {
