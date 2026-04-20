@@ -1,5 +1,27 @@
 import type { MetadataRoute } from "next";
 import { getAllCitySlugs } from "@/lib/cityPages";
+import fs from "fs";
+import path from "path";
+
+function getAllStaticRoutes(dir: string, basePath = ""): string[] {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  return entries.flatMap((entry) => {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      // Skip dynamic routes like [city]
+      if (entry.name.startsWith("[")) return [];
+      return getAllStaticRoutes(fullPath, `${basePath}/${entry.name}`);
+    }
+
+    if (entry.name === "page.tsx") {
+      return basePath === "" ? [""] : [basePath];
+    }
+
+    return [];
+  });
+}
 
 const baseUrl = "https://securelifts.com";
 
