@@ -25,36 +25,7 @@ function getAllStaticRoutes(dir: string, basePath = ""): string[] {
 
 const baseUrl = "https://securelifts.com";
 
-const staticPaths = [
-  "",
-  "/locations",
-  "/book-service",
-
-  "/garage-door-repair",
-  "/garage-door-installation",
-  "/garage-door-maintenance",
-  "/garage-door-opener-repair",
-  "/garage-door-off-track-repair",
-  "/garage-door-cable-repair",
-  "/garage-door-panel-replacement",
-  "/garage-door-roller-replacement",
-  "/broken-spring-repair",
-  "/spring-replacement",
-  "/emergency-garage-door-repair",
-
-  "/hurricane-garage-doors",
-  "/impact-rated-garage-doors",
-  "/wind-rated-garage-doors",
-  "/miami-dade-rated-garage-doors",
-
-  "/hurricane-garage-doors/traditional",
-  "/hurricane-garage-doors/modern",
-  "/hurricane-garage-doors/carriage-house",
-  "/hurricane-garage-doors/custom",
-
-  "/resources",
-  "/resources/hurricane-garage-door-approvals",
-];
+const staticPaths = getAllStaticRoutes(path.join(process.cwd(), "app"));
 
 const stormCities = [
   "miami",
