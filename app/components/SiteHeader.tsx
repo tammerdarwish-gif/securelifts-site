@@ -3,6 +3,18 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import Image from "next/image";
+
+<Link href="/" className="flex items-center gap-3">
+  <Image
+    src="/logo.png"
+    alt="SecureLifts Garage Doors"
+    width={180}
+    height={60}
+    priority
+    className="h-auto w-[150px] md:w-[180px]"
+  />
+</Link>
 
 const serviceLinks = [
   { label: "Garage Door Repair", href: "/garage-door-repair" },
