@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -14,11 +15,10 @@ import {
   FaClipboardCheck,
   FaExclamationTriangle,
 } from "react-icons/fa";
+import { getServiceHref } from "@/lib/serviceRoutes";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
-
-const PRIMARY_COMMERCIAL_CITY = "miami";
 
 export const metadata: Metadata = {
   title: "Commercial Garage Door Services | SecureLifts South Florida",
@@ -41,22 +41,22 @@ const serviceCards = [
   {
     title: "Commercial Garage Door Repair",
     text: "Fast troubleshooting and repair for damaged doors, noisy doors, stuck doors, operator issues, broken hardware, worn rollers, track damage, and unsafe operation.",
-    href: `/commercial-garage-door-repair/${PRIMARY_COMMERCIAL_CITY}`,
+    href: getServiceHref("commercialGarageDoorRepair"),
   },
   {
     title: "Commercial Door Installation",
     text: "Professional installation for sectional overhead doors, insulated commercial doors, full-view doors, service bay doors, and heavy-duty business applications.",
-    href: `/commercial-garage-door-installation/${PRIMARY_COMMERCIAL_CITY}`,
+    href: getServiceHref("commercialGarageDoorInstallation"),
   },
   {
     title: "Preventive Maintenance",
     text: "Routine inspections, lubrication, adjustment, hardware checks, balance checks, and early issue detection to reduce downtime and protect your operation.",
-    href: `/commercial-garage-door-maintenance/${PRIMARY_COMMERCIAL_CITY}`,
+    href: getServiceHref("commercialGarageDoorMaintenance"),
   },
   {
     title: "Emergency Commercial Service",
     text: "Urgent help for doors that are stuck open, stuck closed, unsafe to operate, off track, or disrupting deliveries, access, security, and business flow.",
-    href: `/emergency-commercial-door-repair/${PRIMARY_COMMERCIAL_CITY}`,
+    href: getServiceHref("emergencyCommercialDoorRepair"),
   },
 ];
 
@@ -330,22 +330,11 @@ export default function CommercialGarageDoorServicesPage() {
                   href={card.href}
                   className="mt-6 inline-flex items-center gap-2 text-base font-bold text-red-600 transition hover:text-red-700"
                 >
-                  View Service by City
+                  Learn More
                   <FaArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             ))}
-          </div>
-
-          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-              Important
-            </p>
-            <p className="mt-3 text-base leading-7 text-slate-700">
-              Commercial service pages are currently organized by city. Use the
-              links above to view commercial service in a live market, or call us
-              if you need help fast in another South Florida area.
-            </p>
           </div>
         </section>
 
@@ -527,14 +516,13 @@ export default function CommercialGarageDoorServicesPage() {
                 Related commercial and industrial services
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                These links take visitors into live city-based commercial service pages
-                instead of dead root URLs.
+                These links now point to the correct root commercial service pages.
               </p>
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <Link
-                href={`/commercial-garage-door-repair/${PRIMARY_COMMERCIAL_CITY}`}
+                href={getServiceHref("commercialGarageDoorRepair")}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaTools className="text-red-600" />
@@ -547,7 +535,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={`/commercial-garage-door-installation/${PRIMARY_COMMERCIAL_CITY}`}
+                href={getServiceHref("commercialGarageDoorInstallation")}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaDoorOpen className="text-red-600" />
@@ -560,7 +548,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={`/commercial-garage-door-maintenance/${PRIMARY_COMMERCIAL_CITY}`}
+                href={getServiceHref("commercialGarageDoorMaintenance")}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaClipboardCheck className="text-red-600" />
@@ -573,7 +561,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={`/industrial-door-repair/${PRIMARY_COMMERCIAL_CITY}`}
+                href={getServiceHref("industrialDoorRepair")}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaIndustry className="text-red-600" />
