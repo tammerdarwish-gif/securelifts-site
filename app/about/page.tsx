@@ -43,14 +43,23 @@ const values = [
 ];
 
 const serviceGroups = [
-  "Garage door repair",
-  "Garage door installation",
-  "Broken spring repair",
-  "Garage door opener repair and replacement",
-  "Garage door maintenance",
-  "Off-track garage door repair",
-  "Cable and roller replacement",
-  "Commercial and overhead door service",
+  { label: "Garage door repair", href: "/garage-door-repair" },
+  { label: "Garage door installation", href: "/garage-door-installation" },
+  { label: "Broken spring repair", href: "/broken-spring-repair" },
+  {
+    label: "Garage door opener repair and replacement",
+    href: "/garage-door-opener",
+  },
+  { label: "Garage door maintenance", href: "/garage-door-maintenance" },
+  {
+    label: "Off-track garage door repair",
+    href: "/garage-door-off-track-repair",
+  },
+  { label: "Cable and roller replacement", href: "/garage-door-cable-repair" },
+  {
+    label: "Commercial and overhead door service",
+    href: "/commercial-garage-door-services",
+  },
 ];
 
 const reasons = [
@@ -138,13 +147,14 @@ export default function AboutPage() {
                 About SecureLifts
               </p>
               <h1 className="max-w-4xl text-4xl font-black tracking-tight md:text-5xl xl:text-6xl">
-                Built to earn trust one garage door at a time
+                A South Florida garage door company built on trust, follow-through, and real service
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-                SecureLifts is a garage door company focused on dependable
-                service, honest recommendations, and long-term customer
-                relationships. We serve South Florida with repair, installation,
-                opener service, maintenance, and commercial solutions.
+                SecureLifts helps homeowners, businesses, and property managers
+                with garage door repair, installation, opener service,
+                maintenance, and commercial door solutions across South Florida.
+                Our goal is simple: show up, communicate clearly, and do the
+                job right.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -235,19 +245,21 @@ export default function AboutPage() {
                 Garage door services for homes and businesses
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                We are built to handle core garage door service needs across
-                residential and commercial properties.
+                We help with the core garage door services customers actually
+                need, from urgent repair and spring issues to opener work,
+                full door replacement, and commercial service.
               </p>
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {serviceGroups.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold leading-6 text-slate-800 shadow-sm"
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold leading-6 text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:text-red-700 hover:shadow-md"
                 >
-                  {item}
-                </div>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -272,12 +284,12 @@ export default function AboutPage() {
                   Why Customers Choose Us
                 </p>
                 <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                  Clear recommendations. Better service. Less nonsense.
+                  Clear recommendations, dependable work, and less nonsense
                 </h2>
                 <p className="mt-4 text-lg leading-8 text-slate-600">
-                  The best service companies make things easier for the customer.
-                  That means explaining the issue clearly, showing the right
-                  options, and doing work that holds up.
+                  People do not want a garage door company that creates more
+                  confusion. They want a company that explains the problem,
+                  shows the right options, and handles the work professionally.
                 </p>
 
                 <div className="mt-8 grid gap-x-6 gap-y-4 md:grid-cols-2">
