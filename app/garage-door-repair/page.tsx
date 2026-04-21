@@ -99,13 +99,14 @@ export default function GarageDoorRepairPage() {
   ];
 
   const reasons = [
-  "Same-day service available across South Florida",
-  "Technicians who actually know what they’re doing",
-  "No upselling — just real solutions",
-  "Clean installs that protect your home long-term",
-  "Fast response and clear communication",
-  "Residential & commercial expertise",
-];
+    "Same-day service available across South Florida",
+    "Technicians who actually know what they’re doing",
+    "No upselling — just real solutions",
+    "Clean repairs that protect your door long-term",
+    "Fast response and clear communication",
+    "Residential and commercial experience",
+  ];
+
   const cityLinks = [
     "Miami",
     "Fort Lauderdale",
@@ -169,90 +170,87 @@ export default function GarageDoorRepairPage() {
         ]}
       />
 
-     <section className="relative min-h-[760px] overflow-hidden">
-  <Image
-    src="/garage-door-repair-v2hero.jpg"
-    alt="SecureLifts garage door repair technician working on a garage door in South Florida"
-    fill
-    priority
-    className="object-cover object-[66%_center] md:object-[78%_center]"
-  />
+      <section className="relative min-h-[760px] overflow-hidden">
+        <Image
+          src="/garage-door-repair-v2hero.jpg"
+          alt="SecureLifts garage door repair technician working on a garage door in South Florida"
+          fill
+          priority
+          className="object-cover object-[66%_center] md:object-[78%_center]"
+        />
 
-  <div className="absolute inset-0 bg-gradient-to-r from-black/78 via-black/42 to-transparent" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/78 via-black/42 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-black/10" />
 
-  <div className="relative z-10 mx-auto flex min-h-[760px] max-w-6xl items-end px-6 pb-14 pt-36 md:pt-40">
-    <div className="max-w-[560px]">
-      <p
-        className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 md:text-sm"
-        style={{ textShadow: "0 2px 10px rgba(0,0,0,0.55)" }}
-      >
-        SecureLifts Fast Repair Service
-      </p>
+        <div className="relative z-10 mx-auto flex min-h-[760px] max-w-6xl items-end px-6 pb-14 pt-36 md:pt-40">
+          <div className="max-w-[560px]">
+            <p
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 md:text-sm"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.55)" }}
+            >
+              SecureLifts Fast Repair Service
+            </p>
 
-      <h1
-        className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl"
-        style={{ textShadow: "0 3px 14px rgba(0,0,0,0.68)" }}
-      >
-        Garage Door Repair in South Florida
-      </h1>
+            <h1
+              className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl"
+              style={{ textShadow: "0 3px 14px rgba(0,0,0,0.68)" }}
+            >
+              Garage Door Repair in South Florida
+            </h1>
 
-      <p
-        className="mb-7 max-w-xl text-base leading-7 text-white/95 md:text-lg"
-        style={{ textShadow: "0 2px 10px rgba(0,0,0,0.58)" }}
-      >
-        Fast, professional repair for broken springs, opener failures, off-track
-        doors, worn rollers, cables, and more. SecureLifts helps homeowners get
-        the door working again without wasting time.
-      </p>
+            <p
+              className="mb-7 max-w-xl text-base leading-7 text-white/95 md:text-lg"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.58)" }}
+            >
+              Fast, professional repair for broken springs, opener failures,
+              off-track doors, worn rollers, cables, and more. SecureLifts helps
+              homeowners get the door working again without wasting time.
+            </p>
 
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <a
-          href="tel:18668281818"
-          className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-700"
-        >
-          Call Now – (866) 828-1818
-        </a>
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <a
+                href="tel:18668281818"
+                className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-700"
+              >
+                Call Now – (866) 828-1818
+              </a>
 
-        <Link
-          href="/book-service"
-          className="inline-flex items-center justify-center rounded-lg border border-white/70 bg-white px-8 py-4 text-lg font-semibold !text-gray-900 shadow-sm transition hover:bg-gray-100"
-        >
-          Book Service
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
-      <section className="sl-section bg-white">
-  <div className="sl-container">
-    <div className="text-center mb-12">
-      <p className="sl-eyebrow text-red-600">Common Issues</p>
-      <h2 className="sl-heading-lg">
-        We Fix Garage Door Problems Fast
-      </h2>
-      <p className="sl-copy max-w-2xl mx-auto">
-        Most garage door issues get worse if ignored. We fix them quickly before they turn into expensive problems.
-      </p>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-      {[
-        "Broken Springs",
-        "Garage Door Openers",
-        "Off-Track Doors",
-        "Snapped Cables",
-      ].map((item) => (
-        <div key={item} className="sl-card text-center">
-          <h3 className="text-lg font-semibold mb-2">{item}</h3>
-          <p className="text-sm text-slate-600">
-            Fast repair and reliable solutions done right the first time.
-          </p>
+              <Link
+                href="/book-service"
+                className="inline-flex items-center justify-center rounded-lg border border-white/70 bg-white px-8 py-4 text-lg font-semibold !text-gray-900 shadow-sm transition hover:bg-gray-100"
+              >
+                Book Service
+              </Link>
+            </div>
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
+
+      <section className="sl-section bg-white">
+        <div className="sl-container">
+          <div className="mb-12 text-center">
+            <p className="sl-eyebrow text-red-600">Common Issues</p>
+            <h2 className="sl-heading-lg">We Fix Garage Door Problems Fast</h2>
+            <p className="sl-copy mx-auto max-w-2xl">
+              Most garage door issues get worse if ignored. We fix them quickly
+              before they turn into more expensive problems.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {["Broken Springs", "Garage Door Openers", "Off-Track Doors", "Snapped Cables"].map(
+              (item) => (
+                <div key={item} className="sl-card text-center">
+                  <h3 className="mb-2 text-lg font-semibold">{item}</h3>
+                  <p className="text-sm text-slate-600">
+                    Fast repair and reliable solutions done right the first time.
+                  </p>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-white px-6 py-8">
         <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
@@ -274,7 +272,7 @@ export default function GarageDoorRepairPage() {
           </div>
           <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
-              Daily Reliability
+              Reliable Results
             </p>
             <p className="text-lg font-semibold text-gray-900">
               Built Around Homeowner Needs
@@ -287,21 +285,21 @@ export default function GarageDoorRepairPage() {
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
-              Daily Income Service Category
+              Trusted Repair Service
             </p>
             <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-              Garage Door Repair Is One of the Most Important Service Pages on the Site
+              Fast Garage Door Repair for Real South Florida Problems
             </h2>
             <p className="mb-5 text-lg leading-8 text-gray-700">
-              Repair is where daily service demand lives. Homeowners are not
-              browsing for fun when their garage door will not open, is hanging
-              crooked, is making loud noise, or becomes unsafe. They need help
-              quickly.
+              When a garage door stops working, homeowners are usually dealing
+              with more than inconvenience. They may be locked in, locked out,
+              dealing with an unsafe door, or trying to protect access to the
+              home.
             </p>
             <p className="text-lg leading-8 text-gray-700">
-              This page needs to do one thing well: make it easy for people in
-              South Florida to trust SecureLifts, understand what gets repaired,
-              and call or book service without hesitation.
+              SecureLifts helps homeowners across South Florida get garage doors
+              repaired quickly, safely, and correctly. We focus on clear
+              communication, honest recommendations, and repairs that hold up.
             </p>
           </div>
 
@@ -309,9 +307,7 @@ export default function GarageDoorRepairPage() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
               Fast Direction
             </p>
-            <h3 className="mb-4 text-2xl font-bold">
-              Need Repair Near You?
-            </h3>
+            <h3 className="mb-4 text-2xl font-bold">Need Repair Near You?</h3>
             <p className="mb-6 leading-7 text-gray-700">
               Jump into local pages or compare the most common repair services
               people call for when the garage door stops working right.
@@ -389,15 +385,15 @@ export default function GarageDoorRepairPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
-              Why Repair Calls Convert
+              Why Homeowners Call SecureLifts
             </p>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               Why Homeowners Choose SecureLifts for Garage Door Repair
             </h2>
             <p className="text-lg leading-8 text-gray-600">
               Homeowners want speed, clarity, and a company that does not waste
-              their time. Repair pages need to feel practical, trustworthy, and
-              ready to solve the problem now.
+              their time. A strong repair experience means solving the problem
+              without confusion or pressure.
             </p>
           </div>
 
@@ -542,29 +538,30 @@ export default function GarageDoorRepairPage() {
           },
         ]}
       />
-      <section className="bg-red-600 text-white py-6">
-  <div className="sl-container flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-    <p className="text-lg font-semibold">
-      Limited Time Offer – $25 OFF Any Garage Door Repair
-    </p>
 
-    <div className="flex gap-4">
-      <a
+      <section className="bg-red-600 py-6 text-white">
+        <div className="sl-container flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+          <p className="text-lg font-semibold">
+            Limited Time Offer – $25 OFF Any Garage Door Repair
+          </p>
+
+          <div className="flex gap-4">
+            <a
               href="tel:18668281818"
               className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-4 text-lg font-semibold !text-gray-900 transition hover:bg-gray-100"
             >
               Call (866) 828-1818
             </a>
 
-      <Link
-        href="/book-service"
-        className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-700"
-      >
-        Book Service
-      </Link>
-    </div>
-  </div>
-</section>
+            <Link
+              href="/book-service"
+              className="inline-flex items-center justify-center rounded-lg bg-red-700 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-800"
+            >
+              Book Service
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-gray-900 px-6 py-20 text-white">
         <div className="mx-auto max-w-4xl rounded-3xl bg-white/5 px-8 py-14 text-center md:px-12">
