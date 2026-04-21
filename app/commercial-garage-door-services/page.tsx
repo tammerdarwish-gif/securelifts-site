@@ -222,11 +222,11 @@ export default function CommercialGarageDoorServicesPage() {
                   </a>
 
                   <Link
-                    href="/book-service"
-                    className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-4 text-base font-bold text-slate-900 transition hover:bg-slate-100"
-                  >
-                    Book Commercial Service
-                  </Link>
+  href="/book-service"
+  className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
+>
+  Book Service
+</Link>
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-200">
