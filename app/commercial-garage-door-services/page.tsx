@@ -15,7 +15,15 @@ import {
   FaClipboardCheck,
   FaExclamationTriangle,
 } from "react-icons/fa";
-import { getServiceHref } from "@/lib/serviceRoutes";
+import { serviceRoutes } from "../../lib/serviceRoutes";
+// Breadcrumb helper
+export const getBreadcrumbs = (pathname: string) => {
+  const segments = pathname.split("/").filter(Boolean);
+  return segments.map((segment, index) => ({
+    label: segment.replace(/-/g, " "),
+    path: "/" + segments.slice(0, index + 1).join("/"),
+  }));
+};
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -41,22 +49,22 @@ const serviceCards = [
   {
     title: "Commercial Garage Door Repair",
     text: "Fast troubleshooting and repair for damaged doors, noisy doors, stuck doors, operator issues, broken hardware, worn rollers, track damage, and unsafe operation.",
-    href: getServiceHref("commercialGarageDoorRepair"),
+    href: serviceRoutes.commercialGarageDoorRepair,
   },
   {
     title: "Commercial Door Installation",
     text: "Professional installation for sectional overhead doors, insulated commercial doors, full-view doors, service bay doors, and heavy-duty business applications.",
-    href: getServiceHref("commercialGarageDoorInstallation"),
+    href: serviceRoutes.commercialGarageDoorInstallation,
   },
   {
     title: "Preventive Maintenance",
     text: "Routine inspections, lubrication, adjustment, hardware checks, balance checks, and early issue detection to reduce downtime and protect your operation.",
-    href: getServiceHref("commercialGarageDoorMaintenance"),
+    href: serviceRoutes.commercialGarageDoorMaintenance,
   },
   {
     title: "Emergency Commercial Service",
     text: "Urgent help for doors that are stuck open, stuck closed, unsafe to operate, off track, or disrupting deliveries, access, security, and business flow.",
-    href: getServiceHref("emergencyCommercialDoorRepair"),
+    href: serviceRoutes.emergencyCommercialDoorRepair,
   },
 ];
 
@@ -522,7 +530,7 @@ export default function CommercialGarageDoorServicesPage() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <Link
-                href={getServiceHref("commercialGarageDoorRepair")}
+                href={serviceRoutes.commercialGarageDoorRepair}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaTools className="text-red-600" />
@@ -535,7 +543,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={getServiceHref("commercialGarageDoorInstallation")}
+                href={serviceRoutes.commercialGarageDoorInstallation}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaDoorOpen className="text-red-600" />
@@ -548,7 +556,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={getServiceHref("commercialGarageDoorMaintenance")}
+                href={serviceRoutes.commercialGarageDoorMaintenance}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaClipboardCheck className="text-red-600" />
@@ -561,7 +569,7 @@ export default function CommercialGarageDoorServicesPage() {
               </Link>
 
               <Link
-                href={getServiceHref("industrialDoorRepair")}
+                href={serviceRoutes.industrialDoorRepair}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <FaIndustry className="text-red-600" />
