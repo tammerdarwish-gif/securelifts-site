@@ -16,14 +16,6 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { serviceRoutes } from "../../lib/serviceRoutes";
-// Breadcrumb helper
-export const getBreadcrumbs = (pathname: string) => {
-  const segments = pathname.split("/").filter(Boolean);
-  return segments.map((segment, index) => ({
-    label: segment.replace(/-/g, " "),
-    path: "/" + segments.slice(0, index + 1).join("/"),
-  }));
-};
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
