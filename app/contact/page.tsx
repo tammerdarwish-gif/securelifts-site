@@ -180,11 +180,12 @@ export default function ContactPage() {
                 </a>
 
        <Link
-                    href="/book-service"
-                    className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
-                  >
-                    Book Service
-                  </Link>  </div>
+  href="/book-service"
+  className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
+>
+  Book Service
+</Link>
+                   </div>
 
               <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-200">
                 <span className="inline-flex items-center gap-2">
@@ -434,12 +435,12 @@ export default function ContactPage() {
                 Call {PHONE}
               </a>
 
-       <Link
-                    href="/book-service"
-                    className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
-                  >
-                    Book Service
-                  </Link>
+      <Link
+  href="/book-service"
+  className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
+>
+  Book Service
+</Link>
             </div>
           </div>
         </section>
