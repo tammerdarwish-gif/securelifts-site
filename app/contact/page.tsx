@@ -12,8 +12,8 @@ import {
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
-const EMAIL = "service@securelifts.com";
-const EMAIL_HREF = "mailto:service@securelifts.com";
+const EMAIL = "info@securelifts.com";
+const EMAIL_HREF = "mailto:info@securelifts.com";
 
 export const metadata: Metadata = {
   title: "Contact SecureLifts | Garage Door Service in South Florida",
