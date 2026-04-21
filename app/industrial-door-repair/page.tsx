@@ -1,18 +1,10 @@
-
-
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
-  FaArrowRight,
-  FaIndustry,
   FaTools,
-  FaShieldAlt,
-  FaClock,
 } from "react-icons/fa";
-import { serviceRoutes } from "../../lib/serviceRoutes";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -44,6 +36,15 @@ const benefits = [
   "Get clear repair vs replacement guidance",
 ];
 
+const cityLinks = [
+  { label: "Industrial Door Repair in Miami", href: "/industrial-door-repair/miami" },
+  { label: "Industrial Door Repair in Fort Lauderdale", href: "/industrial-door-repair/fort-lauderdale" },
+  { label: "Industrial Door Repair in West Palm Beach", href: "/industrial-door-repair/west-palm-beach" },
+  { label: "Industrial Door Repair in Boca Raton", href: "/industrial-door-repair/boca-raton" },
+  { label: "Industrial Door Repair in Delray Beach", href: "/industrial-door-repair/delray-beach" },
+  { label: "Industrial Door Repair in Miami Beach", href: "/industrial-door-repair/miami-beach" },
+];
+
 export default function IndustrialDoorRepairPage() {
   return (
     <>
@@ -72,7 +73,7 @@ export default function IndustrialDoorRepairPage() {
 
               <Link
                 href="/book-service"
-                className="border px-6 py-4 rounded-xl font-bold"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
               >
                 Book Service
               </Link>
@@ -122,6 +123,31 @@ export default function IndustrialDoorRepairPage() {
           </div>
         </section>
 
+        {/* CITY LINKS */}
+        <section className="bg-slate-50 px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-black">
+              Industrial door repair by city
+            </h2>
+
+            <p className="mt-4 max-w-3xl text-lg text-slate-600">
+              Browse live industrial door repair pages for major South Florida service areas.
+            </p>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {cityLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="bg-red-600 text-white px-6 py-20 text-center">
           <h2 className="text-4xl font-black">
@@ -142,7 +168,7 @@ export default function IndustrialDoorRepairPage() {
 
             <Link
               href="/book-service"
-              className="border px-6 py-4 rounded-xl font-bold"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
             >
               Book Service
             </Link>
