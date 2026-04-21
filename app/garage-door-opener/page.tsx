@@ -351,8 +351,8 @@ export default function GarageDoorOpenerPage() {
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
                 Most homeowners do not need more information first. They need
-                the right path first. This section is built to move the visitor
-                straight into the correct decision.
+                the right path first. This section helps visitors move quickly
+                toward the best repair, replacement, or upgrade option.
               </p>
             </div>
 
@@ -409,25 +409,16 @@ export default function GarageDoorOpenerPage() {
                   key={type.title}
                   className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
                 >
-      <div className="relative mb-6 h-64 overflow-hidden rounded-2xl bg-slate-100">
-
-  <div className="relative mx-auto h-full w-[88%]">
-
-    <Image
-
-      src={type.image}
-
-      alt={type.alt}
-
-      fill
-
-      className="object-contain py-2"
-
-    />
-
-  </div>
-
-</div>
+                  <div className="relative mb-6 h-64 overflow-hidden rounded-2xl bg-slate-100">
+                    <div className="relative mx-auto h-full w-[88%]">
+                      <Image
+                        src={type.image}
+                        alt={type.alt}
+                        fill
+                        className="object-contain py-2"
+                      />
+                    </div>
+                  </div>
                   <h3 className="text-2xl font-black tracking-tight">
                     {type.title}
                   </h3>
@@ -561,7 +552,7 @@ export default function GarageDoorOpenerPage() {
 
               <div className="rounded-3xl border border-white/10 bg-white/5 p-7">
                 <h3 className="text-2xl font-black tracking-tight">
-                  Search terms this section supports
+                  Common older-opener search topics
                 </h3>
                 <div className="mt-5 flex flex-wrap gap-3">
                   {olderModelTerms.map((term) => (
@@ -574,9 +565,9 @@ export default function GarageDoorOpenerPage() {
                   ))}
                 </div>
                 <p className="mt-6 text-base leading-7 text-slate-300">
-                  This is where you can later expand with internal links to old
-                  model support pages if you want to target individual opener
-                  model searches more aggressively.
+                  We help homeowners figure out whether an older opener is still
+                  worth repairing, whether a compatible part can solve the issue,
+                  or whether upgrading to a newer system makes more sense.
                 </p>
               </div>
             </div>
