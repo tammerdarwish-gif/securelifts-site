@@ -1,574 +1,662 @@
-import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import InternalLinkCards from "../../components/InternalLinkCards";
-import ServiceSchema from "../../components/ServiceSchema";
-import FAQSchema from "../../components/FAQSchema";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import BreadcrumbSchema from "../../components/BreadcrumbSchema";
-import ReviewTrustSection from "../../components/ReviewTrustSection";
+import Image from "next/image";
+import Script from "next/script";
+import type { Metadata } from "next";
+import TraditionalDesignGallery from "../../components/traditionaldesigngallery";
+type FinishOption = {
+  id: string;
+  name: string;
+  manufacturer: "raynor" | "clopay" | "generic";
+  type: "solid" | "woodtone";
+  swatch?: string;
+  image?: string;
+};
+
+const PHONE = "(866) 828-1818";
+const PHONE_HREF = "tel:+18668281818";
+
+const FINISH_LIBRARY = {
+  generic: {
+    white: {
+      id: "generic-white",
+      name: "White",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#F8F8F8",
+    },
+    almond: {
+      id: "generic-almond",
+      name: "Almond",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#E7D7B7",
+    },
+    bronze: {
+      id: "generic-bronze",
+      name: "Bronze",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#6E5B49",
+    },
+    brown: {
+      id: "generic-brown",
+      name: "Brown",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#6B4F3A",
+    },
+    taupe: {
+      id: "generic-taupe",
+      name: "Taupe",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#A79B8B",
+    },
+    sandtone: {
+      id: "generic-sandtone",
+      name: "Sandstone",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#C8B89D",
+    },
+    desertTan: {
+      id: "generic-desert-tan",
+      name: "Desert Tan",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#C9B28F",
+    },
+    black: {
+      id: "generic-black",
+      name: "Black",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#1C1C1C",
+    },
+    gray: {
+      id: "generic-gray",
+      name: "Gray",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#7C8187",
+    },
+    
+    red: {
+      id: "generic-red",
+      name: "Red",
+      manufacturer: "generic",
+      type: "solid" as const,
+      swatch: "#7A1E1E",
+    },
+  },
+  raynor: {
+    mocha: {
+      id: "raynor-mocha",
+      name: "Mocha",
+      manufacturer: "raynor",
+      type: "woodtone" as const,
+      image: "/finishes/raynor/Mocha-Gunite-Encore.png",
+    },
+    shale: {
+      id: "raynor-shale",
+      name: "Shale",
+      manufacturer: "raynor",
+      type: "solid" as const,
+      swatch: "#8A8478",
+    },
+  },
+  clopay: {
+    walnut: {
+      id: "clopay-walnut",
+      name: "Walnut",
+      manufacturer: "clopay",
+      type: "woodtone" as const,
+      image: "/finishes/clopay/walnut.png",
+    },
+    charcoal: {
+      id: "clopay-charcoal",
+      name: "Charcoal",
+      manufacturer: "clopay",
+      type: "solid" as const,
+      swatch: "#3B3E43",
+    },
+    medium: {
+      id: "clopay-medium",
+      name: "Medium Finish",
+      manufacturer: "clopay",
+      type: "woodtone" as const,
+      image: "/finishes/clopay/Medium-Finish.png",
+    },
+    mochaBrown: {
+      id: "clopay-mocha-brown",
+      name: "Mocha Brown",
+      manufacturer: "clopay",
+      type: "solid" as const,
+      swatch: "#5B4638",
+    },
+  },
+} as const;
+
+const TRADITIONAL_COLORS = {
+  nonInsulated: [
+    FINISH_LIBRARY.generic.white,
+    FINISH_LIBRARY.generic.almond,
+    FINISH_LIBRARY.generic.sandtone,
+    FINISH_LIBRARY.generic.brown,
+  ],
+  insulated: [
+    FINISH_LIBRARY.generic.white,
+    FINISH_LIBRARY.generic.almond,
+    FINISH_LIBRARY.generic.sandtone,
+    FINISH_LIBRARY.generic.desertTan,
+    FINISH_LIBRARY.generic.bronze,
+    FINISH_LIBRARY.generic.brown,
+    FINISH_LIBRARY.generic.taupe,
+    FINISH_LIBRARY.raynor.mocha,
+    FINISH_LIBRARY.raynor.shale,
+    FINISH_LIBRARY.clopay.walnut,
+    FINISH_LIBRARY.clopay.medium,
+    FINISH_LIBRARY.clopay.mochaBrown,
+    FINISH_LIBRARY.generic.gray,
+    FINISH_LIBRARY.clopay.charcoal,
+    FINISH_LIBRARY.generic.black,
+    FINISH_LIBRARY.generic.red,
+  ],
+};
+
 export const metadata: Metadata = {
-  title: "Traditional Hurricane Garage Doors in South Florida | SecureLifts",
+  title: "Traditional Garage Doors | SecureLifts South Florida",
   description:
-    "SecureLifts installs traditional hurricane garage doors in South Florida with classic curb appeal, storm-ready strength, and premium residential design. Call (866) 828-1818.",
+    "Explore traditional garage door styles in South Florida including non-insulated, insulated, and premium options with classic panel designs, color choices, and hurricane-rated upgrades from SecureLifts.",
+  alternates: {
+    canonical: "https://securelifts.com/hurricane-garage-doors/traditional",
+  },
   openGraph: {
-    title: "Traditional Hurricane Garage Doors in South Florida | SecureLifts",
+    title: "Traditional Garage Doors | SecureLifts South Florida",
     description:
-      "Traditional hurricane garage doors in South Florida with classic raised-panel design and storm-ready protection installed by SecureLifts.",
-    images: [
-      {
-        url: "/hurricane-traditional-hero.png",
-        width: 1536,
-        height: 1024,
-        alt: "Traditional hurricane garage door installed on a South Florida home with classic raised-panel design and storm-ready construction",
-      },
-    ],
+      "Compare traditional garage door styles, panel designs, colors, insulation levels, and pricing ranges for South Florida homes.",
+    url: "https://securelifts.com/hurricane-garage-doors/traditional",
+    siteName: "SecureLifts",
+    type: "website",
   },
 };
 
-export default function TraditionalHurricaneGarageDoorsPage() {
-  const benefits = [
-    {
-      icon: "🏡",
-      title: "Classic Residential Look",
-      text: "Traditional hurricane garage doors keep the familiar raised-panel style homeowners already love while upgrading to a stronger storm-ready system.",
-    },
-    {
-      icon: "🛡️",
-      title: "Built for South Florida Weather",
-      text: "These doors are made for homeowners who want dependable storm protection without switching to a more modern or decorative design language.",
-    },
-    {
-      icon: "🔧",
-      title: "Stronger Daily Reliability",
-      text: "You are not only buying storm protection. You are also getting a stronger garage door system built for long-term use and cleaner operation.",
-    },
-    {
-      icon: "✨",
-      title: "Timeless Curb Appeal",
-      text: "Traditional styles work well on a wide range of homes and stay visually relevant year after year instead of chasing short-term trends.",
-    },
-  ];
+const buildLevels = [
+  {
+    title: "Value-Focused Traditional",
+    subtitle: "Practical Replacement",
+    highlight: "Best for simple replacement",
+    range: "$1,500 – $3,500+",
+    text: "Best for homeowners who want a clean, dependable traditional garage door without overbuilding the project.",
+    bullets: [
+      "Non-insulated or basic insulation path",
+      "Standard colors and core traditional styles",
+      "Strong fit for practical replacement projects",
+    ],
+  },
+  {
+    title: "Insulated Traditional",
+    subtitle: "Most Popular",
+    highlight: "Best balance of price and performance",
+    range: "$2,500 – $5,500+",
+    text: "Best for homeowners who want better comfort, quieter operation, stronger overall feel, and more design and color flexibility.",
+    bullets: [
+      "Better comfort and quieter operation",
+      "Expanded color and design access",
+      "Better fit for attached garages and daily use",
+    ],
+  },
+  {
+    title: "Premium Traditional",
+    subtitle: "High-End Finish",
+    highlight: "Best for upgraded look and feel",
+    range: "$4,500 – $8,000+",
+    text: "Best for homeowners who want stronger construction, upgraded insulation, cleaner fit and finish, and a more polished final result.",
+    bullets: [
+      "Stronger build and better finish",
+      "Premium finish directions and appearance",
+      "Best overall visual impact and system feel",
+    ],
+  },
+];
 
-  const designOptions = [
-    {
-      title: "Short Panel Traditional Doors",
-      text: "A clean, classic layout that works well on many South Florida homes and keeps the front elevation balanced.",
-    },
-    {
-      title: "Long Panel Traditional Doors",
-      text: "A more refined traditional look with longer raised sections for homeowners who want a slightly upgraded appearance.",
-    },
-    {
-      title: "Traditional Doors with Windows",
-      text: "Add top-row windows to improve curb appeal and give the garage door more architectural interest without losing the classic style.",
-    },
-    {
-      title: "Insulated Traditional Hurricane Doors",
-      text: "A stronger-feeling system with better comfort, quieter operation, and a more solid long-term result.",
-    },
-  ];
+const panelOptions = [
+  {
+    title: "Short Panel",
+    text: "Classic traditional look used on most homes.",
+    availability: "Available Non-Insulated & Insulated",
+    image: "/images/doors/short-panel.jpg",
+  },
+  {
+    title: "Long Panel",
+    text: "Cleaner, more stretched look with a slightly upgraded feel.",
+    availability: "Available Non-Insulated & Insulated",
+    image: "/images/doors/long-panel.jpg",
+  },
+  {
+    title: "Flush",
+    text: "Minimal, flat look for a cleaner and simpler appearance.",
+    availability: "Available Non-Insulated & Insulated",
+    image: "/images/doors/flush-panel.jpg",
+  },
+  {
+    title: "Recessed Colonial",
+    text: "A more detailed recessed-panel look with classic traditional character.",
+    availability: "Available Non-Insulated & Insulated",
+    image: "/images/doors/recessed-colonial.jpg",
+  },
+  {
+    title: "Shaker",
+    text: "Clean square-panel design with a more refined architectural look.",
+    availability: "Insulated Models Only",
+    image: "/images/doors/shaker.jpg",
+  },
+  {
+    title: "Plank",
+    text: "Horizontal plank styling for homeowners who want a cleaner and more current traditional direction.",
+    availability: "Insulated Models Only",
+    image: "/images/doors/plank.jpg",
+  },
+  {
+    title: "Ranch Carriage",
+    text: "A recessed long-panel style that adds a stronger carriage-inspired traditional feel.",
+    availability: "Insulated Models Only",
+    image: "/images/doors/ranch-carriage.jpg",
+  },
+];
+const reasons = [
+  "Classic style that works on a wide range of homes",
+  "Better curb appeal without needing an ultra-modern design",
+  "Available in non-insulated, insulated, and premium builds",
+  "Stronger hurricane-focused upgrade paths for South Florida",
+  "Cleaner, quieter, and more reliable than aging door systems",
+  "A practical way to improve appearance and daily function together",
+];
 
-  const trustItems = [
-    {
-      icon: "⭐",
-      title: "Trusted by South Florida homeowners",
-      text: "Traditional styles are often chosen by homeowners who want reliability, familiar curb appeal, and a company that won’t overcomplicate the project.",
-    },
-    {
-      icon: "🛠️",
-      title: "Installed clean and correctly",
-      text: "Even a classic garage door looks wrong when the fit, spacing, or hardware are off. SecureLifts installs them the right way.",
-    },
-    {
-      icon: "⚡",
-      title: "Fast estimates and direct communication",
-      text: "Homeowners need clear guidance, honest recommendations, and fast follow-through when replacing or upgrading a garage door.",
-    },
-  ];
+const upgradeOptions = [
+  "Decorative window options",
+  "Hardware accents for a stronger carriage-style feel",
+  "Insulated build upgrades",
+  "Hurricane-rated reinforcement paths",
+  "LiftMaster opener upgrades",
+  "Battery backup and smart opener add-ons",
+];
 
-  const reasons = [
-    "Traditional styles that still look premium on the home",
-    "Storm-ready systems built for South Florida conditions",
-    "Help choosing panel style, windows, color, and finish",
-    "Professional installation instead of weak builder-grade shortcuts",
-    "Repair, replacement, and full new-door installation available",
-    "Fast estimates and clear communication from start to finish",
-  ];
+const faqs = [
+  {
+    q: "What is the best traditional garage door option for most homes?",
+    a: "For many homes, a traditional insulated steel door is the strongest overall balance of appearance, comfort, durability, and price. The right fit still depends on budget, storm needs, and how upgraded you want the finished look to feel.",
+  },
+  {
+    q: "What is the difference between non-insulated and insulated traditional garage doors?",
+    a: "Non-insulated doors usually make sense when budget is the main priority. Insulated doors are a stronger choice when you want quieter operation, better comfort, and a more solid overall feel.",
+  },
+  {
+    q: "Are traditional garage doors still a good choice for higher-end homes?",
+    a: "Yes. Traditional doors can still look excellent on higher-end homes when the panel style, finish, insulation level, windows, and overall fit are chosen well.",
+  },
+  {
+    q: "Can I still get a traditional garage door with hurricane-rated protection?",
+    a: "Yes. In South Florida, traditional-style garage doors can still be built around stronger hurricane-rated requirements depending on the system and project needs.",
+  },
+];
 
-  const compareStyles = [
-    {
-      title: "Modern Hurricane Garage Doors",
-      href: "/hurricane-garage-doors/modern",
-    },
-    {
-      title: "Carriage House Hurricane Garage Doors",
-      href: "/hurricane-garage-doors/carriage-house",
-    },
-    {
-      title: "Custom Hurricane Garage Doors",
-      href: "/hurricane-garage-doors/custom",
-    },
-  ];
+export default function TraditionalGarageDoorsPage() {
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Traditional Garage Doors",
+    url: "https://securelifts.com/hurricane-garage-doors/traditional",
+    description:
+      "Traditional garage door styles, design options, color choices, insulation levels, and pricing guidance for South Florida homeowners.",
+  };
 
-  const faqs = [
-    {
-      question: "Are traditional hurricane garage doors still strong enough for South Florida storms?",
-      answer:
-        "Yes. Traditional style refers to the look, not a weak build. SecureLifts installs traditional hurricane garage doors designed for stronger storm protection and daily reliability.",
-    },
-    {
-      question: "Can I add windows to a traditional hurricane garage door?",
-      answer:
-        "Yes. Many homeowners choose top-row windows to improve curb appeal while keeping the overall look classic and clean.",
-    },
-    {
-      question: "Do traditional hurricane garage doors only work on older homes?",
-      answer:
-        "No. Traditional garage doors work on many home types and are often the safest choice when the homeowner wants a timeless look that will not feel outdated.",
-    },
-    {
-      question: "Can SecureLifts help me choose the right traditional style?",
-      answer:
-        "Yes. We help homeowners choose the right panel layout, finish, windows, and overall appearance so the door fits the house correctly.",
-    },
-  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
 
   return (
-    <main className="bg-white text-gray-900">
-      <FAQSchema items={faqs} />
-
-      <ServiceSchema
-        name="Traditional Hurricane Garage Doors in South Florida"
-        description="SecureLifts installs traditional hurricane garage doors in South Florida with classic curb appeal, storm-ready strength, and premium residential design."
-        url="https://securelifts.com/hurricane-garage-doors/traditional"
+    <>
+      <Script
+        id="traditional-garage-doors-collection-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <Script
+        id="traditional-garage-doors-faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <BreadcrumbSchema
-        items={[
-          { label: "Home", href: "https://securelifts.com" },
-          { label: "Hurricane Garage Doors", href: "https://securelifts.com/hurricane-garage-doors" },
-          { label: "Traditional Style", href: "https://securelifts.com/hurricane-garage-doors/traditional" },
-        ]}
-      />
+      <main className="bg-white text-slate-900">
+        <section className="relative overflow-hidden bg-slate-950 px-6 py-16 text-white md:py-24">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.20),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_25%)]" />
+          <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div>
+              <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">
+                SecureLifts Traditional Garage Doors
+              </p>
+              <h1 className="max-w-4xl text-4xl font-black tracking-tight md:text-5xl xl:text-6xl">
+                Traditional Garage Doors for South Florida Homes
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
+                Traditional garage doors remain one of the smartest choices for homeowners who want
+                a clean, proven look with strong daily performance. This page helps you compare panel
+                designs, color paths, build levels, and realistic price ranges before you make a decision.
+              </p>
 
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Hurricane Garage Doors", href: "/hurricane-garage-doors" },
-          { label: "Traditional Style" },
-        ]}
-      />
-      {/* HERO */}
-      <section className="relative min-h-[760px] overflow-hidden">
-        <Image
-          src="/traditional-hurricane-garage-doors-hero.jpg"
-          alt="Traditional hurricane garage door installed on a South Florida home with classic raised-panel design and storm-ready construction"
-          fill
-          priority
-          className="object-cover object-[68%_42%]"
-        />
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href={PHONE_HREF}
+                  className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
+                >
+                  Call {PHONE}
+                </a>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/12" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+                <Link
+                  href="/book-service"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
+                >
+                  Book Service
+                </Link>
+              </div>
+            </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-end px-6 pb-16 pt-32 md:pt-36">
-          <div className="max-w-[580px]">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
-              SecureLifts Classic Storm-Ready Doors
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
+              <div className="relative h-[340px] w-full md:h-[460px]">
+                <Image
+                  src="/images/reviews/coconut-creek-case-study.jpg"
+                  alt="Traditional garage door installation by SecureLifts"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-6 py-16 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Choose Your Build Level
+              </p>
+              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                Traditional garage door pricing should guide the decision, not trap it
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                Start with the build level that fits your home, budget, and goals. From there, compare
+                the designs, colors, and upgrade paths that make the most sense for your project.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {buildLevels.map((item, index) => (
+                <div
+                  key={item.title}
+                  className={`rounded-3xl border bg-white p-7 shadow-sm ${
+                    index === 1 ? "border-red-300 shadow-md ring-2 ring-red-100" : "border-slate-200"
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-600">
+                      {item.subtitle}
+                    </p>
+                    <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
+                      {item.highlight}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-black tracking-tight text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-2xl font-black text-red-600">
+                    {item.range}
+                  </p>
+                  <p className="mt-4 text-base leading-7 text-slate-600">
+                    {item.text}
+                  </p>
+
+                  <div className="mt-6 space-y-3">
+                    {item.bullets.map((line) => (
+                      <div
+                        key={line}
+                        className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800"
+                      >
+                        {line}
+                      </div>
+                    ))}
+                  </div>           
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-50 px-6 py-16 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Design Options
+              </p>
+              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                Choose the panel style that fits your home best
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                Design has the biggest impact on how the finished garage door looks from the street.
+                Compare the panel styles first, then check availability to see whether each design is
+                offered in both build paths or only in insulated models.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+                <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-green-700">
+                  Green = Available Non-Insulated & Insulated
+                </span>
+                <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-red-700">
+                  Red = Insulated Models Only
+                </span>
+              </div>
+              <div className="mt-6 rounded-2xl border border-red-100 bg-red-50 px-5 py-4 text-sm font-semibold leading-7 text-slate-700">
+                Insulated traditional garage doors open up additional design and finish options beyond the
+                standard non-insulated lineup. If you want more style flexibility, quieter operation, and
+                a stronger overall feel, an insulated build is usually the better fit.
+              </div>
+            </div>
+
+            <TraditionalDesignGallery items={panelOptions} />
+          </div>
+        </section>
+
+        <section className="px-6 py-16 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1fr]">
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Standard Colors
+              </p>
+              <h2 className="mt-3 text-3xl font-black tracking-tight">
+                Included color directions that work well on many homes
+              </h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">
+                These standard finish options are a strong fit for many non-insulated traditional garage
+                door projects and straightforward replacement jobs.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {TRADITIONAL_COLORS.nonInsulated.map((color) => (
+                  <FinishSwatchCard key={color.id} item={color} />
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Insulated & Premium Colors
+              </p>
+              <h2 className="mt-3 text-3xl font-black tracking-tight">
+                Expanded finish options available on insulated traditional doors
+              </h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">
+                Insulated traditional garage doors give you access to a wider finish range, including more
+                upgraded colors and premium-looking options that can make the entire exterior feel stronger.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {TRADITIONAL_COLORS.insulated.map((color) => (
+                  <FinishSwatchCard key={color.id} item={color} />
+                ))}
+              </div>
+
+              
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-50 px-6 py-16 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Why Traditional Still Wins
+              </p>
+              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                A strong fit for homeowners who want proven style without overcomplicating the choice
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                Traditional garage doors work because they are practical, flexible, and visually proven.
+                They can stay budget-conscious, step into insulated mid-range, or be upgraded into a more
+                polished premium finished result.
+              </p>
+            </div>
+
+            <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
+              {reasons.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold leading-6 text-slate-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-6 py-16 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Upgrade Paths
+              </p>
+              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                A better door usually means a better full system
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                The strongest traditional door setups usually do not stop at the panel itself. Windows,
+                hardware, insulation, storm performance, and opener upgrades all influence the final result.
+              </p>
+            </div>
+
+            <div className="grid gap-4">
+              {upgradeOptions.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold text-slate-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-50 px-6 py-16 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                FAQ
+              </p>
+              <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                Traditional garage door questions
+              </h2>
+            </div>
+
+            <div className="mt-10 space-y-4">
+              {faqs.map((faq) => (
+                <div
+                  key={faq.q}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                >
+                  <h3 className="text-xl font-black tracking-tight">
+                    {faq.q}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-950 px-6 py-16 text-white md:py-20">
+          <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center shadow-2xl md:p-12">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">
+              Ready To Compare Traditional Garage Door Options?
+            </p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
+              Call SecureLifts to choose the right traditional garage door for your home
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-200">
+              Get help comparing build levels, panel styles, colors, and realistic price ranges so you can
+              choose the right traditional garage door for your home with confidence.
             </p>
 
-            <h1 className="mb-5 text-4xl font-bold leading-[1.04] text-white md:text-6xl">
-              Traditional Hurricane Garage Doors in South Florida
-            </h1>
-
-            <p className="mb-8 max-w-[540px] text-lg leading-8 text-white/90">
-              Classic curb appeal with real storm-ready strength. SecureLifts
-              installs traditional hurricane garage doors that protect the home
-              while keeping a clean, timeless residential look.
-            </p>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <a
-                href="tel:18668281818"
-                className="inline-flex items-center justify-center rounded-xl bg-red-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-red-700"
+                href={PHONE_HREF}
+                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
               >
-                Call Now – (866) 828-1818
+                Call {PHONE}
               </a>
 
               <Link
                 href="/book-service"
-                className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-lg transition hover:bg-slate-100"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 !bg-white px-5 py-3 text-sm font-bold !text-slate-900 shadow-sm transition hover:!bg-slate-100 hover:!text-slate-900"
               >
                 Book Service
               </Link>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
+    </>
+  );
+}
 
-      {/* TRUST BAR */}
-      <section className="bg-white px-6 py-8">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
-              Trusted Service
-            </p>
-            <p className="text-lg font-semibold text-gray-900">
-              Trusted by South Florida Homeowners
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
-              Storm Ready
-            </p>
-            <p className="text-lg font-semibold text-gray-900">
-              Built for Hurricane Conditions
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
-              Premium Work
-            </p>
-            <p className="text-lg font-semibold text-gray-900">
-              Fast Quotes &amp; Clean Installations
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* INTRO */}
-      <section className="bg-white px-6 py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
-              Timeless Style, Real Protection
-            </p>
-            <h2 className="mb-5 text-3xl font-bold md:text-5xl">
-              A Better Traditional Garage Door for South Florida Homes
-            </h2>
-            <p className="mb-5 text-lg leading-8 text-gray-700">
-              Traditional hurricane garage doors are the right choice for
-              homeowners who want a stronger system without changing the visual
-              character of the home. They keep the familiar residential look,
-              but upgrade the performance where it matters.
-            </p>
-            <p className="mb-5 text-lg leading-8 text-gray-700">
-              Too many doors either look too plain or feel too weak. SecureLifts
-              helps homeowners choose traditional styles that still feel clean,
-              well-finished, and built for South Florida weather.
-            </p>
-            <p className="text-lg leading-8 text-gray-700">
-              The result is a garage door that stays visually timeless and gives
-              you the confidence of a stronger storm-ready system.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 shadow-sm">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
-              Compare Hurricane Styles
-            </p>
-            <h3 className="mb-4 text-2xl font-bold">
-              Looking at Other Style Options Too?
-            </h3>
-            <p className="mb-6 leading-7 text-gray-700">
-              Traditional is ideal for timeless curb appeal, but some homeowners
-              still compare modern, carriage-house, or custom styles before
-              making the final decision.
-            </p>
-
-            <div className="flex flex-col gap-3">
-              {compareStyles.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="rounded-xl border border-gray-200 bg-white px-5 py-4 font-semibold text-gray-900 transition hover:border-red-200 hover:shadow-sm"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BENEFITS */}
-      <section className="bg-gray-50 px-6 py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Why Homeowners Choose This Style
-            </p>
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Traditional Style with Strong Hurricane Protection
-            </h2>
-            <p className="text-lg leading-8 text-gray-600">
-              This style is chosen by homeowners who want reliable storm
-              protection without forcing a more modern or decorative look onto
-              the property.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {benefits.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">
-                  {item.icon}
-                </div>
-                <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                  {item.title}
-                </h3>
-                <p className="leading-7 text-gray-700">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* DESIGN OPTIONS */}
-      <section className="bg-white px-6 py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
-              Traditional Design Options
-            </p>
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Classic Options That Still Feel Premium
-            </h2>
-            <p className="text-lg leading-8 text-gray-600">
-              The best traditional doors do not look cheap or flat. They look
-              balanced, well-finished, and right for the home.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {designOptions.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <h3 className="mb-3 text-2xl font-semibold text-gray-900">
-                  {item.title}
-                </h3>
-                <p className="leading-7 text-gray-700">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST / AUTHORITY DETAILS */}
-      <section className="bg-gray-50 px-6 py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
-              Trust • Urgency • Authority
-            </p>
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Why SecureLifts Wins These Traditional Door Jobs
-            </h2>
-            <p className="text-lg leading-8 text-gray-600">
-              Homeowners choosing a traditional hurricane garage door want
-              something that looks right, works right, and gets installed by a
-              company that knows how to keep the project clean.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {trustItems.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm"
-              >
-                <div className="mb-4 text-3xl">{item.icon}</div>
-                <h3 className="mb-3 text-2xl font-semibold text-gray-900">
-                  {item.title}
-                </h3>
-                <p className="leading-7 text-gray-700">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* WHY SECURELIFTS */}
-      <section className="bg-white px-6 py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Why SecureLifts
-            </p>
-            <h2 className="mb-6 text-3xl font-bold md:text-5xl">
-              Why Homeowners Choose SecureLifts for Traditional Hurricane Doors
-            </h2>
-            <p className="mb-8 text-lg leading-8 text-gray-700">
-              Traditional garage doors are easy to underestimate. They still
-              need the right proportions, right finish, right window layout, and
-              a clean install. SecureLifts helps homeowners get the classic look
-              and the storm protection right at the same time.
-            </p>
-
-            <div className="grid gap-5 md:grid-cols-2">
-              {reasons.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5"
-                >
-                  <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-700">
-                    ✓
-                  </div>
-                  <p className="leading-7 text-gray-800">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-gray-200 bg-gray-50 p-8 shadow-sm">
-            <h3 className="mb-4 text-2xl font-bold">
-              Need Help Choosing the Right Traditional Style?
-            </h3>
-            <p className="mb-6 leading-7 text-gray-700">
-              Some homeowners want a simpler clean look. Others want more visual
-              detail through windows or upgraded panel proportions. We help you
-              choose the version that fits the house best.
-            </p>
-
-            <div className="rounded-2xl border border-gray-200 bg-white p-6">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
-                What We Help You Decide
-              </p>
-              <ul className="space-y-3 text-gray-700">
-                <li>Panel style and proportions</li>
-                <li>Window layout and placement</li>
-                <li>Color and finish direction</li>
-                <li>Insulated vs non-insulated option</li>
-                <li>Best fit for your home’s architecture</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ReviewTrustSection
-        heading="Why South Florida Homeowners Choose SecureLifts"
-        intro="When South Florida homeowners invest in stronger garage doors, they want a company that communicates clearly, installs cleanly, and delivers results that actually hold up."
-        reviews={[
-          {
-            name: "Michael R.",
-            text: "Fast response, professional service, and the garage door works better than ever.",
-          },
-          {
-            name: "Jessica T.",
-            text: "They showed up on time, explained everything clearly, and got it done right.",
-          },
-          {
-            name: "Daniel P.",
-            text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
-          },
-          {
-            name: "Alicia T.",
-            text: "The whole process felt organized and professional from the estimate to the final install.",
-          },
-        ]}
+function FinishSwatchCard({ item }: { item: FinishOption }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div
+        className="h-14 w-full rounded-xl border border-slate-200 bg-cover bg-center"
+        style={
+          item.type === "woodtone"
+            ? { backgroundImage: `url(${item.image})` }
+            : { background: item.swatch }
+        }
       />
-
-      {/* FAQ */}
-      <section className="bg-gray-50 px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-              FAQs
-            </p>
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Traditional Hurricane Garage Door FAQs
-            </h2>
-            <p className="text-lg leading-8 text-gray-600">
-              Straight answers for homeowners comparing classic storm-ready
-              garage doors in South Florida.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {faqs.map((item) => (
-              <div
-                key={item.question}
-                className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm"
-              >
-                <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                  {item.question}
-                </h3>
-                <p className="leading-7 text-gray-700">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <InternalLinkCards
-  eyebrow="Compare Hurricane Door Styles"
-  heading="Explore Other Hurricane Garage Door Styles"
-  intro="Every home needs a different balance of style, protection, and curb appeal. Compare the main hurricane door options below."
-  items={[
-    {
-      title: "All Hurricane Styles",
-      text: "Go back to the main hurricane garage door page and compare every style option in one place.",
-      href: "/hurricane-garage-doors",
-      icon: "🌀",
-    },
-    {
-      title: "Modern Style",
-      text: "Clean, contemporary hurricane garage doors with a sleek architectural look.",
-      href: "/hurricane-garage-doors/modern",
-      icon: "⬛",
-    },
-    {
-      title: "Carriage House",
-      text: "Decorative carriage-style hurricane garage doors with premium character.",
-      href: "/hurricane-garage-doors/carriage-house",
-      icon: "🚪",
-    },
-    {
-      title: "Custom Doors",
-      text: "Tailored hurricane garage doors built around your home’s design.",
-      href: "/hurricane-garage-doors/custom",
-      icon: "✨",
-    },
-  ]}
-/>
-
-      {/* CTA */}
-      <section className="bg-gray-900 px-6 py-20 text-white">
-        <div className="mx-auto max-w-5xl rounded-3xl bg-white/5 px-8 py-14 text-center shadow-xl md:px-12">
-          <h2 className="mb-6 text-3xl font-bold md:text-5xl">
-            Want a Traditional Look Without a Weak Garage Door?
-          </h2>
-
-          <p className="mx-auto mb-8 max-w-3xl text-lg leading-8 text-white/85">
-            SecureLifts installs traditional hurricane garage doors built for
-            South Florida protection, timeless curb appeal, and dependable
-            long-term performance.
-          </p>
-
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <a
-              href="tel:18668281818"
-              className="inline-flex items-center justify-center rounded-xl bg-red-600 px-8 py-4 text-lg font-semibold !text-white shadow-lg transition hover:bg-red-700"
-            >
-              Call (866) 828-1818
-            </a>
-
-       <Link
-  href="/book-service"
-  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-lg transition hover:bg-gray-100"
->
-  <span className="text-slate-900">Book Service</span>
-</Link>
-          </div>
-        </div>
-      </section>
-    </main>
+      <p className="mt-3 text-sm font-bold text-slate-800">{item.name}</p>
+      <p className="mt-1 text-xs uppercase tracking-[0.14em] text-slate-500">
+        {item.type === "woodtone" ? "Woodtone" : "Solid"}
+        {item.manufacturer !== "generic" && ` • ${item.manufacturer}`}
+      </p>
+    </div>
   );
 }

@@ -824,18 +824,12 @@ export default function GarageDoorShopPage() {
 
                 <div className="mt-6 grid gap-4">
                   {STYLE_OPTIONS.map((item) => (
-                    <button
+                    <SelectionCard
                       key={item.id}
+                      title={item.name}
+                      text={item.description}
                       onClick={() => selectStyle(item.id)}
-                      className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-left transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
-                    >
-                      <p className="text-lg font-semibold text-slate-900">
-                        {item.name}
-                      </p>
-                      <p className="mt-2 leading-7 text-slate-600">
-                        {item.description}
-                      </p>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -854,18 +848,13 @@ export default function GarageDoorShopPage() {
 
                 <div className="mt-6 grid gap-4">
                   {selectedStyle?.designs.map((item) => (
-                    <button
+                    <SelectionCard
                       key={item.id}
+                      title={item.name}
+                      text={item.description}
+                      image={item.basePreviewImage}
                       onClick={() => selectDesign(item.id)}
-                      className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-left transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
-                    >
-                      <p className="text-lg font-semibold text-slate-900">
-                        {item.name}
-                      </p>
-                      <p className="mt-2 leading-7 text-slate-600">
-                        {item.description}
-                      </p>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -892,20 +881,13 @@ export default function GarageDoorShopPage() {
                       text: "Stronger construction with access to expanded finish options.",
                     },
                   ].map((item) => (
-                    <button
+                    <SelectionCard
                       key={item.title}
+                      title={item.title}
+                      text={item.text}
+                      isSelected={construction === item.title}
                       onClick={() => selectConstruction(item.title)}
-                      className={`rounded-2xl border bg-white px-5 py-5 text-left transition hover:-translate-y-0.5 hover:shadow-md ${
-                        construction === item.title
-                          ? "border-red-500 ring-2 ring-red-200"
-                          : "border-slate-200 hover:border-red-200"
-                      }`}
-                    >
-                      <p className="text-lg font-semibold text-slate-900">
-                        {item.title}
-                      </p>
-                      <p className="mt-2 leading-7 text-slate-600">{item.text}</p>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -925,36 +907,14 @@ export default function GarageDoorShopPage() {
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  {filteredAvailableColors.map((item) => {
-                    const isSelected = colorId === item.id;
-
-                    return (
-                      <button
-                        key={item.id}
-                        onClick={() => selectColor(item.id)}
-                        className={`rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md ${
-                          isSelected
-                            ? "border-red-500 ring-2 ring-red-200"
-                            : "border-slate-200"
-                        }`}
-                      >
-                        <div
-                          className="h-16 rounded-xl border border-slate-200 bg-cover bg-center"
-                          style={
-                            item.type === "woodtone"
-                              ? { backgroundImage: `url(${item.image})` }
-                              : { backgroundColor: item.swatch }
-                          }
-                        />
-                        <p className="mt-3 font-semibold text-slate-900">
-                          {item.name}
-                        </p>
-                        <p className="mt-1 text-xs uppercase tracking-[0.14em] text-slate-500">
-                          {item.type === "woodtone" ? "Woodtone" : "Solid"}
-                        </p>
-                      </button>
-                    );
-                  })}
+                  {filteredAvailableColors.map((item) => (
+                    <FinishSwatchCard
+                      key={item.id}
+                      item={item}
+                      isSelected={colorId === item.id}
+                      onClick={() => selectColor(item.id)}
+                    />
+                  ))}
                 </div>
 
                 <button
@@ -980,19 +940,12 @@ export default function GarageDoorShopPage() {
 
                 <div className="mt-6 grid gap-4">
                   {selectedDesign.availableWindows.map((item) => (
-                    <button
+                    <SelectionCard
                       key={item}
+                      title={item}
+                      isSelected={windowOption === item}
                       onClick={() => setWindowOption(item)}
-                      className={`rounded-2xl border px-5 py-5 text-left transition hover:-translate-y-0.5 hover:shadow-md ${
-                        windowOption === item
-                          ? "border-red-500 ring-2 ring-red-200"
-                          : "border-slate-200"
-                      }`}
-                    >
-                      <p className="text-lg font-semibold text-slate-900">
-                        {item}
-                      </p>
-                    </button>
+                    />
                   ))}
                 </div>
 
@@ -1019,16 +972,12 @@ export default function GarageDoorShopPage() {
 
                 <div className="mt-6 grid gap-4">
                   {OPENER_OPTIONS.map((item) => (
-                    <button
+                    <SelectionCard
                       key={item.id}
+                      title={item.title}
+                      text={item.text}
                       onClick={() => selectOpener(item.id)}
-                      className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-left transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
-                    >
-                      <p className="text-lg font-semibold text-slate-900">
-                        {item.title}
-                      </p>
-                      <p className="mt-2 leading-7 text-slate-600">{item.text}</p>
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -1132,5 +1081,73 @@ function SummaryItem({ label, value }: { label: string; value: string }) {
       </p>
       <p className="mt-1 font-semibold text-slate-900">{value}</p>
     </div>
+  );
+}
+
+function SelectionCard({
+  title,
+  text,
+  onClick,
+  isSelected = false,
+  image,
+}: {
+  title: string;
+  text?: string;
+  onClick: () => void;
+  isSelected?: boolean;
+  image?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`overflow-hidden rounded-2xl border bg-white text-left transition hover:-translate-y-0.5 hover:shadow-md ${
+        isSelected
+          ? "border-red-500 ring-2 ring-red-200"
+          : "border-slate-200 hover:border-red-200"
+      }`}
+    >
+      {image ? (
+        <div className="relative h-44 w-full bg-slate-100">
+          <Image src={image} alt={title} fill className="object-cover" />
+        </div>
+      ) : null}
+
+      <div className="px-5 py-5">
+        <p className="text-lg font-semibold text-slate-900">{title}</p>
+        {text ? <p className="mt-2 leading-7 text-slate-600">{text}</p> : null}
+      </div>
+    </button>
+  );
+}
+
+function FinishSwatchCard({
+  item,
+  isSelected,
+  onClick,
+}: {
+  item: FinishOption;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md ${
+        isSelected ? "border-red-500 ring-2 ring-red-200" : "border-slate-200"
+      }`}
+    >
+      <div
+        className="h-16 rounded-xl border border-slate-200 bg-cover bg-center"
+        style={
+          item.type === "woodtone"
+            ? { backgroundImage: `url(${item.image})` }
+            : { backgroundColor: item.swatch }
+        }
+      />
+      <p className="mt-3 font-semibold text-slate-900">{item.name}</p>
+      <p className="mt-1 text-xs uppercase tracking-[0.14em] text-slate-500">
+        {item.type === "woodtone" ? "Woodtone" : "Solid"}
+      </p>
+    </button>
   );
 }

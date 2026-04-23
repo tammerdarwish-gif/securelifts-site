@@ -1,0 +1,26 @@
+export const TRADITIONAL_COLORS = {
+  nonInsulated: [
+    "White",
+    "Almond",
+    "Bronze",
+    "Brown",
+  ],
+  insulated: [
+    "White",
+    "Almond",
+    "Sandstone",
+    "Desert Tan",
+    "Bronze",
+    "Brown",
+    "Taupe",
+    "Mocha",
+    "Shale",
+    "Walnut",
+    "Medium Finish",
+    "Mocha Brown",
+    "Gray",
+    "Charcoal",
+    "Black",
+    "Red",
+  ],
+};

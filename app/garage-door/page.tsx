@@ -7,17 +7,17 @@ const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
 
 export const metadata: Metadata = {
-  title: "Hurricane Garage Doors | Impact-Rated Options in South Florida | SecureLifts",
+  title: "Garage Doors | Styles, Options & Pricing | SecureLifts South Florida",
   description:
-    "Explore hurricane garage door options in South Florida including modern, traditional, carriage house, custom, and full-view aluminum impact-rated doors. Compare styles, protection levels, and realistic pricing guidance with SecureLifts.",
+    "Explore garage door styles, materials, hurricane-rated options, and pricing guidance for South Florida homes. Compare modern, traditional, carriage house, and impact-rated garage doors with SecureLifts.",
   alternates: {
-    canonical: "https://securelifts.com/hurricane-garage-doors",
+    canonical: "https://securelifts.com/garage-doors",
   },
   openGraph: {
-    title: "Hurricane Garage Doors | Impact-Rated Options in South Florida | SecureLifts",
+    title: "Garage Doors | Styles, Options & Pricing | SecureLifts South Florida",
     description:
-      "Compare modern, traditional, carriage house, custom, and aluminum full-view hurricane-rated garage doors for South Florida homes.",
-    url: "https://securelifts.com/hurricane-garage-doors",
+      "Compare garage door styles, materials, and pricing ranges for South Florida homes with SecureLifts.",
+    url: "https://securelifts.com/garage-doors",
     siteName: "SecureLifts",
     type: "website",
   },
@@ -25,145 +25,121 @@ export const metadata: Metadata = {
 
 const styleCards = [
   {
-    title: "Modern Hurricane Garage Doors",
-    text: "Clean lines, modern steel, plank, glass, and luxury impact-rated designs for contemporary homes.",
+    title: "Modern Garage Doors",
+    text: "Clean lines, glass options, sleek finishes, and a stronger architectural look for contemporary homes.",
     href: "/hurricane-garage-doors/modern",
     image: "/images/reviews/miami-beach-case-study.jpg",
   },
   {
-    title: "Traditional Hurricane Garage Doors",
-    text: "Classic panel designs with value, insulated, and premium build levels for South Florida homes.",
+    title: "Traditional Garage Doors",
+    text: "Classic raised-panel and long-panel styles that fit most homes and neighborhoods well.",
     href: "/hurricane-garage-doors/traditional",
     image: "/images/reviews/coconut-creek-case-study.jpg",
   },
   {
-    title: "Carriage House Hurricane Garage Doors",
-    text: "Stronger carriage-style doors that combine classic character with storm-rated performance.",
-    href: "/hurricane-garage-doors/carriage-house",
+    title: "Hurricane-Rated Garage Doors",
+    text: "Built for South Florida storm conditions with stronger performance, better protection, and more confidence.",
+    href: "/hurricane-garage-doors",
     image: "/images/reviews/coconut-grove-case-study.jpg",
   },
   {
-    title: "Custom & Premium Hurricane Garage Doors",
-    text: "Higher-end custom looks, upscale finishes, and statement doors built around impact-rated performance.",
-    href: "/hurricane-garage-doors/custom",
+    title: "Garage Door Installation",
+    text: "Already know what you want? Go straight to our installation page and get moving.",
+    href: "/garage-door-installation",
     image: "/images/reviews/pinecrest-case-study.jpg",
   },
 ];
 
-const performancePoints = [
+const materialOptions = [
   {
-    title: "Impact-Rated Protection",
-    text: "Hurricane garage doors are built to handle stronger storm conditions and help protect one of the largest openings in the home.",
+    title: "Steel Garage Doors",
+    text: "The most common choice for strength, value, and clean long-term performance.",
   },
   {
-    title: "South Florida Fit",
-    text: "The right door needs to match both style and local storm-driven performance expectations, not just appearance.",
+    title: "Insulated Doors",
+    text: "A better fit when quieter operation, better comfort, and stronger overall performance matter.",
   },
   {
-    title: "Stronger Long-Term Value",
-    text: "A better hurricane door can improve curb appeal, daily confidence, and overall property perception at the same time.",
+    title: "Glass & Aluminum",
+    text: "Premium modern look for upscale homes, contemporary architecture, and statement curb appeal.",
   },
   {
-    title: "System-Level Upgrade",
-    text: "The best result often includes opener, reinforcement, hardware, and overall fit working together as one system.",
+    title: "Wood-Look Finishes",
+    text: "Get the warmth of a richer finish without committing to a full wood door setup.",
   },
 ];
 
 const pricingBands = [
   {
-    title: "Basic Impact-Rated Doors",
-    range: "$2,000 – $4,000+",
-    text: "Best for homeowners focused on practical storm protection with a cleaner value-focused style path.",
+    title: "Value-Focused Doors",
+    range: "$1,500 – $3,000+",
+    text: "Best for homeowners who want a clean, reliable new door without stepping into premium custom territory.",
   },
   {
-    title: "Insulated & Upgraded Hurricane Doors",
-    range: "$4,000 – $8,000+",
-    text: "Best for stronger comfort, better fit and finish, quieter operation, and a more upgraded overall setup.",
+    title: "Mid-Range Upgrades",
+    range: "$3,000 – $6,000+",
+    text: "A strong fit for better materials, insulation, upgraded design, and improved finished appearance.",
   },
   {
-    title: "Modern, Full-View & Luxury Hurricane Doors",
-    range: "$8,000 – $20,000+",
-    text: "Best for higher-end homes, luxury modern designs, larger openings, and premium finished results.",
+    title: "Premium & Modern Doors",
+    range: "$6,000 – $15,000+",
+    text: "For high-end modern, full-view, luxury, and stronger statement-style garage door projects.",
   },
 ];
 
-const productPaths = [
+const fitGuidance = [
   {
-    title: "Traditional Steel Paths",
-    text: "Strong for homeowners who want classic looks with practical storm-focused protection.",
-    bullets: [
-      "Raynor TradeMark-style value path",
-      "Encore / Aspen-style insulated upgrades",
-      "Short panel, long panel, and flush directions",
-    ],
+    title: "Best for Budget-Conscious Homes",
+    text: "Traditional or value-focused steel doors usually make the most sense when the goal is strong appearance without overspending.",
   },
   {
-    title: "Modern Steel & Plank Paths",
-    text: "Strong for homeowners chasing a cleaner, more architectural exterior look.",
-    bullets: [
-      "Modern steel collections",
-      "Plank and flush directions",
-      "Premium finishes and upscale curb appeal",
-    ],
+    title: "Best for High-End Homes",
+    text: "Modern glass, flush designs, and premium finishes work best when curb appeal and architectural impact matter.",
   },
   {
-    title: "Carriage House Paths",
-    text: "Strong for homes that need more warmth, character, and decorative style without giving up storm-rated performance.",
-    bullets: [
-      "Overlay and carriage-inspired looks",
-      "Decorative hardware options",
-      "Traditional character with stronger build paths",
-    ],
+    title: "Best for Storm Protection",
+    text: "Hurricane-rated and impact-rated options are the right move when storm performance and code-driven protection matter most.",
   },
   {
-    title: "Aluminum Full-View & Custom Paths",
-    text: "Strong for luxury homes, premium facades, and statement projects where appearance matters heavily.",
-    bullets: [
-      "Full-view glass and aluminum paths",
-      "Custom visual layouts",
-      "Premium modern and architectural appeal",
-    ],
+    title: "Best for Daily Comfort",
+    text: "Insulated doors are a stronger fit when noise, heat, smoother operation, and overall feel matter more long term.",
   },
 ];
 
 const openerUpsells = [
-  "Wall-mount opener options for cleaner premium setups",
   "Smart opener upgrades with app control",
+  "Quiet belt-drive systems for attached garages",
+  "Wall-mount opener options for premium setups",
   "Battery backup for stronger convenience and preparedness",
-  "Quieter systems that better match upgraded doors",
 ];
 
 const faqs = [
   {
-    q: "What is the best hurricane garage door style for my home?",
-    a: "That depends on whether your priority is classic appearance, modern curb appeal, carriage-style character, premium full-view design, or the best balance of storm protection and price. The strongest choice is the one that matches both your home and your performance expectations.",
+    q: "What is the best garage door style for my home?",
+    a: "That depends on the architecture of the home, the budget, the neighborhood feel, and whether you want a classic, modern, or storm-focused upgrade. The right choice should match both appearance and performance goals.",
   },
   {
-    q: "How much do hurricane garage doors cost in South Florida?",
-    a: "That depends on size, style, insulation, impact rating, finish level, and whether the project includes premium design upgrades. Most projects fall into basic impact-rated, upgraded insulated, or premium luxury pricing tiers.",
+    q: "How much do new garage doors cost in South Florida?",
+    a: "That depends on door size, material, insulation, design, wind rating, and how premium the final setup is. Most projects fall into value, mid-range, or premium pricing tiers rather than one flat number.",
   },
   {
-    q: "Are modern hurricane garage doors more expensive than traditional options?",
-    a: "Often yes. Modern designs, full-view glass, custom finishes, and larger premium openings usually cost more than practical traditional panel doors.",
+    q: "Are modern garage doors always the most expensive?",
+    a: "Not always, but premium modern designs, full-view glass, custom finishes, and stronger upgraded systems usually land higher than standard traditional doors.",
   },
   {
-    q: "Should I upgrade the opener when replacing a hurricane garage door?",
-    a: "In many cases, yes. Heavier or more premium doors often perform better when paired with the right opener, especially when the existing opener is older, underpowered, or outdated.",
-  },
-  {
-    q: "Can hurricane garage doors still look high-end?",
-    a: "Yes. Hurricane-rated does not have to mean plain. Many modern, carriage, custom, and full-view designs can still create a premium finished look while supporting stronger storm-focused performance.",
+    q: "Should I replace the opener when replacing the garage door?",
+    a: "In many cases, yes. If the opener is aging, underpowered, loud, or outdated, replacing it with the new door often creates a better long-term system.",
   },
 ];
 
-export default function HurricaneGarageDoorsPage() {
+export default function GarageDoorsPage() {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Hurricane Garage Doors",
-    url: "https://securelifts.com/hurricane-garage-doors",
+    name: "Garage Doors",
+    url: "https://securelifts.com/garage-doors",
     description:
-      "Hurricane garage door styles, materials, pricing guidance, and impact-rated design options for South Florida homeowners.",
+      "Garage door styles, materials, pricing guidance, and product options for South Florida homeowners.",
   };
 
   const faqSchema = {
@@ -182,12 +158,12 @@ export default function HurricaneGarageDoorsPage() {
   return (
     <>
       <Script
-        id="hurricane-garage-doors-collection-schema"
+        id="garage-doors-collection-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
       <Script
-        id="hurricane-garage-doors-faq-schema"
+        id="garage-doors-faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
@@ -198,16 +174,16 @@ export default function HurricaneGarageDoorsPage() {
           <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">
-                SecureLifts Hurricane Garage Doors
+                SecureLifts Garage Door Selection
               </p>
               <h1 className="max-w-4xl text-4xl font-black tracking-tight md:text-5xl xl:text-6xl">
-                Hurricane Garage Doors for South Florida Homes
+                Garage Doors Designed for Performance, Security & Curb Appeal
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-                Explore impact-rated garage door options built for South Florida
-                storm conditions without giving up style. Compare modern,
-                traditional, carriage house, custom, and premium full-view paths
-                so you can choose the right door direction before moving into a quote.
+                Explore garage door styles, materials, and pricing guidance for
+                South Florida homes. Whether you want a modern statement door, a
+                traditional upgrade, or stronger hurricane protection, this page
+                helps you choose the right direction first.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -228,13 +204,13 @@ export default function HurricaneGarageDoorsPage() {
 
               <div className="mt-8 grid gap-3 text-sm font-semibold text-slate-200 sm:grid-cols-2 xl:grid-cols-4">
                 <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                  Modern & Traditional Options
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                  Carriage & Custom Paths
+                  Style-First Selection
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                   Pricing Guidance
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                  Hurricane Options
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                   Opener Upgrade Paths
@@ -246,7 +222,7 @@ export default function HurricaneGarageDoorsPage() {
               <div className="relative h-[340px] w-full md:h-[460px]">
                 <Image
                   src="/images/reviews/miami-beach-case-study.jpg"
-                  alt="Hurricane-rated garage door options by SecureLifts"
+                  alt="Premium garage door options by SecureLifts"
                   fill
                   className="object-cover"
                   priority
@@ -260,15 +236,15 @@ export default function HurricaneGarageDoorsPage() {
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-                Choose Your Style Direction
+                Choose Your Direction
               </p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                Start with the hurricane-rated look that fits your home
+                Start with the style that fits your home
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                This page should help visitors choose first, not just read generic
-                storm-door copy. Pick the design direction that matches the house,
-                the curb appeal goal, and the price path you are aiming for.
+                This page is built to help homeowners choose first, not just read
+                generic service copy. Pick the direction that fits the property,
+                the look you want, and the budget range you are aiming for.
               </p>
             </div>
 
@@ -309,20 +285,20 @@ export default function HurricaneGarageDoorsPage() {
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-                Why Hurricane Garage Doors Matter
+                Materials & Door Types
               </p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                Protection is part of the decision. Style is too.
+                Compare the main garage door material directions
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                The right hurricane garage door should protect the opening, fit the
-                house visually, and still feel like a smart long-term upgrade instead
-                of just a forced storm product.
+                Material changes the look, feel, price range, insulation, and
+                long-term performance of the door. This is where homeowners start
+                getting more clarity on what actually fits.
               </p>
             </div>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {performancePoints.map((item) => (
+              {materialOptions.map((item) => (
                 <div
                   key={item.title}
                   className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
@@ -345,13 +321,12 @@ export default function HurricaneGarageDoorsPage() {
               Pricing Guidance
             </p>
             <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-              Hurricane garage door pricing in South Florida
+              Garage door pricing in South Florida
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-              Pricing depends on style, opening size, build level, insulation,
-              impact requirements, and how premium the finished design becomes.
-              These ranges help guide the conversation without boxing the project
-              into one number too early.
+              Pricing depends on size, design, material, insulation, wind rating,
+              and how premium the final setup becomes. These ranges help guide the
+              conversation without boxing the project into one flat number.
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -379,20 +354,19 @@ export default function HurricaneGarageDoorsPage() {
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-                Product Paths
+                Best Fit Guidance
               </p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                Compare the main hurricane door directions before narrowing down
+                Choose based on your real goal, not just the lowest number
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                Different homes and budgets need different solutions. This section
-                helps visitors understand the major door categories without getting
-                lost too early.
+                Most homeowners do better when they choose based on the result they
+                want instead of chasing the cheapest option first.
               </p>
             </div>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {productPaths.map((item) => (
+              {fitGuidance.map((item) => (
                 <div
                   key={item.title}
                   className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
@@ -403,17 +377,6 @@ export default function HurricaneGarageDoorsPage() {
                   <p className="mt-4 text-base leading-7 text-slate-600">
                     {item.text}
                   </p>
-
-                  <div className="mt-5 space-y-3">
-                    {item.bullets.map((line) => (
-                      <div
-                        key={line}
-                        className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800"
-                      >
-                        {line}
-                      </div>
-                    ))}
-                  </div>
                 </div>
               ))}
             </div>
@@ -427,12 +390,12 @@ export default function HurricaneGarageDoorsPage() {
                 Complete The System
               </p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                A stronger hurricane door often needs the right opener strategy too
+                The door is only part of the upgrade
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                When the door gets heavier, more premium, or more specialized, the
-                opener matters more. That is where smart upgrades, quieter systems,
-                and better-matched hardware start making real sense.
+                A stronger finished result often means upgrading the opener at the
+                same time. That is especially true when the current opener is old,
+                loud, underpowered, or not built for the type of door being installed.
               </p>
 
               <div className="mt-8 space-y-4">
@@ -462,12 +425,12 @@ export default function HurricaneGarageDoorsPage() {
                 Smart Next Step
               </p>
               <h3 className="mt-3 text-3xl font-black tracking-tight">
-                Want help choosing the right hurricane garage door?
+                Want help choosing the right garage door?
               </h3>
               <p className="mt-4 text-base leading-7 text-slate-600">
-                If you already know the style you want, go straight into that page.
+                If you already know the style you want, go straight to installation.
                 If you want guidance, call SecureLifts and we will help narrow the
-                options based on your home style, storm needs, and realistic price path.
+                options based on your home, budget, and goals.
               </p>
 
               <div className="mt-6 flex flex-col gap-3">
@@ -496,7 +459,7 @@ export default function HurricaneGarageDoorsPage() {
                 FAQ
               </p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                Hurricane garage door questions
+                Garage door selection questions
               </h2>
             </div>
 
@@ -521,14 +484,14 @@ export default function HurricaneGarageDoorsPage() {
         <section className="bg-slate-950 px-6 py-16 text-white md:py-20">
           <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center shadow-2xl md:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">
-              Ready To Compare Hurricane Garage Door Options?
+              Ready To Choose Your Garage Door?
             </p>
             <h2 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
-              Call SecureLifts to choose the right impact-rated garage door for your home
+              Call SecureLifts to compare garage door options for your home
             </h2>
             <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-200">
-              We will help you compare design directions, realistic price ranges,
-              and upgrade paths without pushing you into the wrong setup.
+              We will help you narrow the choices, explain realistic price ranges,
+              and guide you toward the right door without the usual confusion.
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
