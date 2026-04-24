@@ -25,26 +25,26 @@ export const metadata: Metadata = {
 
 const styleCards = [
   {
-    title: "Modern Hurricane Garage Doors",
-    text: "Clean lines, modern steel, plank, glass, and luxury impact-rated designs for contemporary homes.",
+    title: "Modern Garage Doors",
+    text: "Clean lines, glass options, and upscale finishes for homeowners who want a sharper modern look.",
     href: "/hurricane-garage-doors/modern",
     image: "/images/reviews/miami-beach-case-study.jpg",
   },
   {
-    title: "Traditional Hurricane Garage Doors",
-    text: "Classic panel designs with value, insulated, and premium build levels for South Florida homes.",
+    title: "Traditional Garage Doors",
+    text: "Classic panel styles, practical and premium build paths, and strong hurricane-ready options for many homes.",
     href: "/hurricane-garage-doors/traditional",
     image: "/images/reviews/coconut-creek-case-study.jpg",
   },
   {
-    title: "Carriage House Hurricane Garage Doors",
-    text: "Stronger carriage-style doors that combine classic character with storm-rated performance.",
+    title: "Carriage House Garage Doors",
+    text: "Decorative carriage-style designs with more character, stronger curb appeal, and upgraded visual impact.",
     href: "/hurricane-garage-doors/carriage-house",
     image: "/images/reviews/coconut-grove-case-study.jpg",
   },
   {
-    title: "Custom & Premium Hurricane Garage Doors",
-    text: "Higher-end custom looks, upscale finishes, and statement doors built around impact-rated performance.",
+    title: "Custom Garage Doors",
+    text: "Higher-end custom directions for homeowners who want a more unique door design and finish outcome.",
     href: "/hurricane-garage-doors/custom",
     image: "/images/reviews/pinecrest-case-study.jpg",
   },
@@ -272,7 +272,7 @@ export default function HurricaneGarageDoorsPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
               {styleCards.map((item) => (
                 <Link
                   key={item.title}
@@ -288,7 +288,7 @@ export default function HurricaneGarageDoorsPage() {
                     />
                   </div>
 
-                  <div className="p-6">
+                  <div className="p-7">
                     <h3 className="text-2xl font-black tracking-tight text-slate-900">
                       {item.title}
                     </h3>
