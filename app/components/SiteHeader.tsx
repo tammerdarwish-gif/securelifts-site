@@ -154,7 +154,7 @@ export default function SiteHeader() {
                 </Link>
               ))}
 
-              <div className="mt-3 grid gap-3">
+                          <div className="mt-3 grid gap-3">
                 <a
                   href="tel:+18668281818"
                   className="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-red-700"
@@ -173,15 +173,7 @@ export default function SiteHeader() {
             </div>
           </div>
         </div>
-      )}<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NRWSY3V29J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NRWSY3V29J');
-</script>
+      )}
     </header>
   );
 }
