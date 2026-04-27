@@ -5,16 +5,15 @@ import SiteHeader from "./components/SiteHeader";
 import StickyCTA from "./components/StickyCTA";
 import Script from "next/script";
 
-<><Script
-  src="https://www.googletagmanager.com/gtag/js?id=G-NRWSY3V29J"
-  strategy="afterInteractive" /><Script id="google-analytics" strategy="afterInteractive">
-    {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NRWSY3V29J');
-  `}
-  </Script></>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NRWSY3V29J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NRWSY3V29J');
+</script>
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
