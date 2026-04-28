@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { FaCalendarCheck } from "react-icons/fa";
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 type FormDataState = {
   name: string;
@@ -104,6 +109,14 @@ export default function BookServicePage() {
       }
 
       if (data.success) {
+        // --- GOOGLE ADS CONTACT FORM CONVERSION ---
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "conversion", {
+            'send_to': 'AW-17481132065/F_m9CKXmkfQbEKHQ049B',
+          });
+        }
+        // ------------------------------------------
+
         setSubmitted(true);
       } else {
         alert(
