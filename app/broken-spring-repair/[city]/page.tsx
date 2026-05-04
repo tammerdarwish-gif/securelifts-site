@@ -304,7 +304,7 @@ const popularServices = [
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="tel:8668281818"
-                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-7 py-4 font-bold text-white transition hover:bg-red-700"
+                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-7 py-4 font-bold !text-white transition hover:bg-red-700"
               >
                 <FaPhoneAlt className="text-white" />
                 <span className="text-white">(866) 828-1818</span>
@@ -312,7 +312,7 @@ const popularServices = [
 
               <Link
                 href="/book-service"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 font-bold text-slate-900 transition hover:bg-slate-100"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 font-bold !text-slate-900 transition hover:bg-slate-100"
               >
                 Book Us Now
                 <FaArrowRight className="text-sm" />
@@ -378,7 +378,7 @@ const popularServices = [
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="tel:8668281818"
-                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-7 py-4 font-bold text-white transition hover:bg-red-700"
+                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-7 py-4 font-bold !text-white transition hover:bg-red-700"
               >
                 <FaPhoneAlt className="text-white" />
                 <span className="text-white">(866) 828-1818</span>
@@ -386,7 +386,7 @@ const popularServices = [
 
               <Link
                 href="/book-service"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 font-bold text-slate-900 transition hover:bg-slate-100"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 font-bold !text-slate-900 transition hover:bg-slate-100"
               >
                 Book Us Now
                 <FaArrowRight className="text-sm" />
@@ -415,7 +415,7 @@ const popularServices = [
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+                className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold !text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
               >
                 <span>{item.label}</span>
                 <FaArrowRight className="text-red-600" />
@@ -574,7 +574,7 @@ const popularServices = [
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 font-semibold !text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
             >
               <span>{item.label}</span>
               <FaArrowRight className="text-red-600" />
@@ -598,7 +598,7 @@ const popularServices = [
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
               href="tel:8668281818"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-bold text-slate-950"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-bold !text-slate-950"
             >
               <FaPhoneAlt className="text-slate-950" />
               <span className="text-slate-950">Call (866) 828-1818</span>
@@ -606,7 +606,7 @@ const popularServices = [
 
             <Link
               href="/book-service"
-              className="inline-flex rounded-xl border border-white px-8 py-4 font-bold text-white"
+              className="inline-flex rounded-xl border border-white px-8 py-4 font-bold !text-white"
             >
               Book Us Now
             </Link>

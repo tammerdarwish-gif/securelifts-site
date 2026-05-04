@@ -116,13 +116,13 @@ export default function BrokenSpringRepairPage() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
                 href={PHONE_HREF}
-                className="inline-flex items-center justify-center rounded-xl bg-red-600 px-8 py-4 text-lg font-bold text-white transition hover:bg-red-700"
+                className="inline-flex items-center justify-center rounded-xl bg-red-600 px-8 py-4 text-lg font-bold !text-white transition hover:bg-red-700"
               >
                 Call {PHONE}
               </a>
               <Link
                 href="/book-service"
-                className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-bold text-slate-950 transition hover:bg-slate-100"
+                className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-bold !text-slate-950 transition hover:bg-slate-100"
               >
                 Book Service
               </Link>
@@ -185,7 +185,7 @@ export default function BrokenSpringRepairPage() {
               <Link
                 key={slug}
                 href={`/broken-spring-repair/${slug}`}
-                className="rounded-2xl border border-slate-200 bg-white p-5 font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
+                className="rounded-2xl border border-slate-200 bg-white p-5 font-bold !text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md"
               >
                 Broken Spring Repair in {label}
               </Link>
@@ -205,13 +205,13 @@ export default function BrokenSpringRepairPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href={PHONE_HREF}
-              className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-bold text-slate-950"
+              className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-lg font-bold !text-slate-950"
             >
               Call {PHONE}
             </a>
             <Link
               href="/book-service"
-              className="inline-flex items-center justify-center rounded-xl border border-white px-8 py-4 text-lg font-bold text-white"
+              className="inline-flex items-center justify-center rounded-xl border border-white px-8 py-4 text-lg font-bold !text-white"
             >
               Book Service
             </Link>

@@ -253,6 +253,11 @@ img {
 .bg-white.rounded-xl {
   border: 1.5px solid #e2e8f0 !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  color: #0f172a !important;
+}
+
+.bg-white.rounded-xl span {
+  color: inherit !important;
 }
 /* Better hover */
 .bg-white.rounded-xl:hover {
