@@ -1,4 +1,3 @@
-console.log("CITYPAGES FILE LOADED");
 export function getAllCitySlugs() {
   return [
     "miami",
@@ -53,6 +52,12 @@ export function getAllCitySlugs() {
     "stuart",
     "port-st-lucie"
   ];
+}
+
+const citySlugSet = new Set(getAllCitySlugs());
+
+export function isValidCitySlug(slug: string) {
+  return citySlugSet.has(slug.trim().toLowerCase());
 }
 
 function slugToName(slug: string) {
@@ -116,6 +121,9 @@ export function getCityData(slug: string) {
   if (!slug || typeof slug !== "string") return undefined;
 
   const cleanSlug = slug.trim().toLowerCase();
+
+  if (!isValidCitySlug(cleanSlug)) return undefined;
+
   const override = cityOverrides[cleanSlug];
   const cityName = override?.city ?? slugToName(cleanSlug);
 
