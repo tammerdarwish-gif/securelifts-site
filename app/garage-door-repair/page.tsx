@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/garage-door-repair-hero.png",
+        url: "/garage-door-repair-v2hero.jpg",
         width: 1536,
         height: 1024,
         alt: "SecureLifts technician performing garage door repair in South Florida",
@@ -35,26 +35,49 @@ export const metadata: Metadata = {
 };
 
 export default function GarageDoorRepairPage() {
-  const repairProblems = [
+  const proofStats = [
     {
-      icon: "🛠️",
-      title: "Broken Springs",
-      text: "A broken spring can stop the door completely or make it unsafe to operate. This is one of the most common repair calls we handle.",
+      value: "Same-day",
+      label: "repair appointments available for urgent failures",
     },
     {
-      icon: "🚪",
-      title: "Off-Track Garage Doors",
-      text: "When a garage door comes off track, it can bind, shake, or get stuck halfway. It needs proper correction before more damage happens.",
+      value: "Repair-first",
+      label: "clear guidance when repair makes sense",
     },
     {
-      icon: "⚙️",
-      title: "Opener Problems",
-      text: "If the opener hums, clicks, reverses, or stops responding, we diagnose the issue quickly and repair the system the right way.",
+      value: "South FL",
+      label: "Miami-Dade, Broward, and Palm Beach coverage",
+    },
+  ];
+
+  const repairPhotoSections = [
+    {
+      title: "Broken Spring Repair",
+      text: "If the spring breaks, the door can become too heavy to lift and unsafe to force open. We restore balance and safe operation.",
+      href: "/broken-spring-repair",
+      image: "/broken-garage-door-spring.png",
+      alt: "Broken garage door spring repair by SecureLifts",
     },
     {
-      icon: "🔩",
+      title: "Opener & Sensor Problems",
+      text: "When the opener hums, reverses, clicks, or stops responding, we diagnose the motor, sensors, remotes, and wall control.",
+      href: "/garage-door-opener-repair",
+      image: "/belt-drive-openers.png",
+      alt: "Garage door opener repair and troubleshooting",
+    },
+    {
+      title: "Off-Track or Stuck Doors",
+      text: "A crooked, stuck, or off-track door can damage panels, rollers, and tracks if it is forced. We correct the system safely.",
+      href: "/garage-door-off-track-repair",
+      image: "/offtrack-worse.jpg",
+      alt: "Off-track garage door repair in South Florida",
+    },
+    {
       title: "Cables, Rollers & Hardware",
-      text: "Worn rollers, frayed cables, loose hinges, and damaged hardware can cause noisy movement, poor balance, and unsafe operation.",
+      text: "Frayed cables, worn rollers, loose hinges, and noisy hardware often show up before a full breakdown. Early repair matters.",
+      href: "/garage-door-cable-repair",
+      image: "/broken-garage-door-cable.JPG",
+      alt: "Broken garage door cable repair",
     },
   ];
 
@@ -118,8 +141,14 @@ export default function GarageDoorRepairPage() {
     "Fort Lauderdale",
     "Boca Raton",
     "Delray Beach",
+    "Boynton Beach",
+    "Coral Springs",
+    "Davie",
     "West Palm Beach",
     "Wellington",
+    "Royal Palm Beach",
+    "Aventura",
+    "Coral Gables",
   ];
 
   const faqs = [
@@ -188,7 +217,7 @@ export default function GarageDoorRepairPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/78 via-black/42 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-black/10" />
 
-        <div className="relative z-10 mx-auto flex min-h-[760px] max-w-6xl items-end px-6 pb-14 pt-36 md:pt-40">
+        <div className="relative z-10 mx-auto flex min-h-[760px] max-w-6xl items-center px-6 pb-32 pt-28 md:items-end md:pb-14 md:pt-40">
           <div className="max-w-[560px]">
             <p
               className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 md:text-sm"
@@ -213,7 +242,7 @@ export default function GarageDoorRepairPage() {
               homeowners get the door working again without wasting time.
             </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="hidden flex-col gap-4 sm:flex sm:flex-row">
               <a
                 href="tel:18668281818"
                 className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-700"
@@ -234,26 +263,20 @@ export default function GarageDoorRepairPage() {
 
       <section className="sl-section bg-white">
         <div className="sl-container">
-          <div className="mb-12 text-center">
-            <p className="sl-eyebrow text-red-600">Common Issues</p>
-            <h2 className="sl-heading-lg">We Fix Garage Door Problems Fast</h2>
-            <p className="sl-copy mx-auto max-w-2xl">
-              Most garage door issues get worse if ignored. We fix them quickly
-              before they turn into more expensive problems.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {["Broken Springs", "Garage Door Openers", "Off-Track Doors", "Snapped Cables"].map(
-              (item) => (
-                <div key={item} className="sl-card text-center">
-                  <h3 className="mb-2 text-lg font-semibold">{item}</h3>
-                  <p className="text-sm text-slate-600">
-                    Fast repair and reliable solutions done right the first time.
-                  </p>
-                </div>
-              )
-            )}
+          <div className="grid gap-4 md:grid-cols-3">
+            {proofStats.map((stat) => (
+              <div
+                key={stat.value}
+                className="border-l-4 border-red-600 bg-slate-50 px-6 py-5"
+              >
+                <p className="text-2xl font-black text-slate-950">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-sm font-medium leading-6 text-slate-600">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -369,20 +392,74 @@ export default function GarageDoorRepairPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {repairProblems.map((item) => (
-              <div
+            {repairPhotoSections.map((item) => (
+              <Link
                 key={item.title}
-                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+                href={item.href}
+                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-2xl">
-                  {item.icon}
+                <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                  />
                 </div>
-                <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                  {item.title}
-                </h3>
-                <p className="leading-7 text-gray-700">{item.text}</p>
-              </div>
+                <div className="p-6">
+                  <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="leading-7 text-gray-700">{item.text}</p>
+                  <p className="mt-5 font-semibold text-red-600">
+                    View repair service →
+                  </p>
+                </div>
+              </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="relative h-[360px] overflow-hidden rounded-3xl border border-slate-200 shadow-xl md:h-[460px]">
+            <Image
+              src="/service-problem-blue.jpg"
+              alt="Garage door repair problem inspection"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+              Repair First, Replace When Needed
+            </p>
+            <h2 className="mb-5 text-3xl font-bold md:text-4xl">
+              Clear answers when your garage door stops working
+            </h2>
+            <p className="mb-5 text-lg leading-8 text-gray-700">
+              A broken garage door usually creates urgency: the car is trapped,
+              the door will not close, or the home feels exposed. SecureLifts
+              focuses on finding the real cause before recommending a repair or
+              replacement.
+            </p>
+            <div className="grid gap-3">
+              {[
+                "We check balance, spring tension, cables, rollers, tracks, and opener behavior.",
+                "We explain what failed and what should be fixed first.",
+                "We keep the path to booking simple with call and online service options.",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex gap-3 rounded-2xl bg-slate-50 p-4"
+                >
+                  <span className="font-black text-red-600">✓</span>
+                  <p className="font-medium leading-7 text-slate-800">{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -619,7 +696,7 @@ export default function GarageDoorRepairPage() {
               <Link
                 key={city}
                 href={`/garage-door-repair/${city.toLowerCase().replace(/\s+/g, "-")}`}
-                className="rounded-xl border border-gray-200 bg-white px-5 py-3 font-semibold text-gray-900 transition hover:border-red-200 hover:shadow-sm"
+                className="rounded-xl border border-gray-200 bg-white px-5 py-3 font-semibold !text-gray-900 transition hover:border-red-200 hover:shadow-sm"
               >
                 {city}
               </Link>

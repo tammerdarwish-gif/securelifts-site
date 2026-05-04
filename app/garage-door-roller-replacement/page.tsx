@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/garage-door-roller-replacement",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/garage-door-roller-replacement.jpg",
+        width: 1536,
+        height: 1024,
+        alt: "Garage door roller replacement in South Florida",
+      },
+    ],
   },
 };
 

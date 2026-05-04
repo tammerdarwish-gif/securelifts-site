@@ -211,7 +211,17 @@ export default function GarageDoorInstallationPage() {
 
       <main className="bg-white text-slate-900">
         <section className="relative overflow-hidden bg-slate-950 px-6 py-16 text-white md:py-24">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.20),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_25%)]" />
+          <div className="absolute inset-0">
+            <Image
+              src="/mew-garage-door-installation.jpg"
+              alt="New garage door installation by SecureLifts"
+              fill
+              priority
+              className="object-cover opacity-45"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/82 to-slate-950/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-slate-950/15" />
           <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">
@@ -230,14 +240,14 @@ export default function GarageDoorInstallationPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href={PHONE_HREF}
-                  className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
+                  className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700"
                 >
                   Call {PHONE}
                 </a>
 
                 <Link
                   href="/book-service"
-                  className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur transition hover:bg-white/15"
+                  className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-7 py-4 text-base font-bold !text-white backdrop-blur transition hover:bg-white/15"
                 >
                   Book Service
                 </Link>
@@ -317,8 +327,9 @@ export default function GarageDoorInstallationPage() {
                 Explore the main garage door directions
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                These are clickable for a reason. Visitors need a clear path,
-                not dead cards. Pick the direction that fits your home and goals.
+                Compare the main style directions homeowners ask about most,
+                then choose the path that fits your home, budget, and storm
+                protection needs.
               </p>
             </div>
 

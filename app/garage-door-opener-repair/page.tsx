@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/garage-door-opener-repair",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/belt-drive-openers.png",
+        width: 1536,
+        height: 1024,
+        alt: "Garage door opener repair and replacement options",
+      },
+    ],
   },
 };
 

@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/garage-door-panel-replacement",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/garage-door-panel-replacement.jpg",
+        width: 1536,
+        height: 1024,
+        alt: "Garage door panel replacement in South Florida",
+      },
+    ],
   },
 };
 

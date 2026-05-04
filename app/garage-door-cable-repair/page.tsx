@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/garage-door-cable-repair",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/broken-garage-door-cable.JPG",
+        width: 1536,
+        height: 1024,
+        alt: "Broken garage door cable repair in South Florida",
+      },
+    ],
   },
 };
 

@@ -6,13 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FaStar,
   FaShieldAlt,
   FaTools,
   FaMapMarkerAlt,
   FaBolt,
   FaCheckCircle,
   FaArrowRight,
+  FaPhoneAlt,
+  FaClock,
 } from "react-icons/fa";
 import {
   ctaHeroPrimary,
@@ -28,18 +29,48 @@ export default function HomePageClient() {
       text: "Fast diagnosis and repair for broken doors, damaged panels, off-track systems, noisy operation, and sudden breakdowns.",
       icon: <FaTools className="text-3xl" />,
       href: "/garage-door-repair",
+      image: "/garage-door-repair-v2hero.jpg",
+      alt: "Garage door repair service in South Florida",
     },
     {
-      title: "Spring Replacement",
-      text: "Safe replacement of torsion and extension springs with high-cycle hardware built for longer life and smoother operation.",
+      title: "Broken Spring Repair",
+      text: "Same-day help when the door will not open, the spring broke, or the system is too heavy to lift safely.",
       icon: <FaBolt className="text-3xl" />,
       href: "/broken-spring-repair",
+      image: "/broken-garage-door-spring.png",
+      alt: "Broken garage door spring repair",
     },
     {
       title: "Garage Door Installation",
       text: "Professional installation of premium garage doors that improve curb appeal, security, and long-term performance.",
       icon: <FaShieldAlt className="text-3xl" />,
       href: "/garage-door-installation",
+      image: "/mew-garage-door-installation.jpg",
+      alt: "New garage door installation in South Florida",
+    },
+    {
+      title: "Hurricane-Rated Doors",
+      text: "Impact, wind-rated, and Miami-Dade approved garage door options for South Florida storm protection.",
+      icon: <FaShieldAlt className="text-3xl" />,
+      href: "/hurricane-garage-doors",
+      image: "/hurricane-garage-doors-hero.png",
+      alt: "Hurricane rated garage door installation",
+    },
+    {
+      title: "Opener Repair",
+      text: "Troubleshooting and replacement for noisy openers, bad remotes, wall controls, sensors, and smart opener issues.",
+      icon: <FaTools className="text-3xl" />,
+      href: "/garage-door-opener-repair",
+      image: "/belt-drive-openers.png",
+      alt: "Garage door opener repair and replacement",
+    },
+    {
+      title: "Commercial Doors",
+      text: "Roll-up doors, warehouse doors, dock doors, and commercial garage door service for South Florida businesses.",
+      icon: <FaTools className="text-3xl" />,
+      href: "/commercial-garage-door-services",
+      image: "/commercial-warehouse-service.png",
+      alt: "Commercial garage door service team",
     },
   ];
 
@@ -55,16 +86,41 @@ export default function HomePageClient() {
   const reviews = [
     {
       name: "Michael R.",
+      location: "Fort Lauderdale",
       text: "Fast response, professional service, and the garage door works better than ever.",
     },
     {
       name: "Jessica T.",
+      location: "Boca Raton",
       text: "They showed up on time, explained everything clearly, and got it done right.",
     },
     {
       name: "Daniel P.",
+      location: "Miami",
       text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
     },
+  ];
+
+  const proofStats = [
+    { value: "Same-day", label: "repair appointments available" },
+    { value: "South FL", label: "Miami-Dade, Broward, and Palm Beach" },
+    { value: "Storm-ready", label: "hurricane-rated door options" },
+    { value: "Real photos", label: "project proof, not stock promises" },
+  ];
+
+  const topCities = [
+    "Miami",
+    "Fort Lauderdale",
+    "Boca Raton",
+    "Delray Beach",
+    "Boynton Beach",
+    "Coral Springs",
+    "Davie",
+    "West Palm Beach",
+    "Wellington",
+    "Royal Palm Beach",
+    "Aventura",
+    "Coral Gables",
   ];
 
   const caseStudies = [
@@ -114,90 +170,127 @@ export default function HomePageClient() {
         url="https://securelifts.com"
       />
 
-      <section className="relative overflow-hidden bg-slate-950 text-white">
+      <section className="relative min-h-[calc(100vh-82px)] overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/images/about/about-securelifts-team.jpg"
+            src="/secureLifts-garage-doors-rescue.JPG"
             alt="SecureLifts garage door service van in South Florida"
             fill
             priority
-            className="object-cover object-center opacity-45"
+            className="object-cover object-center opacity-55"
           />
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 pb-36 pt-20 md:grid-cols-[1.08fr_0.72fr] md:items-center md:py-28">
           <motion.div
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="max-w-3xl"
+            className="max-w-4xl"
           >
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 md:text-sm">
-              SecureLifts • South Florida Garage Door Experts
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-red-200 md:text-sm">
+              SecureLifts Garage Doors | South Florida
             </p>
 
             <h1 className="text-4xl font-black leading-tight md:text-6xl">
-              Garage Door Repair, Installation, and Hurricane-Rated Upgrades in
-              South Florida
+              Fast Garage Door Repair, Premium Installation, and Storm-Rated
+              Upgrades
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
-              Fast service. Strong workmanship. Premium garage doors built for
-              curb appeal, reliability, and South Florida weather.
-            </p>
-
-            <p className="mt-4 text-sm text-slate-300">
-              Powered by AAA Garage Doors Inc.
+              SecureLifts helps South Florida homeowners fix urgent garage door
+              problems, replace worn systems, and choose hurricane-ready doors
+              with clean workmanship and clear communication.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a href="tel:18668281818" className={ctaHeroPrimary}>
-                Call (866) 828-1818
+                <FaPhoneAlt className="mr-2" />
+                Call Now
               </a>
 
-              <a href="#services" className={ctaHeroSecondary}>
-                View Services
-              </a>
+              <Link href="/book-service" className={ctaHeroSecondary}>
+                Book Service
+              </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/90">
+            <div className="mt-10 hidden flex-wrap gap-4 text-sm text-white/90 sm:flex md:gap-6">
               <span className="flex items-center gap-2">
                 <FaShieldAlt className="text-red-400" />
                 Licensed & Insured
               </span>
               <span className="flex items-center gap-2">
-                <FaStar className="text-red-400" />
-                Top Rated Service
+                <FaClock className="text-red-400" />
+                Same-Day Service Available
               </span>
               <span className="flex items-center gap-2">
                 <FaMapMarkerAlt className="text-red-400" />
-                South Florida Coverage
+                Miami-Dade, Broward & Palm Beach
               </span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.7 }}
+            className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md"
+          >
+            <div className="relative h-56 overflow-hidden rounded-2xl bg-slate-900 md:h-72">
+              <Image
+                src="/securelifts-van.jpg"
+                alt="SecureLifts service vehicle ready for garage door repair"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-2xl bg-white p-4 text-slate-950">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-red-600">
+                  Today&apos;s Priority
+                </p>
+                <p className="mt-2 text-xl font-black">
+                  Broken spring, stuck door, or opener failure?
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Call now for fast scheduling and a technician prepared for the
+                  most common South Florida garage door failures.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-center">
+                <Link
+                  href="/broken-spring-repair"
+                  className="rounded-2xl bg-red-600 px-4 py-3 text-sm font-bold !text-white transition hover:bg-red-700"
+                >
+                  Spring Repair
+                </Link>
+                <Link
+                  href="/hurricane-garage-doors"
+                  className="rounded-2xl bg-white px-4 py-3 text-sm font-bold !text-slate-950 transition hover:bg-slate-100"
+                >
+                  Storm Doors
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-white px-6 py-8">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
-            <p className="text-lg font-semibold text-gray-900">
-              Trusted by South Florida homeowners
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
-            <p className="text-lg font-semibold text-gray-900">
-              Built for long-term reliability
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 shadow-sm">
-            <p className="text-lg font-semibold text-gray-900">
-              Fast quotes and clean service
-            </p>
-          </div>
+      <section className="border-b border-slate-200 bg-white px-6 py-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {proofStats.map((stat) => (
+            <div key={stat.value} className="border-l-4 border-red-600 bg-slate-50 px-5 py-4">
+              <p className="text-2xl font-black text-slate-950">{stat.value}</p>
+              <p className="mt-1 text-sm font-medium leading-6 text-slate-600">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -215,7 +308,7 @@ export default function HomePageClient() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -223,22 +316,33 @@ export default function HomePageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ delay: i * 0.12, duration: 0.5 }}
-              className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
-                {service.icon}
+              <div className="relative h-56 overflow-hidden bg-slate-100">
+                <Image
+                  src={service.image}
+                  alt={service.alt}
+                  fill
+                  className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                />
               </div>
 
-              <h3 className="text-2xl font-bold">{service.title}</h3>
-              <p className="mt-4 leading-8 text-slate-600">{service.text}</p>
+              <div className="p-7">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
+                  {service.icon}
+                </div>
 
-              <div className="mt-6">
-                <Link
-                  href={service.href}
-                  className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
-                >
-                  Explore service <FaArrowRight className="text-sm" />
-                </Link>
+                <h3 className="text-2xl font-bold">{service.title}</h3>
+                <p className="mt-4 leading-8 text-slate-600">{service.text}</p>
+
+                <div className="mt-6">
+                  <Link
+                    href={service.href}
+                    className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
+                  >
+                    Explore service <FaArrowRight className="text-sm" />
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -277,8 +381,8 @@ export default function HomePageClient() {
 
           <div className="relative h-[420px] overflow-hidden rounded-3xl border border-gray-200 shadow-xl">
             <Image
-              src="/securelifts-van.jpg"
-              alt="SecureLifts service van parked for a garage door service call"
+              src="/images/about/about-garage-door-service.jpg"
+              alt="SecureLifts technician servicing a residential garage door"
               fill
               className="object-cover"
             />
@@ -309,8 +413,41 @@ export default function HomePageClient() {
               >
                 <div className="mb-4 flex text-yellow-400">★★★★★</div>
                 <p className="leading-8 text-slate-100">{review.text}</p>
-                <p className="mt-5 font-bold text-white">{review.name}</p>
+                <div className="mt-5">
+                  <p className="font-bold text-white">{review.name}</p>
+                  <p className="text-sm text-slate-300">{review.location}</p>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+              Service Areas
+            </p>
+            <h2 className="text-4xl font-black md:text-5xl">
+              Local Garage Door Help Across South Florida
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              SecureLifts serves homeowners across Miami-Dade, Broward, and Palm
+              Beach with repair, replacement, and hurricane-rated garage door
+              solutions.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {topCities.map((city) => (
+              <Link
+                key={city}
+                href={`/garage-door-repair/${city.toLowerCase().replaceAll(" ", "-")}`}
+                className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 font-bold !text-slate-900 transition hover:border-red-200 hover:bg-white hover:text-red-600"
+              >
+                {city}
+              </Link>
             ))}
           </div>
         </div>
@@ -425,8 +562,18 @@ export default function HomePageClient() {
         ]}
       />
 
-      <section className="bg-red-600 px-6 py-20 text-white">
-        <div className="mx-auto max-w-5xl text-center">
+      <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white">
+        <div className="absolute inset-0">
+          <Image
+            src="/emergency-garage-door-repair.JPG"
+            alt="Emergency garage door repair service"
+            fill
+            className="object-cover opacity-25"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-red-950/70" />
+
+        <div className="relative mx-auto max-w-5xl text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
             Need Garage Door Service Today?
           </h2>

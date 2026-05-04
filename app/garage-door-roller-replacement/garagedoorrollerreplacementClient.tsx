@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaExclamationTriangle,
@@ -69,29 +69,19 @@ export default function GarageDoorRollerReplacementPage() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <Link href="/" className="block">
-              <p className="text-2xl font-extrabold text-slate-950">
-                SecureLifts
-              </p>
-            </Link>
-            <p className="text-xs text-slate-500">
-              Garage Doors • Repairs • Installation
-            </p>
-          </div>
-
-          <div className="flex gap-3">
-           
-          </div>
-        </div>
-      </header>
-
       {/* HERO */}
-      <section className="bg-slate-950 py-32 text-white">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
+        <div className="absolute inset-0">
+          <Image
+            src="/garage-door-roller-replacement.jpg"
+            alt="Garage door roller replacement service"
+            fill
+            priority
+            className="object-cover opacity-40"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/86 to-slate-950/35" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,17 +102,17 @@ export default function GarageDoorRollerReplacementPage() {
               to help restore smoother, quieter, and more dependable operation.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 hidden flex-wrap gap-4 sm:flex">
               <a
                 href="tel:8668281818"
-                className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white hover:bg-red-700"
+                className="rounded-xl bg-red-600 px-8 py-4 font-bold !text-white hover:bg-red-700"
               >
                 Call (866) 828-1818
               </a>
 
               <Link
                 href="/book-service"
-                className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+                className="rounded-xl border border-white bg-white/10 px-8 py-4 font-bold !text-white backdrop-blur hover:bg-white hover:!text-black"
               >
                 Book Service
               </Link>
@@ -178,9 +168,11 @@ export default function GarageDoorRollerReplacementPage() {
           </div>
 
           <div className="relative">
-            <img
+            <Image
               src="/garage-door-roller-replacement.jpg"
               alt="Garage door roller replacement close-up"
+              width={900}
+              height={700}
               className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
             />
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-md">
@@ -293,14 +285,14 @@ export default function GarageDoorRollerReplacementPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               href="tel:8668281818"
-              className="rounded-xl bg-slate-950 px-8 py-4 font-bold text-white"
+              className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white"
             >
               Call (866) 828-1818
             </a>
 
             <Link
               href="/book-service"
-              className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+              className="rounded-xl border border-white px-8 py-4 font-bold !text-white hover:bg-white hover:!text-black"
             >
               Book Service
             </Link>

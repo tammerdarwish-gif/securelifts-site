@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { FaCalendarCheck } from "react-icons/fa";
+import {
+  FaCalendarCheck,
+  FaPhoneAlt,
+  FaShieldAlt,
+  FaClock,
+  FaCheckCircle,
+} from "react-icons/fa";
+import type { IconType } from "react-icons";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -47,6 +54,28 @@ const INITIAL_FORM_DATA: FormDataState = {
   preferredTime: "",
   message: "",
 };
+
+const trustItems: Array<{
+  Icon: IconType;
+  title: string;
+  text: string;
+}> = [
+  {
+    Icon: FaClock,
+    title: "Fast follow-up",
+    text: "Urgent repair requests are prioritized.",
+  },
+  {
+    Icon: FaShieldAlt,
+    title: "Licensed & insured",
+    text: "Professional garage door service across South Florida.",
+  },
+  {
+    Icon: FaCheckCircle,
+    title: "Clear details",
+    text: "Your request includes service type, city, and preferred time.",
+  },
+];
 
 export default function BookServicePage() {
   const [submitted, setSubmitted] = useState(false);
@@ -159,24 +188,76 @@ export default function BookServicePage() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      <section className="bg-slate-950 px-6 py-20 text-white">
-        <div className="mx-auto max-w-5xl">
-          <h1 className="text-4xl font-black md:text-6xl">
-            Book Garage Door Service
-          </h1>
+      <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_28%)]" />
+        <div className="relative mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_0.75fr] md:items-center">
+          <div>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">
+              SecureLifts Service Request
+            </p>
+            <h1 className="text-4xl font-black md:text-6xl">
+              Book Garage Door Service
+            </h1>
 
-          <p className="mt-5 max-w-2xl text-lg text-slate-300">
-            Fill out the form below and our team will reach out to schedule your
-            service request.
-          </p>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+              Send your request and SecureLifts will contact you to confirm the
+              details. For urgent issues, calling is the fastest path.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="tel:18668281818"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-7 py-4 font-bold !text-white transition hover:bg-red-700"
+              >
+                <FaPhoneAlt />
+                Call (866) 828-1818
+              </a>
+              <a
+                href="#service-form"
+                className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 font-bold !text-white backdrop-blur transition hover:bg-white hover:!text-slate-950"
+              >
+                Start Request
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
+            <div className="grid gap-4">
+              {trustItems.map(({ Icon, title, text }) => (
+                <div key={title} className="rounded-2xl bg-white p-4 text-slate-950">
+                  <div className="flex items-start gap-3">
+                    <Icon className="mt-1 shrink-0 text-red-600" />
+                    <div>
+                      <p className="font-black">{title}</p>
+                      <p className="mt-1 text-sm leading-6 text-slate-600">{text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1.2fr_0.8fr]">
         <form
+          id="service-form"
           onSubmit={handleSubmit}
           className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
         >
+          <div className="mb-8">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+              Service Details
+            </p>
+            <h2 className="mt-2 text-3xl font-black">
+              Tell us what happened
+            </h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              The more specific the request, the faster the team can route the
+              right help.
+            </p>
+          </div>
+
           <div className="grid gap-6 md:grid-cols-2">
             <input
               required
@@ -195,6 +276,7 @@ export default function BookServicePage() {
               onChange={handleChange}
               placeholder="Phone Number"
               className="rounded-xl border border-slate-300 px-4 py-4"
+              inputMode="tel"
             />
 
             <input
@@ -297,13 +379,18 @@ export default function BookServicePage() {
           <button
             type="submit"
             disabled={loading}
-            className="mt-6 rounded-xl bg-red-600 px-8 py-4 font-bold text-white transition hover:bg-red-700 disabled:opacity-70"
+            className="mt-6 w-full rounded-xl bg-red-600 px-8 py-4 font-bold !text-white transition hover:bg-red-700 disabled:opacity-70 md:w-auto"
           >
-            {loading ? "Sending..." : "Submit Service Request"}
+            {loading ? "Sending..." : "Send Service Request"}
           </button>
+
+          <p className="mt-4 text-sm leading-6 text-slate-500">
+            By submitting, you are asking SecureLifts to contact you about this
+            garage door service request.
+          </p>
         </form>
 
-        <div className="rounded-3xl bg-slate-50 p-8">
+        <div className="rounded-3xl bg-slate-50 p-8 md:sticky md:top-28 md:self-start">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
             Need Immediate Help?
           </p>
@@ -319,10 +406,25 @@ export default function BookServicePage() {
 
           <a
             href="tel:18668281818"
-            className="mt-6 inline-flex items-center justify-center rounded-xl bg-red-600 px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-base font-semibold !text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
           >
+            <FaPhoneAlt />
             Call (866) 828-1818
           </a>
+
+          <div className="mt-8 grid gap-3">
+            {[
+              "Broken spring or door will not open",
+              "Vehicle trapped inside garage",
+              "Door stuck open or unsafe",
+              "Hurricane-rated door quote",
+            ].map((item) => (
+              <div key={item} className="flex gap-3 rounded-2xl bg-white p-4">
+                <FaCheckCircle className="mt-1 shrink-0 text-red-600" />
+                <span className="font-medium leading-6 text-slate-800">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>

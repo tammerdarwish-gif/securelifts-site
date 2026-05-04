@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaExclamationTriangle,
@@ -115,17 +115,17 @@ export default function GarageDoorPanelReplacementPage() {
         keep everything aligned, clean, and functioning properly.
       </p>
 
-      <div className="mt-8 flex flex-wrap gap-4">
+      <div className="mt-8 hidden flex-wrap gap-4 sm:flex">
         <a
           href="tel:8668281818"
-          className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white hover:bg-red-700"
+          className="rounded-xl bg-red-600 px-8 py-4 font-bold !text-white hover:bg-red-700"
         >
           Call (866) 828-1818
         </a>
 
         <Link
           href="/book-service"
-          className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+          className="rounded-xl border border-white bg-white/10 px-8 py-4 font-bold !text-white backdrop-blur hover:bg-white hover:!text-black"
         >
           Book Service
         </Link>
@@ -149,9 +149,11 @@ export default function GarageDoorPanelReplacementPage() {
 
     {/* RIGHT IMAGE */}
     <div className="relative">
-      <img
-        src="/Garage-door-panel-replacement.jpg"
+      <Image
+        src="/garage-door-panel-replacement.jpg"
         alt="Garage door panel damage requiring replacement"
+        width={900}
+        height={700}
         className="h-[420px] w-full rounded-3xl object-cover shadow-xl"
       />
 

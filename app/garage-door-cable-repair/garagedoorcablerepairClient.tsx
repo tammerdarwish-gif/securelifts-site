@@ -1,15 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
-  FaShieldAlt,
   FaExclamationTriangle,
-  FaClock,
-  FaStar,
-  FaTools,
 } from "react-icons/fa";
 
 export default function GarageDoorCableRepairPage() {
@@ -20,24 +16,6 @@ export default function GarageDoorCableRepairPage() {
     "Door gets stuck halfway or slams shut",
     "Cables came off the drum",
     "Door feels unsafe to operate manually or with the opener",
-  ];
-
-  const services = [
-    {
-      title: "Cable Repair & Replacement",
-      text: "We repair or replace damaged garage door cables so the system can lift evenly and operate safely again.",
-      icon: <FaTools />,
-    },
-    {
-      title: "Drum & Hardware Correction",
-      text: "We inspect the drums, brackets, rollers, and related hardware to correct the condition that caused the cable problem.",
-      icon: <FaShieldAlt />,
-    },
-    {
-      title: "System Balance & Safety Testing",
-      text: "Once the cable issue is corrected, we test door travel, spring balance, and overall operation for safer long-term performance.",
-      icon: <FaCheckCircle />,
-    },
   ];
 
   const whyLeft = [
@@ -52,26 +30,21 @@ export default function GarageDoorCableRepairPage() {
     "Repairs focused on safe, reliable operation",
   ];
 
-  const reviews = [
-    {
-      name: "Maria G.",
-      text: "One cable snapped and the door looked dangerous. SecureLifts handled it fast and made the whole system feel solid again.",
-    },
-    {
-      name: "Kevin R.",
-      text: "They explained exactly what failed, fixed it cleanly, and checked the rest of the door before leaving.",
-    },
-    {
-      name: "Paul S.",
-      text: "Fast service, strong work, and no guessing. The garage door runs smooth again and feels safe.",
-    },
-  ];
-
   return (
     <main className="min-h-screen bg-white text-slate-900">
           {/* HERO */}
-      <section className="bg-slate-950 py-32 text-white">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
+        <div className="absolute inset-0">
+          <Image
+            src="/broken-garage-door-cable.JPG"
+            alt="Broken garage door cable repair"
+            fill
+            priority
+            className="object-cover opacity-40"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/86 to-slate-950/35" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,17 +65,17 @@ export default function GarageDoorCableRepairPage() {
               cable problems correctly and restores smooth operation.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 hidden flex-wrap gap-4 sm:flex">
               <a
                 href="tel:8668281818"
-                className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white hover:bg-red-700"
+                className="rounded-xl bg-red-600 px-8 py-4 font-bold !text-white hover:bg-red-700"
               >
                 Call (866) 828-1818
               </a>
 
               <Link
                 href="/book-service"
-                className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+                className="rounded-xl border border-white bg-white/10 px-8 py-4 font-bold !text-white backdrop-blur hover:bg-white hover:!text-black"
               >
                 Book Service
               </Link>
@@ -145,9 +118,11 @@ export default function GarageDoorCableRepairPage() {
 
           {/* RIGHT IMAGE */}
           <div className="relative">
-            <img
-              src="/broken-garage-door-cable.jpg"
+            <Image
+              src="/broken-garage-door-cable.JPG"
               alt="Broken garage door cable example"
+              width={900}
+              height={700}
               className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
             />
 
@@ -198,14 +173,14 @@ export default function GarageDoorCableRepairPage() {
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <a
               href="tel:8668281818"
-              className="rounded-xl bg-slate-950 px-8 py-4 font-bold"
+              className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white"
             >
               Call (866) 828-1818
             </a>
 
             <Link
               href="/book-service"
-              className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+              className="rounded-xl border border-white px-8 py-4 font-bold !text-white hover:bg-white hover:!text-black"
             >
               Book Service
             </Link>

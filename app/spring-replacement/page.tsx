@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/spring-replacement",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/broken-garage-door-spring.png",
+        width: 1536,
+        height: 1024,
+        alt: "Garage door spring replacement in South Florida",
+      },
+    ],
   },
 };
 

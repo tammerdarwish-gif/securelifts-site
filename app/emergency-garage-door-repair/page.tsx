@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/emergency-garage-door-repair",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/emergency-garage-door-repair.JPG",
+        width: 1536,
+        height: 1024,
+        alt: "Emergency garage door repair in South Florida",
+      },
+    ],
   },
 };
 

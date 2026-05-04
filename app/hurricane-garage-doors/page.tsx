@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/hurricane-garage-doors",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/impact-rated-garage-doors-hero.png",
+        width: 1536,
+        height: 1024,
+        alt: "Hurricane-rated garage door options for South Florida homes",
+      },
+    ],
   },
 };
 
@@ -194,7 +202,17 @@ export default function HurricaneGarageDoorsPage() {
 
       <main className="bg-white text-slate-900">
         <section className="relative overflow-hidden bg-slate-950 px-6 py-16 text-white md:py-24">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.20),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_25%)]" />
+          <div className="absolute inset-0">
+            <Image
+              src="/impact-rated-garage-doors-hero.png"
+              alt="Hurricane-rated garage door installed on a South Florida home"
+              fill
+              priority
+              className="object-cover opacity-45"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/84 to-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/15" />
           <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">
@@ -213,7 +231,7 @@ export default function HurricaneGarageDoorsPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href={PHONE_HREF}
-                  className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
+                  className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700"
                 >
                   Call {PHONE}
                 </a>
@@ -266,9 +284,9 @@ export default function HurricaneGarageDoorsPage() {
                 Start with the hurricane-rated look that fits your home
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                This page should help visitors choose first, not just read generic
-                storm-door copy. Pick the design direction that matches the house,
-                the curb appeal goal, and the price path you are aiming for.
+                Compare the design directions that fit South Florida homes,
+                from clean modern doors to traditional, carriage, custom, and
+                premium storm-rated options.
               </p>
             </div>
 

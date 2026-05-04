@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaBolt,
-  FaClock,
-  FaStar,
   FaTools,
 } from "react-icons/fa";
 
@@ -70,8 +68,18 @@ export default function GarageDoorOpenerRepairPage() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
          {/* HERO */}
-      <section className="bg-slate-950 text-white py-32">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
+        <div className="absolute inset-0">
+          <Image
+            src="/belt-drive-openers.png"
+            alt="Garage door opener repair and replacement"
+            fill
+            priority
+            className="object-cover opacity-35"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/86 to-slate-950/40" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,20 +99,48 @@ export default function GarageDoorOpenerRepairPage() {
               restores smooth, reliable operation quickly and correctly.
             </p>
 
-            <div className="mt-8 flex gap-4 flex-wrap">
+            <div className="mt-8 hidden gap-4 sm:flex sm:flex-wrap">
               <a
                 href="tel:8668281818"
-                className="rounded-xl bg-red-600 px-8 py-4 font-bold text-white hover:bg-red-700"
+                className="rounded-xl bg-red-600 px-8 py-4 font-bold !text-white hover:bg-red-700"
               >
                 Call (866) 828-1818
               </a>
 
               <Link
                 href="/book-service"
-                className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+                className="rounded-xl border border-white bg-white/10 px-8 py-4 font-bold !text-white backdrop-blur hover:bg-white hover:!text-black"
               >
                 Book Service
               </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur"
+          >
+            <div className="relative h-64 overflow-hidden rounded-2xl bg-slate-900 md:h-80">
+              <Image
+                src="/wall-mount-jackshaft-openers.png"
+                alt="Wall mount garage door opener upgrade"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="mt-5 rounded-2xl bg-white p-5 text-slate-950">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-600">
+                Opener Help
+              </p>
+              <h2 className="mt-2 text-2xl font-black">
+                Remote, sensor, motor, or smart opener issue?
+              </h2>
+              <p className="mt-3 leading-7 text-slate-600">
+                We diagnose the opener and the door system together so the real
+                problem gets fixed.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -112,7 +148,7 @@ export default function GarageDoorOpenerRepairPage() {
 
       {/* COMMON PROBLEMS */}
       <section className="py-28 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 md:items-center">
           <div>
             <p className="mb-6 text-base font-bold uppercase tracking-[0.3em] text-red-600">
               Common Problems
@@ -139,6 +175,21 @@ export default function GarageDoorOpenerRepairPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3">
+          {[
+            ["Remote or keypad", "Signal, battery, programming, and receiver issues."],
+            ["Safety sensors", "Alignment and reversal problems that stop the door."],
+            ["Motor and drive", "Belt, chain, gear, travel, and motor diagnostics."],
+          ].map(([title, text]) => (
+            <div key={title} className="border-l-4 border-red-600 bg-slate-50 px-6 py-5">
+              <h3 className="text-xl font-black">{title}</h3>
+              <p className="mt-2 leading-7 text-slate-600">{text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -228,14 +279,14 @@ export default function GarageDoorOpenerRepairPage() {
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <a
               href="tel:8668281818"
-              className="rounded-xl bg-slate-950 px-8 py-4 font-bold text-white"
+              className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white"
             >
               Call (866) 828-1818
             </a>
 
             <Link
               href="/book-service"
-              className="rounded-xl border border-white px-8 py-4 font-bold hover:bg-white hover:text-black"
+              className="rounded-xl border border-white px-8 py-4 font-bold !text-white hover:bg-white hover:!text-black"
             >
               Book Service
             </Link>
