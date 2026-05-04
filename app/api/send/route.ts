@@ -1,5 +1,14 @@
 import { Resend } from "resend";
 
+function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
@@ -30,25 +39,40 @@ export async function POST(req: Request) {
       date,
       time,
       message,
+      sourcePage,
+      referrer,
     } = body ?? {};
+
+    if (!name || !phone || !address || !city || !service) {
+      return Response.json(
+        {
+          success: false,
+          error: "Missing required lead details",
+        },
+        { status: 400 }
+      );
+    }
 
     const result = await resend.emails.send({
       from: "SecureLifts <bookings@send.securelifts.com>",
       to: "info@securelifts.com",
-      subject: "New Service Request - SecureLifts",
+      subject: `New ${escapeHtml(service)} Lead - SecureLifts`,
       html: `
         <div style="font-family: Arial, Helvetica, sans-serif; color: #111827; line-height: 1.6;">
           <h2 style="margin-bottom: 16px;">New Service Request</h2>
-          <p><strong>Name:</strong> ${name || ""}</p>
-          <p><strong>Phone:</strong> ${phone || ""}</p>
-          <p><strong>Email:</strong> ${email || ""}</p>
-          <p><strong>Service Address:</strong> ${address || ""}</p>
-          <p><strong>City:</strong> ${city || ""}</p>
-          <p><strong>ZIP Code:</strong> ${zip || ""}</p>
-          <p><strong>Service:</strong> ${service || ""}</p>
-          <p><strong>Preferred Date:</strong> ${date || ""}</p>
-          <p><strong>Preferred Time:</strong> ${time || ""}</p>
-          <p><strong>Message:</strong> ${message || ""}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Service Address:</strong> ${escapeHtml(address)}</p>
+          <p><strong>City:</strong> ${escapeHtml(city)}</p>
+          <p><strong>ZIP Code:</strong> ${escapeHtml(zip)}</p>
+          <p><strong>Service:</strong> ${escapeHtml(service)}</p>
+          <p><strong>Preferred Date:</strong> ${escapeHtml(date)}</p>
+          <p><strong>Preferred Time:</strong> ${escapeHtml(time)}</p>
+          <p><strong>Message:</strong> ${escapeHtml(message)}</p>
+          <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
+          <p><strong>Lead Source Page:</strong> ${escapeHtml(sourcePage)}</p>
+          <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
         </div>
       `,
     });

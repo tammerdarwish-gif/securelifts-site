@@ -1,32 +1,34 @@
 import StormCityLandingPage from "../../components/StormCityLandingPage";
-import { hurricaneCities } from "../../lib/hurricaneCities";
+import {
+  generateStormCityStaticParams,
+  getStormCityMetadata,
+  getStormCityOrNotFound,
+} from "../../lib/stormCityPageData";
 
 type PageProps = {
   params: Promise<{ city: string }>;
 };
 
+export function generateStaticParams() {
+  return generateStormCityStaticParams();
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { city: citySlug } = await params;
+  const cityData = getStormCityOrNotFound(citySlug);
+
+  return getStormCityMetadata("impact", cityData);
+}
+
 export default async function Page({ params }: PageProps) {
   const { city: citySlug } = await params;
-
-  const cityData = hurricaneCities.find((c) => c.slug === citySlug);
-
-  const city =
-    cityData?.name ??
-    citySlug
-      .split("-")
-      .filter(Boolean)
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" ");
-
-  const nearbyText =
-    cityData?.nearbyAreas?.length
-      ? cityData.nearbyAreas.join(", ")
-      : `areas near ${city}`;
+  const cityData = getStormCityOrNotFound(citySlug);
+  const nearbyText = cityData.nearbyAreas.join(", ");
 
   return (
     <StormCityLandingPage
       serviceKey="impact"
-      city={city}
+      city={cityData.name}
       citySlug={citySlug}
       nearbyText={nearbyText}
     />
