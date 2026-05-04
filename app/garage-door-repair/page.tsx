@@ -13,10 +13,16 @@ export const metadata: Metadata = {
   title: "Garage Door Repair in South Florida | SecureLifts",
   description:
     "SecureLifts provides fast, professional garage door repair in South Florida for broken springs, opener issues, off-track doors, cables, rollers, and more. Call (866) 828-1818.",
+  alternates: {
+    canonical: "https://securelifts.com/garage-door-repair",
+  },
   openGraph: {
     title: "Garage Door Repair in South Florida | SecureLifts",
     description:
       "Fast, professional garage door repair in South Florida for broken springs, opener issues, off-track doors, cables, rollers, and more.",
+    url: "https://securelifts.com/garage-door-repair",
+    siteName: "SecureLifts",
+    type: "website",
     images: [
       {
         url: "/garage-door-repair-hero.png",

@@ -2,9 +2,14 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { FaPhoneAlt, FaCheckCircle, FaStar, FaTools, FaShieldAlt } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 function formatCityName(slug: string) {
   return slug
@@ -28,15 +33,10 @@ export async function generateMetadata({
   params: Promise<{ city: string }>;
 }): Promise<Metadata> {
   const { city } = await params;
-  const cityName = formatCityName(city);
-
-  return {
-    title: `Garage Door Roller Replacement in ${cityName} | SecureLifts`,
-    description: `Fix noisy or stuck garage doors in ${cityName}. Professional roller replacement for smoother and quieter operation.`,
-    alternates: {
-      canonical: `https://securelifts.com/garage-door-roller-replacement/${city}`,
-    },
-  };
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.garageDoorRollerReplacement
+  );
 }
 
 export default async function Page({
@@ -46,6 +46,11 @@ export default async function Page({
 }) {
   const { city } = await params;
   const data = getCityData(city) as CityPageData | undefined;
+
+  if (!data) {
+    notFound();
+  }
+
   const cityName = data?.city?.trim() || formatCityName(city);
 
   const nearbyAreas =

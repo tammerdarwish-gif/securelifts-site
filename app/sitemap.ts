@@ -27,6 +27,58 @@ const baseUrl = "https://securelifts.com";
 
 const staticPaths = getAllStaticRoutes(path.join(process.cwd(), "app"));
 
+const priorityStaticPaths = [
+  "",
+  "/garage-door-repair",
+  "/garage-door-installation",
+  "/broken-spring-repair",
+  "/spring-replacement",
+  "/garage-door-opener-repair",
+  "/emergency-garage-door-repair",
+  "/garage-door-maintenance",
+  "/garage-door-cable-repair",
+  "/garage-door-roller-replacement",
+  "/garage-door-panel-replacement",
+  "/hurricane-garage-doors",
+  "/wind-rated-garage-doors",
+  "/impact-rated-garage-doors",
+  "/miami-dade-rated-garage-doors",
+  "/locations",
+  "/reviews",
+  "/about",
+  "/contact",
+  "/book-service",
+];
+
+const topCitySlugs = [
+  "miami",
+  "fort-lauderdale",
+  "boca-raton",
+  "delray-beach",
+  "boynton-beach",
+  "coral-springs",
+  "davie",
+  "west-palm-beach",
+  "wellington",
+  "royal-palm-beach",
+  "aventura",
+  "coral-gables",
+];
+
+const coreServicePaths = [
+  "garage-door-repair",
+  "garage-door-installation",
+  "garage-door-maintenance",
+  "garage-door-opener-repair",
+  "garage-door-off-track-repair",
+  "garage-door-cable-repair",
+  "garage-door-panel-replacement",
+  "garage-door-roller-replacement",
+  "broken-spring-repair",
+  "spring-replacement",
+  "emergency-garage-door-repair",
+];
+
 const stormCities = [
   "miami",
   "miami-beach",
@@ -72,11 +124,18 @@ const stormCities = [
 ];
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const priorityStaticPathSet = new Set(priorityStaticPaths);
+  const orderedStaticPaths = [
+    ...priorityStaticPaths.filter((path) => staticPaths.includes(path)),
+    ...staticPaths.filter((path) => !priorityStaticPathSet.has(path)).sort(),
+  ];
 
   // Static pages
-  const staticPages: MetadataRoute.Sitemap = staticPaths.map((path) => ({
+  const staticPages: MetadataRoute.Sitemap = orderedStaticPaths.map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: now,
+    changeFrequency: path === "" ? "weekly" : "monthly",
+    priority: priorityStaticPathSet.has(path) ? 0.9 : 0.5,
   }));
 
   // Hurricane / storm city pages
@@ -101,53 +160,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Core service pages (ALL cities, not limited list)
   const allCities = getAllCitySlugs();
+  const allCitySet = new Set(allCities);
+  const priorityCities = topCitySlugs.filter((city) => allCitySet.has(city));
+  const remainingCities = allCities
+    .filter((city) => !priorityCities.includes(city))
+    .sort();
+  const orderedCities = [...priorityCities, ...remainingCities];
+  const priorityCitySet = new Set(priorityCities);
 
-  const coreCityPages: MetadataRoute.Sitemap = allCities.flatMap((city) => [
-    {
-      url: `${baseUrl}/garage-door-repair/${city}`,
+  const coreCityPages: MetadataRoute.Sitemap = orderedCities.flatMap((city) =>
+    coreServicePaths.map((servicePath) => ({
+      url: `${baseUrl}/${servicePath}/${city}`,
       lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-installation/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-maintenance/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-opener-repair/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-off-track-repair/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-cable-repair/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-panel-replacement/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/garage-door-roller-replacement/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/broken-spring-repair/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/spring-replacement/${city}`,
-      lastModified: now,
-    },
-    {
-      url: `${baseUrl}/emergency-garage-door-repair/${city}`,
-      lastModified: now,
-    },
-  ]);
+      changeFrequency: "monthly" as const,
+      priority: priorityCitySet.has(city) ? 0.75 : 0.45,
+    }))
+  );
 
   return [...staticPages, ...stormCityPages, ...coreCityPages];
 }

@@ -16,6 +16,10 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 function formatCityName(slug: string) {
   return slug
@@ -41,33 +45,14 @@ export async function generateMetadata({
   const { city } = await params;
   const data = getCityData(city) as CityPageData | undefined;
 
-  const cityName = data?.city?.trim() || formatCityName(city);
-  const title = `Garage Door Maintenance in ${cityName} | SecureLifts`;
-  const description = `Professional garage door maintenance in ${cityName}. Tune-ups, safety inspections, lubrication, balancing, and preventive service to keep your garage door operating safely and reliably.`;
-  const canonical = `https://securelifts.com/garage-door-maintenance/${city}`;
+  if (!data) {
+    notFound();
+  }
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      siteName: "SecureLifts",
-      type: "website",
-      images: [
-        {
-          url: "/garage-door-maintenance-plans.png",
-          width: 1200,
-          height: 630,
-          alt: `Garage door maintenance plans and preventive service in ${cityName}`,
-        },
-      ],
-    },
-  };
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.garageDoorMaintenance
+  );
 }
 
 export default async function CityPage({

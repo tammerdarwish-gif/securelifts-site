@@ -16,6 +16,10 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 function formatCityName(slug: string) {
   return slug
@@ -34,22 +38,10 @@ export async function generateMetadata({
   params: Promise<{ city: string }>;
 }): Promise<Metadata> {
   const { city } = await params;
-  const cityName = formatCityName(city);
-
-  return {
-    title: `Garage Door Cable Repair in ${cityName} | SecureLifts`,
-    description: `Fast garage door cable repair in ${cityName}. SecureLifts fixes broken, loose, frayed, or off-drum garage door cables safely and quickly.`,
-    alternates: {
-      canonical: `https://securelifts.com/garage-door-cable-repair/${city}`,
-    },
-    openGraph: {
-      title: `Garage Door Cable Repair in ${cityName} | SecureLifts`,
-      description: `Fast garage door cable repair in ${cityName} for broken, loose, frayed, or off-drum cables.`,
-      url: `https://securelifts.com/garage-door-cable-repair/${city}`,
-      siteName: "SecureLifts",
-      type: "website",
-    },
-  };
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.garageDoorCableRepair
+  );
 }
 
 export default async function Page({
@@ -58,16 +50,19 @@ export default async function Page({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const cityName = formatCityName(city);
-  const cityData = getCityData(city) as { nearbyAreas?: string[] } | undefined;
+  const cityData = getCityData(city) as
+    | { city?: string; nearbyAreas?: string[] }
+    | undefined;
+
+  if (!cityData) return notFound();
+
+  const cityName = cityData.city?.trim() || formatCityName(city);
   const nearbyAreas = cityData?.nearbyAreas?.slice(0, 4) ?? [
     `Homes near ${cityName}`,
     `Nearby neighborhoods around ${cityName}`,
     "Surrounding South Florida areas",
     "Nearby residential communities",
   ];
-
-  if (!cityName) return notFound();
 
   const schema = {
     "@context": "https://schema.org",

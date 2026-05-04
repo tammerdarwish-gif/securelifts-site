@@ -14,8 +14,10 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
-
-const BASE_URL = "https://securelifts.com";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -36,37 +38,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { city } = await params;
-  const data = getCityData(city);
-
-  if (!data) {
-    notFound();
-  }
-
-  const cityName = data.city?.trim() || formatCityName(city);
-  const canonical = `${BASE_URL}/broken-spring-repair/${city}`;
-
-  return {
-    title: `Broken Spring Repair in ${cityName}, FL | SecureLifts`,
-    description: `SecureLifts provides fast broken garage door spring repair in ${cityName}, FL for doors that will not open, feel heavy, or slammed shut. Call (866) 828-1818.`,
-    alternates: {
-      canonical,
-    },
-    openGraph: {
-      title: `Broken Spring Repair in ${cityName}, FL | SecureLifts`,
-      description: `Fast broken garage door spring repair in ${cityName}, FL with safe spring replacement and dependable service from SecureLifts.`,
-      url: canonical,
-      siteName: "SecureLifts",
-      type: "website",
-      images: [
-        {
-          url: "/securelifts-van.jpg",
-          width: 1536,
-          height: 1024,
-          alt: `SecureLifts broken spring repair service in ${cityName}, Florida`,
-        },
-      ],
-    },
-  };
+  return generateServiceCityMetadata(city, serviceCitySeoConfigs.brokenSpringRepair);
 }
 
 type CityPageData = {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
   FaCheckCircle,
@@ -10,6 +11,10 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 function formatCityName(slug: string) {
   return slug
@@ -33,15 +38,10 @@ export async function generateMetadata({
   params: Promise<{ city: string }>;
 }): Promise<Metadata> {
   const { city } = await params;
-  const cityName = formatCityName(city);
-
-  return {
-    title: `Garage Door Panel Replacement in ${cityName} | SecureLifts`,
-    description: `Replace damaged garage door panels in ${cityName}. Restore your door without full replacement when possible.`,
-    alternates: {
-      canonical: `https://securelifts.com/garage-door-panel-replacement/${city}`,
-    },
-  };
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.garageDoorPanelReplacement
+  );
 }
 
 export default async function Page({
@@ -51,6 +51,11 @@ export default async function Page({
 }) {
   const { city } = await params;
   const data = getCityData(city) as CityPageData | undefined;
+
+  if (!data) {
+    notFound();
+  }
+
   const cityName = data?.city?.trim() || formatCityName(city);
 
   const nearbyAreas =

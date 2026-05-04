@@ -1,4 +1,5 @@
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -13,7 +14,16 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-import { getCityData } from "../../lib/cityPages";
+import { getAllCitySlugs, getCityData } from "../../lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
+
+type PageProps = {
+  params: Promise<{ city: string }>;
+};
+
 function formatCityName(slug: string) {
   return slug
     .split("-")
@@ -22,7 +32,17 @@ function formatCityName(slug: string) {
 }
 
 export function generateStaticParams() {
-  return [];
+  return getAllCitySlugs().map((city) => ({ city }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { city } = await params;
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.garageDoorOpenerRepair
+  );
 }
 
 type CityPageData = {
@@ -32,9 +52,7 @@ type CityPageData = {
 
 export default async function CityPage({
   params,
-}: {
-  params: Promise<{ city: string }>;
-}) {
+}: PageProps) {
   const { city } = await params;
   const data = getCityData(city);
 

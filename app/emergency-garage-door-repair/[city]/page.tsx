@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -11,16 +12,32 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
+
+type PageProps = {
+  params: Promise<{ city: string }>;
+};
 
 export function generateStaticParams() {
   return getAllCitySlugs().map((city) => ({ city }));
 }
 
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { city } = await params;
+  return generateServiceCityMetadata(
+    city,
+    serviceCitySeoConfigs.emergencyGarageDoorRepair
+  );
+}
+
 export default async function EmergencyGarageDoorRepairCityPage({
   params,
-}: {
-  params: Promise<{ city: string }>;
-}) {
+}: PageProps) {
   const { city } = await params;
   const data = getCityData(city);
 

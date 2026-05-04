@@ -12,6 +12,10 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import {
+  generateServiceCityMetadata,
+  serviceCitySeoConfigs,
+} from "@/lib/serviceCitySeo";
 
 type CityPageData = {
   city?: string;
@@ -37,15 +41,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { city } = await params;
   const data = getCityData(city) as CityPageData | undefined;
-  const cityName = data?.city?.trim() || formatCityName(city);
 
-  return {
-    title: `Spring Replacement in ${cityName} | SecureLifts`,
-    description: `Fast garage door spring replacement in ${cityName}. Broken spring? SecureLifts replaces springs safely and restores smooth, reliable door operation.`,
-    alternates: {
-      canonical: `https://securelifts.com/spring-replacement/${city}`,
-    },
-  };
+  if (!data) {
+    notFound();
+  }
+
+  return generateServiceCityMetadata(city, serviceCitySeoConfigs.springReplacement);
 }
 
 export default async function Page({
