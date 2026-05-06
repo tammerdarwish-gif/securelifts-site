@@ -79,7 +79,7 @@ export default function GarageDoorRepairPage() {
       title: "Cables, Rollers & Hardware",
       text: "Frayed cables, worn rollers, loose hinges, and noisy hardware often show up before a full breakdown. Early repair matters.",
       href: "/garage-door-cable-repair",
-      image: "/images/approved/cable-repair-full-card.jpg",
+      image: "/images/approved/red-hanging-door-far-card.jpg",
       alt: "Broken garage door cable repair",
     },
   ];
@@ -394,22 +394,23 @@ export default function GarageDoorRepairPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2">
             {repairPhotoSections.map((item) => (
               <Link
                 key={item.title}
                 href={item.href}
                 className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="relative h-48 overflow-hidden bg-slate-100">
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                   <Image
                     src={item.image}
                     alt={item.alt}
                     fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
                     className={
                       item.fit === "contain"
                         ? "object-contain transition duration-300"
-                        : "object-cover transition duration-300 group-hover:scale-[1.03]"
+                        : "object-contain transition duration-300"
                     }
                   />
                 </div>
