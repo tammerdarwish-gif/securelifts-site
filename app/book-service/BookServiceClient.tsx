@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   FaCalendarCheck,
   FaPhoneAlt,
@@ -189,7 +190,16 @@ export default function BookServicePage() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_28%)]" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/approved/service-van-at-door-card.jpg"
+            alt="SecureLifts service vehicle at a South Florida garage door appointment"
+            fill
+            priority
+            className="object-cover opacity-35"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-slate-950/45" />
         <div className="relative mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_0.75fr] md:items-center">
           <div>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-red-400">

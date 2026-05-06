@@ -8,6 +8,8 @@ import InternalLinkCards from "../components/InternalLinkCards";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import ReviewTrustSection from "../components/ReviewTrustSection";
+import QuickLeadForm from "../components/QuickLeadForm";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 
 export const metadata: Metadata = {
   title: "Garage Door Repair in South Florida | SecureLifts",
@@ -55,7 +57,7 @@ export default function GarageDoorRepairPage() {
       title: "Broken Spring Repair",
       text: "If the spring breaks, the door can become too heavy to lift and unsafe to force open. We restore balance and safe operation.",
       href: "/broken-spring-repair",
-      image: "/broken-garage-door-spring.png",
+      image: "/images/approved/spring-closeup-card.jpg",
       alt: "Broken garage door spring repair by SecureLifts",
     },
     {
@@ -69,14 +71,15 @@ export default function GarageDoorRepairPage() {
       title: "Off-Track or Stuck Doors",
       text: "A crooked, stuck, or off-track door can damage panels, rollers, and tracks if it is forced. We correct the system safely.",
       href: "/garage-door-off-track-repair",
-      image: "/offtrack-worse.jpg",
+      image: "/images/approved/offtrack-full-card.jpg",
       alt: "Off-track garage door repair in South Florida",
+      fit: "contain",
     },
     {
       title: "Cables, Rollers & Hardware",
       text: "Frayed cables, worn rollers, loose hinges, and noisy hardware often show up before a full breakdown. Early repair matters.",
       href: "/garage-door-cable-repair",
-      image: "/broken-garage-door-cable.JPG",
+      image: "/images/approved/cable-repair-full-card.jpg",
       alt: "Broken garage door cable repair",
     },
   ];
@@ -403,7 +406,11 @@ export default function GarageDoorRepairPage() {
                     src={item.image}
                     alt={item.alt}
                     fill
-                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    className={
+                      item.fit === "contain"
+                        ? "object-contain transition duration-300"
+                        : "object-cover transition duration-300 group-hover:scale-[1.03]"
+                    }
                   />
                 </div>
                 <div className="p-6">
@@ -463,6 +470,13 @@ export default function GarageDoorRepairPage() {
           </div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Real Repair Proof"
+        heading="Customers Can See The Type Of Work Before They Call"
+        intro="Repair pages convert better when the customer sees real damage, real technicians, and real finished work. These approved photos show SecureLifts solving the kinds of problems South Florida homeowners call about."
+      />
 
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-6xl">
@@ -647,18 +661,19 @@ export default function GarageDoorRepairPage() {
       </section>
 
       <section className="bg-gray-900 px-6 py-20 text-white">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-white/5 px-8 py-14 text-center md:px-12">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">
             Need Garage Door Repair Today?
           </h2>
 
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-8 text-white/85">
+          <p className="mb-8 max-w-2xl text-lg leading-8 text-white/85">
             Call SecureLifts now for fast, professional garage door repair in
             South Florida. Broken spring, opener issue, off-track door, noisy
             hardware, or general failure — we help homeowners get it fixed.
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="hidden flex-col gap-4 sm:flex sm:flex-row">
             <a
               href="tel:18668281818"
               className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-4 text-lg font-semibold !text-white transition hover:bg-red-700"
@@ -673,6 +688,13 @@ export default function GarageDoorRepairPage() {
               Book Service
             </Link>
           </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService="Garage Door Repair"
+            title="Send A Repair Request"
+            intro="Describe the issue and city so SecureLifts can follow up with the right repair path."
+          />
         </div>
       </section>
 

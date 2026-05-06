@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import type { Metadata } from "next";
+import QuickLeadForm from "../components/QuickLeadForm";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -20,6 +22,14 @@ export const metadata: Metadata = {
     url: "https://securelifts.com/garage-door-installation",
     siteName: "SecureLifts",
     type: "website",
+    images: [
+      {
+        url: "/images/approved/two-black-doors-interior-hero.jpg",
+        width: 1800,
+        height: 1100,
+        alt: "Premium garage door installation by SecureLifts in South Florida",
+      },
+    ],
   },
 };
 
@@ -28,19 +38,19 @@ const doorTypes = [
     title: "Modern Garage Doors",
     text: "Clean lines, glass options, and upscale finishes for high-end homes and contemporary architecture.",
     href: "/hurricane-garage-doors/modern",
-    image: "/images/reviews/miami-beach-case-study.jpg",
+    image: "/images/approved/two-black-doors-interior-card.jpg",
   },
   {
     title: "Traditional Garage Doors",
     text: "Classic raised-panel and long-panel styles that work well for most homes and neighborhoods.",
     href: "/hurricane-garage-doors/traditional",
-    image: "/images/reviews/coconut-creek-case-study.jpg",
+    image: "/images/approved/white-traditional-clean-card.jpg",
   },
   {
     title: "Hurricane-Rated Garage Doors",
     text: "Built for South Florida storm conditions with stronger performance, better protection, and peace of mind.",
     href: "/hurricane-garage-doors",
-    image: "/images/reviews/coconut-grove-case-study.jpg",
+    image: "/images/approved/modern-slate-hurricane-card.jpg",
   },
 ];
 
@@ -213,7 +223,7 @@ export default function GarageDoorInstallationPage() {
         <section className="relative overflow-hidden bg-slate-950 px-6 py-16 text-white md:py-24">
           <div className="absolute inset-0">
             <Image
-              src="/mew-garage-door-installation.jpg"
+              src="/images/approved/wood-modern-install-hero.jpg"
               alt="New garage door installation by SecureLifts"
               fill
               priority
@@ -272,7 +282,7 @@ export default function GarageDoorInstallationPage() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
               <div className="relative h-[340px] w-full md:h-[460px]">
                 <Image
-                  src="/images/reviews/coconut-grove-case-study.jpg"
+                  src="/images/approved/two-black-doors-interior-card.jpg"
                   alt="Garage door installation by SecureLifts in South Florida"
                   fill
                   className="object-cover"
@@ -282,6 +292,13 @@ export default function GarageDoorInstallationPage() {
             </div>
           </div>
         </section>
+
+        <ApprovedProjectShowcase
+          variant="installation"
+          eyebrow="Approved Installation Photos"
+          heading="Installation Work That Looks Like A Premium Company"
+          intro="These selected project photos show real SecureLifts installation work and the kind of curb appeal customers expect from a top South Florida garage door company."
+        />
 
         <section className="px-6 py-16 md:py-20">
           <div className="mx-auto max-w-7xl">
@@ -537,34 +554,42 @@ export default function GarageDoorInstallationPage() {
         </section>
 
         <section className="bg-slate-950 px-6 py-16 text-white md:py-20">
-          <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center shadow-2xl md:p-12">
+          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">
               Ready To Install A New Garage Door?
             </p>
             <h2 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
               Call SecureLifts for garage door installation in South Florida
             </h2>
-            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-200">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-200">
               Whether you want a modern statement door, a strong traditional
               upgrade, or hurricane-rated protection, SecureLifts can help you
               choose the right fit and get the installation done right.
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="mt-8 hidden flex-col gap-4 sm:flex sm:flex-row">
               <a
                 href={PHONE_HREF}
-                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
+                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700"
               >
                 Call {PHONE}
               </a>
 
               <Link
                 href="/book-service"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-7 py-4 text-base font-bold text-white transition hover:bg-white/15"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-7 py-4 text-base font-bold !text-white transition hover:bg-white/15"
               >
                 Book Service
               </Link>
             </div>
+            </div>
+
+            <QuickLeadForm
+              defaultService="Garage Door Installation"
+              title="Request Installation Quote"
+              intro="Tell us your city and what style or storm-rated door you are considering."
+            />
           </div>
         </section>
       </main>

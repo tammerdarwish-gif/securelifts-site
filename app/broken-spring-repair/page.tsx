@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import FAQSchema from "../components/FAQSchema";
 import ServiceSchema from "../components/ServiceSchema";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/broken-garage-door-spring.png",
-        width: 1536,
-        height: 1024,
+        url: "/images/approved/spring-closeup-hero.jpg",
+        width: 1800,
+        height: 1100,
         alt: "Broken garage door spring repair by SecureLifts in South Florida",
       },
     ],
@@ -92,7 +93,7 @@ export default function BrokenSpringRepairPage() {
 
       <section className="relative min-h-[700px] overflow-hidden bg-slate-950 text-white">
         <Image
-          src="/broken-garage-door-spring.png"
+          src="/images/approved/spring-closeup-hero.jpg"
           alt="Broken garage door spring repair in South Florida"
           fill
           priority
@@ -100,7 +101,7 @@ export default function BrokenSpringRepairPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
 
-        <div className="relative mx-auto flex min-h-[700px] max-w-7xl items-end px-6 pb-16 pt-32">
+        <div className="relative mx-auto flex min-h-[700px] max-w-7xl items-center px-6 pb-36 pt-32 md:items-end md:pb-16">
           <div className="max-w-3xl">
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-red-300">
               SecureLifts Same-Day Spring Service
@@ -164,6 +165,13 @@ export default function BrokenSpringRepairPage() {
           </div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="spring"
+        eyebrow="Real Spring Repair Proof"
+        heading="Broken spring calls need fast, trustworthy help"
+        intro="These photos stay closer to the spring repair subject: spring hardware, door balance, and the kind of unsafe door condition customers should not force open."
+      />
 
       <section className="bg-slate-50 px-6 py-20">
         <div className="mx-auto max-w-7xl">

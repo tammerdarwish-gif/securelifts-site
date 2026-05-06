@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import QuickLeadForm from "../components/QuickLeadForm";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -124,8 +126,8 @@ export default function EmergencyGarageDoorRepairPage() {
           {/* RIGHT IMAGE */}
           <div className="relative">
             <div className="relative h-[420px] w-full overflow-hidden rounded-[32px] shadow-xl md:h-[560px]">
-              <Image
-                src="/securelifts-van.jpg"
+                <Image
+                src="/images/approved/service-van-at-door-card.jpg"
                 alt="SecureLifts emergency garage door service vehicle"
                 fill
                 className="object-cover"
@@ -137,6 +139,13 @@ export default function EmergencyGarageDoorRepairPage() {
           </div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Emergency Repair Proof"
+        heading="Real repair situations, not generic promises"
+        intro="Emergency visitors need confidence fast. These approved photos show damaged-door scenarios, service presence, and real technician work so customers know SecureLifts can help."
+      />
 
       {/* EMERGENCY SIGNS */}
       <section className="py-24">
@@ -243,8 +252,9 @@ export default function EmergencyGarageDoorRepairPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-red-600 py-24 text-white text-center">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-red-600 px-6 py-24 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
           <h2 className="text-4xl font-black md:text-5xl">
             Need emergency garage door repair now?
           </h2>
@@ -253,7 +263,7 @@ export default function EmergencyGarageDoorRepairPage() {
             Call SecureLifts now and get your garage door fixed today.
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-8 hidden flex-wrap gap-4 sm:flex">
             <a
               href="tel:8668281818"
               className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white"
@@ -268,6 +278,13 @@ export default function EmergencyGarageDoorRepairPage() {
               Book Service
             </Link>
           </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService="Emergency Garage Door Repair"
+            title="Send Emergency Request"
+            intro="If your door is stuck, unsafe, or will not close, send details here or call now."
+          />
         </div>
       </section>
     </main>

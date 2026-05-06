@@ -301,7 +301,7 @@ export default async function Page({
 
           <div className="flex justify-center mt-10 lg:mt-0">
             <img
-              src="/broken-garage-door-cable.jpg"
+              src="/images/approved/cable-repair-full-card.jpg"
               className="w-full max-h-[500px] object-contain rounded-2xl"
               alt="Broken garage door cable"
             />

@@ -6,13 +6,15 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 const serviceLinks = [
+  { label: "Emergency Repair", href: "/emergency-garage-door-repair" },
   { label: "Garage Door Repair", href: "/garage-door-repair" },
-  { label: "Garage Door Installation", href: "/garage-door-installation" },
-  { label: "Garage Door Opener", href: "/garage-door-opener" },
   { label: "Broken Spring Repair", href: "/broken-spring-repair" },
-  { label: "Garage Door Maintenance", href: "/garage-door-maintenance" },
-  { label: "Garage Door Off-Track Repair", href: "/garage-door-off-track-repair" },
+  { label: "Opener Repair", href: "/garage-door-opener-repair" },
+  { label: "Garage Door Installation", href: "/garage-door-installation" },
+  { label: "Hurricane Garage Doors", href: "/hurricane-garage-doors" },
   { label: "Garage Door Cable Repair", href: "/garage-door-cable-repair" },
+  { label: "Roller Replacement", href: "/garage-door-roller-replacement" },
+  { label: "Panel Replacement", href: "/garage-door-panel-replacement" },
   { label: "Commercial Garage Doors", href: "/commercial-garage-door-services" },
 ];
 
@@ -96,9 +98,9 @@ export default function SiteHeader() {
 
             <Link
               href="/book-service"
-              className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-50"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold !text-slate-900 transition hover:bg-slate-50"
             >
-              Book Service
+              Request Service
             </Link>
           </div>
 
@@ -165,9 +167,9 @@ export default function SiteHeader() {
                 <Link
                   href="/book-service"
                   onClick={closeMenus}
-                  className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-50"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold !text-slate-900 transition hover:bg-slate-50"
                 >
-                  Book Service
+                  Request Service
                 </Link>
               </div>
             </div>

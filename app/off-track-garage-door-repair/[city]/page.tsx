@@ -273,7 +273,7 @@ export default async function CityPage({
           <div className="min-w-0 lg:sticky lg:top-24">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
               <img
-                src="/offtrack-worse.jpg"
+                src="/images/approved/offtrack-full-card.jpg"
                 alt={`Off-track garage door repair in ${cityName}`}
                 className="block h-[300px] w-full object-cover object-center md:h-[360px] lg:h-[420px]"
               />

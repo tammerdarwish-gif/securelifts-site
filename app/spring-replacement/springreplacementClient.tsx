@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import QuickLeadForm from "../components/QuickLeadForm";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -70,7 +71,7 @@ export default function SpringReplacementPage() {
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/broken-garage-door-spring.png"
+            src="/images/approved/spring-closeup-hero.jpg"
             alt="Garage door spring replacement service"
             fill
             priority
@@ -339,8 +340,9 @@ export default function SpringReplacementPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="bg-red-600 text-white">
-        <div className="mx-auto max-w-5xl px-6 py-28 text-center">
+      <section className="bg-red-600 px-6 py-28 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
           <h2 className="text-5xl font-black leading-tight">
             Need garage door spring replacement?
           </h2>
@@ -350,7 +352,7 @@ export default function SpringReplacementPage() {
             operates the way it should.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 hidden flex-wrap items-center gap-4 sm:flex">
             <a
   href="tel:8668281818"
   className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white transition hover:bg-black"
@@ -365,6 +367,13 @@ export default function SpringReplacementPage() {
               Book Service
             </Link>
           </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService="Garage Door Spring Replacement"
+            title="Send Spring Request"
+            intro="Tell us if the door is heavy, stuck, or the spring snapped so we can follow up quickly."
+          />
         </div>
       </section>
     </main>

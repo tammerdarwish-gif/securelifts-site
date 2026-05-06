@@ -155,7 +155,7 @@ export default async function Page({
 
         <div className="rounded-3xl overflow-hidden border border-slate-200">
           <img
-            src="/broken-garage-door-spring.png"
+            src="/images/approved/spring-closeup-hero.jpg"
             alt="Broken garage door spring"
             className="w-full h-full object-cover"
           />

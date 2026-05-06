@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/broken-garage-door-spring.png",
-        width: 1536,
-        height: 1024,
+        url: "/images/approved/spring-closeup-hero.jpg",
+        width: 1800,
+        height: 1100,
         alt: "Garage door spring replacement in South Florida",
       },
     ],

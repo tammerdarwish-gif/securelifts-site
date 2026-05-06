@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CityServiceConfig } from "../lib/servicePages";
-import { FaPhoneAlt, FaArrowRight } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import QuickLeadForm from "./QuickLeadForm";
+import ApprovedProjectShowcase from "./ApprovedProjectShowcase";
 
  type Props = {
   city: string;
@@ -241,9 +243,18 @@ export default function CityServicePage({ city, nearbyText, config }: Props) {
         </div>
       </section>
 
+      <ApprovedProjectShowcase
+        variant="commercial"
+        eyebrow="Commercial Project Proof"
+        heading={`Real commercial door work near ${city}`}
+        intro="Business customers need to know the company understands downtime, access, and heavy-use door systems. These approved photos show real SecureLifts commercial and hardware work."
+        dark
+      />
+
       {/* CTA */}
-      <section className="py-24 bg-red-600 text-white text-center">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-red-600 px-6 py-24 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
           <h2 className="text-4xl font-black">
             {config.ctaTitle(city)}
           </h2>
@@ -251,7 +262,7 @@ export default function CityServicePage({ city, nearbyText, config }: Props) {
             {config.ctaDescription(city)}
           </p>
 
-          <div className="mt-10 flex justify-center gap-4 flex-wrap">
+          <div className="mt-10 hidden gap-4 sm:flex sm:flex-wrap">
             <a
               href="tel:8668281818"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-bold text-slate-950 shadow-lg"
@@ -267,6 +278,13 @@ export default function CityServicePage({ city, nearbyText, config }: Props) {
               Book Service
             </Link>
           </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService={config.heroTitle(city)}
+            title={`Request Service in ${city}`}
+            intro="Send a quick request with your city and service need. For urgent issues, call directly."
+          />
         </div>
       </section>
 

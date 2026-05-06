@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import type { Metadata } from "next";
+import QuickLeadForm from "../components/QuickLeadForm";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -22,9 +24,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/impact-rated-garage-doors-hero.png",
-        width: 1536,
-        height: 1024,
+        url: "/images/approved/modern-slate-hurricane-card.jpg",
+        width: 1000,
+        height: 720,
         alt: "Hurricane-rated garage door options for South Florida homes",
       },
     ],
@@ -36,25 +38,25 @@ const styleCards = [
     title: "Modern Garage Doors",
     text: "Clean lines, glass options, and upscale finishes for homeowners who want a sharper modern look.",
     href: "/hurricane-garage-doors/modern",
-    image: "/images/reviews/miami-beach-case-study.jpg",
+    image: "/images/approved/two-black-doors-interior-card.jpg",
   },
   {
     title: "Traditional Garage Doors",
     text: "Classic panel styles, practical and premium build paths, and strong hurricane-ready options for many homes.",
     href: "/hurricane-garage-doors/traditional",
-    image: "/images/reviews/coconut-creek-case-study.jpg",
+    image: "/images/approved/traditional-white-install-hero.jpg",
   },
   {
     title: "Carriage House Garage Doors",
     text: "Decorative carriage-style designs with more character, stronger curb appeal, and upgraded visual impact.",
     href: "/hurricane-garage-doors/carriage-house",
-    image: "/images/reviews/coconut-grove-case-study.jpg",
+    image: "/images/approved/carriage-house-premium-card.jpg",
   },
   {
     title: "Custom Garage Doors",
     text: "Higher-end custom directions for homeowners who want a more unique door design and finish outcome.",
     href: "/hurricane-garage-doors/custom",
-    image: "/images/reviews/pinecrest-case-study.jpg",
+    image: "/images/approved/wood-modern-install-card.jpg",
   },
 ];
 
@@ -204,7 +206,7 @@ export default function HurricaneGarageDoorsPage() {
         <section className="relative overflow-hidden bg-slate-950 px-6 py-16 text-white md:py-24">
           <div className="absolute inset-0">
             <Image
-              src="/impact-rated-garage-doors-hero.png"
+              src="/images/approved/modern-slate-hurricane-card.jpg"
               alt="Hurricane-rated garage door installed on a South Florida home"
               fill
               priority
@@ -263,7 +265,7 @@ export default function HurricaneGarageDoorsPage() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
               <div className="relative h-[340px] w-full md:h-[460px]">
                 <Image
-                  src="/images/reviews/miami-beach-case-study.jpg"
+                  src="/images/approved/modern-black-glass-hero.jpg"
                   alt="Hurricane-rated garage door options by SecureLifts"
                   fill
                   className="object-cover"
@@ -273,6 +275,13 @@ export default function HurricaneGarageDoorsPage() {
             </div>
           </div>
         </section>
+
+        <ApprovedProjectShowcase
+          variant="storm"
+          eyebrow="Real Storm-Door Style Options"
+          heading="Hurricane-Rated Can Still Look Premium"
+          intro="South Florida homeowners need protection, but they also care about how the house looks. These approved photos show storm-ready style directions that feel premium instead of generic."
+        />
 
         <section className="px-6 py-16 md:py-20">
           <div className="mx-auto max-w-7xl">
@@ -537,22 +546,23 @@ export default function HurricaneGarageDoorsPage() {
         </section>
 
         <section className="bg-slate-950 px-6 py-16 text-white md:py-20">
-          <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center shadow-2xl md:p-12">
+          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">
               Ready To Compare Hurricane Garage Door Options?
             </p>
             <h2 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
               Call SecureLifts to choose the right impact-rated garage door for your home
             </h2>
-            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-200">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-200">
               We will help you compare design directions, realistic price ranges,
               and upgrade paths without pushing you into the wrong setup.
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="mt-8 hidden flex-col gap-4 sm:flex sm:flex-row">
               <a
                 href={PHONE_HREF}
-                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold text-white transition hover:bg-red-700"
+                className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700"
               >
                 Call {PHONE}
               </a>
@@ -564,6 +574,13 @@ export default function HurricaneGarageDoorsPage() {
                 Book Service
               </Link>
             </div>
+            </div>
+
+            <QuickLeadForm
+              defaultService="Hurricane-Rated Garage Door Quote"
+              title="Request A Storm-Door Quote"
+              intro="Tell us your city and what kind of garage door upgrade you are considering."
+            />
           </div>
         </section>
       </main>

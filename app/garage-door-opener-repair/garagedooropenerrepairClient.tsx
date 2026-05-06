@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import QuickLeadForm from "../components/QuickLeadForm";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -123,9 +125,9 @@ export default function GarageDoorOpenerRepairPage() {
             className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur"
           >
             <div className="relative h-64 overflow-hidden rounded-2xl bg-slate-900 md:h-80">
-              <Image
-                src="/wall-mount-jackshaft-openers.png"
-                alt="Wall mount garage door opener upgrade"
+            <Image
+                src="/images/approved/technician-opener-service-card.jpg"
+                alt="SecureLifts technician servicing a garage door opener"
                 fill
                 className="object-cover"
               />
@@ -145,6 +147,13 @@ export default function GarageDoorOpenerRepairPage() {
           </motion.div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Real Service Proof"
+        heading="Opener problems are diagnosed with the full door system"
+        intro="A garage door opener issue is often connected to balance, hardware, safety sensors, or door movement. These approved photos help customers see real SecureLifts service work before booking."
+      />
 
       {/* COMMON PROBLEMS */}
       <section className="py-28 border-t border-slate-100">
@@ -270,13 +279,14 @@ export default function GarageDoorOpenerRepairPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 bg-red-600 text-white">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+      <section className="bg-red-600 px-6 py-28 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
           <h2 className="text-4xl font-black">
             Need garage door opener repair?
           </h2>
 
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          <div className="mt-8 hidden gap-4 sm:flex sm:flex-wrap">
             <a
               href="tel:8668281818"
               className="rounded-xl bg-slate-950 px-8 py-4 font-bold !text-white"
@@ -291,6 +301,13 @@ export default function GarageDoorOpenerRepairPage() {
               Book Service
             </Link>
           </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService="Garage Door Opener Repair"
+            title="Send Opener Request"
+            intro="Tell us if the opener is clicking, reversing, not responding, or making noise."
+          />
         </div>
       </section>
     </main>

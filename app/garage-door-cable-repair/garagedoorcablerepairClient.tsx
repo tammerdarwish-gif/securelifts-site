@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -40,7 +41,7 @@ export default function GarageDoorCableRepairPage() {
             alt="Broken garage door cable repair"
             fill
             priority
-            className="object-cover opacity-40"
+            className="object-cover object-center opacity-40"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/86 to-slate-950/35" />
@@ -119,7 +120,7 @@ export default function GarageDoorCableRepairPage() {
           {/* RIGHT IMAGE */}
           <div className="relative">
             <Image
-              src="/broken-garage-door-cable.JPG"
+              src="/images/approved/cable-repair-full-card.jpg"
               alt="Broken garage door cable example"
               width={900}
               height={700}
@@ -133,6 +134,13 @@ export default function GarageDoorCableRepairPage() {
 
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Real Repair Proof"
+        heading="Cable problems are serious balance problems"
+        intro="These approved SecureLifts repair photos show real damage, real technician work, and finished repair proof, which helps customers understand why fast professional service matters."
+      />
 
       {/* WHY */}
       <section className="border-t border-slate-100 py-28">

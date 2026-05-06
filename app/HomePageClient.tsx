@@ -2,6 +2,8 @@
 
 import ServiceSchema from "./components/ServiceSchema";
 import InternalLinkCards from "./components/InternalLinkCards";
+import QuickLeadForm from "./components/QuickLeadForm";
+import ApprovedProjectShowcase from "./components/ApprovedProjectShowcase";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -18,8 +20,6 @@ import {
 import {
   ctaHeroPrimary,
   ctaHeroSecondary,
-  ctaSectionPrimary,
-  ctaSectionSecondary,
 } from "./components/ctaStyles";
 
 export default function HomePageClient() {
@@ -37,7 +37,7 @@ export default function HomePageClient() {
       text: "Same-day help when the door will not open, the spring broke, or the system is too heavy to lift safely.",
       icon: <FaBolt className="text-3xl" />,
       href: "/broken-spring-repair",
-      image: "/broken-garage-door-spring.png",
+      image: "/images/approved/spring-closeup-card.jpg",
       alt: "Broken garage door spring repair",
     },
     {
@@ -45,7 +45,7 @@ export default function HomePageClient() {
       text: "Professional installation of premium garage doors that improve curb appeal, security, and long-term performance.",
       icon: <FaShieldAlt className="text-3xl" />,
       href: "/garage-door-installation",
-      image: "/mew-garage-door-installation.jpg",
+      image: "/images/approved/wood-modern-install-card.jpg",
       alt: "New garage door installation in South Florida",
     },
     {
@@ -53,7 +53,7 @@ export default function HomePageClient() {
       text: "Impact, wind-rated, and Miami-Dade approved garage door options for South Florida storm protection.",
       icon: <FaShieldAlt className="text-3xl" />,
       href: "/hurricane-garage-doors",
-      image: "/hurricane-garage-doors-hero.png",
+      image: "/images/approved/modern-slate-hurricane-card.jpg",
       alt: "Hurricane rated garage door installation",
     },
     {
@@ -69,7 +69,7 @@ export default function HomePageClient() {
       text: "Roll-up doors, warehouse doors, dock doors, and commercial garage door service for South Florida businesses.",
       icon: <FaTools className="text-3xl" />,
       href: "/commercial-garage-door-services",
-      image: "/commercial-warehouse-service.png",
+      image: "/images/approved/commercial-rollup-card.jpg",
       alt: "Commercial garage door service team",
     },
   ];
@@ -423,6 +423,13 @@ export default function HomePageClient() {
         </div>
       </section>
 
+      <ApprovedProjectShowcase
+        variant="mixed"
+        eyebrow="Real SecureLifts Projects"
+        heading="Real Photos Make It Easier To Trust The Company"
+        intro="These are approved SecureLifts project photos from South Florida, selected to show clean installs, real service presence, and premium garage door options before a customer ever picks up the phone."
+      />
+
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
@@ -573,24 +580,39 @@ export default function HomePageClient() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-red-950/70" />
 
-        <div className="relative mx-auto max-w-5xl text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            Need Garage Door Service Today?
-          </h2>
+        <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-400">
+              Ready For Service
+            </p>
+            <h2 className="text-3xl font-bold md:text-5xl">
+              Need Garage Door Service Today?
+            </h2>
 
-          <p className="mx-auto max-w-2xl text-lg leading-8 text-white/90">
-            Call now and get fast, professional service from SecureLifts.
-          </p>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">
+              Call now for the fastest help, or send a quick request and
+              SecureLifts will follow up to confirm the next step.
+            </p>
 
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a href="tel:18668281818" className={ctaSectionPrimary}>
-              Call (866) 828-1818
-            </a>
-
-            <a href="#services" className={ctaSectionSecondary}>
-              View Services
-            </a>
+            <div className="mt-8 grid gap-3 text-sm font-semibold text-white/90">
+              {[
+                "Broken springs, stuck doors, opener failures, and storm-door quotes",
+                "Service across Miami-Dade, Broward, and Palm Beach",
+                "Clear communication before the visit is booked",
+              ].map((item) => (
+                <div key={item} className="flex gap-3">
+                  <FaCheckCircle className="mt-1 shrink-0 text-red-400" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <QuickLeadForm
+            defaultService="Garage Door Repair"
+            title="Request Fast Service"
+            intro="Tell us what you need and the city. For urgent problems, call directly."
+          />
         </div>
       </section>
     </main>

@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/broken-garage-door-cable.JPG",
-        width: 1536,
-        height: 1024,
+        url: "/images/approved/cable-repair-full-card.jpg",
+        width: 1000,
+        height: 720,
         alt: "Broken garage door cable repair in South Florida",
       },
     ],

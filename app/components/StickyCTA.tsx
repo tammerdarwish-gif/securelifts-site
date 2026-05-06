@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Phone, CalendarCheck } from "lucide-react";
 
 export default function StickyCTA() {
   const pathname = usePathname();
@@ -16,16 +17,18 @@ export default function StickyCTA() {
         <div className="grid grid-cols-2 gap-2">
           <a
             href="tel:18668281818"
-            className="inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-red-700"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-red-700"
           >
+            <Phone className="h-4 w-4" />
             Call Now
           </a>
 
           <Link
             href="/book-service"
-            className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-gray-800"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold !text-white transition hover:bg-gray-800"
           >
-            Book Service
+            <CalendarCheck className="h-4 w-4" />
+            Request
           </Link>
         </div>
       </div>

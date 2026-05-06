@@ -185,7 +185,7 @@ export default async function Page({
           {/* RIGHT IMAGE */}
           <div className="w-full flex justify-center">
             <img
-              src="/offtrack-worse.jpg"
+              src="/images/approved/offtrack-full-card.jpg"
               alt="Off-track garage door example"
               className="w-full max-h-[520px] object-contain rounded-2xl"
             />

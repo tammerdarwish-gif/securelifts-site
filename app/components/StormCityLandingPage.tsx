@@ -7,6 +7,8 @@ import InternalLinkCards from "./InternalLinkCards";
 import Breadcrumbs from "./Breadcrumbs";
 import BreadcrumbSchema from "./BreadcrumbSchema";
 import ReviewTrustSection from "./ReviewTrustSection";
+import QuickLeadForm from "./QuickLeadForm";
+import ApprovedProjectShowcase from "./ApprovedProjectShowcase";
 
 import {
   stormCityConfigs,
@@ -294,6 +296,13 @@ export default function StormCityLandingPage({
         items={config.internalLinks}
       />
 
+      <ApprovedProjectShowcase
+        variant="storm"
+        eyebrow="Real Storm-Door Project Photos"
+        heading={`Storm-rated garage door style options for ${city}`}
+        intro={`Homeowners in ${city} need protection, but the door still has to look right on the home. These approved photos show real style directions SecureLifts can use to guide the quote conversation.`}
+      />
+
       <section className="bg-slate-50 px-6 py-20">
         <div className="mx-auto max-w-5xl">
           <SectionIntro
@@ -409,24 +418,34 @@ export default function StormCityLandingPage({
         </div>
       </section>
 
-      <section className="bg-red-600 px-6 py-20 text-center text-white">
-        <h2 className="text-3xl font-bold md:text-5xl">
-          {config.finalCtaTitle(city)}
-        </h2>
+      <section className="bg-red-600 px-6 py-20 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
+            <h2 className="text-3xl font-bold md:text-5xl">
+              {config.finalCtaTitle(city)}
+            </h2>
 
-        <p className="mt-6 text-lg text-white/90">
-          {config.finalCtaText(city)}
-        </p>
+            <p className="mt-6 text-lg text-white/90">
+              {config.finalCtaText(city)}
+            </p>
 
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="tel:18668281818"
-            className="rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white transition hover:bg-black"
-          >
-            Call (866) 828-1818
-          </a>
+            <div className="mt-8 hidden flex-col gap-4 sm:flex sm:flex-row">
+              <a
+                href="tel:18668281818"
+                className="rounded-xl bg-slate-900 px-8 py-4 font-semibold !text-white transition hover:bg-black"
+              >
+                Call (866) 828-1818
+              </a>
 
-          <BookServiceButton className="rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition hover:bg-slate-100" />
+              <BookServiceButton className="rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition hover:bg-slate-100" />
+            </div>
+          </div>
+
+          <QuickLeadForm
+            defaultService={config.categoryName}
+            title={`Request ${config.categoryName} Help`}
+            intro={`Tell us your city and what kind of storm-rated garage door help you need in ${city}.`}
+          />
         </div>
       </section>
     </main>

@@ -160,7 +160,7 @@ export default function GarageDoorOffTrackRepairPage() {
 
           <div className="relative">
             <img
-              src="/offtrack-worse.jpg"
+              src="/images/approved/offtrack-full-card.jpg"
               alt="Garage door off track problem example"
               className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
             />
