@@ -191,10 +191,10 @@ export default function AboutPage() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
               <div className="relative h-[360px] w-full md:h-[460px]">
                 <Image
-                  src="/images/about/about-securelifts-team.jpg"
+                  src="/images/approved/service-van-at-door-card.jpg"
                   alt="SecureLifts garage door team"
                   fill
-                  className="object-cover"
+                  className="bg-slate-100 object-contain"
                   priority
                 />
               </div>
@@ -271,10 +271,10 @@ export default function AboutPage() {
               <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
                 <div className="relative h-[340px] w-full md:h-[460px]">
                   <Image
-                    src="/images/about/about-garage-door-service.jpg"
+                    src="/images/approved/technician-door-service-card.jpg"
                     alt="SecureLifts garage door service in South Florida"
                     fill
-                    className="object-cover"
+                    className="bg-slate-100 object-contain"
                   />
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -158,10 +159,12 @@ export default async function Page({
           {/* RIGHT IMAGE */}
           <div className="flex justify-end">
             <div className="overflow-hidden rounded-3xl border shadow-lg max-w-[500px]">
-              <img
-                src="/mew-garage-door-installation.jpg"
-                alt="Garage door installation"
-                className="w-full h-[250px] object-cover object-center"
+              <Image
+                src="/images/approved/two-black-doors-interior-card.jpg"
+                width={900}
+                height={650}
+                alt="Premium garage door installation by SecureLifts"
+                className="h-[250px] w-full bg-slate-100 object-contain"
               />
             </div>
           </div>

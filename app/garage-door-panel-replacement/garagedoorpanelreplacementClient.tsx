@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -150,11 +151,11 @@ export default function GarageDoorPanelReplacementPage() {
     {/* RIGHT IMAGE */}
     <div className="relative">
       <Image
-        src="/garage-door-panel-replacement.jpg"
-        alt="Garage door panel damage requiring replacement"
+        src="/images/approved/damaged-panel-proof-card.jpg"
+        alt="Real damaged garage door panel inspected by SecureLifts"
         width={900}
         height={700}
-        className="h-[420px] w-full rounded-3xl object-cover shadow-xl"
+        className="h-[420px] w-full rounded-3xl bg-slate-100 object-contain shadow-xl"
       />
 
       {/* OVERLAY LABEL */}
@@ -164,6 +165,13 @@ export default function GarageDoorPanelReplacementPage() {
     </div>
   </div>
 </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Real Damage Proof"
+        heading="Panel replacement starts with a real repair evaluation"
+        intro="Approved SecureLifts photos help customers see real damaged doors, finished repairs, and technician work before they decide whether a panel replacement or full door replacement makes the most sense."
+      />
 
       {/* SIGNS */}
       <section className="border-t border-slate-100 py-28">

@@ -13,6 +13,7 @@ type IconCardItem = {
   icon: string;
   title: string;
   text: string;
+  href?: string;
 };
 
 type ProcessStep = {
@@ -95,16 +96,22 @@ function IconCardGrid({ items, columns = "md:grid-cols-2 xl:grid-cols-4" }: { it
   return (
     <div className={`grid gap-6 ${columns}`}>
       {items.map((item) => (
-        <div
+        <Link
           key={item.title}
-          className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+          href={item.href ?? "/book-service"}
+          className="rounded-2xl border border-slate-200 bg-white p-7 !text-slate-900 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
         >
           <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">
             {item.icon}
           </div>
           <h3 className="mb-3 text-xl font-semibold text-slate-900">{item.title}</h3>
           <p className="leading-7 text-slate-700">{item.text}</p>
-        </div>
+          {item.href ? (
+            <span className="mt-5 inline-block text-sm font-bold text-red-600">
+              View designs →
+            </span>
+          ) : null}
+        </Link>
       ))}
     </div>
   );
@@ -215,21 +222,25 @@ export default function MiamiDadeRatedGarageDoorsPage() {
       icon: "🏡",
       title: "Traditional Miami-Dade Rated Doors",
       text: "Classic raised-panel looks with stronger storm-ready construction for homes that need protection without losing timeless curb appeal.",
+      href: "/hurricane-garage-doors/traditional",
     },
     {
       icon: "⬛",
       title: "Modern Miami-Dade Rated Doors",
       text: "Contemporary lines, cleaner profiles, and premium finishes built into stronger South Florida-ready garage door systems.",
+      href: "/hurricane-garage-doors/modern",
     },
     {
       icon: "🚪",
       title: "Carriage House Miami-Dade Rated Doors",
       text: "Decorative carriage-style looks for homeowners who want a premium architectural appearance with real storm-focused strength.",
+      href: "/hurricane-garage-doors/carriage-house",
     },
     {
       icon: "✨",
       title: "Custom Miami-Dade Rated Doors",
       text: "Tailored solutions for homeowners who want a specific look, window design, finish, or upgraded exterior statement.",
+      href: "/hurricane-garage-doors/custom",
     },
   ];
 
@@ -340,7 +351,7 @@ export default function MiamiDadeRatedGarageDoorsPage() {
 
       <section className="relative min-h-[820px] overflow-hidden">
         <Image
-          src="/miami-dade-rated-garage-doors-hero.png"
+          src="/images/approved/two-black-doors-interior-hero.jpg"
           alt="Miami-Dade rated garage doors installed by SecureLifts in South Florida with premium residential design and storm-ready protection"
           fill
           priority

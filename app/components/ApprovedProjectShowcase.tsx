@@ -65,13 +65,19 @@ const projectsByVariant: Record<ShowcaseVariant, Project[]> = {
       alt: "Garage door hardware and spring system inspection",
     },
     {
-      title: "Real Repair Situation",
-      text: "When a door becomes unsafe or will not move correctly, SecureLifts focuses on restoring safe operation first.",
-      image: "/images/approved/damaged-panel-proof-card.jpg",
-      alt: "Damaged garage door panel and hardware repair proof",
+      title: "Technician Spring Service",
+      text: "Real technician work helps customers see that spring service should include the full door system, not just one part.",
+      image: "/images/approved/technician-door-service-card.jpg",
+      alt: "SecureLifts technician checking garage door hardware during spring service",
     },
   ],
   storm: [
+    {
+      title: "Clean Traditional Option",
+      text: "A stronger classic direction for homeowners who want a familiar look with better performance.",
+      image: "/images/approved/traditional-white-install-hero.jpg",
+      alt: "Traditional white garage door on South Florida home",
+    },
     {
       title: "Modern Storm-Ready Style",
       text: "A premium modern look that fits South Florida homes preparing for stronger weather.",
@@ -83,12 +89,6 @@ const projectsByVariant: Record<ShowcaseVariant, Project[]> = {
       text: "A high-end carriage-house style for homeowners who want protection without losing design.",
       image: "/images/approved/carriage-house-premium-card.jpg",
       alt: "Premium carriage-house garage doors in South Florida",
-    },
-    {
-      title: "Clean Traditional Option",
-      text: "A stronger classic direction for homeowners who want a familiar look with better performance.",
-      image: "/images/approved/traditional-white-install-hero.jpg",
-      alt: "Traditional white garage door on South Florida home",
     },
   ],
   commercial: [
@@ -171,13 +171,13 @@ export default function ApprovedProjectShowcase({
               key={project.title}
               className={dark ? "overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-sm" : "overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"}
             >
-              <div className="relative h-64 w-full overflow-hidden bg-slate-100">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                 <Image
                   src={project.image}
                   alt={project.alt}
                   fill
                   sizes="(min-width: 1024px) 33vw, 100vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <div className="p-6">

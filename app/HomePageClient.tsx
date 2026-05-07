@@ -29,7 +29,7 @@ export default function HomePageClient() {
       text: "Fast diagnosis and repair for broken doors, damaged panels, off-track systems, noisy operation, and sudden breakdowns.",
       icon: <FaTools className="text-3xl" />,
       href: "/garage-door-repair",
-      image: "/garage-door-repair-v2hero.jpg",
+      image: "/images/approved/red-hanging-door-far-card.jpg",
       alt: "Garage door repair service in South Florida",
     },
     {
@@ -61,7 +61,7 @@ export default function HomePageClient() {
       text: "Troubleshooting and replacement for noisy openers, bad remotes, wall controls, sensors, and smart opener issues.",
       icon: <FaTools className="text-3xl" />,
       href: "/garage-door-opener-repair",
-      image: "/belt-drive-openers.png",
+      image: "/images/approved/technician-opener-service-card.jpg",
       alt: "Garage door opener repair and replacement",
     },
     {
@@ -318,12 +318,12 @@ export default function HomePageClient() {
               transition={{ delay: i * 0.12, duration: 0.5 }}
               className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="relative h-56 overflow-hidden bg-slate-100">
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                 <Image
                   src={service.image}
                   alt={service.alt}
                   fill
-                  className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                  className="object-contain transition duration-300 group-hover:scale-[1.03]"
                 />
               </div>
 
@@ -381,10 +381,10 @@ export default function HomePageClient() {
 
           <div className="relative h-[420px] overflow-hidden rounded-3xl border border-gray-200 shadow-xl">
             <Image
-              src="/images/about/about-garage-door-service.jpg"
+              src="/images/approved/technician-door-service-card.jpg"
               alt="SecureLifts technician servicing a residential garage door"
               fill
-              className="object-cover"
+              className="bg-slate-100 object-contain"
             />
           </div>
         </div>
@@ -571,12 +571,12 @@ export default function HomePageClient() {
 
       <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white">
         <div className="absolute inset-0">
-          <Image
-            src="/emergency-garage-door-repair.JPG"
-            alt="Emergency garage door repair service"
-            fill
-            className="object-cover opacity-25"
-          />
+            <Image
+              src="/images/approved/service-van-at-door-card.jpg"
+              alt="Emergency garage door repair service"
+              fill
+              className="object-cover opacity-25"
+            />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-red-950/70" />
 

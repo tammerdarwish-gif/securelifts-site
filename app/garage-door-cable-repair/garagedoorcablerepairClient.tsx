@@ -37,8 +37,8 @@ export default function GarageDoorCableRepairPage() {
       <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
         <div className="absolute inset-0">
           <Image
-            src="/broken-garage-door-cable.JPG"
-            alt="Broken garage door cable repair"
+            src="/images/approved/red-hanging-door-far-card.jpg"
+            alt="Crooked garage door caused by cable and hardware failure"
             fill
             priority
             className="object-cover object-center opacity-40"
@@ -120,11 +120,11 @@ export default function GarageDoorCableRepairPage() {
           {/* RIGHT IMAGE */}
           <div className="relative">
             <Image
-              src="/images/approved/cable-repair-full-card.jpg"
-              alt="Broken garage door cable example"
+              src="/images/approved/interior-door-hardware-card.jpg"
+              alt="Garage door cable and hardware inspection"
               width={900}
               height={700}
-              className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
+              className="h-[420px] w-full rounded-3xl bg-slate-100 object-contain shadow-lg"
             />
 
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-md">

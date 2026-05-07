@@ -182,7 +182,7 @@ export default function ImpactRatedGarageDoorsPage() {
       {/* HERO */}
       <section className="relative min-h-[820px] overflow-hidden">
         <Image
-          src="/impact-rated-garage-doors-hero.png"
+          src="/images/approved/modern-slate-hurricane-card.jpg"
           alt="Impact-rated garage doors installed by SecureLifts in South Florida"
           fill
           priority
@@ -513,10 +513,10 @@ export default function ImpactRatedGarageDoorsPage() {
 
           <div className="relative h-96 overflow-hidden rounded-3xl border border-slate-200 shadow-lg lg:h-full lg:min-h-[520px]">
             <Image
-              src="/impact-rated-installation.jpg"
+              src="/images/approved/traditional-white-install-hero.jpg"
               alt="SecureLifts technician installing impact-rated garage door"
               fill
-              className="object-cover"
+              className="bg-slate-100 object-contain"
             />
           </div>
         </div>

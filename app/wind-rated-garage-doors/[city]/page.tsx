@@ -209,21 +209,25 @@ export default async function WindRatedGarageDoorsCityPage({
       icon: "🏡",
       title: "Traditional Wind-Rated Garage Doors",
       text: `Classic raised-panel looks with upgraded reinforcement for ${cityName} homeowners who want storm-focused performance and timeless curb appeal.`,
+      href: "/hurricane-garage-doors/traditional",
     },
     {
       icon: "⬛",
       title: "Modern Wind-Rated Garage Doors",
       text: "Contemporary designs with clean lines, stronger structure, glass options, and a more architectural look.",
+      href: "/hurricane-garage-doors/modern",
     },
     {
       icon: "🚪",
       title: "Carriage House Wind-Rated Garage Doors",
       text: "Decorative carriage-house style with stronger storm-ready construction for homeowners who want appearance and performance together.",
+      href: "/hurricane-garage-doors/carriage-house",
     },
     {
       icon: "✨",
       title: "Custom Wind-Rated Garage Doors",
       text: "Tailored options for homeowners who want a specific look, finish, window layout, and wind-performance direction.",
+      href: "/hurricane-garage-doors/custom",
     },
   ];
 
@@ -314,7 +318,7 @@ export default async function WindRatedGarageDoorsCityPage({
 
       <section className="relative min-h-[820px] overflow-hidden">
         <Image
-          src="/wind-rated-garage-doors-hero.png"
+          src="/images/approved/modern-slate-hurricane-card.jpg"
           alt={`Wind-rated garage doors installed by SecureLifts in ${cityName}, Florida for stronger storm pressure resistance`}
           fill
           priority
@@ -397,11 +401,12 @@ export default async function WindRatedGarageDoorsCityPage({
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {styleOptions.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+              <Link key={item.title} href={item.href} className="rounded-2xl border border-gray-200 bg-white p-7 !text-gray-900 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">{item.icon}</div>
                 <h3 className="mb-3 text-2xl font-semibold text-gray-900">{item.title}</h3>
                 <p className="leading-7 text-gray-700">{item.text}</p>
-              </div>
+                <span className="mt-5 inline-block text-sm font-bold text-red-600">View designs →</span>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -459,10 +460,12 @@ export default async function CityPage({
           </div>
 
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
-            <img
-              src="/garage-door-maintenance-plans.png"
+            <Image
+              src="/images/approved/technician-door-service-card.jpg"
+              width={900}
+              height={650}
               alt="SecureLifts garage door maintenance plan options"
-              className="h-full w-full object-cover"
+              className="h-full w-full bg-slate-100 object-contain"
             />
           </div>
         </div>

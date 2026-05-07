@@ -1,6 +1,7 @@
 
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaPhoneAlt, FaCheckCircle, FaStar, FaTools, FaShieldAlt } from "react-icons/fa";
@@ -96,10 +97,12 @@ export default async function Page({
           </div>
 
           <div className="flex justify-center">
-            <img
-              src="/garage-door-rollers.jpg"
-              className="w-full max-h-[500px] object-contain rounded-2xl"
-              alt="Garage door rollers replacement"
+            <Image
+              src="/images/approved/interior-door-hardware-card.jpg"
+              width={900}
+              height={650}
+              className="max-h-[500px] w-full rounded-2xl bg-slate-100 object-contain"
+              alt="Garage door rollers and track hardware inspection by SecureLifts"
             />
           </div>
         </div>

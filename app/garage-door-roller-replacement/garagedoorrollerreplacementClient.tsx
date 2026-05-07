@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
   FaCheckCircle,
@@ -73,8 +74,8 @@ export default function GarageDoorRollerReplacementPage() {
       <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
         <div className="absolute inset-0">
           <Image
-            src="/garage-door-roller-replacement.jpg"
-            alt="Garage door roller replacement service"
+            src="/images/approved/interior-door-hardware-card.jpg"
+            alt="Garage door rollers and hardware inspection by SecureLifts"
             fill
             priority
             className="object-cover opacity-40"
@@ -169,11 +170,11 @@ export default function GarageDoorRollerReplacementPage() {
 
           <div className="relative">
             <Image
-              src="/garage-door-roller-replacement.jpg"
-              alt="Garage door roller replacement close-up"
+              src="/images/approved/interior-door-hardware-card.jpg"
+              alt="Garage door roller and track hardware inspection"
               width={900}
               height={700}
-              className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
+              className="h-[420px] w-full rounded-3xl bg-slate-100 object-contain shadow-lg"
             />
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-md">
               Worn Roller Issue
@@ -181,6 +182,13 @@ export default function GarageDoorRollerReplacementPage() {
           </div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Real Repair Proof"
+        heading="Roller problems usually show up with other hardware wear"
+        intro="These approved SecureLifts repair photos show the kind of real garage door hardware, balance, and movement issues that should be checked when rollers are noisy, worn, or rough."
+      />
 
       {/* SERVICES */}
       <section className="border-t border-slate-100 bg-slate-50 py-28">

@@ -143,10 +143,10 @@ export default function SpringReplacementPage() {
           >
             <div className="relative h-64 overflow-hidden rounded-2xl bg-slate-900 md:h-80">
               <Image
-                src="/bad rollers with broken spring.JPG"
+                src="/images/approved/interior-door-hardware-card.jpg"
                 alt="Broken spring and garage door hardware inspection"
                 fill
-                className="object-cover"
+                className="bg-slate-100 object-contain"
               />
             </div>
             <div className="mt-5 rounded-2xl bg-white p-5 text-slate-950">

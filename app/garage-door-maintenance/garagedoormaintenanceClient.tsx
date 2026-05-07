@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaClock,
@@ -72,8 +73,18 @@ export default function GarageDoorMaintenancePage() {
     <main className="min-h-screen bg-white text-slate-900">
      
       {/* HERO */}
-      <section className="bg-slate-950 py-32 text-white">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/approved/interior-door-hardware-card.jpg"
+            alt="Garage door hardware maintenance inspection"
+            fill
+            priority
+            className="object-cover opacity-25"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/50" />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1fr_0.78fr]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,8 +137,40 @@ export default function GarageDoorMaintenancePage() {
               </span>
             </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl"
+          >
+            <div className="relative aspect-[4/3] bg-slate-100">
+              <Image
+                src="/images/approved/technician-door-service-card.jpg"
+                alt="SecureLifts technician performing garage door maintenance"
+                fill
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="object-contain"
+              />
+            </div>
+            <div className="bg-slate-950/92 p-6">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-300">
+                Maintenance Visit
+              </p>
+              <p className="mt-3 text-lg font-semibold text-white">
+                Real tune-ups check springs, rollers, cables, hinges, opener force, and door balance.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      <ApprovedProjectShowcase
+        variant="repair"
+        eyebrow="Maintenance Proof"
+        heading="A tune-up should look at the whole garage door system"
+        intro="These approved SecureLifts photos show real doors, hardware, and technician work, which helps customers understand that maintenance is a complete system check, not a quick spray-and-go visit."
+      />
 
       {/* SIGNS */}
       <section className="border-t border-slate-100 py-28">
