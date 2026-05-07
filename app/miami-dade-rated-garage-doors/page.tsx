@@ -95,24 +95,46 @@ function TrustStrip() {
 function IconCardGrid({ items, columns = "md:grid-cols-2 xl:grid-cols-4" }: { items: IconCardItem[]; columns?: string }) {
   return (
     <div className={`grid gap-6 ${columns}`}>
-      {items.map((item) => (
-        <Link
-          key={item.title}
-          href={item.href ?? "/book-service"}
-          className="rounded-2xl border border-slate-200 bg-white p-7 !text-slate-900 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
-        >
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">
-            {item.icon}
-          </div>
-          <h3 className="mb-3 text-xl font-semibold text-slate-900">{item.title}</h3>
-          <p className="leading-7 text-slate-700">{item.text}</p>
-          {item.href ? (
+      {items.map((item) => {
+        const cardContent = (
+          <>
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">
+                {item.icon}
+              </div>
+              <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-red-600">
+                View Designs
+              </span>
+            </div>
+            <h3 className="mb-3 text-xl font-semibold text-slate-900">{item.title}</h3>
+            <p className="leading-7 text-slate-700">{item.text}</p>
             <span className="mt-5 inline-block text-sm font-bold text-red-600">
-              View designs →
+              Open design page →
             </span>
-          ) : null}
-        </Link>
-      ))}
+          </>
+        );
+
+        return item.href ? (
+          <Link
+            key={item.title}
+            href={item.href}
+            className="rounded-2xl border border-slate-200 bg-white p-7 !text-slate-900 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+          >
+            {cardContent}
+          </Link>
+        ) : (
+          <div
+            key={item.title}
+            className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+          >
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">
+              {item.icon}
+            </div>
+            <h3 className="mb-3 text-xl font-semibold text-slate-900">{item.title}</h3>
+            <p className="leading-7 text-slate-700">{item.text}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }

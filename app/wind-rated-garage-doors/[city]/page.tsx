@@ -402,10 +402,13 @@ export default async function WindRatedGarageDoorsCityPage({
           <div className="grid gap-6 md:grid-cols-2">
             {styleOptions.map((item) => (
               <Link key={item.title} href={item.href} className="rounded-2xl border border-gray-200 bg-white p-7 !text-gray-900 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">{item.icon}</div>
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl">{item.icon}</div>
+                  <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-red-600">View Designs</span>
+                </div>
                 <h3 className="mb-3 text-2xl font-semibold text-gray-900">{item.title}</h3>
                 <p className="leading-7 text-gray-700">{item.text}</p>
-                <span className="mt-5 inline-block text-sm font-bold text-red-600">View designs →</span>
+                <span className="mt-5 inline-block text-sm font-bold text-red-600">Open design page →</span>
               </Link>
             ))}
           </div>
