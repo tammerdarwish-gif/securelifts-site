@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://securelifts.com"),
   title: "SecureLifts",
   description: "SecureLifts garage door services in South Florida",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
+  },
 };
 
 export default function RootLayout({
