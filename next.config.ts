@@ -1,8 +1,99 @@
 import type { NextConfig } from "next";
 
+const legacyRedirects = [
+  {
+    source: "/belt-drive-garage-door-openers",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/liftmaster-8365-267-garage-door-opener",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/extreme-300-series",
+    destination: "/hurricane-garage-doors/modern/modern-steel-with-windows",
+  },
+  {
+    source: "/encore-en200",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/chain-drive-garage-door-openers",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/liftmaster-84505r-belt-drive-opener",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/garage-doors",
+    destination: "/garage-door",
+  },
+  {
+    source: "/liftmaster-8160w-garage-door-opener",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/avenue-garage-door",
+    destination: "/hurricane-garage-doors/modern",
+  },
+  {
+    source: "/liftmaster-85870-ac-chain-drive-w-fi-garage-door-opener",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/garage-door-repair-in-palm-beach",
+    destination: "/garage-door-repair/west-palm-beach",
+  },
+  {
+    source: "/mywood-garage-door",
+    destination: "/hurricane-garage-doors/modern/modern-steel-with-windows",
+  },
+  {
+    source: "/garage-door-repair-in-atlantis",
+    destination: "/garage-door-repair/west-palm-beach",
+  },
+  {
+    source: "/architectural-series-aluminum",
+    destination: "/hurricane-garage-doors/modern/full-view-aluminum-glass",
+  },
+  {
+    source: "/miami",
+    destination: "/garage-door-repair/miami",
+  },
+  {
+    source: "/the-boulevard-garage-door",
+    destination: "/hurricane-garage-doors/modern",
+  },
+  {
+    source: "/alumaview-series",
+    destination: "/hurricane-garage-doors/modern/full-view-aluminum-glass",
+  },
+  {
+    source: "/shop",
+    destination: "/garage-door-shop",
+  },
+  {
+    source: "/liftmaster-98022-garage-door-opener",
+    destination: "/garage-door-opener",
+  },
+].flatMap(({ source, destination }) => [
+  {
+    source,
+    destination,
+    permanent: true,
+  },
+  {
+    source: `${source}/`,
+    destination,
+    permanent: true,
+  },
+]);
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      ...legacyRedirects,
       {
         source: "/about-us",
         destination: "/about",

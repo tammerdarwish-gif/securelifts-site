@@ -130,10 +130,6 @@ const constructionCards = [
     text: "A clean steel door direction for budget-conscious modern upgrades.",
   },
   {
-    title: "2-Layer Insulated",
-    text: "Steel plus insulation for better comfort and smoother daily operation.",
-  },
-  {
     title: "3-Layer Premium",
     text: "Steel, insulation, and interior steel backing for stronger feel and quieter use.",
   },
