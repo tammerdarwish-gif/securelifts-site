@@ -26,45 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-const buildLevels = [
-  {
-    title: "Value-Focused Modern",
-    subtitle: "Clean Entry Point",
-    highlight: "Best for practical modern upgrades",
-    range: "$4,000 – $8,000+",
-    text: "A strong starting point for a cleaner modern look without moving into the highest-end full-glass or custom configurations.",
-    bullets: [
-      "Modern steel and clean-line design paths",
-      "Stronger visual upgrade than standard panel doors",
-      "Good fit when you want a modern upgrade with controlled cost",
-    ],
-  },
-  {
-    title: "Insulated Modern",
-    subtitle: "Most Popular",
-    highlight: "Best balance of look and performance",
-    range: "$8,000 – $14,000+",
-    text: "A balanced option for a sharper architectural look, stronger comfort, quieter operation, and a more upgraded overall system.",
-    bullets: [
-      "Better comfort and quieter operation",
-      "Stronger frame, finish, and overall feel",
-      "More attractive fit for daily-use garages and higher-end homes",
-    ],
-  },
-  {
-    title: "Premium Full-View & Custom Modern",
-    subtitle: "High-End Finish",
-    highlight: "Best for statement curb appeal",
-    range: "$14,000 – $20,000+",
-    text: "A higher-end path for premium full-view glass, custom layouts, upscale materials, and stronger architectural impact.",
-    bullets: [
-      "Full-view glass and premium frame directions",
-      "Higher-end custom appearance and finish",
-      "Best for luxury homes and strong visual impact",
-    ],
-  },
-];
-
 const designOptions = [
   {
     title: "Full-View Glass",
@@ -123,20 +84,6 @@ const compareStyles = [
     text: "Higher-end custom hurricane garage door directions built around the exact look and finish your home needs.",
     href: "/hurricane-garage-doors/custom",
   },
-];
-
-const standardFinishDirections = [
-  "Black aluminum frame",
-  "Bronze frame options",
-  "Dark modern finishes",
-  "Clean neutral frame directions",
-];
-
-const premiumFinishDirections = [
-  "Frosted glass combinations",
-  "Tinted glass combinations",
-  "Premium frame finish upgrades",
-  "Custom modern layout directions",
 ];
 
 const fullViewFinishSwatches = [
@@ -372,6 +319,7 @@ export default function ModernHurricaneGarageDoorsPage() {
           title: "Full-View Aluminum & Glass",
           image: "/images/doors/full-view-modern.jpg",
           badge: "Premium Modern Option",
+          href: "/hurricane-garage-doors/modern/full-view-aluminum-glass",
           text: "Best for luxury homes, contemporary architecture, and a stronger modern statement.",
           points: [
             "1-pane and 2-pane layouts",
@@ -383,6 +331,7 @@ export default function ModernHurricaneGarageDoorsPage() {
           title: "Modern Steel With Windows",
           image: "/images/doors/modern-steel-windows.jpg",
           badge: "Available in Multiple Build Paths",
+          href: "/hurricane-garage-doors/modern/modern-steel-with-windows",
           text: "Best for a clean modern look with more flexibility than full glass.",
           points: [
             "Flush and grooved panel designs",
@@ -391,8 +340,9 @@ export default function ModernHurricaneGarageDoorsPage() {
           ],
         },
       ].map((item) => (
-        <div
+        <Link
           key={item.title}
+          href={item.href}
           className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
         >
           <div className="relative h-72 w-full bg-slate-100">
@@ -433,8 +383,12 @@ export default function ModernHurricaneGarageDoorsPage() {
                 </div>
               ))}
             </div>
+
+            <span className="mt-6 inline-block text-sm font-bold text-red-600">
+              View designs and colors →
+            </span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   </div>
