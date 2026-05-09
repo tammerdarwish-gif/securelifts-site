@@ -18,6 +18,7 @@ import {
   generateServiceCityMetadata,
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
+import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -582,6 +583,14 @@ const popularServices = [
           ))}
         </div>
       </section>
+
+      <LocalServiceSeoBlock
+        cityName={cityName}
+        citySlug={city}
+        servicePath="broken-spring-repair"
+        serviceName="Broken Spring Repair"
+        nearbyAreas={nearbyAreas}
+      />
 
       {/* CTA */}
       <section className="bg-red-600 px-6 py-20 text-white">

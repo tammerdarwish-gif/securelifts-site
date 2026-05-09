@@ -143,15 +143,13 @@ export default function GarageDoorRepairPage() {
     "Miami",
     "Fort Lauderdale",
     "Boca Raton",
-    "Delray Beach",
-    "Boynton Beach",
-    "Coral Springs",
-    "Davie",
     "West Palm Beach",
+    "Palm Beach Gardens",
+    "Jupiter",
     "Wellington",
     "Royal Palm Beach",
-    "Aventura",
-    "Coral Gables",
+    "Delray Beach",
+    "Boynton Beach",
   ];
 
   const faqs = [

@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   description:
     "Explore garage door styles, materials, hurricane-rated options, and pricing guidance for South Florida homes. Compare modern, traditional, carriage house, and impact-rated garage doors with SecureLifts.",
   alternates: {
-    canonical: "https://securelifts.com/garage-doors",
+    canonical: "https://securelifts.com/garage-door",
   },
   openGraph: {
     title: "Garage Doors | Styles, Options & Pricing | SecureLifts South Florida",
     description:
       "Compare garage door styles, materials, and pricing ranges for South Florida homes with SecureLifts.",
-    url: "https://securelifts.com/garage-doors",
+    url: "https://securelifts.com/garage-door",
     siteName: "SecureLifts",
     type: "website",
   },
@@ -137,7 +137,7 @@ export default function GarageDoorsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Garage Doors",
-    url: "https://securelifts.com/garage-doors",
+    url: "https://securelifts.com/garage-door",
     description:
       "Garage door styles, materials, pricing guidance, and product options for South Florida homeowners.",
   };

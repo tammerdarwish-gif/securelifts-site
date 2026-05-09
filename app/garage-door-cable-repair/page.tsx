@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 import GarageDoorCableRepairPage from "./garagedoorcablerepairClient";
 
 export const metadata: Metadata = {
@@ -28,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <GarageDoorCableRepairPage />;
+  return (
+    <>
+      <GarageDoorCableRepairPage />
+      <TopCityServiceLinks
+        servicePath="garage-door-cable-repair"
+        serviceName="Garage Door Cable Repair"
+      />
+    </>
+  );
 }

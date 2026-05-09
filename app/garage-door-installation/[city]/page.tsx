@@ -18,6 +18,7 @@ import {
   generateServiceCityMetadata,
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
+import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -46,6 +47,11 @@ export default async function Page({
   if (!data) notFound();
 
   const cityName = data.city;
+  const nearbyAreas = data.nearbyAreas ?? [
+    `Homes near ${cityName}`,
+    `Neighborhoods around ${cityName}`,
+    "Nearby South Florida service areas",
+  ];
 
   const installBenefits = [
     "Improves curb appeal instantly",
@@ -259,6 +265,14 @@ export default async function Page({
     ))}
   </div>
 </section>
+
+      <LocalServiceSeoBlock
+        cityName={cityName}
+        citySlug={city}
+        servicePath="garage-door-installation"
+        serviceName="Garage Door Installation"
+        nearbyAreas={nearbyAreas}
+      />
 
       {/* CTA */}
       <section className="bg-red-600 text-white px-6 py-20">

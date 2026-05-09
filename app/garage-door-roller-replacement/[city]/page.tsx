@@ -11,6 +11,7 @@ import {
   generateServiceCityMetadata,
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
+import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
 
 function formatCityName(slug: string) {
   return slug
@@ -201,6 +202,14 @@ export default async function Page({
           </div>
         </div>
       </section>
+
+      <LocalServiceSeoBlock
+        cityName={cityName}
+        citySlug={city}
+        servicePath="garage-door-roller-replacement"
+        serviceName="Garage Door Roller Replacement"
+        nearbyAreas={nearbyAreas}
+      />
 
       {/* CTA */}
       <section className="bg-red-600 text-white px-6 py-20 text-center">

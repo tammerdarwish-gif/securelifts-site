@@ -4,6 +4,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import QuickLeadForm from "../components/QuickLeadForm";
 import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 
 const PHONE = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -411,6 +412,11 @@ export default function GarageDoorInstallationPage() {
             </div>
           </div>
         </section>
+
+        <TopCityServiceLinks
+          servicePath="garage-door-installation"
+          serviceName="Garage Door Installation"
+        />
 
         <section className="bg-slate-950 px-6 py-16 text-white md:py-20">
           <div className="mx-auto max-w-7xl">

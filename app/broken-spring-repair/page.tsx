@@ -45,17 +45,15 @@ const symptoms = [
 
 const cityLinks = [
   ["Miami", "miami"],
-  ["Aventura", "aventura"],
-  ["Coral Gables", "coral-gables"],
   ["Fort Lauderdale", "fort-lauderdale"],
-  ["Davie", "davie"],
-  ["Coral Springs", "coral-springs"],
   ["Boca Raton", "boca-raton"],
-  ["Delray Beach", "delray-beach"],
-  ["Boynton Beach", "boynton-beach"],
   ["West Palm Beach", "west-palm-beach"],
+  ["Palm Beach Gardens", "palm-beach-gardens"],
+  ["Jupiter", "jupiter"],
   ["Wellington", "wellington"],
   ["Royal Palm Beach", "royal-palm-beach"],
+  ["Delray Beach", "delray-beach"],
+  ["Boynton Beach", "boynton-beach"],
 ];
 
 const faqs = [

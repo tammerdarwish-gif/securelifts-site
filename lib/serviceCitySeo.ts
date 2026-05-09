@@ -37,9 +37,10 @@ export function generateServiceCityMetadata(
   citySlug: string,
   config: ServiceCityConfig
 ): Metadata {
-  const data = getCityPageDataOrNotFound(citySlug);
-  const cityName = data.city?.trim() || formatCityName(citySlug);
-  const canonical = `${BASE_URL}/${config.path}/${citySlug}`;
+  const cleanCitySlug = citySlug.trim().toLowerCase();
+  const data = getCityPageDataOrNotFound(cleanCitySlug);
+  const cityName = data.city?.trim() || formatCityName(cleanCitySlug);
+  const canonical = `${BASE_URL}/${config.path}/${cleanCitySlug}`;
   const titleServiceName = config.titleServiceName ?? config.serviceName;
   const title = `${titleServiceName} in ${cityName}, FL | SecureLifts`;
   const description = config.description(cityName);

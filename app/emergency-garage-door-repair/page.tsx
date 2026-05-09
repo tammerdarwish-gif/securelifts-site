@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 import EmergencyGarageDoorRepairPage from "./emergencygaragedoorrepairClient";
 
 export const metadata: Metadata = {
@@ -28,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <EmergencyGarageDoorRepairPage />;
+  return (
+    <>
+      <EmergencyGarageDoorRepairPage />
+      <TopCityServiceLinks
+        servicePath="emergency-garage-door-repair"
+        serviceName="Emergency Garage Door Repair"
+      />
+    </>
+  );
 }

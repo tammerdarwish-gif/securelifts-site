@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 import SpringReplacementPage from "./springreplacementClient";
 
 export const metadata: Metadata = {
@@ -28,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <SpringReplacementPage />;
+  return (
+    <>
+      <SpringReplacementPage />
+      <TopCityServiceLinks
+        servicePath="spring-replacement"
+        serviceName="Garage Door Spring Replacement"
+      />
+    </>
+  );
 }

@@ -16,6 +16,7 @@ import {
   generateServiceCityMetadata,
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
+import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
 
 type CityPageData = {
   city?: string;
@@ -62,6 +63,11 @@ export default async function Page({
   }
 
   const cityName = data.city?.trim() || formatCityName(city);
+  const nearbyAreas = data.nearbyAreas ?? [
+    `Homes near ${cityName}`,
+    `Neighborhoods around ${cityName}`,
+    "Nearby South Florida service areas",
+  ];
 
   return (
     <main className="bg-white text-slate-900">
@@ -197,6 +203,14 @@ export default async function Page({
           </div>
         </div>
       </section>
+
+      <LocalServiceSeoBlock
+        cityName={cityName}
+        citySlug={city}
+        servicePath="spring-replacement"
+        serviceName="Garage Door Spring Replacement"
+        nearbyAreas={nearbyAreas}
+      />
 
       {/* CTA */}
       <section className="bg-red-600 text-white px-6 py-20 text-center">

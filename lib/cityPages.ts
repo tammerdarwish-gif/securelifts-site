@@ -88,12 +88,52 @@ const cityOverrides: Record<
   "west-palm-beach": {
     city: "West Palm Beach",
     county: "Palm Beach",
-    nearbyAreas: ["Lake Worth", "Palm Beach", "Royal Palm Beach", "Greenacres"],
+    nearbyAreas: ["Lake Worth", "Palm Beach Gardens", "Royal Palm Beach", "Greenacres"],
   },
   miami: {
     city: "Miami",
     county: "Miami-Dade",
-    nearbyAreas: ["Brickell", "Downtown Miami", "Doral", "Coral Gables"],
+    nearbyAreas: ["Miami Beach", "Coral Gables", "Doral", "Aventura"],
+  },
+  "fort-lauderdale": {
+    city: "Fort Lauderdale",
+    county: "Broward",
+    nearbyAreas: ["Davie", "Hollywood", "Pompano Beach", "Plantation"],
+  },
+  "boca-raton": {
+    city: "Boca Raton",
+    county: "Palm Beach",
+    nearbyAreas: ["Delray Beach", "Deerfield Beach", "Highland Beach", "Parkland"],
+  },
+  "palm-beach-gardens": {
+    city: "Palm Beach Gardens",
+    county: "Palm Beach",
+    nearbyAreas: ["Jupiter", "Juno Beach", "North Palm Beach", "West Palm Beach"],
+  },
+  jupiter: {
+    city: "Jupiter",
+    county: "Palm Beach",
+    nearbyAreas: ["Palm Beach Gardens", "Tequesta", "Juno Beach", "North Palm Beach"],
+  },
+  wellington: {
+    city: "Wellington",
+    county: "Palm Beach",
+    nearbyAreas: ["Royal Palm Beach", "Loxahatchee", "West Palm Beach", "Lake Worth"],
+  },
+  "royal-palm-beach": {
+    city: "Royal Palm Beach",
+    county: "Palm Beach",
+    nearbyAreas: ["Wellington", "Loxahatchee", "West Palm Beach", "Greenacres"],
+  },
+  "delray-beach": {
+    city: "Delray Beach",
+    county: "Palm Beach",
+    nearbyAreas: ["Boca Raton", "Boynton Beach", "Highland Beach", "Lake Worth"],
+  },
+  "boynton-beach": {
+    city: "Boynton Beach",
+    county: "Palm Beach",
+    nearbyAreas: ["Delray Beach", "Lake Worth", "Boca Raton", "Greenacres"],
   },
   miramar: {
     city: "Miramar",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 import GarageDoorPanelReplacementPage from "./garagedoorpanelreplacementClient";
 
 export const metadata: Metadata = {
@@ -28,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <GarageDoorPanelReplacementPage />;
+  return (
+    <>
+      <GarageDoorPanelReplacementPage />
+      <TopCityServiceLinks
+        servicePath="garage-door-panel-replacement"
+        serviceName="Garage Door Panel Replacement"
+      />
+    </>
+  );
 }

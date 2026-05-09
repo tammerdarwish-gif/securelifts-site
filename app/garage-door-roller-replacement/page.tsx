@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import TopCityServiceLinks from "../components/TopCityServiceLinks";
 import GarageDoorRollerReplacementPage from "./garagedoorrollerreplacementClient";
 
 export const metadata: Metadata = {
@@ -28,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <GarageDoorRollerReplacementPage />;
+  return (
+    <>
+      <GarageDoorRollerReplacementPage />
+      <TopCityServiceLinks
+        servicePath="garage-door-roller-replacement"
+        serviceName="Garage Door Roller Replacement"
+      />
+    </>
+  );
 }

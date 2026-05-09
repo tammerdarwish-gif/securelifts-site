@@ -19,6 +19,7 @@ import {
   generateServiceCityMetadata,
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
+import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -500,6 +501,14 @@ export default async function CityPage({
     ))}
   </div>
 </section>
+
+      <LocalServiceSeoBlock
+        cityName={cityName}
+        citySlug={city}
+        servicePath="garage-door-opener-repair"
+        serviceName="Garage Door Opener Repair"
+        nearbyAreas={nearbyAreas}
+      />
 
       {/* CTA */}
       <section className="bg-red-600 px-6 py-20 text-white">
