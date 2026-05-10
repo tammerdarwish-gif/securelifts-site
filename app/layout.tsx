@@ -46,10 +46,10 @@ export default function RootLayout({
       >
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
-        <Script id="google-analytics-and-ads" strategy="afterInteractive">
+        <Script id="google-analytics-and-ads" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -62,7 +62,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <Script id="google-ads-phone-conversion" strategy="afterInteractive">
+        <Script id="google-ads-phone-conversion" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             if (typeof window.gtag === 'function') {

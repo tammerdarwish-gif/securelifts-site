@@ -1,12 +1,9 @@
-"use client";
-
 import ServiceSchema from "./components/ServiceSchema";
 import InternalLinkCards from "./components/InternalLinkCards";
 import QuickLeadForm from "./components/QuickLeadForm";
 import ApprovedProjectShowcase from "./components/ApprovedProjectShowcase";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   FaShieldAlt,
   FaTools,
@@ -173,10 +170,11 @@ export default function HomePageClient() {
       <section className="relative min-h-[calc(100vh-82px)] overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/secureLifts-garage-doors-rescue.JPG"
+            src="/images/approved/service-van-at-door-card.jpg"
             alt="SecureLifts garage door service van in South Florida"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center opacity-55"
           />
         </div>
@@ -185,12 +183,7 @@ export default function HomePageClient() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
 
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 pb-36 pt-20 md:grid-cols-[1.08fr_0.72fr] md:items-center md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-4xl"
-          >
+          <div className="max-w-4xl">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-red-200 md:text-sm">
               SecureLifts Garage Doors | South Florida
             </p>
@@ -231,19 +224,15 @@ export default function HomePageClient() {
                 Miami-Dade, Broward & Palm Beach
               </span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-            className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md"
-          >
+          <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
             <div className="relative h-56 overflow-hidden rounded-2xl bg-slate-900 md:h-72">
               <Image
                 src="/securelifts-van.jpg"
                 alt="SecureLifts service vehicle ready for garage door repair"
                 fill
+                sizes="(min-width: 768px) 38vw, 100vw"
                 className="object-cover"
               />
             </div>
@@ -277,7 +266,7 @@ export default function HomePageClient() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -309,13 +298,9 @@ export default function HomePageClient() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <motion.div
+          {services.map((service) => (
+            <div
               key={service.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ delay: i * 0.12, duration: 0.5 }}
               className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
@@ -323,6 +308,7 @@ export default function HomePageClient() {
                   src={service.image}
                   alt={service.alt}
                   fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-contain transition duration-300 group-hover:scale-[1.03]"
                 />
               </div>
@@ -344,7 +330,7 @@ export default function HomePageClient() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -384,6 +370,7 @@ export default function HomePageClient() {
               src="/images/approved/technician-door-service-card.jpg"
               alt="SecureLifts technician servicing a residential garage door"
               fill
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="bg-slate-100 object-contain"
             />
           </div>
@@ -498,6 +485,7 @@ export default function HomePageClient() {
                       src={study.image}
                       alt={study.title}
                       fill
+                      sizes="320px"
                       className="object-cover transition duration-300 group-hover:scale-[1.03]"
                     />
                   </div>
@@ -575,6 +563,7 @@ export default function HomePageClient() {
               src="/images/approved/service-van-at-door-card.jpg"
               alt="Emergency garage door repair service"
               fill
+              sizes="100vw"
               className="object-cover opacity-25"
             />
         </div>
