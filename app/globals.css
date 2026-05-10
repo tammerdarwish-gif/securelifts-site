@@ -5,9 +5,23 @@
   --foreground: #111827;
 
   --brand-orange: #ff8b00;
+  --brand-orange-soft: #fff3e0;
+  --brand-orange-muted: #ffd08a;
   --brand-orange-hover: #e67e00;
+  --brand-orange-deep: #9a4f00;
   --brand-blue: #07739e;
+  --brand-blue-soft: #e7f5fa;
+  --brand-blue-muted: #9ad3e7;
   --brand-blue-hover: #055d7f;
+  --brand-blue-deep: #033f57;
+  --brand-ink: #0f172a;
+  --brand-border: #d7e4ea;
+}
+
+@theme {
+  --color-brand-orange: #ff8b00;
+  --color-brand-blue: #07739e;
+  --color-brand-ink: #0f172a;
 }
 
 * {
@@ -37,57 +51,149 @@ img {
   height: auto;
 }
 
-/* -------------------- */
-/* ORANGE BRAND COLORS  */
-/* -------------------- */
+/* ------------------------------ */
+/* APPROVED SECURELIFTS THEME     */
+/* ------------------------------ */
+
+.bg-red-50,
+.bg-orange-50 {
+  background-color: var(--brand-orange-soft) !important;
+}
+
+.bg-red-100,
+.bg-orange-100 {
+  background-color: #ffe4bd !important;
+}
+
+.bg-red-200,
+.bg-red-300,
+.bg-orange-200,
+.bg-orange-300 {
+  background-color: var(--brand-orange-muted) !important;
+}
 
 .bg-red-500,
 .bg-red-600,
 .bg-red-700,
-.bg-red-800 {
+.bg-red-800,
+.bg-orange-500,
+.bg-orange-600,
+.bg-orange-700,
+.bg-orange-800 {
   background-color: var(--brand-orange) !important;
+}
+
+.bg-red-900,
+.bg-red-950,
+.bg-orange-900,
+.bg-orange-950 {
+  background-color: var(--brand-orange-deep) !important;
 }
 
 .hover\:bg-red-600:hover,
 .hover\:bg-red-700:hover,
-.hover\:bg-red-800:hover {
+.hover\:bg-red-800:hover,
+.hover\:bg-orange-600:hover,
+.hover\:bg-orange-700:hover,
+.hover\:bg-orange-800:hover {
   background-color: var(--brand-orange-hover) !important;
 }
 
+.text-red-50,
+.text-red-100,
+.text-red-200,
+.text-red-300,
+.text-orange-50,
+.text-orange-100,
+.text-orange-200,
+.text-orange-300 {
+  color: #ffdba8 !important;
+}
+
+.text-red-400,
 .text-red-500,
 .text-red-600,
 .text-red-700,
-.text-red-800 {
+.text-red-800,
+.text-orange-400,
+.text-orange-500,
+.text-orange-600,
+.text-orange-700,
+.text-orange-800 {
   color: var(--brand-orange) !important;
+}
+
+.text-red-900,
+.text-red-950,
+.text-orange-900,
+.text-orange-950 {
+  color: var(--brand-orange-deep) !important;
 }
 
 .border-red-200,
 .border-red-300,
+.border-red-400,
 .border-red-500,
 .border-red-600,
-.border-red-700 {
+.border-red-700,
+.border-orange-200,
+.border-orange-300,
+.border-orange-400,
+.border-orange-500,
+.border-orange-600,
+.border-orange-700 {
   border-color: var(--brand-orange) !important;
 }
 
 .hover\:border-red-200:hover,
 .hover\:border-red-300:hover,
-.hover\:border-red-600:hover {
+.hover\:border-red-400:hover,
+.hover\:border-red-600:hover,
+.hover\:border-orange-200:hover,
+.hover\:border-orange-300:hover,
+.hover\:border-orange-400:hover,
+.hover\:border-orange-600:hover {
   border-color: var(--brand-orange-hover) !important;
 }
 
-/* -------------------- */
-/* BLUE SOLID SURFACES  */
-/* -------------------- */
+.ring-red-100,
+.ring-red-200,
+.ring-red-500\/30,
+.focus\:ring-red-100:focus,
+.focus\:ring-red-500\/30:focus {
+  --tw-ring-color: rgba(255, 139, 0, 0.22) !important;
+}
+
+.focus\:border-red-500:focus {
+  border-color: var(--brand-orange) !important;
+}
+
+.from-red-950 {
+  --tw-gradient-from: var(--brand-orange-deep) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(154, 79, 0, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.via-red-950 {
+  --tw-gradient-via: rgba(154, 79, 0, 0.86) var(--tw-gradient-via-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to) !important;
+}
+
+.to-red-950 {
+  --tw-gradient-to: rgba(154, 79, 0, 0.72) var(--tw-gradient-to-position) !important;
+}
 
 .bg-slate-900,
 .bg-slate-950,
-.bg-gray-900 {
+.bg-gray-900,
+.bg-black {
   background-color: var(--brand-blue) !important;
 }
 
 .hover\:bg-slate-900:hover,
 .hover\:bg-slate-950:hover,
-.hover\:bg-gray-900:hover {
+.hover\:bg-gray-900:hover,
+.hover\:bg-black:hover {
   background-color: var(--brand-blue-hover) !important;
 }
 
@@ -95,6 +201,43 @@ img {
 .border-slate-950,
 .border-gray-900 {
   border-color: var(--brand-blue) !important;
+}
+
+.text-slate-950,
+.text-gray-950,
+.text-black {
+  color: var(--brand-ink) !important;
+}
+
+.bg-green-50,
+.bg-green-100 {
+  background-color: var(--brand-blue-soft) !important;
+}
+
+.bg-green-600,
+.bg-green-700 {
+  background-color: var(--brand-blue) !important;
+}
+
+.text-green-600,
+.text-green-700,
+.text-green-800 {
+  color: var(--brand-blue) !important;
+}
+
+.border-green-200,
+.border-green-300,
+.border-green-600 {
+  border-color: var(--brand-blue-muted) !important;
+}
+
+.hover\:text-green-700:hover {
+  color: var(--brand-blue-hover) !important;
+}
+
+.hover\:border-green-300:hover,
+.hover\:border-green-600:hover {
+  border-color: var(--brand-blue-hover) !important;
 }
 
 /* -------------------- */
