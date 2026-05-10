@@ -8,7 +8,9 @@ export function getAllCitySlugs() {
     "hialeah-gardens",
     "kendall",
     "homestead",
+    "pinecrest",
     "doral",
+    "medley",
     "cutler-bay",
     "palmetto-bay",
     "coral-gables",
@@ -94,6 +96,26 @@ const cityOverrides: Record<
     city: "Miami",
     county: "Miami-Dade",
     nearbyAreas: ["Miami Beach", "Coral Gables", "Doral", "Aventura"],
+  },
+  doral: {
+    city: "Doral",
+    county: "Miami-Dade",
+    nearbyAreas: ["Miami", "Hialeah", "Miami Lakes", "Coral Gables"],
+  },
+  homestead: {
+    city: "Homestead",
+    county: "Miami-Dade",
+    nearbyAreas: ["Cutler Bay", "Palmetto Bay", "Kendall", "Miami"],
+  },
+  pinecrest: {
+    city: "Pinecrest",
+    county: "Miami-Dade",
+    nearbyAreas: ["Kendall", "Coral Gables", "Palmetto Bay", "Miami"],
+  },
+  medley: {
+    city: "Medley",
+    county: "Miami-Dade",
+    nearbyAreas: ["Doral", "Hialeah", "Miami Lakes", "Miami"],
   },
   "fort-lauderdale": {
     city: "Fort Lauderdale",

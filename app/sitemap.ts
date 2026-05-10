@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllCitySlugs } from "@/lib/cityPages";
+import { getOpenerProductSlugs } from "@/lib/openerProducts";
 import fs from "fs";
 import path from "path";
 
@@ -177,5 +178,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...stormCityPages, ...coreCityPages];
+  const openerProductPages: MetadataRoute.Sitemap = getOpenerProductSlugs().map(
+    (slug) => ({
+      url: `${baseUrl}/garage-door-opener/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    })
+  );
+
+  return [
+    ...staticPages,
+    ...openerProductPages,
+    ...stormCityPages,
+    ...coreCityPages,
+  ];
 }

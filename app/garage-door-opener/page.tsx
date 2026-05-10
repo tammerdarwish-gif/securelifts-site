@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { openerProducts } from "@/lib/openerProducts";
 
 const PHONE_DISPLAY = "(866) 828-1818";
 const PHONE_HREF = "tel:+18668281818";
@@ -70,64 +71,7 @@ const openerTypes = [
   },
 ];
 
-const featuredModels = [
-  {
-    name: "LiftMaster 6690L",
-    category: "Premium Belt Drive",
-    reason:
-      "Best for homeowners wanting premium quiet performance, battery backup, myQ connectivity, camera visibility, and strong everyday lifting power.",
-    highlights: [
-      "1¼ HP equivalent DC performance",
-      "Battery backup",
-      "myQ smart control",
-      "360° camera and LED lighting",
-    ],
-    image: "/images/opener/models/liftmaster-6690l.png",
-    alt: "LiftMaster 6690L garage door opener",
-  },
-  {
-    name: "LiftMaster 6580L",
-    category: "Quiet Belt Drive",
-    reason:
-      "Excellent choice for attached garages where quiet performance and battery backup matter, without stepping all the way into the heaviest premium tier.",
-    highlights: [
-      "1 HP equivalent DC performance",
-      "Battery backup",
-      "myQ connectivity",
-      "Quiet belt drive",
-    ],
-    image: "/images/opener/models/liftmaster-6580l.png",
-    alt: "LiftMaster 6580L garage door opener",
-  },
-  {
-    name: "LiftMaster 2220L",
-    category: "Chain Drive Value Pick",
-    reason:
-      "Strong fit for homeowners who want chain-drive durability, smart features, and dependable daily use at a more value-oriented price point.",
-    highlights: [
-      "3/4 HP equivalent DC performance",
-      "Built-in camera",
-      "myQ connectivity",
-      "Reliable chain-drive strength",
-    ],
-    image: "/images/opener/models/liftmaster-2220l.png",
-    alt: "LiftMaster 2220L garage door opener",
-  },
-  {
-    name: "LiftMaster 98022",
-    category: "Wall-Mount Upgrade",
-    reason:
-      "Great for premium garages where ceiling space, appearance, and quieter side-mounted operation matter more than basic entry-level pricing.",
-    highlights: [
-      "Wall-mount design",
-      "Battery backup",
-      "Frees overhead space",
-      "Ideal for modern garage layouts",
-    ],
-    image: "/images/opener/models/liftmaster-98022.png",
-    alt: "LiftMaster 98022 wall mount garage door opener",
-  },
-];
+const featuredModels = openerProducts.slice(0, 4);
 
 const olderModelTerms = [
   "LiftMaster 8165W repair",
@@ -387,7 +331,10 @@ export default function GarageDoorOpenerPage() {
           </div>
         </section>
 
-        <section className="bg-slate-50 px-6 py-16 md:py-20">
+        <section
+          id="belt-drive-openers"
+          className="bg-slate-50 px-6 py-16 md:py-20"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
@@ -407,6 +354,11 @@ export default function GarageDoorOpenerPage() {
               {openerTypes.map((type) => (
                 <div
                   key={type.title}
+                  id={
+                    type.title.startsWith("Chain")
+                      ? "chain-drive-openers"
+                      : undefined
+                  }
                   className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
                 >
                   <div className="relative mb-6 h-64 overflow-hidden rounded-2xl bg-slate-100">
@@ -462,14 +414,15 @@ export default function GarageDoorOpenerPage() {
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
               {featuredModels.map((model) => (
-                <div
-                  key={model.name}
-                  className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
+                <Link
+                  key={model.slug}
+                  href={`/garage-door-opener/${model.slug}`}
+                  className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="relative mb-6 h-56 overflow-hidden rounded-2xl bg-slate-100">
                     <Image
                       src={model.image}
-                      alt={model.alt}
+                      alt={model.imageAlt}
                       fill
                       className="object-contain p-5"
                     />
@@ -478,10 +431,13 @@ export default function GarageDoorOpenerPage() {
                     {model.category}
                   </p>
                   <h3 className="mt-3 text-2xl font-black tracking-tight">
-                    {model.name}
+                    {model.shortName}
                   </h3>
+                  <p className="mt-2 text-sm font-black text-red-600">
+                    Also sold as {model.pairedName}
+                  </p>
                   <p className="mt-4 text-base leading-7 text-slate-600">
-                    {model.reason}
+                    {model.summary}
                   </p>
                   <div className="mt-5 grid gap-3 sm:grid-cols-2">
                     {model.highlights.map((highlight) => (
@@ -493,7 +449,10 @@ export default function GarageDoorOpenerPage() {
                       </div>
                     ))}
                   </div>
-                </div>
+                  <span className="mt-6 inline-flex text-sm font-black text-red-600">
+                    View model page and manual →
+                  </span>
+                </Link>
               ))}
             </div>
 

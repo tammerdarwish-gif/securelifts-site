@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "../components/Breadcrumbs";
 import BreadcrumbSchema from "../components/BreadcrumbSchema";
 import AutoApprovalLibraryClient from "../components/AutoApprovalLibraryClient";
 import { getAllApprovalFiles } from "@/lib/getAllApprovalFiles";
 
 export const metadata: Metadata = {
-  title: "Hurricane Garage Door Approvals | SecureLifts",
+  title: "Garage Door Resources, Manuals & Approvals | SecureLifts",
   description:
-    "Browse and search hurricane garage door approvals, NOAs, and Florida Product Approvals by manufacturer.",
+    "Browse SecureLifts garage door resources, opener manual guides, hurricane approvals, NOAs, and Florida Product Approvals.",
 };
 
 export default function HurricaneGarageDoorApprovalsPage() {
@@ -37,21 +38,65 @@ export default function HurricaneGarageDoorApprovalsPage() {
       <section className="bg-slate-950 px-6 py-20 text-white">
         <div className="mx-auto max-w-6xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-400">
-            Technical Resource Library
+            SecureLifts Resource Center
           </p>
 
           <h1 className="text-4xl font-bold md:text-6xl">
-            Hurricane Garage Door Approvals
+            Garage Door Resources, Manuals & Approvals
           </h1>
 
           <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-white/85">
-            Search and browse hurricane garage door approval documents by
-            manufacturer, product line, and file name in one organized place.
+            Helpful garage door information for South Florida homeowners,
+            including opener model guides, safe troubleshooting resources,
+            hurricane approvals, NOAs, and Florida Product Approvals.
           </p>
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="px-6 py-16">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
+          <Link
+            href="/resources/garage-door-opener-manuals"
+            className="rounded-3xl border border-red-100 bg-red-50 p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+          >
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+              Opener Manual Guide
+            </p>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">
+              LiftMaster / Raynor opener manuals and model names
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-700">
+              Keep customers on SecureLifts with model-name matching, safe
+              homeowner checks, opener troubleshooting, and repair-or-replace
+              guidance.
+            </p>
+            <span className="mt-6 inline-flex rounded-2xl bg-red-600 px-5 py-3 text-sm font-bold text-white">
+              Open Opener Resources
+            </span>
+          </Link>
+
+          <Link
+            href="/resources/hurricane-garage-door-approvals"
+            className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+          >
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-blue-700">
+              Approval Library
+            </p>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">
+              Hurricane garage door approvals
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-700">
+              Search approval documents by manufacturer, product line, and file
+              name in one organized SecureLifts library.
+            </p>
+            <span className="mt-6 inline-flex rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white">
+              Browse Approval Documents
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20">
         <div className="mx-auto max-w-7xl">
           <AutoApprovalLibraryClient records={records} />
         </div>
