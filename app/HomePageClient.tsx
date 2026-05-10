@@ -174,6 +174,7 @@ export default function HomePageClient() {
             alt="SecureLifts garage door service van in South Florida"
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             quality={48}
             className="object-cover object-center opacity-55"

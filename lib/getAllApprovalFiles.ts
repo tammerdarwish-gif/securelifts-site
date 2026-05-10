@@ -17,7 +17,7 @@ function formatManufacturerName(slug: string) {
 }
 
 function formatTitle(file: string) {
-  let name = file
+  const name = file
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\.pdf$/i, "")

@@ -24,7 +24,7 @@ function extractSpec(text: string) {
 }
 
 function buildPrettyTitle(file: string) {
-  let text = cleanRawFileName(file);
+  const text = cleanRawFileName(file);
 
   const lower = text.toLowerCase();
   const spec = extractSpec(text);
