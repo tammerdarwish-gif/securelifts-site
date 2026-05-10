@@ -111,7 +111,7 @@ export default function QuickLeadForm({
             </p>
             <a
               href="tel:18668281818"
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 font-bold !text-white transition hover:bg-red-700"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-red-700 px-5 py-3 font-bold !text-white transition hover:bg-red-800"
             >
               Call (866) 828-1818
             </a>
@@ -126,7 +126,7 @@ export default function QuickLeadForm({
       onSubmit={handleSubmit}
       className="rounded-3xl border border-slate-200 bg-white p-6 pb-28 shadow-xl md:p-7"
     >
-      <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+      <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-700">
         Quick Request
       </p>
       <h3 className="mt-2 text-2xl font-black text-slate-950 md:text-3xl">
@@ -159,6 +159,7 @@ export default function QuickLeadForm({
         />
 
         <select
+          aria-label="Service needed"
           required
           name="service"
           defaultValue={defaultService}
@@ -183,7 +184,7 @@ export default function QuickLeadForm({
         <button
           type="submit"
           disabled={loading}
-          className="rounded-xl bg-red-600 px-6 py-4 font-bold !text-white transition hover:bg-red-700 disabled:opacity-70"
+          className="rounded-xl bg-red-700 px-6 py-4 font-bold !text-white transition hover:bg-red-800 disabled:opacity-70"
         >
           {loading ? "Sending..." : "Send Request"}
         </button>

@@ -213,21 +213,21 @@ export default function HomePageClient() {
 
             <div className="mt-10 hidden flex-wrap gap-4 text-sm text-white/90 sm:flex md:gap-6">
               <span className="flex items-center gap-2">
-                <FaShieldAlt className="text-red-400" />
+                <FaShieldAlt className="text-red-300" />
                 Licensed & Insured
               </span>
               <span className="flex items-center gap-2">
-                <FaClock className="text-red-400" />
+                <FaClock className="text-red-300" />
                 Same-Day Service Available
               </span>
               <span className="flex items-center gap-2">
-                <FaMapMarkerAlt className="text-red-400" />
+                <FaMapMarkerAlt className="text-red-300" />
                 Miami-Dade, Broward & Palm Beach
               </span>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
+          <div className="rounded-3xl border border-white/20 bg-slate-950/80 p-5 shadow-2xl backdrop-blur-md">
             <div className="relative h-56 overflow-hidden rounded-2xl bg-slate-900 md:h-72">
               <Image
                 src="/securelifts-van.jpg"
@@ -240,7 +240,7 @@ export default function HomePageClient() {
 
             <div className="mt-5 grid gap-3">
               <div className="rounded-2xl bg-white p-4 text-slate-950">
-                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-red-600">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-red-700">
                   Today&apos;s Priority
                 </p>
                 <p className="mt-2 text-xl font-black">
@@ -255,7 +255,7 @@ export default function HomePageClient() {
               <div className="grid grid-cols-2 gap-3 text-center">
                 <Link
                   href="/broken-spring-repair"
-                  className="rounded-2xl bg-red-600 px-4 py-3 text-sm font-bold !text-white transition hover:bg-red-700"
+                  className="rounded-2xl bg-red-700 px-4 py-3 text-sm font-bold !text-white transition hover:bg-red-800"
                 >
                   Spring Repair
                 </Link>
@@ -274,7 +274,7 @@ export default function HomePageClient() {
       <section className="border-b border-slate-200 bg-white px-6 py-8">
         <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {proofStats.map((stat) => (
-            <div key={stat.value} className="border-l-4 border-red-600 bg-slate-50 px-5 py-4">
+            <div key={stat.value} className="border-l-4 border-red-700 bg-slate-50 px-5 py-4">
               <p className="text-2xl font-black text-slate-950">{stat.value}</p>
               <p className="mt-1 text-sm font-medium leading-6 text-slate-600">
                 {stat.label}
@@ -286,7 +286,7 @@ export default function HomePageClient() {
 
       <section id="services" className="mx-auto max-w-7xl px-6 py-20">
         <div className="mx-auto mb-12 max-w-3xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
             Core Services
           </p>
           <h2 className="text-4xl font-black md:text-5xl">
@@ -315,7 +315,7 @@ export default function HomePageClient() {
               </div>
 
               <div className="p-7">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-700">
                   {service.icon}
                 </div>
 
@@ -325,9 +325,9 @@ export default function HomePageClient() {
                 <div className="mt-6">
                   <Link
                     href={service.href}
-                    className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
+                    className="inline-flex items-center gap-2 font-semibold text-red-700 transition hover:text-red-800"
                   >
-                    Explore service <FaArrowRight className="text-sm" />
+                    Explore {service.title} <FaArrowRight className="text-sm" />
                   </Link>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export default function HomePageClient() {
       <section className="bg-slate-50 py-20">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
               Why SecureLifts
             </p>
 
@@ -359,7 +359,7 @@ export default function HomePageClient() {
                   key={reason}
                   className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm"
                 >
-                  <FaCheckCircle className="shrink-0 text-red-600" />
+                  <FaCheckCircle className="shrink-0 text-red-700" />
                   <span className="font-medium text-slate-800">{reason}</span>
                 </div>
               ))}
@@ -378,16 +378,16 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="bg-slate-900 py-20 text-white">
+      <section className="bg-slate-950 py-20 text-white">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-400">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-300">
               Customer Feedback
             </p>
             <h2 className="text-4xl font-black md:text-5xl">
               What Customers Say
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-300">
+            <p className="mt-4 text-lg leading-8 text-slate-100">
               Good service should not leave customers guessing. These are the
               kinds of results people remember.
             </p>
@@ -397,13 +397,13 @@ export default function HomePageClient() {
             {reviews.map((review) => (
               <div
                 key={review.name}
-                className="rounded-3xl border border-white/10 bg-white/10 p-7 backdrop-blur-sm"
+                className="rounded-3xl border border-slate-700 bg-slate-900 p-7"
               >
                 <div className="mb-4 flex text-yellow-400">★★★★★</div>
                 <p className="leading-8 text-slate-100">{review.text}</p>
                 <div className="mt-5">
                   <p className="font-bold text-white">{review.name}</p>
-                  <p className="text-sm text-slate-300">{review.location}</p>
+                  <p className="text-sm text-slate-100">{review.location}</p>
                 </div>
               </div>
             ))}
@@ -421,7 +421,7 @@ export default function HomePageClient() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
               Service Areas
             </p>
             <h2 className="text-4xl font-black md:text-5xl">
@@ -439,7 +439,7 @@ export default function HomePageClient() {
               <Link
                 key={city}
                 href={`/garage-door-repair/${city.toLowerCase().replaceAll(" ", "-")}`}
-                className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 font-bold !text-slate-900 transition hover:border-red-200 hover:bg-white hover:text-red-600"
+                className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 font-bold !text-slate-900 transition hover:border-red-300 hover:bg-white hover:!text-red-700"
               >
                 {city}
               </Link>
@@ -452,7 +452,7 @@ export default function HomePageClient() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
                 Real Project Proof
               </p>
               <h2 className="text-4xl font-black md:text-5xl">
@@ -467,7 +467,7 @@ export default function HomePageClient() {
 
             <Link
               href="/reviews"
-              className="inline-flex items-center gap-2 font-semibold text-red-600 transition hover:text-red-700"
+              className="inline-flex items-center gap-2 font-semibold text-red-700 transition hover:text-red-800"
             >
               See all reviews & case studies <FaArrowRight className="text-sm" />
             </Link>
@@ -492,7 +492,7 @@ export default function HomePageClient() {
                   </div>
 
                   <div className="flex min-h-[320px] flex-1 flex-col p-6">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-red-700">
                       {study.location}
                     </p>
 
@@ -514,7 +514,7 @@ export default function HomePageClient() {
                         </p>
                       </div>
 
-                      <span className="whitespace-nowrap text-sm font-semibold text-red-600">
+                      <span className="whitespace-nowrap text-sm font-semibold text-red-700">
                         View Case Study →
                       </span>
                     </div>
@@ -573,7 +573,7 @@ export default function HomePageClient() {
 
         <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-400">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-300">
               Ready For Service
             </p>
             <h2 className="text-3xl font-bold md:text-5xl">
@@ -592,7 +592,7 @@ export default function HomePageClient() {
                 "Clear communication before the visit is booked",
               ].map((item) => (
                 <div key={item} className="flex gap-3">
-                  <FaCheckCircle className="mt-1 shrink-0 text-red-400" />
+                  <FaCheckCircle className="mt-1 shrink-0 text-red-300" />
                   <span>{item}</span>
                 </div>
               ))}

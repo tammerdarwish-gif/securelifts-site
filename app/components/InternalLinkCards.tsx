@@ -24,7 +24,7 @@ export default function InternalLinkCards({
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-12 max-w-3xl text-center">
           {eyebrow ? (
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
               {eyebrow}
             </p>
           ) : null}
@@ -45,7 +45,7 @@ export default function InternalLinkCards({
               href={item.href}
               className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-xl"
             >
-              <div className="absolute inset-x-0 top-0 h-1 bg-red-600 opacity-0 transition group-hover:opacity-100" />
+              <div className="absolute inset-x-0 top-0 h-1 bg-red-700 opacity-0 transition group-hover:opacity-100" />
 
               {item.icon ? (
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-2xl">
@@ -59,7 +59,7 @@ export default function InternalLinkCards({
 
               <p className="mb-5 leading-7 text-gray-700">{item.text}</p>
 
-              <span className="inline-flex items-center font-semibold text-red-600 transition group-hover:translate-x-1">
+              <span className="inline-flex items-center font-semibold text-red-700 transition group-hover:translate-x-1">
                 Explore →
               </span>
             </Link>

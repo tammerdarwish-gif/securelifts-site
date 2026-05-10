@@ -154,7 +154,7 @@ export default function ApprovedProjectShowcase({
     <section className={dark ? "bg-slate-950 px-6 py-16 text-white md:py-20" : "bg-white px-6 py-16 text-slate-900 md:py-20"}>
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className={dark ? "mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-400" : "mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-600"}>
+          <p className={dark ? "mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-300" : "mb-3 text-sm font-bold uppercase tracking-[0.2em] text-red-700"}>
             {eyebrow}
           </p>
           <h2 className="text-3xl font-black tracking-tight md:text-4xl">
@@ -195,7 +195,7 @@ export default function ApprovedProjectShowcase({
         <div className="mt-8">
           <Link
             href="/book-service"
-            className={dark ? "inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700" : "inline-flex items-center justify-center rounded-2xl bg-red-600 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-700"}
+            className={dark ? "inline-flex items-center justify-center rounded-2xl bg-red-700 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-800" : "inline-flex items-center justify-center rounded-2xl bg-red-700 px-7 py-4 text-base font-bold !text-white transition hover:bg-red-800"}
           >
             Request Service or Quote
           </Link>
