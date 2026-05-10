@@ -527,7 +527,7 @@ export default function ModernHurricaneGarageDoorsPage() {
       <section className="bg-gray-50 px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Modern Design Options
             </p>
             <h2 className="text-3xl font-bold md:text-5xl">
@@ -626,7 +626,7 @@ export default function ModernHurricaneGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Modern Look, Real Protection
             </p>
             <h2 className="mb-6 text-4xl font-bold">

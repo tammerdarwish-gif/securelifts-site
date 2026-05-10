@@ -79,7 +79,7 @@ export default function HurricaneGarageDoorApprovalsPage() {
             href="/resources/hurricane-garage-door-approvals"
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
           >
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-blue-800">
               Approval Library
             </p>
             <h2 className="text-3xl font-black tracking-tight text-slate-950">
@@ -135,7 +135,7 @@ export default function HurricaneGarageDoorApprovalsPage() {
           </div>
 
           <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Expanding Library
             </p>
 

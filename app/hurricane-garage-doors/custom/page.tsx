@@ -250,7 +250,7 @@ export default function CustomHurricaneGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Custom Style, Real Protection
             </p>
             <h2 className="mb-5 text-3xl font-bold md:text-5xl">
@@ -375,7 +375,7 @@ export default function CustomHurricaneGarageDoorsPage() {
       <section className="bg-gray-50 px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Trust • Urgency • Authority
             </p>
             <h2 className="mb-4 text-3xl font-bold md:text-5xl">

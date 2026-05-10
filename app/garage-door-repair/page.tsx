@@ -314,7 +314,7 @@ export default function GarageDoorRepairPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Trusted Repair Service
             </p>
             <h2 className="mb-5 text-3xl font-bold md:text-4xl">
@@ -480,7 +480,7 @@ export default function GarageDoorRepairPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Why Homeowners Call SecureLifts
             </p>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">

@@ -606,7 +606,7 @@ export default function GarageDoorShopPage() {
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
                   Live Preview
                 </p>
                 <h2 className="mt-2 text-2xl font-black">

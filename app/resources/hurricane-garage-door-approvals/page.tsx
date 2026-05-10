@@ -82,7 +82,7 @@ export default function HurricaneGarageDoorApprovalsPage() {
           </div>
 
           <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Next Expansion
             </p>
 

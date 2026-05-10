@@ -354,7 +354,7 @@ export default async function WindRatedGarageDoorsCityPage({
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Local Wind-Rated Garage Door Installation</p>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">Local Wind-Rated Garage Door Installation</p>
             <h2 className="mb-5 text-3xl font-bold md:text-5xl">Stronger Garage Door Protection for {cityName} Homes</h2>
             <p className="mb-5 text-lg leading-8 text-gray-700">{insight.areaLine}</p>
             <p className="mb-5 text-lg leading-8 text-gray-700">{insight.localNeed}</p>
@@ -395,7 +395,7 @@ export default async function WindRatedGarageDoorsCityPage({
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Design Options</p>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">Design Options</p>
             <h2 className="mb-4 text-3xl font-bold md:text-5xl">Wind-Rated Styles That Still Look Premium</h2>
             <p className="text-lg leading-8 text-gray-600">Wind-rated does not have to mean plain or bulky. The right system can protect the home while still upgrading the exterior.</p>
           </div>
@@ -437,7 +437,7 @@ export default async function WindRatedGarageDoorsCityPage({
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">How We Handle It</p>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">How We Handle It</p>
             <h2 className="mb-4 text-3xl font-bold md:text-5xl">Our Wind-Rated Garage Door Process in {cityName}</h2>
             <p className="text-lg leading-8 text-gray-600">Better guidance, cleaner installation, stronger final result.</p>
           </div>

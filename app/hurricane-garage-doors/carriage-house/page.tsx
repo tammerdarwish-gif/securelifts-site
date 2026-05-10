@@ -627,7 +627,7 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Decorative Style, Real Protection
             </p>
             <h2 className="mb-5 text-3xl font-bold md:text-5xl">

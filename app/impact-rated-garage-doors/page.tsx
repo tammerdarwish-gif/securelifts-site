@@ -275,7 +275,7 @@ export default function ImpactRatedGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Why This Category Matters
             </p>
             <h2 className="mb-5 text-3xl font-bold md:text-5xl">
@@ -380,7 +380,7 @@ export default function ImpactRatedGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Design Options
             </p>
             <h2 className="mb-4 text-3xl font-bold md:text-5xl">
@@ -469,7 +469,7 @@ export default function ImpactRatedGarageDoorsPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step) => (
               <div key={step.number} className="text-center">
-                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-3xl font-bold text-blue-700">
+                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-3xl font-bold text-blue-800">
                   {step.number}
                 </div>
                 <h3 className="mb-3 text-lg font-semibold text-slate-900">
@@ -486,7 +486,7 @@ export default function ImpactRatedGarageDoorsPage() {
       <section className="bg-white px-6 py-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Why SecureLifts
             </p>
             <h2 className="mb-6 text-3xl font-bold md:text-5xl">
@@ -581,7 +581,7 @@ export default function ImpactRatedGarageDoorsPage() {
       <section className="bg-slate-50 px-6 py-20">
         <div className="mx-auto max-w-3xl">
           <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-800">
               Questions
             </p>
             <h2 className="mb-4 text-3xl font-bold md:text-5xl">
