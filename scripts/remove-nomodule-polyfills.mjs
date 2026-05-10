@@ -1,9 +1,12 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const appDir = join(process.cwd(), ".next", "server", "app");
+const serverDir = join(process.cwd(), ".next", "server");
+const staticChunksDir = join(process.cwd(), ".next", "static", "chunks");
 const polyfillScriptPattern =
-  /<script\s+src="\/_next\/static\/chunks\/polyfills-[^"]+\.js"\s+noModule="">\s*<\/script>/g;
+  /<script\b(?=[^>]*\bsrc=["']\/_next\/static\/chunks\/polyfills-[^"']+\.js["'])(?=[^>]*\b(?:noModule|nomodule)\b)[^>]*>\s*<\/script>/g;
+const polyfillPreloadPattern =
+  /<link\b(?=[^>]*\bhref=["']\/_next\/static\/chunks\/polyfills-[^"']+\.js["'])[^>]*>/g;
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -19,11 +22,14 @@ async function walk(dir) {
 
 let updated = 0;
 
-for (const file of await walk(appDir)) {
-  if (!file.endsWith(".html")) continue;
+for (const file of await walk(serverDir)) {
+  if (!file.endsWith(".html") && !file.endsWith(".js")) continue;
 
   const html = await readFile(file, "utf8");
-  const nextHtml = html.replace(polyfillScriptPattern, "");
+  const nextHtml = html
+    .replace(polyfillScriptPattern, "")
+    .replace(polyfillPreloadPattern, "")
+    .replace(/polyfillFiles:\[[^\]]*\]/g, "polyfillFiles:[]");
 
   if (nextHtml !== html) {
     await writeFile(file, nextHtml);
@@ -31,4 +37,21 @@ for (const file of await walk(appDir)) {
   }
 }
 
-console.log(`Removed legacy nomodule polyfill scripts from ${updated} HTML files.`);
+let removedFiles = 0;
+
+try {
+  const chunks = await readdir(staticChunksDir, { withFileTypes: true });
+  await Promise.all(
+    chunks.map(async (entry) => {
+      if (!entry.isFile() || !/^polyfills-.*\.js$/.test(entry.name)) return;
+      await rm(join(staticChunksDir, entry.name));
+      removedFiles += 1;
+    })
+  );
+} catch {
+  // Some build outputs do not include a static chunks directory.
+}
+
+console.log(
+  `Removed legacy nomodule polyfills from ${updated} HTML files and deleted ${removedFiles} polyfill chunks.`
+);

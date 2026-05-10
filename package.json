@@ -10,8 +10,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "postbuild": "node scripts/remove-nomodule-polyfills.mjs",
+    "build": "next build --webpack && node scripts/remove-nomodule-polyfills.mjs",
     "start": "next start",
     "lint": "eslint"
   },
