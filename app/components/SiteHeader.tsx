@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import MobileHeaderMenu from "./MobileHeaderMenu";
 
@@ -49,7 +48,7 @@ export default function SiteHeader() {
                 className="flex items-center gap-1 text-sm font-bold text-slate-900 transition hover:text-red-600"
               >
                 Services
-                <ChevronDown className="h-4 w-4" />
+                <span aria-hidden="true">v</span>
               </button>
 
               <div className="invisible absolute left-0 top-full mt-4 w-[320px] rounded-3xl border border-slate-200 bg-white p-3 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">

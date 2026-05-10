@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
 
 type HeaderLink = {
   label: string;
@@ -34,7 +33,9 @@ export default function MobileHeaderMenu({
         onClick={() => setMobileOpen((prev) => !prev)}
         className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 transition hover:bg-slate-50 lg:hidden"
       >
-        {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        <span className="text-xs font-black uppercase tracking-wide">
+          {mobileOpen ? "Close" : "Menu"}
+        </span>
       </button>
 
       {mobileOpen && (
@@ -47,9 +48,12 @@ export default function MobileHeaderMenu({
                 className="flex items-center justify-between rounded-2xl px-4 py-4 text-left text-base font-bold text-slate-900 transition hover:bg-slate-50"
               >
                 <span>Services</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition ${servicesOpen ? "rotate-180" : ""}`}
-                />
+                <span
+                  className={`text-lg transition ${servicesOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                >
+                  v
+                </span>
               </button>
 
               {servicesOpen && (
