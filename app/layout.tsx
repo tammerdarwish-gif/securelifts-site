@@ -4,6 +4,7 @@ import SiteHeader from "./components/SiteHeader";
 import StickyCTA from "./components/StickyCTA";
 
 const GA_MEASUREMENT_ID = "G-NRWSY3V29J";
+const ADDITIONAL_GA_MEASUREMENT_ID = "G-MM5H23RMXS";
 const GOOGLE_ADS_ID = "AW-17481132065";
 const GOOGLE_ADS_PHONE_CONVERSION_ID = "AW-17481132065/F22OCPvmkfQbEKHQ049B";
 const PHONE_NUMBER = "(866) 828-1818";
@@ -47,6 +48,7 @@ export default function RootLayout({
         window.gtag('js', new Date());
         window.gtag('config', '${GOOGLE_ADS_ID}');
         window.gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+        window.gtag('config', '${ADDITIONAL_GA_MEASUREMENT_ID}', { send_page_view: true });
         window.gtag('config', '${GOOGLE_ADS_PHONE_CONVERSION_ID}', {
           phone_conversion_number: '${PHONE_NUMBER}'
         });
