@@ -1,21 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { FaCheckCircle, FaPhoneAlt } from "react-icons/fa";
 
 type QuickLeadFormProps = {
   defaultService?: string;
   title?: string;
   intro?: string;
   compact?: boolean;
-};
-
-type LeadState = {
-  name: string;
-  phone: string;
-  city: string;
-  service: string;
-  message: string;
 };
 
 const serviceOptions = [
@@ -32,38 +23,28 @@ const serviceOptions = [
   "Commercial Door Service",
 ];
 
-const initialLeadState = (defaultService = "Garage Door Repair"): LeadState => ({
-  name: "",
-  phone: "",
-  city: "",
-  service: defaultService,
-  message: "",
-});
-
 export default function QuickLeadForm({
   defaultService = "Garage Door Repair",
   title = "Get Fast Garage Door Help",
   intro = "Send a quick request and SecureLifts will contact you to confirm the next step.",
   compact = false,
 }: QuickLeadFormProps) {
-  const [lead, setLead] = useState<LeadState>(() =>
-    initialLeadState(defaultService)
-  );
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  function handleChange(
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) {
-    const { name, value } = event.target;
-    setLead((prev) => ({ ...prev, [name]: value }));
-  }
+  const visibleServiceOptions = serviceOptions.includes(defaultService)
+    ? serviceOptions
+    : [defaultService, ...serviceOptions];
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") || "");
+    const phone = String(formData.get("phone") || "");
+    const city = String(formData.get("city") || "");
+    const service = String(formData.get("service") || defaultService);
+    const message = String(formData.get("message") || "Quick lead form request");
 
     try {
       const response = await fetch("/api/send", {
@@ -72,16 +53,16 @@ export default function QuickLeadForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: lead.name,
-          phone: lead.phone,
+          name,
+          phone,
           email: "",
           address: "Not provided - quick lead form",
-          city: lead.city,
+          city,
           zip: "",
-          service: lead.service,
+          service,
           date: "",
           time: "",
-          message: lead.message || "Quick lead form request",
+          message,
           sourcePage:
             typeof window !== "undefined" ? window.location.href : "",
           referrer:
@@ -106,7 +87,7 @@ export default function QuickLeadForm({
       }
 
       setSubmitted(true);
-      setLead(initialLeadState(defaultService));
+      form.reset();
     } catch {
       alert("The request could not be sent. Please call SecureLifts now.");
     } finally {
@@ -118,7 +99,9 @@ export default function QuickLeadForm({
     return (
       <div className="rounded-3xl border border-green-200 bg-green-50 p-7 text-slate-950 shadow-sm">
         <div className="flex items-start gap-3">
-          <FaCheckCircle className="mt-1 shrink-0 text-green-600" />
+          <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-black !text-white">
+            ✓
+          </span>
           <div>
             <h3 className="text-2xl font-black">Request Received</h3>
             <p className="mt-2 leading-7 text-slate-700">
@@ -129,7 +112,6 @@ export default function QuickLeadForm({
               href="tel:18668281818"
               className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 font-bold !text-white transition hover:bg-red-700"
             >
-              <FaPhoneAlt />
               Call (866) 828-1818
             </a>
           </div>
@@ -155,8 +137,6 @@ export default function QuickLeadForm({
         <input
           required
           name="name"
-          value={lead.name}
-          onChange={handleChange}
           placeholder="Your name"
           className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
         />
@@ -166,8 +146,6 @@ export default function QuickLeadForm({
           name="phone"
           type="tel"
           inputMode="tel"
-          value={lead.phone}
-          onChange={handleChange}
           placeholder="Phone number"
           className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
         />
@@ -175,8 +153,6 @@ export default function QuickLeadForm({
         <input
           required
           name="city"
-          value={lead.city}
-          onChange={handleChange}
           placeholder="City"
           className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
         />
@@ -184,11 +160,10 @@ export default function QuickLeadForm({
         <select
           required
           name="service"
-          value={lead.service}
-          onChange={handleChange}
+          defaultValue={defaultService}
           className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
         >
-          {serviceOptions.map((service) => (
+          {visibleServiceOptions.map((service) => (
             <option key={service} value={service}>
               {service}
             </option>
@@ -198,8 +173,6 @@ export default function QuickLeadForm({
 
       <textarea
         name="message"
-        value={lead.message}
-        onChange={handleChange}
         rows={compact ? 3 : 4}
         placeholder="What happened? Door stuck, spring broke, opener issue..."
         className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
@@ -217,7 +190,6 @@ export default function QuickLeadForm({
           href="tel:18668281818"
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 py-4 font-bold !text-white transition hover:bg-black"
         >
-          <FaPhoneAlt />
           Call Now
         </a>
       </div>
