@@ -128,7 +128,7 @@ const legacyRedirects = [
 
 const nextConfig: NextConfig = {
   images: {
-    qualities: [48, 52, 75],
+    qualities: [34, 48, 52, 75],
   },
   async headers() {
     return [

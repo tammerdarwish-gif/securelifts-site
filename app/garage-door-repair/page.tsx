@@ -212,6 +212,9 @@ export default function GarageDoorRepairPage() {
           alt="SecureLifts garage door repair technician working on a garage door in South Florida"
           fill
           priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={34}
           className="object-cover object-[66%_center] md:object-[78%_center]"
         />
 

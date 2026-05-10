@@ -176,7 +176,7 @@ export default function HomePageClient() {
             priority
             fetchPriority="high"
             sizes="100vw"
-            quality={48}
+            quality={34}
             className="object-cover object-center opacity-55"
           />
         </div>
