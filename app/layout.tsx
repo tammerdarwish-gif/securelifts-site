@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import StickyCTA from "./components/StickyCTA";
@@ -28,37 +27,45 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const deferredGoogleTags = `
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      if (window.__secureLiftsGoogleTagsReady) return;
+
+      var loaded = false;
+      var loadTags = function () {
+        if (loaded) return;
+        loaded = true;
+        window.__secureLiftsGoogleTagsReady = true;
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}';
+        document.head.appendChild(script);
+
+        window.gtag('js', new Date());
+        window.gtag('config', '${GOOGLE_ADS_ID}');
+        window.gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+        window.gtag('config', '${GOOGLE_ADS_PHONE_CONVERSION_ID}', {
+          phone_conversion_number: '${PHONE_NUMBER}'
+        });
+      };
+
+      window.loadSecureLiftsGoogleTags = loadTags;
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (eventName) {
+        window.addEventListener(eventName, loadTags, { once: true, passive: true });
+      });
+    })();
+  `;
+
   return (
     <html lang="en">
       <body className="antialiased pb-24">
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="lazyOnload"
+        <script
+          id="securelifts-deferred-google-tags"
+          dangerouslySetInnerHTML={{ __html: deferredGoogleTags }}
         />
-
-        <Script id="google-analytics-and-ads" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}', {
-              send_page_view: true
-            });
-            gtag('config', '${GOOGLE_ADS_ID}');
-          `}
-        </Script>
-
-        <Script id="google-ads-phone-conversion" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            if (typeof window.gtag === 'function') {
-              window.gtag('config', '${GOOGLE_ADS_PHONE_CONVERSION_ID}', {
-                phone_conversion_number: '${PHONE_NUMBER}'
-              });
-            }
-          `}
-        </Script>
 
         <SiteHeader />
         {children}

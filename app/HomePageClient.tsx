@@ -170,11 +170,12 @@ export default function HomePageClient() {
       <section className="relative min-h-[calc(100vh-82px)] overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/images/approved/service-van-at-door-card.jpg"
+            src="/images/approved/service-van-at-door-hero-optimized.jpg"
             alt="SecureLifts garage door service van in South Florida"
             fill
             priority
             sizes="100vw"
+            quality={48}
             className="object-cover object-center opacity-55"
           />
         </div>
@@ -564,6 +565,7 @@ export default function HomePageClient() {
               alt="Emergency garage door repair service"
               fill
               sizes="100vw"
+              quality={52}
               className="object-cover opacity-25"
             />
         </div>

@@ -10,11 +10,6 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import type { IconType } from "react-icons";
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
 
 type FormDataState = {
   name: string;
@@ -144,7 +139,8 @@ export default function BookServicePage() {
 
       if (data.success) {
         // --- GOOGLE ADS CONTACT FORM CONVERSION ---
-        if (typeof window !== "undefined" && window.gtag) {
+        if (typeof window !== "undefined") {
+          window.loadSecureLiftsGoogleTags?.();
           window.gtag("event", "conversion", {
             'send_to': 'AW-17481132065/F_m9CKXmkfQbEKHQ049B',
           });

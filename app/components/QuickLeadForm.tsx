@@ -80,7 +80,8 @@ export default function QuickLeadForm({
         return;
       }
 
-      if (typeof window !== "undefined" && window.gtag) {
+      if (typeof window !== "undefined") {
+        window.loadSecureLiftsGoogleTags?.();
         window.gtag("event", "conversion", {
           send_to: "AW-17481132065/F_m9CKXmkfQbEKHQ049B",
         });
