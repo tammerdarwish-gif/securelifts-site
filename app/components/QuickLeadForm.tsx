@@ -98,14 +98,16 @@ export default function QuickLeadForm({
 
   if (submitted) {
     return (
-      <div className="rounded-3xl border border-green-200 bg-green-50 p-7 text-slate-950 shadow-sm">
+      <div className="rounded-3xl border border-slate-200 bg-white p-7 !text-slate-950 shadow-xl">
         <div className="flex items-start gap-3">
           <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-black !text-white">
             ✓
           </span>
           <div>
-            <h3 className="text-2xl font-black">Request Received</h3>
-            <p className="mt-2 leading-7 text-slate-700">
+            <h3 className="text-2xl font-black !text-slate-950">
+              Thank You - Request Received
+            </h3>
+            <p className="mt-2 leading-7 !text-slate-700">
               Thank you. SecureLifts received your request and will contact you
               shortly. For urgent service, call now.
             </p>
