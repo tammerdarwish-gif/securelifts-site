@@ -9,6 +9,12 @@ function escapeHtml(value: unknown) {
     .replace(/'/g, "&#39;");
 }
 
+const FROM_EMAILS = [
+  process.env.RESEND_FROM_EMAIL,
+  "SecureLifts <bookings@send.securelifts.com>",
+  "SecureLifts <bookings@securelifts.com>",
+].filter((value): value is string => Boolean(value));
+
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
@@ -58,8 +64,7 @@ export async function POST(req: Request) {
         ? email
         : undefined;
 
-    const result = await resend.emails.send({
-      from: "SecureLifts <bookings@securelifts.com>",
+    const emailPayload = {
       to: "info@securelifts.com",
       replyTo,
       subject: `New ${escapeHtml(service)} Lead - SecureLifts`,
@@ -81,24 +86,35 @@ export async function POST(req: Request) {
           <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
         </div>
       `,
-    });
+    };
 
-    if (result.error) {
-      console.error("RESEND API ERROR:", result.error);
+    for (const from of FROM_EMAILS) {
+      try {
+        const result = await resend.emails.send({
+          from,
+          ...emailPayload,
+        });
 
-      return Response.json(
-        {
-          success: false,
-          error: "The request could not be sent. Please call SecureLifts now.",
-        },
-        { status: 500 }
-      );
+        if (!result.error) {
+          return Response.json({
+            success: true,
+            result,
+          });
+        }
+
+        console.error("RESEND API ERROR:", { from, error: result.error });
+      } catch (error) {
+        console.error("RESEND SEND ATTEMPT ERROR:", { from, error });
+      }
     }
 
-    return Response.json({
-      success: true,
-      result,
-    });
+    return Response.json(
+      {
+        success: false,
+        error: "The request could not be sent. Please call SecureLifts now.",
+      },
+      { status: 500 }
+    );
   } catch (error: unknown) {
     console.error("FULL SEND ERROR:", error);
 
