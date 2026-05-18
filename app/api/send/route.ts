@@ -53,9 +53,15 @@ export async function POST(req: Request) {
       );
     }
 
+    const replyTo =
+      typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        ? email
+        : undefined;
+
     const result = await resend.emails.send({
-      from: "SecureLifts <bookings@send.securelifts.com>",
+      from: "SecureLifts <bookings@securelifts.com>",
       to: "info@securelifts.com",
+      replyTo,
       subject: `New ${escapeHtml(service)} Lead - SecureLifts`,
       html: `
         <div style="font-family: Arial, Helvetica, sans-serif; color: #111827; line-height: 1.6;">
@@ -83,7 +89,7 @@ export async function POST(req: Request) {
       return Response.json(
         {
           success: false,
-          error: result.error.message || "Resend failed to send email",
+          error: "The request could not be sent. Please call SecureLifts now.",
         },
         { status: 500 }
       );
@@ -96,16 +102,10 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error("FULL SEND ERROR:", error);
 
-    let errorMessage = "Unknown email error";
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
     return Response.json(
       {
         success: false,
-        error: errorMessage,
+        error: "The request could not be sent. Please call SecureLifts now.",
       },
       { status: 500 }
     );
