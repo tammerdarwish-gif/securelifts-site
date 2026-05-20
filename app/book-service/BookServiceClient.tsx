@@ -92,6 +92,7 @@ export default function BookServicePage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    const submittedForm = new FormData(e.currentTarget);
 
     try {
       const response = await fetch("/api/send", {
@@ -110,6 +111,7 @@ export default function BookServicePage() {
           date: formData.preferredDate,
           time: formData.preferredTime,
           message: formData.message,
+          smsOptIn: submittedForm.get("smsOptIn") === "yes",
           sourcePage:
             typeof window !== "undefined" ? window.location.href : "",
           referrer:
@@ -381,6 +383,25 @@ export default function BookServicePage() {
               className="rounded-xl border border-slate-300 px-4 py-4"
             />
           </div>
+
+          <label className="mt-6 flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+            <input
+              type="checkbox"
+              name="smsOptIn"
+              value="yes"
+              className="mt-1 h-4 w-4 shrink-0"
+            />
+            <span>
+              I agree to receive SecureLifts support SMS notifications. Message
+              frequency varies. Msg &amp; data rates may apply. Reply STOP to
+              opt out. Reply HELP for help. Consent is not a condition of
+              purchase. See our{" "}
+              <a href="/privacy-policy" className="font-bold underline">
+                Privacy Policy
+              </a>
+              .
+            </span>
+          </label>
 
           <button
             type="submit"

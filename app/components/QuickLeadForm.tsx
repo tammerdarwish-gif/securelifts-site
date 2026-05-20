@@ -45,6 +45,7 @@ export default function QuickLeadForm({
     const city = String(formData.get("city") || "");
     const service = String(formData.get("service") || defaultService);
     const message = String(formData.get("message") || "Quick lead form request");
+    const smsOptIn = formData.get("smsOptIn") === "yes";
 
     try {
       const response = await fetch("/api/send", {
@@ -63,6 +64,7 @@ export default function QuickLeadForm({
           date: "",
           time: "",
           message,
+          smsOptIn,
           sourcePage:
             typeof window !== "undefined" ? window.location.href : "",
           referrer:
@@ -181,6 +183,25 @@ export default function QuickLeadForm({
         placeholder="What happened? Door stuck, spring broke, opener issue..."
         className="mt-4 w-full rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
       />
+
+      <label className="mt-4 flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 !text-slate-700">
+        <input
+          type="checkbox"
+          name="smsOptIn"
+          value="yes"
+          className="mt-1 h-4 w-4 shrink-0"
+        />
+        <span>
+          I agree to receive SecureLifts support SMS notifications. Message
+          frequency varies. Msg &amp; data rates may apply. Reply STOP to opt
+          out. Reply HELP for help. Consent is not a condition of purchase. See
+          our{" "}
+          <a href="/privacy-policy" className="font-bold underline">
+            Privacy Policy
+          </a>
+          .
+        </span>
+      </label>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto]">
         <button

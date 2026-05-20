@@ -45,6 +45,7 @@ export async function POST(req: Request) {
       date,
       time,
       message,
+      smsOptIn,
       sourcePage,
       referrer,
     } = body ?? {};
@@ -80,6 +81,7 @@ export async function POST(req: Request) {
           <p><strong>Service:</strong> ${escapeHtml(service)}</p>
           <p><strong>Preferred Date:</strong> ${escapeHtml(date)}</p>
           <p><strong>Preferred Time:</strong> ${escapeHtml(time)}</p>
+          <p><strong>SMS Opt-In:</strong> ${smsOptIn ? "Yes" : "No"}</p>
           <p><strong>Message:</strong> ${escapeHtml(message)}</p>
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p><strong>Lead Source Page:</strong> ${escapeHtml(sourcePage)}</p>
