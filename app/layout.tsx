@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
+import SiteFooter from "./components/SiteFooter";
 import StickyCTA from "./components/StickyCTA";
 
 const GA_MEASUREMENT_ID = "G-NRWSY3V29J";
@@ -72,6 +73,7 @@ export default function RootLayout({
 
         <SiteHeader />
         {children}
+        <SiteFooter />
         <StickyCTA />
         <Script
           src="https://widgets.leadconnectorhq.com/loader.js"
