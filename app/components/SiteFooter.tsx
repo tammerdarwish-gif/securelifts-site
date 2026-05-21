@@ -8,12 +8,20 @@ export default function SiteFooter() {
           &copy; {new Date().getFullYear()} SecureLifts Garage Doors. All rights
           reserved.
         </p>
-        <Link
-          href="/privacy-policy"
-          className="font-semibold text-slate-900 underline-offset-4 hover:underline"
-        >
-          Privacy Policy
-        </Link>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/privacy-policy"
+            className="font-semibold text-slate-900 underline-offset-4 hover:underline"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms-of-service"
+            className="font-semibold text-slate-900 underline-offset-4 hover:underline"
+          >
+            Terms of Service
+          </Link>
+        </div>
       </div>
     </footer>
   );

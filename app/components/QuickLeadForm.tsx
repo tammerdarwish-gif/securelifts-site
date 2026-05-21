@@ -199,6 +199,10 @@ export default function QuickLeadForm({
           <a href="/privacy-policy" className="font-bold underline">
             Privacy Policy
           </a>
+          {" "}and{" "}
+          <a href="/terms-of-service" className="font-bold underline">
+            Terms of Service
+          </a>
           .
         </span>
       </label>
