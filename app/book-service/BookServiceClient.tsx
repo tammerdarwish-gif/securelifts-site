@@ -392,16 +392,12 @@ export default function BookServicePage() {
               className="mt-1 h-4 w-4 shrink-0"
             />
             <span>
-              I agree to receive SecureLifts support SMS notifications. Message
-              frequency varies. Msg &amp; data rates may apply. Reply STOP to
-              opt out. Reply HELP for help. Consent is not a condition of
-              purchase. See our{" "}
+              I agree to receive AAA Garage Door Inc. DBA SecureLifts support
+              SMS notifications. Message frequency varies. Msg &amp; data rates
+              may apply. Reply STOP to opt out. Reply HELP for help. Consent is
+              not a condition of purchase. See our{" "}
               <a href="/privacy-policy" className="font-bold underline">
                 Privacy Policy
-              </a>
-              {" "}and{" "}
-              <a href="/terms-of-service" className="font-bold underline">
-                Terms of Service
               </a>
               .
             </span>
