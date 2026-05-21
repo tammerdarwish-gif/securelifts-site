@@ -58,6 +58,17 @@ export default function PrivacyPolicyPage() {
             provide when you opt in to receive text messages from us.
           </p>
 
+          <section className="mt-8">
+            <h2 className="text-2xl font-black tracking-tight text-slate-950">
+              Cookies and Tracking Technologies
+            </h2>
+            <p className="mt-3 text-base leading-8 text-slate-700">
+              We use cookies and similar tracking technologies to track the
+              activity on our service and hold certain information to improve
+              and analyze our service.
+            </p>
+          </section>
+
           <div className="mt-10 space-y-8">
             {sections.map((section) => (
               <section key={section.title}>
