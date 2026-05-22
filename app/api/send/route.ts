@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { syncLead } from "@/lib/leadSync";
 
 function escapeHtml(value: unknown) {
   return String(value ?? "")
@@ -60,6 +61,8 @@ export async function POST(req: Request) {
       );
     }
 
+    const leadSyncResult = await syncLead(body);
+
     const replyTo =
       typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
         ? email
@@ -101,6 +104,7 @@ export async function POST(req: Request) {
           return Response.json({
             success: true,
             result,
+            leadSync: leadSyncResult,
           });
         }
 
