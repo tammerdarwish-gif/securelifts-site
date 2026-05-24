@@ -189,6 +189,16 @@ function leadNotes(lead: LeadInput) {
     .join("\n");
 }
 
+function leadDisplayName(lead: LeadInput) {
+  return (
+    lead.name ||
+    [lead.firstName, lead.lastName].filter(Boolean).join(" ") ||
+    lead.phone ||
+    lead.email ||
+    "SecureLifts Website Lead"
+  );
+}
+
 function extractCreatedId(data: unknown) {
   if (!isRecord(data)) {
     return "";
@@ -234,11 +244,15 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     "x-api-key": apiKey,
   };
 
+  const displayName = leadDisplayName(lead);
+
   const customerPayload = compactObject({
     firstName: lead.firstName,
     lastName: lead.lastName,
     name: lead.name,
     fullName: lead.name,
+    displayName,
+    display_name: displayName,
     phone: lead.phone,
     email: lead.email,
     address: lead.address,
@@ -246,8 +260,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     state: lead.state || "FL",
     zip: lead.zip,
     postalCode: lead.zip,
-    accountStatus: "Lead",
-    status: "Lead",
+    accountStatus: "Active",
     leadSource: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
   });
