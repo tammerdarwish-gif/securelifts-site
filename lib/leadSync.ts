@@ -1,3 +1,4 @@
+
 export type LeadInput = {
   name?: string;
   firstName?: string;
@@ -303,11 +304,11 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     };
   }
 
-  const customerId = extractCreatedId(customerResult.data);
+  const customerId = extractCreatedId(customerResult.data);  const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";  const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";  const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);  const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
 
   const jobPayload = compactObject({
     customerId,
-    customer_id: customerId,
+    customer_id: customerId,    customerID: customerId,    customer: { id: customerId },    jobType,    job_type: jobType,    jobTypeName: jobType,    job_type_name: jobType,    jobTypeId: jobTypeId,    job_type_id: jobTypeId,    billing: billingCode,    billingCode,    billing_code: billingCode,    billingType: billingCode,    billing_type: billingCode,
     title: lead.service || "SecureLifts Service Lead",
     name: lead.service || "SecureLifts Service Lead",
     description: leadNotes(lead),
@@ -316,7 +317,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     city: lead.city,
     state: lead.state || "FL",
     zip: lead.zip,
-    status: "Pending",
+    status: jobStatus,    statusId: jobStatus,    status_id: jobStatus,
     source: "SecureLifts Website / GoHighLevel",
   });
 
