@@ -245,14 +245,19 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   };
 
   const displayName = leadDisplayName(lead);
-
-  const customerPayload = compactObject({
+  const fieldPulseCustomer = compactObject({
     firstName: lead.firstName,
+    first_name: lead.firstName,
     lastName: lead.lastName,
-    name: lead.name,
-    fullName: lead.name,
+    last_name: lead.lastName,
+    name: displayName,
+    fullName: displayName,
+    full_name: displayName,
     displayName,
     display_name: displayName,
+    display: displayName,
+    companyName: displayName,
+    company_name: displayName,
     phone: lead.phone,
     email: lead.email,
     address: lead.address,
@@ -260,15 +265,25 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     state: lead.state || "FL",
     zip: lead.zip,
     postalCode: lead.zip,
+    postal_code: lead.zip,
     accountStatus: "Active",
+    account_status: "Active",
     leadSource: "SecureLifts Website / GoHighLevel",
+    lead_source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
   });
+  const customerPayload = {
+    ...fieldPulseCustomer,
+    customer: fieldPulseCustomer,
+  };
 
   const customerResult = await postJson(`${baseUrl}/customers`, customerPayload, headers);
 
   if (!customerResult.success) {
-    console.error("FIELD PULSE CUSTOMER SYNC ERROR:", customerResult);
+    console.error("FIELD PULSE CUSTOMER SYNC ERROR:", {
+      ...customerResult,
+      payloadKeys: Object.keys(fieldPulseCustomer),
+    });
 
     return {
       enabled: true,
