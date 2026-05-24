@@ -244,12 +244,12 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     "x-api-key": apiKey,
   };
 
-  const displayName = `${leadDisplayName(lead)} - ${Date.now()}`;
+  const originalName = leadDisplayName(lead); const uniqueLeadId = `SL-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; const displayName = `${originalName} - ${uniqueLeadId}`;
   const fieldPulseCustomer = compactObject({
-    firstName: lead.firstName,
-    first_name: lead.firstName,
-    lastName: lead.lastName,
-    last_name: lead.lastName,
+    firstName: displayName,
+    first_name: displayName,
+    lastName: uniqueLeadId,
+    last_name: uniqueLeadId,
     name: displayName,
     fullName: displayName,
     full_name: displayName,
