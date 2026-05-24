@@ -293,7 +293,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     };
   }
 
-  if (process.env.FIELD_PULSE_CREATE_JOB === "false") {
+  if (process.env.FIELD_PULSE_CREATE_JOB !== "true") {
     return {
       enabled: true,
       success: true,
