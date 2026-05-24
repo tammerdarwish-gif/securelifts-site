@@ -225,7 +225,7 @@ function extractCreatedId(data: unknown) {
   }
 
   for (const key of ["data", "customer", "customers", "result", "results", "item", "items", "record", "records"] as const) {
-    if (isRecord(data[key])) {
+    if (data[key] != null) {
       const nested = extractCreatedId(data[key]);
       if (nested) {
         return nested;
