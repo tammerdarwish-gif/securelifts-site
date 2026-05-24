@@ -34,7 +34,7 @@ const DEFAULT_HIGHLEVEL_API_BASE_URL = "https://services.leadconnectorhq.com";
 const DEFAULT_HIGHLEVEL_API_VERSION = "2023-02-21";
 
 function asString(value: unknown) {
-  return typeof value === "string" ? value.trim() : "";
+  if (typeof value === "string") {    return value.trim();  }  if (typeof value === "number" && Number.isFinite(value)) {    return String(value);  }  return "";
 }
 
 function asBoolean(value: unknown) {
@@ -206,7 +206,7 @@ function extractCreatedId(data: unknown) {
   }
 
   const directId = asString(
-    data.id ?? data.customerId ?? data.customer_id ?? data.contactId
+    data.id ?? data.customerId ?? data.customer_id ?? data.customerID ?? data.contactId ?? data.contact_id
   );
 
   if (directId) {
