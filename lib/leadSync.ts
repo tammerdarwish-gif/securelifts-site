@@ -201,6 +201,17 @@ function leadDisplayName(lead: LeadInput) {
 }
 
 function extractCreatedId(data: unknown) {
+    if (Array.isArray(data)) {
+          for (const item of data) {
+                  const nested = extractCreatedId(item);
+                  if (nested) {
+                            return nested;
+                  }
+          }
+          return "";
+    }
+
+  
   if (!isRecord(data)) {
     return "";
   }
@@ -213,7 +224,7 @@ function extractCreatedId(data: unknown) {
     return directId;
   }
 
-  for (const key of ["data", "customer", "result"] as const) {
+  for (const key of ["data", "customer", "customers", "result", "results", "item", "items", "record", "records"] as const) {
     if (isRecord(data[key])) {
       const nested = extractCreatedId(data[key]);
       if (nested) {
