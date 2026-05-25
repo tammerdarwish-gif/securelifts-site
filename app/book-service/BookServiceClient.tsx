@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import {
-  FaCalendarCheck,
   FaPhoneAlt,
   FaShieldAlt,
   FaClock,
@@ -11,45 +9,7 @@ import {
 } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
-type FormDataState = {
-  name: string;
-  phone: string;
-  email: string;
-  address: string;
-  city: string;
-  zip: string;
-  service: string;
-  preferredDate: string;
-  preferredTime: string;
-  message: string;
-};
-
-type SendApiResponse = {
-  success?: boolean;
-  error?: string;
-  message?: string;
-};
-
-const TIME_SLOTS = [
-  "8:00 AM - 10:00 AM",
-  "10:00 AM - 12:00 PM",
-  "12:00 PM - 2:00 PM",
-  "2:00 PM - 4:00 PM",
-  "4:00 PM - 6:00 PM",
-];
-
-const INITIAL_FORM_DATA: FormDataState = {
-  name: "",
-  phone: "",
-  email: "",
-  address: "",
-  city: "",
-  zip: "",
-  service: "",
-  preferredDate: "",
-  preferredTime: "",
-  message: "",
-};
+const FIELD_PULSE_PORTAL_URL = "https://portal.fieldpulse.com/securelifts";
 
 const trustItems: Array<{
   Icon: IconType;
@@ -74,117 +34,6 @@ const trustItems: Array<{
 ];
 
 export default function BookServicePage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
-
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    const submittedForm = new FormData(e.currentTarget);
-
-    try {
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          address: formData.address,
-          city: formData.city,
-          zip: formData.zip,
-          service: formData.service,
-          date: formData.preferredDate,
-          time: formData.preferredTime,
-          message: formData.message,
-          smsOptIn: submittedForm.get("smsOptIn") === "yes",
-          sourcePage:
-            typeof window !== "undefined" ? window.location.href : "",
-          referrer:
-            typeof document !== "undefined" ? document.referrer : "",
-        }),
-      });
-
-      const rawText = await response.text();
-
-      let data: SendApiResponse = {};
-
-      try {
-        data = rawText ? (JSON.parse(rawText) as SendApiResponse) : {};
-      } catch {
-        data = {
-          success: false,
-          error: rawText || `HTTP ${response.status}`,
-        };
-      }
-
-      if (!response.ok) {
-        alert(
-          `Form error: ${data.error || data.message || `HTTP ${response.status}`}`
-        );
-        return;
-      }
-
-      if (data.success) {
-        // --- GOOGLE ADS CONTACT FORM CONVERSION ---
-        if (typeof window !== "undefined") {
-          window.loadSecureLiftsGoogleTags?.();
-          window.gtag("event", "conversion", {
-            'send_to': 'AW-17481132065/F_m9CKXmkfQbEKHQ049B',
-          });
-        }
-        // ------------------------------------------
-
-        setSubmitted(true);
-      } else {
-        alert(
-          `Form error: ${data.error || data.message || "Unknown server error"}`
-        );
-      }
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Network or server error";
-
-      console.error("BOOK SERVICE SUBMIT ERROR:", error);
-      alert(`Submit failed: ${message}`);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  if (submitted) {
-    return (
-      <main className="min-h-screen bg-slate-50 px-6 py-20">
-        <div className="mx-auto max-w-3xl rounded-3xl bg-white p-10 text-center shadow-sm">
-          <div className="mx-auto inline-flex rounded-full bg-red-50 p-5 text-red-600">
-            <FaCalendarCheck className="text-3xl" />
-          </div>
-
-          <h1 className="mt-6 text-4xl font-black">Request Received</h1>
-
-          <p className="mt-4 text-lg text-slate-600">
-            Thank you. SecureLifts received your service request and will contact
-            you shortly to confirm details.
-          </p>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white">
@@ -221,10 +70,10 @@ export default function BookServicePage() {
                 Call (866) 828-1818
               </a>
               <a
-                href="#service-form"
+                href="#booking-portal"
                 className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 font-bold !text-white backdrop-blur transition hover:bg-white hover:!text-slate-950"
               >
-                Start Request
+                Book Online
               </a>
             </div>
           </div>
@@ -248,174 +97,31 @@ export default function BookServicePage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1.2fr_0.8fr]">
-        <form
-          id="service-form"
-          onSubmit={handleSubmit}
-          className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
+        <div
+          id="booking-portal"
+          className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
         >
-          <div className="mb-8">
+          <div className="border-b border-slate-200 p-8">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-              Service Details
+              SecureLifts Booking Portal
             </p>
             <h2 className="mt-2 text-3xl font-black">
-              Tell us what happened
+              Schedule your garage door service
             </h2>
             <p className="mt-3 leading-7 text-slate-600">
-              The more specific the request, the faster the team can route the
-              right help.
+              Choose the service details and appointment information directly
+              through the SecureLifts FieldPulse portal.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <input
-              required
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Full Name"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-
-            <input
-              required
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Phone Number"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-              inputMode="tel"
-            />
-
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email Address"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-
-            <input
-              required
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              placeholder="Service Address"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-
-            <input
-              required
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="City"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-
-            <input
-              name="zip"
-              value={formData.zip}
-              onChange={handleChange}
-              placeholder="ZIP Code"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-          </div>
-
-          <div className="mt-6 grid gap-6">
-            <select
-              required
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            >
-              <option value="" disabled>
-                Type of Service Needed
-              </option>
-              <option>Broken Spring Repair</option>
-              <option>Garage Door Repair</option>
-              <option>Garage Door Opener Repair</option>
-              <option>Garage Door Off-Track Repair</option>
-              <option>Garage Door Cable Repair</option>
-              <option>Garage Door Roller Replacement</option>
-              <option>Garage Door Panel Replacement</option>
-              <option>Garage Door Installation</option>
-              <option>Hurricane-Rated Garage Door Quote</option>
-              <option>Wind-Rated Garage Door Quote</option>
-              <option>Impact-Rated Garage Door Quote</option>
-              <option>Miami-Dade Rated Garage Door Quote</option>
-              <option>Emergency Garage Door Repair</option>
-              <option>Commercial Door Service</option>
-            </select>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              <input
-                type="date"
-                name="preferredDate"
-                value={formData.preferredDate}
-                onChange={handleChange}
-                className="rounded-xl border border-slate-300 px-4 py-4 text-center"
-              />
-
-              <select
-                name="preferredTime"
-                value={formData.preferredTime}
-                onChange={handleChange}
-                className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-center"
-              >
-                <option value="">Preferred Time Slot</option>
-                {TIME_SLOTS.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <textarea
-              rows={5}
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Describe the issue"
-              className="rounded-xl border border-slate-300 px-4 py-4"
-            />
-          </div>
-
-          <label className="mt-6 flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
-            <input
-              type="checkbox"
-              name="smsOptIn"
-              value="yes"
-              className="mt-1 h-4 w-4 shrink-0"
-            />
-            <span>
-              I agree to receive AAA Garage Door Inc. DBA SecureLifts support
-              SMS notifications. Message frequency varies. Msg &amp; data rates
-              may apply. Reply STOP to opt out. Reply HELP for help. Consent is
-              not a condition of purchase. See our{" "}
-              <a href="/privacy-policy" className="font-bold underline">
-                Privacy Policy
-              </a>
-              .
-            </span>
-          </label>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="mt-6 w-full rounded-xl bg-red-600 px-8 py-4 font-bold !text-white transition hover:bg-red-700 disabled:opacity-70 md:w-auto"
-          >
-            {loading ? "Sending..." : "Send Service Request"}
-          </button>
-
-          <p className="mt-4 text-sm leading-6 text-slate-500">
-            By submitting, you are asking SecureLifts to contact you about this
-            garage door service request.
-          </p>
-        </form>
+          <iframe
+            src={FIELD_PULSE_PORTAL_URL}
+            title="SecureLifts FieldPulse booking portal"
+            width="100%"
+            loading="lazy"
+            className="h-[760px] w-full border-0 md:h-[900px]"
+          />
+        </div>
 
         <div className="rounded-3xl bg-slate-50 p-8 md:sticky md:top-28 md:self-start">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
