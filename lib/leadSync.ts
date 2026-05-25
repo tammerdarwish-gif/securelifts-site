@@ -414,10 +414,77 @@ export async function syncLeadToHighLevel(lead: LeadInput): Promise<SyncResult> 
     };
   }
 
+  const pipelineId = process.env.HIGHLEVEL_PIPELINE_ID;
+  const pipelineStageId = process.env.HIGHLEVEL_PIPELINE_STAGE_ID;
+  const contactId = extractCreatedId(contactResult.data);
+  const defaultOpportunityValue = Number(
+    process.env.HIGHLEVEL_DEFAULT_OPPORTUNITY_VALUE || 0
+  );
+  const opportunityName = [
+    leadDisplayName(lead),
+    lead.service || "SecureLifts Service Lead",
+  ]
+    .filter(Boolean)
+    .join(" - ");
+
+  let opportunity: SyncResult = {
+    enabled: false,
+    success: true,
+    skipped: true,
+    error: "HIGHLEVEL_PIPELINE_ID or HIGHLEVEL_PIPELINE_STAGE_ID is not set",
+  };
+
+  if (pipelineId && pipelineStageId) {
+    if (!contactId) {
+      opportunity = {
+        enabled: true,
+        success: false,
+        error: "Could not find HighLevel contact ID for opportunity creation",
+        details: contactResult.data,
+      };
+    } else {
+      const opportunityResult = await postJson(
+        `${baseUrl}/opportunities/`,
+        compactObject({
+          locationId,
+          contactId,
+          pipelineId,
+          pipelineStageId,
+          status: "open",
+          name: opportunityName,
+          monetaryValue: Number.isFinite(defaultOpportunityValue)
+            ? defaultOpportunityValue
+            : 0,
+          source: "SecureLifts Website",
+        }),
+        headers
+      );
+
+      if (!opportunityResult.success) {
+        console.error("HIGHLEVEL OPPORTUNITY SYNC ERROR:", opportunityResult);
+        opportunity = {
+          enabled: true,
+          success: false,
+          error: "Could not create HighLevel opportunity",
+          details: opportunityResult,
+        };
+      } else {
+        opportunity = {
+          enabled: true,
+          success: true,
+          details: opportunityResult.data,
+        };
+      }
+    }
+  }
+
   return {
     enabled: true,
-    success: true,
-    details: contactResult.data,
+    success: opportunity.success,
+    details: {
+      contact: contactResult.data,
+      opportunity,
+    },
   };
 }
 
