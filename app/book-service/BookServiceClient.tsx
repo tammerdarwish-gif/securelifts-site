@@ -69,7 +69,7 @@ const trustItems: Array<{
   {
     Icon: FaCheckCircle,
     title: "Clear details",
-    text: "Your request includes service type, city, and preferred time.",
+    text: "Your request includes clear details about the service type and preferred time.",
   },
 ];
 
