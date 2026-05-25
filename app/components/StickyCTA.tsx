@@ -1,6 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function StickyCTA() {
+  const pathname = usePathname();
+
+  if (pathname === "/book-service" || pathname.startsWith("/book-service/")) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-4 left-0 right-0 z-50 px-4 md:hidden">
       <div className="mx-auto max-w-md rounded-2xl border border-gray-200 bg-white p-2 shadow-[0_12px_30px_rgba(0,0,0,0.18)]">
