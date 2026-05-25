@@ -96,7 +96,7 @@ export default function BookServicePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-20">
+      <section className="mx-auto grid max-w-[1366px] gap-10 px-0 py-20 sm:px-6">
         <div
           id="booking-portal"
           className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
@@ -118,8 +118,9 @@ export default function BookServicePage() {
             src={FIELD_PULSE_PORTAL_URL}
             title="SecureLifts FieldPulse booking portal"
             width="100%"
+            height="768"
             loading="lazy"
-            className="h-[820px] w-full border-0 md:h-[980px]"
+            className="h-[768px] w-full border-0"
           />
         </div>
 
