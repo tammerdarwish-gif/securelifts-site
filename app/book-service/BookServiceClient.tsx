@@ -96,7 +96,7 @@ export default function BookServicePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1.2fr_0.8fr]">
+      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-20">
         <div
           id="booking-portal"
           className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
@@ -119,33 +119,36 @@ export default function BookServicePage() {
             title="SecureLifts FieldPulse booking portal"
             width="100%"
             loading="lazy"
-            className="h-[760px] w-full border-0 md:h-[900px]"
+            className="h-[820px] w-full border-0 md:h-[980px]"
           />
         </div>
 
-        <div className="rounded-3xl bg-slate-50 p-8 md:sticky md:top-28 md:self-start">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-            Need Immediate Help?
-          </p>
+        <div className="rounded-3xl bg-slate-50 p-8">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
+                Need Immediate Help?
+              </p>
 
-          <h2 className="mt-3 text-3xl font-black">
-            Call now for faster service
-          </h2>
+              <h2 className="mt-3 text-3xl font-black">
+                Call now for faster service
+              </h2>
 
-          <p className="mt-4 leading-7 text-slate-600">
-            For urgent issues like broken springs, stuck doors, or garage doors
-            that won’t open, calling is the fastest path.
-          </p>
+              <p className="mt-4 leading-7 text-slate-600">
+                For urgent issues like broken springs, stuck doors, or garage
+                doors that won’t open, calling is the fastest path.
+              </p>
 
-          <a
-            href="tel:18668281818"
-            className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-base font-semibold !text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
-          >
-            <FaPhoneAlt />
-            Call (866) 828-1818
-          </a>
+              <a
+                href="tel:18668281818"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-base font-semibold !text-white shadow-md transition hover:bg-red-700 hover:shadow-lg"
+              >
+                <FaPhoneAlt />
+                Call (866) 828-1818
+              </a>
+            </div>
 
-          <div className="mt-8 grid gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
             {[
               "Broken spring or door will not open",
               "Vehicle trapped inside garage",
@@ -157,6 +160,7 @@ export default function BookServicePage() {
                 <span className="font-medium leading-6 text-slate-800">{item}</span>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
