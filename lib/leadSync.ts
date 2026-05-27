@@ -591,18 +591,14 @@ async function scheduleFieldPulseVisit(
     };
   }
 
-  let jobRecord = extractRecord(jobData);
-
-  if (!jobRecord) {
-    const pluralLookup = await getJson(`${baseUrl}/jobs/${jobId}`, headers);
-    const jobLookup = pluralLookup.success
-      ? pluralLookup
-      : await getJson(`${baseUrl}/job/${jobId}`, headers);
-
-    if (jobLookup.success) {
-      jobRecord = extractRecord(jobLookup.data);
-    }
-  }
+  const singularLookup = await getJson(`${baseUrl}/job/${jobId}`, headers);
+  const pluralLookup = singularLookup.success
+    ? null
+    : await getJson(`${baseUrl}/jobs/${jobId}`, headers);
+  const jobLookup = singularLookup.success ? singularLookup : pluralLookup;
+  const jobRecord = jobLookup?.success
+    ? extractRecord(jobLookup.data)
+    : extractRecord(jobData);
 
   if (!jobRecord) {
     return {
@@ -632,18 +628,35 @@ async function scheduleFieldPulseVisit(
     on_the_way_status_log: 0,
   });
 
+  const existingVisits = Array.isArray(jobRecord.visits)
+    ? jobRecord.visits.filter(isRecord)
+    : [];
+
   const visitPayload = {
     ...jobRecord,
-    visits: [visit],
+    visits: [...existingVisits, visit],
   };
+
+  const singularResult = await putJson(`${baseUrl}/job/${jobId}`, visitPayload, headers);
+
+  if (singularResult.success) {
+    return singularResult;
+  }
 
   const pluralResult = await putJson(`${baseUrl}/jobs/${jobId}`, visitPayload, headers);
 
-  if (pluralResult.success || pluralResult.status !== 404) {
+  if (pluralResult.success) {
     return pluralResult;
   }
 
-  return putJson(`${baseUrl}/job/${jobId}`, visitPayload, headers);
+  return {
+    success: false,
+    status: singularResult.status,
+    data: {
+      singular: singularResult,
+      plural: pluralResult,
+    },
+  };
 }
 
 export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult> {
