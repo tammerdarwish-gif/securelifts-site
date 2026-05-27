@@ -430,6 +430,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const originalName = leadDisplayName(lead);
   const uniqueLeadId = lead.leadId || createLeadId();
   const addressFields = fieldPulseAddress(lead);
+  const initialLocation = fieldPulseLocation(lead, originalName);
   const fieldPulseCustomer = compactObject({
     externalId: uniqueLeadId,
     external_id: uniqueLeadId,
@@ -439,6 +440,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     first_name: lead.firstName || originalName,
     lastName: lead.lastName,
     last_name: lead.lastName,
+    display_name: originalName,
     phone: lead.phone,
     email: lead.email,
     ...addressFields,
@@ -448,6 +450,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     lead_source: "SecureLifts Website / GoHighLevel",
     source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
+    locations: lead.address ? [initialLocation] : undefined,
   });
 
   let customerResult = await postJson(`${baseUrl}/customers`, fieldPulseCustomer, headers);
@@ -510,42 +513,27 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const locationId =
     locationResult?.success ? extractCreatedId(locationResult.data) : "";
   const locationText = fieldPulseLocationString(lead);
-  const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";
+  const jobType = process.env.FIELD_PULSE_JOB_TYPE || "service";
   const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
   const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
+  const jobStatusWorkflowId = Number(process.env.FIELD_PULSE_JOB_STATUS_WORKFLOW_ID || 0);
 
   const jobPayload = compactObject({
-    externalId: uniqueLeadId,
-    external_id: uniqueLeadId,
-    leadId: uniqueLeadId,
-    lead_id: uniqueLeadId,
-    customerId,
-    customer_id: customerId,
-    customerID: customerId,
-    customer: { id: customerId },
-    locationId,
-    location_id: locationId,
-    location: locationText,
-    jobType,
+    customer_id: Number(customerId),
+    project_id: undefined,
     job_type: jobType,
-    jobTypeName: jobType,
-    job_type_name: jobType,
-    jobTypeId: jobTypeId,
-    job_type_id: jobTypeId,
-    billing: billingCode,
-    billingCode,
-    billing_code: billingCode,
-    billingType: billingCode,
-    billing_type: billingCode,
     subtitle: lead.service || "SecureLifts Service Lead",
+    status: jobStatus,
+    status_id: jobStatus,
+    status_workflow_id: jobStatusWorkflowId || undefined,
+    billing: billingCode,
     notes: lead.message || lead.service || "SecureLifts service request",
     field_notes: leadNotes(lead),
-    ...addressFields,
-    status: jobStatus,
-    statusId: jobStatus,
-    status_id: jobStatus,
-    source: "SecureLifts Website / GoHighLevel",
+    location: locationText,
+    location_id: locationId,
+    job_type_id: jobTypeId,
+    type: "job",
   });
 
   const jobResult = await postJson(`${baseUrl}/jobs`, jobPayload, headers);
