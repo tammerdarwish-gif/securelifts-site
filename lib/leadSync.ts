@@ -485,6 +485,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
       details: customerResult,
     };
   }
+
   let locationResult:
     | Awaited<ReturnType<typeof postJson>>
     | { success: false; skipped: true; data: string }
