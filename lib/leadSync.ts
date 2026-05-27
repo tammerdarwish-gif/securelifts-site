@@ -325,6 +325,69 @@ function fieldPulseLocationString(lead: LeadInput) {
     .join(", ");
 }
 
+function parsePreferredTime(value: string) {
+  const normalized = value.trim().toLowerCase();
+
+  if (normalized === "as soon as possible" || normalized === "flexible") {
+    return {
+      start: "08:00:00",
+      end: "10:00:00",
+    };
+  }
+
+  const match = value.match(
+    /^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\s+-\s+(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  const to24Hour = (hourValue: string, minuteValue: string | undefined, periodValue: string) => {
+    let hour = Number(hourValue);
+    const minute = Number(minuteValue || 0);
+    const period = periodValue.toUpperCase();
+
+    if (period === "PM" && hour !== 12) {
+      hour += 12;
+    }
+
+    if (period === "AM" && hour === 12) {
+      hour = 0;
+    }
+
+    return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
+  };
+
+  return {
+    start: to24Hour(match[1], match[2], match[3]),
+    end: to24Hour(match[4], match[5], match[6]),
+  };
+}
+
+function fieldPulseJobSchedule(lead: LeadInput) {
+  if (!lead.date || !lead.time) {
+    return {};
+  }
+
+  const parsedTime = parsePreferredTime(lead.time);
+
+  if (!parsedTime) {
+    return {};
+  }
+
+  const startTime = `${lead.date} ${parsedTime.start}`;
+  const endTime = `${lead.date} ${parsedTime.end}`;
+
+  return {
+    start_time: startTime,
+    end_time: endTime,
+    due_date: startTime,
+    customer_arrival_window_start_time: startTime,
+    customer_arrival_window_end_time: endTime,
+  };
+}
+
 function fieldPulseLocation(
   lead: LeadInput,
   originalName: string,
@@ -528,6 +591,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
   const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
   const jobStatusWorkflowId = Number(process.env.FIELD_PULSE_JOB_STATUS_WORKFLOW_ID || 0);
+  const scheduleFields = fieldPulseJobSchedule(lead);
 
   const jobPayload = compactObject({
     customer_id: Number(customerId),
@@ -544,6 +608,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     location_id: locationId,
     job_type_id: jobTypeId,
     type: "job",
+    ...scheduleFields,
   });
 
   const jobResult = await postJson(`${baseUrl}/jobs`, jobPayload, headers);
