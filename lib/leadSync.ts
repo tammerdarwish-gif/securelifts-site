@@ -412,14 +412,9 @@ function fieldPulseJobSchedule(lead: LeadInput) {
   }
 
   const startTime = `${lead.date} ${parsedTime.start}`;
-  const endTime = `${lead.date} ${parsedTime.end}`;
 
   return {
     start_time: startTime,
-    end_time: endTime,
-    due_date: startTime,
-    customer_arrival_window_start_time: startTime,
-    customer_arrival_window_end_time: endTime,
   };
 }
 
