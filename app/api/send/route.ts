@@ -43,8 +43,6 @@ export async function POST(req: Request) {
       city,
       zip,
       service,
-      doorType,
-      residentialOrCommercial,
       date,
       time,
       message,
@@ -84,8 +82,6 @@ export async function POST(req: Request) {
           <p><strong>City:</strong> ${escapeHtml(city)}</p>
           <p><strong>ZIP Code:</strong> ${escapeHtml(zip)}</p>
           <p><strong>Service:</strong> ${escapeHtml(service)}</p>
-          <p><strong>Door / System Type:</strong> ${escapeHtml(doorType)}</p>
-          <p><strong>Residential or Commercial:</strong> ${escapeHtml(residentialOrCommercial)}</p>
           <p><strong>Preferred Date:</strong> ${escapeHtml(date)}</p>
           <p><strong>Preferred Time:</strong> ${escapeHtml(time)}</p>
           <p><strong>SMS Opt-In:</strong> ${smsOptIn ? "Yes" : "No"}</p>

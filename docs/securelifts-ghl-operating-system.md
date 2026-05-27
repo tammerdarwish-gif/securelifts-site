@@ -131,7 +131,7 @@ Current bridge behavior:
 - Sends the lead to FieldPulse first.
 - Sends the lead to GHL with FieldPulse sync status tags.
 - Sends clean customer names to FieldPulse. SecureLifts `SL-...` lead IDs must stay in notes/external reference fields and must not be appended to visible customer names, display names, first names, last names, or company names.
-- Website quick-request forms collect service address, city, ZIP, service category, residential/commercial, door/system type, preferred date, and preferred time so FieldPulse receives real job context.
+- Website quick-request forms collect service address, city, ZIP, service category, preferred date, and preferred time so FieldPulse receives real job context without overwhelming clients.
 - Customer-facing service choices stay simple: Garage Door Repair, Broken Spring, Opener Problem, Door Off Track, New Garage Door / Replacement, Hurricane-Rated Door Quote, Commercial Door Service, and Other / Not Sure.
 - Preferred time choices use 2-hour arrival windows from 8:00 AM through 6:00 PM, plus As soon as possible and Flexible.
 - Adds source tags based on the lead source/referrer.

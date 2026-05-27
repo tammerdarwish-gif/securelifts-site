@@ -20,8 +20,6 @@ const serviceOptions = [
   "Other / Not Sure",
 ];
 
-const doorTypeOptions = ["Garage Door", "Garage Door Opener"];
-
 const preferredTimeOptions = [
   "As soon as possible",
   "8:00 AM - 10:00 AM",
@@ -56,10 +54,6 @@ export default function QuickLeadForm({
     const city = String(formData.get("city") || "");
     const zip = String(formData.get("zip") || "");
     const service = String(formData.get("service") || defaultService);
-    const residentialOrCommercial = String(
-      formData.get("residentialOrCommercial") || ""
-    );
-    const doorType = String(formData.get("doorType") || "");
     const date = String(formData.get("date") || "");
     const time = String(formData.get("time") || "");
     const message = String(formData.get("message") || "Quick lead form request");
@@ -79,8 +73,6 @@ export default function QuickLeadForm({
           city,
           zip,
           service,
-          residentialOrCommercial,
-          doorType,
           date,
           time,
           message,
@@ -240,36 +232,6 @@ export default function QuickLeadForm({
           ))}
         </select>
 
-        <select
-          aria-label="Residential or commercial"
-          required
-          name="residentialOrCommercial"
-          defaultValue=""
-          className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
-        >
-          <option value="" disabled>
-            Residential or commercial?
-          </option>
-          <option value="Residential">Residential</option>
-          <option value="Commercial">Commercial</option>
-        </select>
-
-        <select
-          aria-label="Door or system type"
-          required
-          name="doorType"
-          defaultValue=""
-          className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
-        >
-          <option value="" disabled>
-            Door / system type
-          </option>
-          {doorTypeOptions.map((doorType) => (
-            <option key={doorType} value={doorType}>
-              {doorType}
-            </option>
-          ))}
-        </select>
       </div>
 
       <textarea
