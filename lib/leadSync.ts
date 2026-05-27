@@ -283,11 +283,41 @@ function fieldPulseAddress(lead: LeadInput) {
     street: lead.address,
     streetAddress: lead.address,
     street_address: lead.address,
+    service_address_1: lead.address,
+    service_address_city: lead.city,
+    service_address_state: state,
+    service_address_zip_code: lead.zip,
     city: lead.city,
     state,
     zip: lead.zip,
+    zip_code: lead.zip,
     postalCode: lead.zip,
     postal_code: lead.zip,
+  });
+}
+
+function fieldPulseLocationString(lead: LeadInput) {
+  return [lead.address, lead.city, lead.state || "FL", lead.zip]
+    .filter(Boolean)
+    .join(", ");
+}
+
+function fieldPulseLocation(
+  lead: LeadInput,
+  originalName: string,
+  customerId?: string
+) {
+  return compactObject({
+    object_type: "customer",
+    object_id: customerId ? Number(customerId) : undefined,
+    title: `Service Address - ${originalName}`,
+    address_1: lead.address,
+    city: lead.city,
+    state: lead.state || "FL",
+    zip_code: lead.zip,
+    notes: leadNotes(lead),
+    is_main_location: true,
+    is_primary_location: true,
   });
 }
 
@@ -350,6 +380,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const originalName = leadDisplayName(lead);
   const uniqueLeadId = lead.leadId || createLeadId();
   const addressFields = fieldPulseAddress(lead);
+  const initialLocation = fieldPulseLocation(lead, originalName);
   const fieldPulseCustomer = compactObject({
     externalId: uniqueLeadId,
     external_id: uniqueLeadId,
@@ -374,13 +405,11 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     lead_source: "SecureLifts Website / GoHighLevel",
     source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
+    job_notes: leadNotes(lead),
+    locations: lead.address ? [initialLocation] : undefined,
   });
-  const customerPayload = {
-    ...fieldPulseCustomer,
-    customer: fieldPulseCustomer,
-  };
 
-  const customerResult = await postJson(`${baseUrl}/customers`, customerPayload, headers);
+  const customerResult = await postJson(`${baseUrl}/customers`, fieldPulseCustomer, headers);
 
   if (!customerResult.success) {
     console.error("FIELD PULSE CUSTOMER SYNC ERROR:", {
@@ -407,38 +436,11 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     customerId &&
     process.env.FIELD_PULSE_CREATE_LOCATION !== "false"
   ) {
-    const fieldPulseLocation = compactObject({
-      externalId: uniqueLeadId,
-      external_id: uniqueLeadId,
-      leadId: uniqueLeadId,
-      lead_id: uniqueLeadId,
-      customerId,
-      customer_id: customerId,
-      customerID: customerId,
-      customer: { id: customerId },
-      name: `Service Location - ${originalName}`,
-      title: `Service Location - ${originalName}`,
-      displayName: originalName,
-      display_name: originalName,
-      phone: lead.phone,
-      email: lead.email,
-      ...addressFields,
-      notes: leadNotes(lead),
-    });
-    const locationPayload = {
-      ...fieldPulseLocation,
-      location: fieldPulseLocation,
-    };
-
-    const nestedLocationResult = await postJson(
-      `${baseUrl}/customers/${customerId}/locations`,
-      locationPayload,
+    locationResult = await postJson(
+      `${baseUrl}/locations`,
+      fieldPulseLocation(lead, originalName, customerId),
       headers
     );
-
-    locationResult = nestedLocationResult.success
-      ? nestedLocationResult
-      : await postJson(`${baseUrl}/locations`, locationPayload, headers);
 
     if (!locationResult.success) {
       console.error("FIELD PULSE LOCATION SYNC ERROR:", locationResult);
@@ -460,6 +462,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
 
   const locationId =
     locationResult?.success ? extractCreatedId(locationResult.data) : "";
+  const locationText = fieldPulseLocationString(lead);
   const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";
   const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
@@ -476,7 +479,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     customer: { id: customerId },
     locationId,
     location_id: locationId,
-    location: locationId ? { id: locationId } : undefined,
+    location: locationText,
     jobType,
     job_type: jobType,
     jobTypeName: jobType,
@@ -488,10 +491,9 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     billing_code: billingCode,
     billingType: billingCode,
     billing_type: billingCode,
-    title: lead.service || "SecureLifts Service Lead",
-    name: lead.service || "SecureLifts Service Lead",
-    description: leadNotes(lead),
-    notes: leadNotes(lead),
+    subtitle: lead.service || "SecureLifts Service Lead",
+    notes: lead.message || lead.service || "SecureLifts service request",
+    field_notes: leadNotes(lead),
     ...addressFields,
     status: jobStatus,
     statusId: jobStatus,
