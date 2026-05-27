@@ -10,23 +10,32 @@ type QuickLeadFormProps = {
 };
 
 const serviceOptions = [
-  "Emergency Garage Door Repair",
   "Garage Door Repair",
-  "Broken Spring Repair",
-  "Garage Door Spring Replacement",
-  "Garage Door Opener Repair",
-  "Garage Door Cable Repair",
-  "Garage Door Roller Replacement",
-  "Garage Door Panel Replacement",
-  "Garage Door Installation",
-  "Hurricane-Rated Garage Door Quote",
+  "Broken Spring",
+  "Opener Problem",
+  "Door Off Track",
+  "New Garage Door / Replacement",
+  "Hurricane-Rated Door Quote",
   "Commercial Door Service",
+  "Other / Not Sure",
+];
+
+const doorTypeOptions = ["Garage Door", "Garage Door Opener"];
+
+const preferredTimeOptions = [
+  "As soon as possible",
+  "8:00 AM - 10:00 AM",
+  "10:00 AM - 12:00 PM",
+  "12:00 PM - 2:00 PM",
+  "2:00 PM - 4:00 PM",
+  "4:00 PM - 6:00 PM",
+  "Flexible",
 ];
 
 export default function QuickLeadForm({
   defaultService = "Garage Door Repair",
   title = "Get Fast Garage Door Help",
-  intro = "Send a quick request and SecureLifts will contact you to confirm the next step.",
+  intro = "Tell us the basics and SecureLifts will contact you to confirm the right next step.",
   compact = false,
 }: QuickLeadFormProps) {
   const [loading, setLoading] = useState(false);
@@ -42,8 +51,17 @@ export default function QuickLeadForm({
     const formData = new FormData(form);
     const name = String(formData.get("name") || "");
     const phone = String(formData.get("phone") || "");
+    const email = String(formData.get("email") || "");
+    const address = String(formData.get("address") || "");
     const city = String(formData.get("city") || "");
+    const zip = String(formData.get("zip") || "");
     const service = String(formData.get("service") || defaultService);
+    const residentialOrCommercial = String(
+      formData.get("residentialOrCommercial") || ""
+    );
+    const doorType = String(formData.get("doorType") || "");
+    const date = String(formData.get("date") || "");
+    const time = String(formData.get("time") || "");
     const message = String(formData.get("message") || "Quick lead form request");
     const smsOptIn = formData.get("smsOptIn") === "yes";
 
@@ -56,13 +74,15 @@ export default function QuickLeadForm({
         body: JSON.stringify({
           name,
           phone,
-          email: "",
-          address: "Not provided - quick lead form",
+          email,
+          address,
           city,
-          zip: "",
+          zip,
           service,
-          date: "",
-          time: "",
+          residentialOrCommercial,
+          doorType,
+          date,
+          time,
           message,
           smsOptIn,
           sourcePage:
@@ -156,9 +176,30 @@ export default function QuickLeadForm({
         />
 
         <input
+          name="email"
+          type="email"
+          placeholder="Email address"
+          className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        />
+
+        <input
+          required
+          name="address"
+          placeholder="Service address"
+          className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        />
+
+        <input
           required
           name="city"
           placeholder="City"
+          className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        />
+
+        <input
+          name="zip"
+          inputMode="numeric"
+          placeholder="ZIP code"
           className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
         />
 
@@ -172,6 +213,60 @@ export default function QuickLeadForm({
           {visibleServiceOptions.map((service) => (
             <option key={service} value={service}>
               {service}
+            </option>
+          ))}
+        </select>
+
+        <input
+          name="date"
+          type="date"
+          aria-label="Preferred date"
+          className="rounded-xl border border-slate-300 px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        />
+
+        <select
+          aria-label="Preferred time"
+          name="time"
+          defaultValue=""
+          className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        >
+          <option value="" disabled>
+            Preferred time
+          </option>
+          {preferredTimeOptions.map((time) => (
+            <option key={time} value={time}>
+              {time}
+            </option>
+          ))}
+        </select>
+
+        <select
+          aria-label="Residential or commercial"
+          required
+          name="residentialOrCommercial"
+          defaultValue=""
+          className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        >
+          <option value="" disabled>
+            Residential or commercial?
+          </option>
+          <option value="Residential">Residential</option>
+          <option value="Commercial">Commercial</option>
+        </select>
+
+        <select
+          aria-label="Door or system type"
+          required
+          name="doorType"
+          defaultValue=""
+          className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-slate-950 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+        >
+          <option value="" disabled>
+            Door / system type
+          </option>
+          {doorTypeOptions.map((doorType) => (
+            <option key={doorType} value={doorType}>
+              {doorType}
             </option>
           ))}
         </select>

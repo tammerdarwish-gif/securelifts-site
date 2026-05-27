@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import StickyCTA from "./components/StickyCTA";
+import BusinessAuthoritySchema from "./components/BusinessAuthoritySchema";
 
 const GA_MEASUREMENT_ID = "G-NRWSY3V29J";
 const ADDITIONAL_GA_MEASUREMENT_ID = "G-MM5H23RMXS";
@@ -66,6 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased pb-24">
+        <BusinessAuthoritySchema />
         <script
           id="securelifts-deferred-google-tags"
           dangerouslySetInnerHTML={{ __html: deferredGoogleTags }}

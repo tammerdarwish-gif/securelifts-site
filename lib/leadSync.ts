@@ -1,5 +1,6 @@
 
 export type LeadInput = {
+  leadId?: string;
   name?: string;
   firstName?: string;
   lastName?: string;
@@ -10,12 +11,15 @@ export type LeadInput = {
   state?: string;
   zip?: string;
   service?: string;
+  doorType?: string;
+  residentialOrCommercial?: string;
   date?: string;
   time?: string;
   message?: string;
   smsOptIn?: boolean;
   sourcePage?: string;
   referrer?: string;
+  campaignSource?: string;
 };
 
 type SyncResult = {
@@ -37,8 +41,22 @@ function asString(value: unknown) {
   if (typeof value === "string") {    return value.trim();  }  if (typeof value === "number" && Number.isFinite(value)) {    return String(value);  }  return "";
 }
 
+function cleanFieldValue(value: unknown) {
+  const text = asString(value);
+
+  if (!text || text.includes("{{") || text.includes("}}")) {
+    return "";
+  }
+
+  return text;
+}
+
 function asBoolean(value: unknown) {
   return value === true || value === "true" || value === "yes" || value === "1";
+}
+
+function createLeadId() {
+  return `SL-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 function splitName(name = "") {
@@ -126,7 +144,7 @@ export function normalizeLead(input: unknown): LeadInput {
   };
 
   const name =
-    asString(
+    cleanFieldValue(
       pickField(merged, [
         "name",
         "fullName",
@@ -136,55 +154,110 @@ export function normalizeLead(input: unknown): LeadInput {
       ])
     ) ||
     [pickField(merged, ["firstName", "first_name"]), pickField(merged, ["lastName", "last_name"])]
-      .map(asString)
+      .map(cleanFieldValue)
       .filter(Boolean)
       .join(" ");
 
   const split = splitName(name);
+  const firstNameValue = cleanFieldValue(
+    pickField(merged, ["firstName", "first_name"])
+  );
+  const lastNameValue = cleanFieldValue(
+    pickField(merged, ["lastName", "last_name"])
+  );
+  const firstNameSplit = firstNameValue && !lastNameValue ? splitName(firstNameValue) : null;
 
   return {
+    leadId:
+      cleanFieldValue(
+        pickField(merged, [
+          "leadId",
+          "lead_id",
+          "externalLeadId",
+          "external_lead_id",
+          "securelifts_lead_id",
+        ])
+      ) || createLeadId(),
     name,
     firstName:
-      asString(pickField(merged, ["firstName", "first_name"])) || split.firstName,
+      firstNameSplit?.firstName || firstNameValue || split.firstName,
     lastName:
-      asString(pickField(merged, ["lastName", "last_name"])) || split.lastName,
-    phone: asString(pickField(merged, ["phone", "phoneNumber", "phone_number"])),
-    email: asString(pickField(merged, ["email", "emailAddress", "email_address"])),
-    address: asString(
+      lastNameValue || firstNameSplit?.lastName || split.lastName,
+    phone: cleanFieldValue(pickField(merged, ["phone", "phoneNumber", "phone_number"])),
+    email: cleanFieldValue(pickField(merged, ["email", "emailAddress", "email_address"])),
+    address: cleanFieldValue(
       pickField(merged, ["address", "address1", "street", "streetAddress"])
     ),
-    city: asString(pickField(merged, ["city"])),
-    state: asString(pickField(merged, ["state", "region"])),
-    zip: asString(pickField(merged, ["zip", "postalCode", "postal_code"])),
-    service: asString(
+    city: cleanFieldValue(pickField(merged, ["city"])),
+    state: cleanFieldValue(pickField(merged, ["state", "region"])),
+    zip: cleanFieldValue(pickField(merged, ["zip", "postalCode", "postal_code"])),
+    service: cleanFieldValue(
       pickField(merged, ["service", "serviceNeeded", "service_needed", "Service Needed"])
     ),
-    date: asString(pickField(merged, ["date", "preferredDate", "preferred_date"])),
-    time: asString(
+    doorType: cleanFieldValue(
+      pickField(merged, [
+        "doorType",
+        "door_type",
+        "Door / System Type",
+        "Door Type",
+        "system_type",
+      ])
+    ),
+    residentialOrCommercial: cleanFieldValue(
+      pickField(merged, [
+        "residentialOrCommercial",
+        "residential_or_commercial",
+        "Residential or Commercial",
+        "customer_type",
+      ])
+    ),
+    date: cleanFieldValue(pickField(merged, ["date", "preferredDate", "preferred_date"])),
+    time: cleanFieldValue(
       pickField(merged, ["time", "preferredTime", "preferred_time", "Preferred Service Time"])
     ),
-    message: asString(
+    message: cleanFieldValue(
       pickField(merged, ["message", "notes", "note", "description", "Reason For Call"])
     ),
     smsOptIn: asBoolean(
       pickField(merged, ["smsOptIn", "sms_opt_in", "SMS Opt-In"])
     ),
-    sourcePage: asString(
+    sourcePage: cleanFieldValue(
       pickField(merged, ["sourcePage", "source_page", "page", "url"])
     ),
-    referrer: asString(pickField(merged, ["referrer", "referer"])),
+    referrer: cleanFieldValue(pickField(merged, ["referrer", "referer"])),
+    campaignSource: cleanFieldValue(
+      pickField(merged, [
+        "campaignSource",
+        "campaign_source",
+        "utm_campaign",
+        "utm_source",
+        "utm_medium",
+        "utm_content",
+        "utm_term",
+        "gclid",
+        "gbraid",
+        "wbraid",
+        "fbclid",
+        "source",
+      ])
+    ),
   };
 }
 
 function leadNotes(lead: LeadInput) {
   return [
+    lead.leadId && `SecureLifts lead ID: ${lead.leadId}`,
     lead.message && `Message: ${lead.message}`,
     lead.service && `Service: ${lead.service}`,
+    lead.doorType && `Door / system type: ${lead.doorType}`,
+    lead.residentialOrCommercial &&
+      `Residential or commercial: ${lead.residentialOrCommercial}`,
     lead.date && `Preferred date: ${lead.date}`,
     lead.time && `Preferred time: ${lead.time}`,
     `SMS opt-in: ${lead.smsOptIn ? "Yes" : "No"}`,
     lead.sourcePage && `Source page: ${lead.sourcePage}`,
     lead.referrer && `Referrer: ${lead.referrer}`,
+    lead.campaignSource && `Campaign source: ${lead.campaignSource}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -256,20 +329,23 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     "x-api-key": apiKey,
   };
 
-  const originalName = leadDisplayName(lead); const uniqueLeadId = `SL-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`; const displayName = `${originalName} - ${uniqueLeadId}`;
+  const originalName = leadDisplayName(lead);
+  const uniqueLeadId = lead.leadId || createLeadId();
   const fieldPulseCustomer = compactObject({
-    firstName: displayName,
-    first_name: displayName,
-    lastName: uniqueLeadId,
-    last_name: uniqueLeadId,
-    name: displayName,
-    fullName: displayName,
-    full_name: displayName,
-    displayName,
-    display_name: displayName,
-    display: displayName,
-    companyName: displayName,
-    company_name: displayName,
+    externalId: uniqueLeadId,
+    external_id: uniqueLeadId,
+    leadId: uniqueLeadId,
+    lead_id: uniqueLeadId,
+    firstName: lead.firstName || originalName,
+    first_name: lead.firstName || originalName,
+    lastName: lead.lastName,
+    last_name: lead.lastName,
+    name: originalName,
+    fullName: originalName,
+    full_name: originalName,
+    displayName: originalName,
+    display_name: originalName,
+    display: originalName,
     phone: lead.phone,
     email: lead.email,
     address: lead.address,
@@ -282,6 +358,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     account_status: "Active",
     leadSource: "SecureLifts Website / GoHighLevel",
     lead_source: "SecureLifts Website / GoHighLevel",
+    source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
   });
   const customerPayload = {
@@ -315,11 +392,32 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     };
   }
 
-  const customerId = extractCreatedId(customerResult.data);  const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";  const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";  const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);  const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
+  const customerId = extractCreatedId(customerResult.data);
+  const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";
+  const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";
+  const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
+  const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
 
   const jobPayload = compactObject({
+    externalId: uniqueLeadId,
+    external_id: uniqueLeadId,
+    leadId: uniqueLeadId,
+    lead_id: uniqueLeadId,
     customerId,
-    customer_id: customerId,    customerID: customerId,    customer: { id: customerId },    jobType,    job_type: jobType,    jobTypeName: jobType,    job_type_name: jobType,    jobTypeId: jobTypeId,    job_type_id: jobTypeId,    billing: billingCode,    billingCode,    billing_code: billingCode,    billingType: billingCode,    billing_type: billingCode,
+    customer_id: customerId,
+    customerID: customerId,
+    customer: { id: customerId },
+    jobType,
+    job_type: jobType,
+    jobTypeName: jobType,
+    job_type_name: jobType,
+    jobTypeId: jobTypeId,
+    job_type_id: jobTypeId,
+    billing: billingCode,
+    billingCode,
+    billing_code: billingCode,
+    billingType: billingCode,
+    billing_type: billingCode,
     title: lead.service || "SecureLifts Service Lead",
     name: lead.service || "SecureLifts Service Lead",
     description: leadNotes(lead),
@@ -328,7 +426,9 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     city: lead.city,
     state: lead.state || "FL",
     zip: lead.zip,
-    status: jobStatus,    statusId: jobStatus,    status_id: jobStatus,
+    status: jobStatus,
+    statusId: jobStatus,
+    status_id: jobStatus,
     source: "SecureLifts Website / GoHighLevel",
   });
 
@@ -349,7 +449,293 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   };
 }
 
-export async function syncLeadToHighLevel(lead: LeadInput): Promise<SyncResult> {
+type HighLevelSyncContext = {
+  fieldPulse?: SyncResult;
+};
+
+function fieldPulseTags(context?: HighLevelSyncContext) {
+  const fieldPulse = context?.fieldPulse;
+
+  if (!fieldPulse?.enabled) {
+    return [];
+  }
+
+  if (!fieldPulse.success) {
+    return ["sl-fieldpulse-sync-failed"];
+  }
+
+  const details = isRecord(fieldPulse.details) ? fieldPulse.details : {};
+
+  return [
+    "sl-fieldpulse-synced",
+    details.job ? "sl-fieldpulse-job-created" : "",
+  ].filter(Boolean);
+}
+
+function uniqueTags(tags: string[]) {
+  return Array.from(new Set(tags.filter(Boolean)));
+}
+
+function leadSourceText(lead: LeadInput) {
+  return [lead.sourcePage, lead.referrer, lead.campaignSource]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function leadSourceLabel(lead: LeadInput) {
+  const value = leadSourceText(lead);
+
+  if (value.includes("fieldpulse")) return "SecureLifts FieldPulse Booking";
+  if (
+    value.includes("leadconnector") ||
+    value.includes("gohighlevel") ||
+    value.includes("securelifts form")
+  ) {
+    return "SecureLifts GHL Form";
+  }
+  if (
+    value.includes("facebook message") ||
+    value.includes("messenger") ||
+    value.includes("fb message")
+  ) {
+    return "SecureLifts Facebook Message";
+  }
+  if (value.includes("facebook")) return "SecureLifts Facebook Lead Ads";
+  if (value.includes("instagram")) return "SecureLifts Instagram";
+  if (value.includes("tiktok")) return "SecureLifts TikTok";
+  if (value.includes("linkedin")) return "SecureLifts LinkedIn";
+  if (value.includes("whatsapp")) return "SecureLifts WhatsApp";
+  if (
+    value.includes("google lead") ||
+    value.includes("google lead ads")
+  ) {
+    return "SecureLifts Google Lead Ads";
+  }
+  if (
+    value.includes("google ads") ||
+    value.includes("google search") ||
+    value.includes("paid search") ||
+    value.includes("cpc") ||
+    value.includes("gclid") ||
+    value.includes("gbraid") ||
+    value.includes("wbraid")
+  ) {
+    return "SecureLifts Google Search Ads";
+  }
+  if (
+    value.includes("google business") ||
+    value.includes("business profile") ||
+    value.includes("gbp") ||
+    value.includes("maps.google")
+  ) {
+    return "SecureLifts Google Business Profile";
+  }
+  if (value.includes("local services") || value.includes("lsa")) {
+    return "SecureLifts Local Services Ads";
+  }
+  if (value.includes("bing places") || value.includes("bing_places")) {
+    return "SecureLifts Bing Places";
+  }
+  if (
+    value.includes("apple business") ||
+    value.includes("apple_business_connect")
+  ) {
+    return "SecureLifts Apple Business Connect";
+  }
+  if (value.includes("yelp")) return "SecureLifts Yelp";
+  if (value.includes("bbb")) return "SecureLifts BBB";
+  if (value.includes("chamber")) return "SecureLifts Chamber";
+  if (value.includes("nextdoor")) return "SecureLifts Nextdoor";
+  if (value.includes("angi")) return "SecureLifts Angi";
+  if (value.includes("homeadvisor")) return "SecureLifts HomeAdvisor";
+  if (value.includes("thumbtack")) return "SecureLifts Thumbtack";
+  if (value.includes("houzz")) return "SecureLifts Houzz";
+  if (value.includes("porch")) return "SecureLifts Porch";
+  if (value.includes("foursquare")) return "SecureLifts Foursquare";
+  if (value.includes("data_axle") || value.includes("data axle")) {
+    return "SecureLifts Data Axle";
+  }
+  if (value.includes("mapquest")) return "SecureLifts MapQuest";
+  if (value.includes("clopay")) return "SecureLifts Clopay";
+  if (value.includes("liftmaster")) return "SecureLifts LiftMaster";
+  if (value.includes("best_pick_reports") || value.includes("best pick")) {
+    return "SecureLifts Best Pick Reports";
+  }
+  if (value.includes("tellows")) return "SecureLifts Tellows";
+  if (value.includes("showmelocal")) return "SecureLifts ShowMeLocal";
+  if (value.includes("cylex")) return "SecureLifts Cylex";
+  if (value.includes("brownbook")) return "SecureLifts Brownbook";
+  if (value.includes("hotfrog")) return "SecureLifts HotFrog";
+  if (value.includes("n49")) return "SecureLifts n49";
+  if (value.includes("iglobal")) return "SecureLifts iGlobal";
+  if (
+    value.includes("my_local_services") ||
+    value.includes("my local services")
+  ) {
+    return "SecureLifts My Local Services";
+  }
+  if (value.includes("uscity")) return "SecureLifts USCity";
+  if (value.includes("navmii")) return "SecureLifts Navmii";
+  if (value.includes("where_to") || value.includes("where to")) {
+    return "SecureLifts Where To";
+  }
+  if (value.includes("aroundme")) return "SecureLifts AroundMe";
+  if (value.includes("merchantcircle")) return "SecureLifts MerchantCircle";
+  if (value.includes("tupalo")) return "SecureLifts Tupalo";
+  if (value.includes("citysquares")) return "SecureLifts CitySquares";
+  if (value.includes("8coupons")) return "SecureLifts 8coupons";
+  if (value.includes("elocal")) return "SecureLifts eLocal";
+  if (value.includes("yellowpagesgoesgreen")) {
+    return "SecureLifts YellowPagesGoesGreen";
+  }
+  if (value.includes("yellowpages")) return "SecureLifts Yellowpages.com";
+  if (value.includes("golocal247")) return "SecureLifts GoLocal247";
+  if (value.includes("opendi")) return "SecureLifts Opendi";
+  if (value.includes("ibegin")) return "SecureLifts iBegin";
+  if (value.includes("ezlocal")) return "SecureLifts EZlocal";
+  if (value.includes("propertycapsule")) return "SecureLifts PropertyCapsule";
+  if (value.includes("judysbook")) return "SecureLifts JUDYSBOOK";
+  if (value.includes("acompio")) return "SecureLifts Acompio";
+  if (value.includes("referral")) return "SecureLifts Referral";
+  if (value.includes("manual")) return "SecureLifts Manual Entry";
+
+  return "SecureLifts Website";
+}
+
+function sourceToTags(lead: LeadInput) {
+  const value = leadSourceText(lead);
+
+  if (value.includes("fieldpulse")) return ["src-fieldpulse-booking"];
+  if (
+    value.includes("leadconnector") ||
+    value.includes("gohighlevel") ||
+    value.includes("securelifts form")
+  ) {
+    return ["src-ghl-form"];
+  }
+  if (
+    value.includes("facebook message") ||
+    value.includes("messenger") ||
+    value.includes("fb message")
+  ) {
+    return ["src-facebook-message"];
+  }
+  if (value.includes("facebook")) return ["src-facebook-lead-ads"];
+  if (value.includes("instagram")) return ["src-instagram-message"];
+  if (value.includes("tiktok")) return ["src-tiktok"];
+  if (value.includes("linkedin")) return ["src-linkedin"];
+  if (value.includes("whatsapp")) return ["src-whatsapp"];
+  if (
+    value.includes("google lead") ||
+    value.includes("google lead ads")
+  ) {
+    return ["src-google-lead-ads"];
+  }
+  if (
+    value.includes("google ads") ||
+    value.includes("google search") ||
+    value.includes("paid search") ||
+    value.includes("cpc") ||
+    value.includes("gclid") ||
+    value.includes("gbraid") ||
+    value.includes("wbraid")
+  ) {
+    return ["src-google-search-ads"];
+  }
+  if (
+    value.includes("google business") ||
+    value.includes("business profile") ||
+    value.includes("gbp") ||
+    value.includes("maps.google")
+  ) {
+    return ["src-google-business-profile"];
+  }
+  if (value.includes("local services") || value.includes("lsa")) {
+    return ["src-local-services-ads"];
+  }
+  if (value.includes("bing places") || value.includes("bing_places")) {
+    return ["src-bing-places"];
+  }
+  if (
+    value.includes("apple business") ||
+    value.includes("apple_business_connect")
+  ) {
+    return ["src-apple-business-connect"];
+  }
+  if (value.includes("yelp")) return ["src-yelp"];
+  if (value.includes("bbb")) return ["src-bbb"];
+  if (value.includes("chamber")) return ["src-chamber"];
+  if (value.includes("nextdoor")) return ["src-nextdoor"];
+  if (value.includes("angi")) return ["src-angi"];
+  if (value.includes("homeadvisor")) return ["src-homeadvisor"];
+  if (value.includes("thumbtack")) return ["src-thumbtack"];
+  if (value.includes("houzz")) return ["src-houzz"];
+  if (value.includes("porch")) return ["src-porch"];
+  if (value.includes("foursquare")) return ["src-foursquare"];
+  if (value.includes("data_axle") || value.includes("data axle")) {
+    return ["src-data-axle"];
+  }
+  if (value.includes("mapquest")) return ["src-mapquest"];
+  if (value.includes("clopay")) return ["src-clopay"];
+  if (value.includes("liftmaster")) return ["src-liftmaster"];
+  if (value.includes("best_pick_reports") || value.includes("best pick")) {
+    return ["src-best-pick-reports"];
+  }
+  if (value.includes("tellows")) return ["src-tellows"];
+  if (value.includes("showmelocal")) return ["src-showmelocal"];
+  if (value.includes("cylex")) return ["src-cylex"];
+  if (value.includes("brownbook")) return ["src-brownbook"];
+  if (value.includes("hotfrog")) return ["src-hotfrog"];
+  if (value.includes("n49")) return ["src-n49"];
+  if (value.includes("iglobal")) return ["src-iglobal"];
+  if (
+    value.includes("my_local_services") ||
+    value.includes("my local services")
+  ) {
+    return ["src-my-local-services"];
+  }
+  if (value.includes("uscity")) return ["src-uscity"];
+  if (value.includes("navmii")) return ["src-navmii"];
+  if (value.includes("where_to") || value.includes("where to")) {
+    return ["src-where-to"];
+  }
+  if (value.includes("aroundme")) return ["src-aroundme"];
+  if (value.includes("merchantcircle")) return ["src-merchantcircle"];
+  if (value.includes("tupalo")) return ["src-tupalo"];
+  if (value.includes("citysquares")) return ["src-citysquares"];
+  if (value.includes("8coupons")) return ["src-8coupons"];
+  if (value.includes("elocal")) return ["src-elocal"];
+  if (value.includes("yellowpagesgoesgreen")) {
+    return ["src-yellowpagesgoesgreen"];
+  }
+  if (value.includes("yellowpages")) return ["src-yellowpages"];
+  if (value.includes("golocal247")) return ["src-golocal247"];
+  if (value.includes("opendi")) return ["src-opendi"];
+  if (value.includes("ibegin")) return ["src-ibegin"];
+  if (value.includes("ezlocal")) return ["src-ezlocal"];
+  if (value.includes("propertycapsule")) return ["src-propertycapsule"];
+  if (value.includes("judysbook")) return ["src-judysbook"];
+  if (value.includes("acompio")) return ["src-acompio"];
+  if (value.includes("referral")) return ["src-referral"];
+  if (value.includes("manual")) return ["src-manual-entry"];
+
+  return ["src-website"];
+}
+
+function fieldPulseStatusLabel(context?: HighLevelSyncContext) {
+  const fieldPulse = context?.fieldPulse;
+
+  if (!fieldPulse?.enabled) return "Not enabled";
+  if (fieldPulse.success) return "Synced";
+
+  return "Sync failed";
+}
+
+export async function syncLeadToHighLevel(
+  lead: LeadInput,
+  context?: HighLevelSyncContext
+): Promise<SyncResult> {
   const token = process.env.HIGHLEVEL_PRIVATE_INTEGRATION_TOKEN;
 
   if (!token) {
@@ -387,18 +773,42 @@ export async function syncLeadToHighLevel(lead: LeadInput): Promise<SyncResult> 
       city: lead.city,
       state: lead.state || "FL",
       postalCode: lead.zip,
-      source: "SecureLifts Website",
-      tags: [
+      source: leadSourceLabel(lead),
+      tags: uniqueTags([
         "sl-new-lead",
         lead.smsOptIn ? "sl-sms-opt-in" : "",
-        serviceToTag(lead.service),
-      ].filter(Boolean),
+        ...sourceToTags(lead),
+        serviceToTag(lead.service, lead.smsOptIn),
+        ...fieldPulseTags(context),
+      ]),
       customFields: [
+        { key: "securelifts_lead_id", field_value: lead.leadId },
         { key: "service_needed", field_value: lead.service },
+        { key: "door_type", field_value: lead.doorType },
+        {
+          key: "residential_or_commercial",
+          field_value: lead.residentialOrCommercial,
+        },
         { key: "lead_source_page", field_value: lead.sourcePage },
-        { key: "urgency", field_value: lead.service?.toLowerCase().includes("emergency") ? "Emergency" : "Normal" },
-        { key: "sms_opt_in", field_value: lead.smsOptIn ? "Yes" : "No" },
-        { key: "preferred_service_time", field_value: [lead.date, lead.time].filter(Boolean).join(" ") },
+        {
+          key: "campaign_source",
+          field_value: lead.campaignSource || leadSourceLabel(lead),
+        },
+        {
+          key: "fieldpulse_sync_status",
+          field_value: fieldPulseStatusLabel(context),
+        },
+        {
+          key: "urgency",
+          field_value: lead.service?.toLowerCase().includes("emergency")
+            ? "Emergency"
+            : "Normal",
+        },
+        { key: "sms_optin", field_value: lead.smsOptIn ? "Yes" : "No" },
+        {
+          key: "preferred_service_time",
+          field_value: [lead.date, lead.time].filter(Boolean).join(" "),
+        },
       ].filter((field) => field.field_value),
     }),
     headers
@@ -455,7 +865,7 @@ export async function syncLeadToHighLevel(lead: LeadInput): Promise<SyncResult> 
           monetaryValue: Number.isFinite(defaultOpportunityValue)
             ? defaultOpportunityValue
             : 0,
-          source: "SecureLifts Website",
+          source: leadSourceLabel(lead),
         }),
         headers
       );
@@ -488,17 +898,25 @@ export async function syncLeadToHighLevel(lead: LeadInput): Promise<SyncResult> 
   };
 }
 
-function serviceToTag(service = "") {
+function serviceToTag(service = "", smsOptIn = false) {
   const value = service.toLowerCase();
 
   if (value.includes("spring")) return "sl-broken-spring";
   if (value.includes("opener")) return "sl-opener-repair";
+  if (value.includes("off track") || value.includes("off-track")) return "sl-off-track";
+  if (value.includes("replace") || value.includes("replacement")) return "sl-replacement";
   if (value.includes("install")) return "sl-installation";
   if (value.includes("hurricane") || value.includes("impact") || value.includes("wind")) {
     return "sl-hurricane-door";
   }
   if (value.includes("commercial")) return "sl-commercial";
   if (value.includes("emergency")) return "sl-emergency-repair";
+  if (
+    smsOptIn &&
+    (value.includes("maintenance") || value.includes("service plan"))
+  ) {
+    return "sl-maintenance-prospect";
+  }
 
   return "";
 }
@@ -506,28 +924,33 @@ function serviceToTag(service = "") {
 export async function syncLead(leadInput: unknown) {
   const lead = normalizeLead(leadInput);
 
-  const [fieldPulse, highLevel] = await Promise.allSettled([
-    syncLeadToFieldPulse(lead),
-    syncLeadToHighLevel(lead),
-  ]);
+  let fieldPulse: SyncResult;
+
+  try {
+    fieldPulse = await syncLeadToFieldPulse(lead);
+  } catch (error) {
+    fieldPulse = {
+      enabled: true,
+      success: false,
+      error: error instanceof Error ? error.message : "FieldPulse sync failed",
+    };
+  }
+
+  let highLevel: SyncResult;
+
+  try {
+    highLevel = await syncLeadToHighLevel(lead, { fieldPulse });
+  } catch (error) {
+    highLevel = {
+      enabled: true,
+      success: false,
+      error: error instanceof Error ? error.message : "HighLevel sync failed",
+    };
+  }
 
   return {
     lead,
-    fieldPulse:
-      fieldPulse.status === "fulfilled"
-        ? fieldPulse.value
-        : {
-            enabled: true,
-            success: false,
-            error: fieldPulse.reason instanceof Error ? fieldPulse.reason.message : "FieldPulse sync failed",
-          },
-    highLevel:
-      highLevel.status === "fulfilled"
-        ? highLevel.value
-        : {
-            enabled: true,
-            success: false,
-            error: highLevel.reason instanceof Error ? highLevel.reason.message : "HighLevel sync failed",
-          },
+    fieldPulse,
+    highLevel,
   };
 }
