@@ -122,6 +122,29 @@ async function postJson(
   };
 }
 
+async function getJson(url: string, headers: HeadersInit) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers,
+  });
+
+  const data = await parseJsonSafely(response);
+
+  if (!response.ok) {
+    return {
+      success: false,
+      status: response.status,
+      data,
+    };
+  }
+
+  return {
+    success: true,
+    status: response.status,
+    data,
+  };
+}
+
 function pickField(source: Record<string, unknown>, keys: string[]) {
   for (const key of keys) {
     const value = source[key];
@@ -357,6 +380,33 @@ function extractCreatedId(data: unknown) {
   return "";
 }
 
+async function findFieldPulseCustomer(
+  baseUrl: string,
+  headers: HeadersInit,
+  lead: LeadInput
+) {
+  const searches = [lead.phone, lead.email, leadDisplayName(lead)].filter(Boolean);
+
+  for (const search of searches) {
+    const result = await getJson(
+      `${baseUrl}/customers?search=${encodeURIComponent(search)}&limit=5`,
+      headers
+    );
+
+    if (!result.success) {
+      continue;
+    }
+
+    const customerId = extractCreatedId(result.data);
+
+    if (customerId) {
+      return result;
+    }
+  }
+
+  return null;
+}
+
 export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult> {
   const apiKey = process.env.FIELD_PULSE_API_KEY;
 
@@ -380,7 +430,6 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const originalName = leadDisplayName(lead);
   const uniqueLeadId = lead.leadId || createLeadId();
   const addressFields = fieldPulseAddress(lead);
-  const initialLocation = fieldPulseLocation(lead, originalName);
   const fieldPulseCustomer = compactObject({
     externalId: uniqueLeadId,
     external_id: uniqueLeadId,
@@ -390,12 +439,6 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     first_name: lead.firstName || originalName,
     lastName: lead.lastName,
     last_name: lead.lastName,
-    name: originalName,
-    fullName: originalName,
-    full_name: originalName,
-    displayName: originalName,
-    display_name: originalName,
-    display: originalName,
     phone: lead.phone,
     email: lead.email,
     ...addressFields,
@@ -405,23 +448,28 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     lead_source: "SecureLifts Website / GoHighLevel",
     source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
-    locations: lead.address ? [initialLocation] : undefined,
   });
 
-  const customerResult = await postJson(`${baseUrl}/customers`, fieldPulseCustomer, headers);
+  let customerResult = await postJson(`${baseUrl}/customers`, fieldPulseCustomer, headers);
 
   if (!customerResult.success) {
-    console.error("FIELD PULSE CUSTOMER SYNC ERROR:", {
-      ...customerResult,
-      payloadKeys: Object.keys(fieldPulseCustomer),
-    });
+    const existingCustomerResult = await findFieldPulseCustomer(baseUrl, headers, lead);
 
-    return {
-      enabled: true,
-      success: false,
-      error: "Could not create FieldPulse customer lead",
-      details: customerResult,
-    };
+    if (existingCustomerResult?.success) {
+      customerResult = existingCustomerResult;
+    } else {
+      console.error("FIELD PULSE CUSTOMER SYNC ERROR:", {
+        ...customerResult,
+        payloadKeys: Object.keys(fieldPulseCustomer),
+      });
+
+      return {
+        enabled: true,
+        success: false,
+        error: "Could not create or retrieve FieldPulse customer lead",
+        details: customerResult,
+      };
+    }
   }
 
   const customerId = extractCreatedId(customerResult.data);

@@ -16,6 +16,10 @@ const FROM_EMAILS = [
   "SecureLifts <bookings@securelifts.com>",
 ].filter((value): value is string => Boolean(value));
 
+function prettyJson(value: unknown) {
+  return escapeHtml(JSON.stringify(value, null, 2));
+}
+
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
@@ -89,7 +93,8 @@ export async function POST(req: Request) {
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p><strong>Lead Source Page:</strong> ${escapeHtml(sourcePage)}</p>
           <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
-          <p><strong>FieldPulse Sync:</strong> ${escapeHtml(JSON.stringify(leadSyncResult))}</p>
+          <p><strong>FieldPulse / GHL Sync:</strong></p>
+          <pre style="white-space: pre-wrap; background: #f3f4f6; border: 1px solid #e5e7eb; padding: 12px; border-radius: 8px;">${prettyJson(leadSyncResult)}</pre>
         </div>
       `,
     };
