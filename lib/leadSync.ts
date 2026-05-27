@@ -122,37 +122,6 @@ async function postJson(
   };
 }
 
-async function putJson(
-  url: string,
-  payload: Record<string, unknown>,
-  headers: HeadersInit
-) {
-  const response = await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      ...headers,
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await parseJsonSafely(response);
-
-  if (!response.ok) {
-    return {
-      success: false,
-      status: response.status,
-      data,
-    };
-  }
-
-  return {
-    success: true,
-    status: response.status,
-    data,
-  };
-}
-
 async function getJson(url: string, headers: HeadersInit) {
   const response = await fetch(url, {
     method: "GET",
@@ -400,7 +369,7 @@ function parsePreferredTime(value: string) {
   };
 }
 
-function fieldPulseJobSchedule(lead: LeadInput) {
+function fieldPulseJobVisit(lead: LeadInput) {
   if (!lead.date || !lead.time) {
     return {};
   }
@@ -631,6 +600,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
   const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
   const jobStatusWorkflowId = Number(process.env.FIELD_PULSE_JOB_STATUS_WORKFLOW_ID || 0);
+  const visitFields = fieldPulseJobVisit(lead);
 
   const jobPayload = compactObject({
     customer_id: Number(customerId),
@@ -647,30 +617,13 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     location_id: locationId,
     job_type_id: jobTypeId,
     type: "job",
+    ...visitFields,
   });
 
   const jobResult = await postJson(`${baseUrl}/jobs`, jobPayload, headers);
 
   if (!jobResult.success) {
     console.error("FIELD PULSE JOB SYNC ERROR:", jobResult);
-  }
-
-  const jobId = jobResult.success ? extractCreatedId(jobResult.data) : "";
-  const scheduleFields = fieldPulseJobSchedule(lead);
-  const scheduleResult =
-    jobId && Object.keys(scheduleFields).length
-      ? await putJson(
-          `${baseUrl}/jobs/${jobId}`,
-          {
-            ...jobPayload,
-            ...scheduleFields,
-          },
-          headers
-        )
-      : null;
-
-  if (scheduleResult && !scheduleResult.success) {
-    console.error("FIELD PULSE JOB SCHEDULE UPDATE ERROR:", scheduleResult);
   }
 
   return {
@@ -683,9 +636,6 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
         locationResult && !locationResult.success ? locationResult : null,
       job: jobResult.success ? jobResult.data : null,
       jobError: jobResult.success ? null : jobResult,
-      schedule: scheduleResult?.success ? scheduleResult.data : null,
-      scheduleError:
-        scheduleResult && !scheduleResult.success ? scheduleResult : null,
     },
   };
 }
