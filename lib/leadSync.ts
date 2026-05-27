@@ -122,6 +122,37 @@ async function postJson(
   };
 }
 
+async function putJson(
+  url: string,
+  payload: Record<string, unknown>,
+  headers: HeadersInit
+) {
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await parseJsonSafely(response);
+
+  if (!response.ok) {
+    return {
+      success: false,
+      status: response.status,
+      data,
+    };
+  }
+
+  return {
+    success: true,
+    status: response.status,
+    data,
+  };
+}
+
 async function getJson(url: string, headers: HeadersInit) {
   const response = await fetch(url, {
     method: "GET",
@@ -325,6 +356,110 @@ function fieldPulseLocationString(lead: LeadInput) {
     .join(", ");
 }
 
+function parseClockTime(value: string) {
+  const match = value.trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
+
+  if (!match) {
+    return null;
+  }
+
+  let hour = Number(match[1]);
+  const minute = Number(match[2] || 0);
+  const period = match[3].toUpperCase();
+
+  if (period === "PM" && hour !== 12) hour += 12;
+  if (period === "AM" && hour === 12) hour = 0;
+
+  return { hour, minute };
+}
+
+function easternDateToday() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+
+  return year && month && day ? `${year}-${month}-${day}` : "";
+}
+
+function timeZoneOffsetMinutes(date: Date, timeZone: string) {
+  const timeZoneName = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(date)
+    .find((part) => part.type === "timeZoneName")?.value;
+
+  const match = timeZoneName?.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/);
+
+  if (!match) {
+    return 0;
+  }
+
+  const sign = match[1] === "-" ? -1 : 1;
+  const hours = Number(match[2]);
+  const minutes = Number(match[3] || 0);
+
+  return sign * (hours * 60 + minutes);
+}
+
+function easternUnixSeconds(dateValue: string, time: { hour: number; minute: number }) {
+  const [year, month, day] = dateValue.split("-").map(Number);
+
+  if (!year || !month || !day) {
+    return 0;
+  }
+
+  const wallClockAsUtc = Date.UTC(year, month - 1, day, time.hour, time.minute);
+  const offset = timeZoneOffsetMinutes(
+    new Date(wallClockAsUtc),
+    "America/New_York"
+  );
+
+  return Math.floor((wallClockAsUtc - offset * 60_000) / 1000);
+}
+
+function fieldPulseVisitWindow(lead: LeadInput) {
+  const dateValue = lead.date || easternDateToday();
+  const timeValue = lead.time || "";
+  const fallbackStart = parseClockTime("8:00 AM");
+  const fallbackEnd = parseClockTime("10:00 AM");
+  const normalizedTime = timeValue.toLowerCase();
+  const timeParts =
+    normalizedTime.includes("asap") || normalizedTime.includes("flexible")
+      ? []
+      : timeValue.split(/\s*-\s*/);
+
+  const start = parseClockTime(timeParts[0] || "") || fallbackStart;
+  const end = parseClockTime(timeParts[1] || "") || fallbackEnd;
+
+  if (!dateValue || !start || !end) {
+    return null;
+  }
+
+  const startTime = easternUnixSeconds(dateValue, start);
+  let endTime = easternUnixSeconds(dateValue, end);
+
+  if (!startTime || !endTime) {
+    return null;
+  }
+
+  if (endTime <= startTime) {
+    endTime = startTime + 2 * 60 * 60;
+  }
+
+  return {
+    startTime,
+    endTime,
+  };
+}
+
 function fieldPulseLocation(
   lead: LeadInput,
   originalName: string,
@@ -380,6 +515,38 @@ function extractCreatedId(data: unknown) {
   return "";
 }
 
+function extractRecord(data: unknown): Record<string, unknown> | null {
+  if (Array.isArray(data)) {
+    for (const item of data) {
+      const nested = extractRecord(item);
+      if (nested) {
+        return nested;
+      }
+    }
+
+    return null;
+  }
+
+  if (!isRecord(data)) {
+    return null;
+  }
+
+  if (data.id != null) {
+    return data;
+  }
+
+  for (const key of ["response", "data", "job", "result", "item", "record"] as const) {
+    if (data[key] != null) {
+      const nested = extractRecord(data[key]);
+      if (nested) {
+        return nested;
+      }
+    }
+  }
+
+  return null;
+}
+
 async function findFieldPulseCustomer(
   baseUrl: string,
   headers: HeadersInit,
@@ -405,6 +572,78 @@ async function findFieldPulseCustomer(
   }
 
   return null;
+}
+
+async function scheduleFieldPulseVisit(
+  baseUrl: string,
+  headers: HeadersInit,
+  jobId: string,
+  lead: LeadInput,
+  jobData: unknown
+) {
+  const visitWindow = fieldPulseVisitWindow(lead);
+
+  if (!visitWindow) {
+    return {
+      success: false,
+      skipped: true,
+      data: "Preferred visit date/time was not available",
+    };
+  }
+
+  let jobRecord = extractRecord(jobData);
+
+  if (!jobRecord) {
+    const pluralLookup = await getJson(`${baseUrl}/jobs/${jobId}`, headers);
+    const jobLookup = pluralLookup.success
+      ? pluralLookup
+      : await getJson(`${baseUrl}/job/${jobId}`, headers);
+
+    if (jobLookup.success) {
+      jobRecord = extractRecord(jobLookup.data);
+    }
+  }
+
+  if (!jobRecord) {
+    return {
+      success: false,
+      skipped: true,
+      data: "FieldPulse job was created, but the full job record was not available for a safe visit update",
+    };
+  }
+
+  const visit = compactObject({
+    start_time: visitWindow.startTime,
+    end_time: visitWindow.endTime,
+    customer_arrival_window_start_time: visitWindow.startTime,
+    customer_arrival_window_end_time: visitWindow.endTime,
+    assignments: [],
+    status: Number(process.env.FIELD_PULSE_VISIT_STATUS || 1),
+    status_id: Number(process.env.FIELD_PULSE_VISIT_STATUS_ID || 377747),
+    status_workflow_id: Number(
+      process.env.FIELD_PULSE_VISIT_STATUS_WORKFLOW_ID || 126534
+    ),
+    title: process.env.FIELD_PULSE_VISIT_TITLE || "Site Visit",
+    notes: "",
+    field_notes: "",
+    is_visible: true,
+    is_multiday_job: false,
+    in_progress_status_log: 0,
+    on_the_way_status_log: 0,
+  });
+
+  const visitPayload = {
+    ...jobRecord,
+    visits: [visit],
+  };
+
+  const pluralResult = await putJson(`${baseUrl}/jobs/${jobId}`, visitPayload, headers);
+
+  if (pluralResult.success || pluralResult.status !== 404) {
+    return pluralResult;
+  }
+
+  return putJson(`${baseUrl}/job/${jobId}`, visitPayload, headers);
 }
 
 export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult> {
@@ -552,6 +791,19 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     console.error("FIELD PULSE JOB SYNC ERROR:", jobResult);
   }
 
+  const jobId = jobResult.success ? extractCreatedId(jobResult.data) : "";
+  const visitResult =
+    jobId && process.env.FIELD_PULSE_CREATE_VISIT !== "false"
+      ? await scheduleFieldPulseVisit(baseUrl, headers, jobId, lead, jobResult.data)
+      : null;
+
+  const visitSkipped =
+    visitResult && "skipped" in visitResult ? visitResult.skipped : false;
+
+  if (visitResult && !visitResult.success && !visitSkipped) {
+    console.error("FIELD PULSE VISIT SYNC ERROR:", visitResult);
+  }
+
   return {
     enabled: true,
     success: true,
@@ -562,6 +814,9 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
         locationResult && !locationResult.success ? locationResult : null,
       job: jobResult.success ? jobResult.data : null,
       jobError: jobResult.success ? null : jobResult,
+      visit: visitResult?.success ? visitResult.data : null,
+      visitError:
+        visitResult && !visitResult.success ? visitResult : null,
     },
   };
 }
