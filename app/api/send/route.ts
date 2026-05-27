@@ -89,6 +89,7 @@ export async function POST(req: Request) {
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p><strong>Lead Source Page:</strong> ${escapeHtml(sourcePage)}</p>
           <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
+          <p><strong>FieldPulse Sync:</strong> ${escapeHtml(JSON.stringify(leadSyncResult))}</p>
         </div>
       `,
     };

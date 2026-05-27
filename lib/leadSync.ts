@@ -405,7 +405,6 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     lead_source: "SecureLifts Website / GoHighLevel",
     source: "SecureLifts Website / GoHighLevel",
     notes: leadNotes(lead),
-    job_notes: leadNotes(lead),
     locations: lead.address ? [initialLocation] : undefined,
   });
 
@@ -447,7 +446,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     }
   }
 
-  if (process.env.FIELD_PULSE_CREATE_JOB !== "true") {
+  if (process.env.FIELD_PULSE_CREATE_JOB === "false") {
     return {
       enabled: true,
       success: true,
