@@ -412,9 +412,19 @@ function fieldPulseJobSchedule(lead: LeadInput) {
   }
 
   const startTime = `${lead.date} ${parsedTime.start}`;
+  const endTime = `${lead.date} ${parsedTime.end}`;
 
   return {
-    start_time: startTime,
+    visits: [
+      compactObject({
+        status: 1,
+        title: lead.service || "SecureLifts Site Visit",
+        subtitle: lead.time,
+        is_visible: true,
+        start_time: startTime,
+        end_time: endTime,
+      }),
+    ],
   };
 }
 
