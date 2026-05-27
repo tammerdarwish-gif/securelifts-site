@@ -368,7 +368,7 @@ function extractCreatedId(data: unknown) {
     return directId;
   }
 
-  for (const key of ["data", "customer", "customers", "result", "results", "item", "items", "record", "records"] as const) {
+  for (const key of ["response", "data", "customer", "customers", "result", "results", "item", "items", "record", "records"] as const) {
     if (data[key] != null) {
       const nested = extractCreatedId(data[key]);
       if (nested) {
@@ -476,6 +476,15 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   }
 
   const customerId = extractCreatedId(customerResult.data);
+
+  if (!customerId) {
+    return {
+      enabled: true,
+      success: false,
+      error: "FieldPulse customer was created or found, but no customer ID was returned",
+      details: customerResult,
+    };
+  }
   let locationResult:
     | Awaited<ReturnType<typeof postJson>>
     | { success: false; skipped: true; data: string }
