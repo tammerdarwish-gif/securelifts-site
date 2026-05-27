@@ -273,6 +273,24 @@ function leadDisplayName(lead: LeadInput) {
   );
 }
 
+function fieldPulseAddress(lead: LeadInput) {
+  const state = lead.state || "FL";
+
+  return compactObject({
+    address: lead.address,
+    address1: lead.address,
+    address_1: lead.address,
+    street: lead.address,
+    streetAddress: lead.address,
+    street_address: lead.address,
+    city: lead.city,
+    state,
+    zip: lead.zip,
+    postalCode: lead.zip,
+    postal_code: lead.zip,
+  });
+}
+
 function extractCreatedId(data: unknown) {
     if (Array.isArray(data)) {
           for (const item of data) {
@@ -331,6 +349,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
 
   const originalName = leadDisplayName(lead);
   const uniqueLeadId = lead.leadId || createLeadId();
+  const addressFields = fieldPulseAddress(lead);
   const fieldPulseCustomer = compactObject({
     externalId: uniqueLeadId,
     external_id: uniqueLeadId,
@@ -348,12 +367,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     display: originalName,
     phone: lead.phone,
     email: lead.email,
-    address: lead.address,
-    city: lead.city,
-    state: lead.state || "FL",
-    zip: lead.zip,
-    postalCode: lead.zip,
-    postal_code: lead.zip,
+    ...addressFields,
     accountStatus: "Active",
     account_status: "Active",
     leadSource: "SecureLifts Website / GoHighLevel",
@@ -382,17 +396,70 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     };
   }
 
+  const customerId = extractCreatedId(customerResult.data);
+  let locationResult:
+    | Awaited<ReturnType<typeof postJson>>
+    | { success: false; skipped: true; data: string }
+    | null = null;
+
+  if (
+    lead.address &&
+    customerId &&
+    process.env.FIELD_PULSE_CREATE_LOCATION !== "false"
+  ) {
+    const fieldPulseLocation = compactObject({
+      externalId: uniqueLeadId,
+      external_id: uniqueLeadId,
+      leadId: uniqueLeadId,
+      lead_id: uniqueLeadId,
+      customerId,
+      customer_id: customerId,
+      customerID: customerId,
+      customer: { id: customerId },
+      name: `Service Location - ${originalName}`,
+      title: `Service Location - ${originalName}`,
+      displayName: originalName,
+      display_name: originalName,
+      phone: lead.phone,
+      email: lead.email,
+      ...addressFields,
+      notes: leadNotes(lead),
+    });
+    const locationPayload = {
+      ...fieldPulseLocation,
+      location: fieldPulseLocation,
+    };
+
+    const nestedLocationResult = await postJson(
+      `${baseUrl}/customers/${customerId}/locations`,
+      locationPayload,
+      headers
+    );
+
+    locationResult = nestedLocationResult.success
+      ? nestedLocationResult
+      : await postJson(`${baseUrl}/locations`, locationPayload, headers);
+
+    if (!locationResult.success) {
+      console.error("FIELD PULSE LOCATION SYNC ERROR:", locationResult);
+    }
+  }
+
   if (process.env.FIELD_PULSE_CREATE_JOB !== "true") {
     return {
       enabled: true,
       success: true,
       details: {
         customer: customerResult.data,
+        location: locationResult?.success ? locationResult.data : null,
+        locationError:
+          locationResult && !locationResult.success ? locationResult : null,
       },
     };
   }
 
-  const customerId = extractCreatedId(customerResult.data);
+  const locationId =
+    locationResult?.success ? extractCreatedId(locationResult.data) : "";
   const jobType = process.env.FIELD_PULSE_JOB_TYPE || "New Lead";
   const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
@@ -407,6 +474,9 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     customer_id: customerId,
     customerID: customerId,
     customer: { id: customerId },
+    locationId,
+    location_id: locationId,
+    location: locationId ? { id: locationId } : undefined,
     jobType,
     job_type: jobType,
     jobTypeName: jobType,
@@ -422,10 +492,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     name: lead.service || "SecureLifts Service Lead",
     description: leadNotes(lead),
     notes: leadNotes(lead),
-    address: lead.address,
-    city: lead.city,
-    state: lead.state || "FL",
-    zip: lead.zip,
+    ...addressFields,
     status: jobStatus,
     statusId: jobStatus,
     status_id: jobStatus,
@@ -443,6 +510,9 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     success: true,
     details: {
       customer: customerResult.data,
+      location: locationResult?.success ? locationResult.data : null,
+      locationError:
+        locationResult && !locationResult.success ? locationResult : null,
       job: jobResult.success ? jobResult.data : null,
       jobError: jobResult.success ? null : jobResult,
     },
