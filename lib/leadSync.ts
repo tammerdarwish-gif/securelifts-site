@@ -73,6 +73,14 @@ function compactObject<T extends Record<string, unknown>>(value: T) {
   );
 }
 
+function omitFields<T extends Record<string, unknown>>(value: T, keys: string[]) {
+  const blockedKeys = new Set(keys);
+
+  return Object.fromEntries(
+    Object.entries(value).filter(([key]) => !blockedKeys.has(key))
+  );
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -627,9 +635,13 @@ async function scheduleFieldPulseVisit(
   const existingVisits = Array.isArray(jobRecord.visits)
     ? jobRecord.visits.filter(isRecord)
     : [];
+  const safeJobRecord = omitFields(jobRecord, [
+    "status_workflow_id",
+    "status_based_button_workflow_id",
+  ]);
 
   const visitPayload = {
-    ...jobRecord,
+    ...safeJobRecord,
     visits: [...existingVisits, visit],
   };
 
