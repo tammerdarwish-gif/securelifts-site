@@ -45,6 +45,7 @@ const priorityStaticPaths = [
   "/impact-rated-garage-doors",
   "/miami-dade-rated-garage-doors",
   "/locations",
+  "/ai-garage-door-answers",
   "/reviews",
   "/about",
   "/contact",

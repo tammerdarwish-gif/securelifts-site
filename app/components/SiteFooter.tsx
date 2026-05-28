@@ -10,6 +10,12 @@ export default function SiteFooter() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
+            href="/ai-garage-door-answers"
+            className="font-semibold text-slate-900 underline-offset-4 hover:underline"
+          >
+            Garage Door Answers
+          </Link>
+          <Link
             href="/privacy-policy"
             className="font-semibold text-slate-900 underline-offset-4 hover:underline"
           >
