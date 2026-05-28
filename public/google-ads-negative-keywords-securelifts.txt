@@ -1,0 +1,57 @@
+SecureLifts Google Ads negative keyword starter list
+
+Use these as phrase or exact negatives where they match the campaign intent.
+Review search terms weekly before expanding the list.
+
+Research / DIY:
+free
+cheap parts
+parts only
+for sale
+wholesale
+manual
+diagram
+instructions
+youtube
+reddit
+forum
+how to
+diy
+do it yourself
+tutorial
+course
+training
+
+Employment:
+job
+jobs
+hiring
+career
+salary
+technician job
+installer job
+
+Retail-only intent:
+home depot
+lowes
+amazon
+ebay
+walmart
+used garage door
+garage door parts
+garage door spring for sale
+opener remote for sale
+
+Non-service intent:
+apartment garage
+parking garage
+self storage
+commercial roll up door parts
+gate remote programming
+
+Low-quality lead patterns to watch:
+coupon only
+free estimate only
+no service fee
+cheapest
+near me reviews only

@@ -7,6 +7,7 @@ type QuickLeadFormProps = {
   title?: string;
   intro?: string;
   compact?: boolean;
+  campaignSource?: string;
 };
 
 const serviceOptions = [
@@ -35,6 +36,7 @@ export default function QuickLeadForm({
   title = "Get Fast Garage Door Help",
   intro = "Tell us the basics and SecureLifts will contact you to confirm the right next step.",
   compact = false,
+  campaignSource = "",
 }: QuickLeadFormProps) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -81,6 +83,13 @@ export default function QuickLeadForm({
             typeof window !== "undefined" ? window.location.href : "",
           referrer:
             typeof document !== "undefined" ? document.referrer : "",
+          campaignSource:
+            campaignSource ||
+            (typeof window !== "undefined"
+              ? new URLSearchParams(window.location.search).get("utm_campaign") ||
+                new URLSearchParams(window.location.search).get("campaign") ||
+                ""
+              : ""),
         }),
       });
 
@@ -96,8 +105,16 @@ export default function QuickLeadForm({
 
       if (typeof window !== "undefined") {
         window.loadSecureLiftsGoogleTags?.();
-        window.gtag("event", "conversion", {
+        window.gtag?.("event", "conversion", {
           send_to: "AW-17481132065/F_m9CKXmkfQbEKHQ049B",
+          value: 50,
+          currency: "USD",
+        });
+        window.gtag?.("event", "generate_lead", {
+          event_category: "lead",
+          event_label: service,
+          value: 50,
+          currency: "USD",
         });
       }
 

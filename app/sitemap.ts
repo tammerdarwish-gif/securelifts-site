@@ -31,6 +31,9 @@ const staticPaths = getAllStaticRoutes(path.join(process.cwd(), "app"));
 const priorityStaticPaths = [
   "",
   "/garage-door-repair",
+  "/ads/garage-door-repair",
+  "/ads/broken-spring-repair",
+  "/ads/garage-door-opener-repair",
   "/garage-door-installation",
   "/broken-spring-repair",
   "/spring-replacement",
