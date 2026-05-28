@@ -608,6 +608,8 @@ async function scheduleFieldPulseVisit(
     };
   }
 
+  const visitStatusId = process.env.FIELD_PULSE_VISIT_STATUS_ID;
+  const visitStatusWorkflowId = process.env.FIELD_PULSE_VISIT_STATUS_WORKFLOW_ID;
   const visit = compactObject({
     start_time: visitWindow.startTime,
     end_time: visitWindow.endTime,
@@ -615,10 +617,10 @@ async function scheduleFieldPulseVisit(
     customer_arrival_window_end_time: visitWindow.endTime,
     assignments: [],
     status: Number(process.env.FIELD_PULSE_VISIT_STATUS || 1),
-    status_id: Number(process.env.FIELD_PULSE_VISIT_STATUS_ID || 377747),
-    status_workflow_id: Number(
-      process.env.FIELD_PULSE_VISIT_STATUS_WORKFLOW_ID || 126534
-    ),
+    status_id: visitStatusId ? Number(visitStatusId) : undefined,
+    status_workflow_id: visitStatusWorkflowId
+      ? Number(visitStatusWorkflowId)
+      : undefined,
     title: process.env.FIELD_PULSE_VISIT_TITLE || "Site Visit",
     notes: "",
     field_notes: "",
