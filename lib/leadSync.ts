@@ -32,6 +32,9 @@ type SyncResult = {
 
 const DEFAULT_FIELD_PULSE_API_BASE_URL =
   "https://ywe3crmpll.execute-api.us-east-2.amazonaws.com/stage";
+const DEFAULT_FIELD_PULSE_JOB_STATUS = 1;
+const DEFAULT_FIELD_PULSE_JOB_STATUS_ID = 377741;
+const DEFAULT_FIELD_PULSE_JOB_STATUS_WORKFLOW_ID = 74733;
 
 const DEFAULT_HIGHLEVEL_LOCATION_ID = "7hrTJmU6U7A0rUjbCzBv";
 const DEFAULT_HIGHLEVEL_API_BASE_URL = "https://services.leadconnectorhq.com";
@@ -53,6 +56,13 @@ function cleanFieldValue(value: unknown) {
 
 function asBoolean(value: unknown) {
   return value === true || value === "true" || value === "yes" || value === "1";
+}
+
+function asFiniteNumber(value: unknown) {
+  const numberValue =
+    typeof value === "number" ? value : Number(asString(value));
+
+  return Number.isFinite(numberValue) ? numberValue : 0;
 }
 
 function createLeadId() {
@@ -364,6 +374,27 @@ function fieldPulseLocationString(lead: LeadInput) {
     .join(", ");
 }
 
+function fieldPulseJobStatusFields(jobRecord?: Record<string, unknown>) {
+  const status = asFiniteNumber(jobRecord?.status) || DEFAULT_FIELD_PULSE_JOB_STATUS;
+  const statusId =
+    asFiniteNumber(process.env.FIELD_PULSE_JOB_STATUS_ID) ||
+    (asFiniteNumber(jobRecord?.status_id) > 1
+      ? asFiniteNumber(jobRecord?.status_id)
+      : DEFAULT_FIELD_PULSE_JOB_STATUS_ID);
+  const statusWorkflowId =
+    asFiniteNumber(process.env.FIELD_PULSE_JOB_STATUS_WORKFLOW_ID) ||
+    asFiniteNumber(jobRecord?.status_workflow_id) ||
+    DEFAULT_FIELD_PULSE_JOB_STATUS_WORKFLOW_ID;
+
+  return {
+    status:
+      asFiniteNumber(process.env.FIELD_PULSE_JOB_STATUS) ||
+      status,
+    status_id: statusId,
+    status_workflow_id: statusWorkflowId,
+  };
+}
+
 function parseClockTime(value: string) {
   const match = value.trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
 
@@ -636,12 +667,12 @@ async function scheduleFieldPulseVisit(
     ? jobRecord.visits.filter(isRecord)
     : [];
   const safeJobRecord = omitFields(jobRecord, [
-    "status_workflow_id",
     "status_based_button_workflow_id",
   ]);
 
   const visitPayload = {
     ...safeJobRecord,
+    ...fieldPulseJobStatusFields(jobRecord),
     visits: [...existingVisits, visit],
   };
 
@@ -791,6 +822,7 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
     customer_id: Number(customerId),
     project_id: undefined,
     job_type: jobType,
+    ...fieldPulseJobStatusFields(),
     subtitle: lead.service || "SecureLifts Service Lead",
     billing: billingCode,
     notes: lead.message || lead.service || "SecureLifts service request",
