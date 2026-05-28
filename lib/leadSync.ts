@@ -786,17 +786,12 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   const jobType = process.env.FIELD_PULSE_JOB_TYPE || "service";
   const jobTypeId = process.env.FIELD_PULSE_JOB_TYPE_ID || "";
   const billingCode = Number(process.env.FIELD_PULSE_BILLING_CODE || 1);
-  const jobStatus = Number(process.env.FIELD_PULSE_JOB_STATUS || 1);
-  const jobStatusWorkflowId = Number(process.env.FIELD_PULSE_JOB_STATUS_WORKFLOW_ID || 0);
 
   const jobPayload = compactObject({
     customer_id: Number(customerId),
     project_id: undefined,
     job_type: jobType,
     subtitle: lead.service || "SecureLifts Service Lead",
-    status: jobStatus,
-    status_id: jobStatus,
-    status_workflow_id: jobStatusWorkflowId || undefined,
     billing: billingCode,
     notes: lead.message || lead.service || "SecureLifts service request",
     field_notes: leadNotes(lead),
