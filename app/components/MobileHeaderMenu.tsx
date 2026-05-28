@@ -52,7 +52,7 @@ export default function MobileHeaderMenu({
                   className={`text-lg transition ${servicesOpen ? "rotate-180" : ""}`}
                   aria-hidden="true"
                 >
-                  v
+                  {servicesOpen ? "-" : "+"}
                 </span>
               </button>
 

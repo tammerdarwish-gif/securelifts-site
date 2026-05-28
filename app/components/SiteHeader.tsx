@@ -7,8 +7,10 @@ const serviceLinks = [
   { label: "Garage Door Repair", href: "/garage-door-repair" },
   { label: "Broken Spring Repair", href: "/broken-spring-repair" },
   { label: "Opener Repair", href: "/garage-door-opener-repair" },
+  { label: "Garage Door Openers", href: "/garage-door-opener" },
   { label: "Garage Door Installation", href: "/garage-door-installation" },
-  { label: "Hurricane Garage Doors", href: "/hurricane-garage-doors" },
+  { label: "Hurricane Doors", href: "/hurricane-garage-doors" },
+  { label: "Impact-Rated Doors", href: "/impact-rated-garage-doors" },
   { label: "Garage Door Cable Repair", href: "/garage-door-cable-repair" },
   { label: "Roller Replacement", href: "/garage-door-roller-replacement" },
   { label: "Panel Replacement", href: "/garage-door-panel-replacement" },
@@ -16,6 +18,8 @@ const serviceLinks = [
 ];
 
 const mainLinks = [
+  { label: "Openers", href: "/garage-door-opener" },
+  { label: "Hurricane Doors", href: "/hurricane-garage-doors" },
   { label: "About", href: "/about" },
   { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
@@ -48,7 +52,6 @@ export default function SiteHeader() {
                 className="flex items-center gap-1 text-sm font-bold text-slate-900 transition hover:text-red-600"
               >
                 Services
-                <span aria-hidden="true">v</span>
               </button>
 
               <div className="invisible absolute left-0 top-full mt-4 w-[320px] rounded-3xl border border-slate-200 bg-white p-3 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
