@@ -129,6 +129,14 @@ const legacyRedirects = [
     source: "/hurricane-garage-doors/broward",
     destination: "/hurricane-garage-doors/broward-county",
   },
+  {
+    source: "/book-your-appointment",
+    destination: "/book-service",
+  },
+  {
+    source: "/garage-door-spring-repair",
+    destination: "/broken-spring-repair",
+  },
 ].flatMap(({ source, destination }) => [
   {
     source,
