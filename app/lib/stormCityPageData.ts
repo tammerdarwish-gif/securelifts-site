@@ -25,6 +25,7 @@ export const stormCities: StormCityData[] = [
   { slug: "doral", name: "Doral", nearbyAreas: ["Miami", "Hialeah", "Sweetwater"] },
   { slug: "cutler-bay", name: "Cutler Bay", nearbyAreas: ["Palmetto Bay", "Kendall", "Homestead"] },
   { slug: "pembroke-pines", name: "Pembroke Pines", nearbyAreas: ["Miramar", "Hollywood", "Davie"] },
+  { slug: "broward-county", name: "Broward County", nearbyAreas: ["Fort Lauderdale", "Hollywood", "Pembroke Pines"] },
   { slug: "miramar", name: "Miramar", nearbyAreas: ["Pembroke Pines", "Hollywood", "Miami Gardens"] },
   { slug: "hollywood", name: "Hollywood", nearbyAreas: ["Fort Lauderdale", "Pembroke Pines", "Hallandale Beach"] },
   { slug: "fort-lauderdale", name: "Fort Lauderdale", nearbyAreas: ["Wilton Manors", "Oakland Park", "Davie"] },

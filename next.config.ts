@@ -113,6 +113,22 @@ const legacyRedirects = [
     source: "/lp",
     destination: "/garage-door-repair",
   },
+  {
+    source: "/hurricane-garage-door-in-wellington",
+    destination: "/hurricane-garage-doors/wellington",
+  },
+  {
+    source: "/openers-installation-in-wellington",
+    destination: "/garage-door-opener-repair/wellington",
+  },
+  {
+    source: "/impact-doors/broward",
+    destination: "/hurricane-garage-doors/broward-county",
+  },
+  {
+    source: "/hurricane-garage-doors/broward",
+    destination: "/hurricane-garage-doors/broward-county",
+  },
 ].flatMap(({ source, destination }) => [
   {
     source,
