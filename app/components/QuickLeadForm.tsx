@@ -104,18 +104,7 @@ export default function QuickLeadForm({
       }
 
       if (typeof window !== "undefined") {
-        window.loadSecureLiftsGoogleTags?.();
-        window.gtag?.("event", "conversion", {
-          send_to: "AW-17481132065/F_m9CKXmkfQbEKHQ049B",
-          value: 50,
-          currency: "USD",
-        });
-        window.gtag?.("event", "generate_lead", {
-          event_category: "lead",
-          event_label: service,
-          value: 50,
-          currency: "USD",
-        });
+        await window.trackSecureLiftsLeadConversion?.(service);
       }
 
       setSubmitted(true);

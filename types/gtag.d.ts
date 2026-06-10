@@ -5,6 +5,8 @@ declare global {
     __secureLiftsGoogleTagsReady?: boolean;
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
-    loadSecureLiftsGoogleTags?: () => void;
+    loadSecureLiftsGoogleTags?: () => Promise<void>;
+    trackSecureLiftsLeadConversion?: (service?: string) => Promise<boolean>;
+    trackSecureLiftsPhoneConversion?: (label?: string) => Promise<boolean>;
   }
 }
