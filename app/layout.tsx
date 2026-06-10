@@ -121,6 +121,7 @@ export default function RootLayout({
               send_to: sendTo,
               value: 50,
               currency: 'USD',
+              transport_type: 'beacon',
               event_callback: finish
             }, options || {}));
           });
@@ -155,7 +156,8 @@ export default function RootLayout({
 
       document.addEventListener('click', function (event) {
         var target = event.target;
-        var anchor = target && target.closest ? target.closest('a[href^="tel:"]') : null;
+        var element = target && target.nodeType === 1 ? target : target && target.parentElement;
+        var anchor = element && element.closest ? element.closest('a[href^="tel:"]') : null;
         if (!anchor || anchor.dataset.secureLiftsPhoneTracking === 'active') return;
 
         event.preventDefault();
