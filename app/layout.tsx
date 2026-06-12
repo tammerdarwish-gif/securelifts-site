@@ -11,6 +11,7 @@ const ADDITIONAL_GA_MEASUREMENT_ID = "G-MM5H23RMXS";
 const GOOGLE_ADS_ID = "AW-17481132065";
 const GOOGLE_ADS_PHONE_CONVERSION_ID = "AW-17481132065/F22OCPvmkfQbEKHQ049B";
 const GOOGLE_ADS_LEAD_FORM_CONVERSION_ID = "AW-17481132065/F_m9CKXmkfQbEKHQ049B";
+const GOOGLE_TAG_MANAGER_ID = "GTM-NLKNM4LB";
 const PHONE_NUMBER = "(866) 828-1818";
 
 export const metadata: Metadata = {
@@ -190,11 +191,19 @@ export default function RootLayout({
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NLKNM4LB');`,
+})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');`,
           }}
         />
       </head>
       <body className="antialiased pb-24">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <BusinessAuthoritySchema />
         <script
           id="securelifts-deferred-google-tags"
