@@ -196,6 +196,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body className="antialiased pb-24">
+        {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
@@ -204,6 +205,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <BusinessAuthoritySchema />
         <script
           id="securelifts-deferred-google-tags"
