@@ -110,10 +110,6 @@ const legacyRedirects = [
     destination: "/garage-door-repair/miami",
   },
   {
-    source: "/lp",
-    destination: "/garage-door-repair",
-  },
-  {
     source: "/hurricane-garage-door-in-wellington",
     destination: "/hurricane-garage-doors/wellington",
   },
@@ -165,6 +161,14 @@ const nextConfig: NextConfig = {
             value: "public, max-age=31536000, immutable",
           },
         ],
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/lp/:path*",
+        destination: "https://securelift-lp-a6vat.ondigitalocean.app/lp/:path*",
       },
     ];
   },
