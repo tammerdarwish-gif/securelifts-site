@@ -216,13 +216,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {children}
         <SiteFooter />
         <StickyCTA />
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="6a0d03bb0732dcf288113a4b"
-          data-source="WEB_USER"
-          strategy="afterInteractive"
-        />
+        <script
+          id="chatBT"
+          data-chat-key="iNTvyxQDHOng6busC7Ym"
+          src="https://nowl.ink/1791z3115a"
+          type="text/javascript"
+        /> 
       </body>
     </html>
   );
