@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaArrowRight,
   FaExclamationTriangle,
@@ -12,7 +12,6 @@ import {
   FaShieldAlt,
   FaClock,
   FaWarehouse,
-  FaClipboardCheck,
   FaDoorOpen,
 } from "react-icons/fa";
 import { serviceRoutes } from "../../lib/serviceRoutes";
@@ -178,10 +177,7 @@ export default function EmergencyCommercialDoorRepairPage() {
     name: "Emergency Commercial Door Repair",
     serviceType: "Emergency Commercial Door Repair",
     provider: {
-      "@type": "GarageDoorRepair",
-      name: "SecureLifts",
-      telephone: PHONE,
-      url: "https://securelifts.com/emergency-commercial-door-repair",
+      ...BUSINESS_SCHEMA_REFERENCE,
     },
     areaServed: [
       { "@type": "Place", name: "South Florida" },

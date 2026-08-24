@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Garage door repair in South Florida with practical repair-first recommendations, fast follow-up, and clear next steps before work begins.",
   alternates: { canonical: "https://securelifts.com/ads/garage-door-repair" },
+  robots: { index: false, follow: true },
 };
 
 export default function GarageDoorRepairAdsPage() {

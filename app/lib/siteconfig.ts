@@ -1,6 +1,8 @@
+import { SITE_IDENTITY } from "@/lib/siteIdentity";
+
 export const SITE = {
-  phone: "(866) 828-1818",
-  phoneHref: "tel:+18668281818",
-  email: "info@securelifts.com",
-  emailHref: "mailto:info@securelifts.com",
+  phone: SITE_IDENTITY.phoneDisplay,
+  phoneHref: SITE_IDENTITY.phoneHref,
+  email: SITE_IDENTITY.email,
+  emailHref: SITE_IDENTITY.emailHref,
 };

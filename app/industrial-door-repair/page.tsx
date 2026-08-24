@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Script from "next/script";
 import type { Metadata } from "next";
 import {
   FaCheckCircle,

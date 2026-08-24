@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Canyon Ridge Elements Garage Doors | SecureLifts South Florida",
   description:
     "Explore Canyon Ridge Elements garage door options for South Florida homes. Premium textured curb appeal installed by SecureLifts.",
+  alternates: { canonical: "https://securelifts.com/hurricane-garage-doors/carriage-house/canyon-ridge-elements" },
 };
 
 export default function CanyonRidgeElementsPage() {

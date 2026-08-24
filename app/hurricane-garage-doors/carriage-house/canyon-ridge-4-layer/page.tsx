@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Canyon Ridge 4-Layer Garage Doors | SecureLifts South Florida",
   description:
     "Explore Canyon Ridge Carriage House 4-Layer garage door options for South Florida homes. Premium faux-wood carriage style installed by SecureLifts.",
+  alternates: { canonical: "https://securelifts.com/hurricane-garage-doors/carriage-house/canyon-ridge-4-layer" },
 };
 
 export default function CanyonRidgeFourLayerPage() {

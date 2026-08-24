@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Canyon Ridge Modern Garage Doors | SecureLifts South Florida",
   description:
     "Explore Canyon Ridge Modern garage door options for South Florida homes. Premium modern wood-look garage doors installed by SecureLifts.",
+  alternates: { canonical: "https://securelifts.com/hurricane-garage-doors/carriage-house/canyon-ridge-modern" },
 };
 
 export default function CanyonRidgeModernPage() {

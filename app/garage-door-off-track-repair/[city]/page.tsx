@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
   FaCheckCircle,
-  FaStar,
-  FaMapMarkerAlt,
   FaExclamationTriangle,
   FaTools,
   FaShieldAlt,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 function formatCityName(slug: string) {
   return slug
@@ -89,21 +89,6 @@ export default async function Page({
       `Neighborhoods around ${cityName}`,
       "Nearby South Florida service areas",
     ];
-
-  const reviewCards = [
-    {
-      name: "Michael R.",
-      text: `Fast response, clean work, and they handled the off-track repair in ${cityName} the right way without wasting time.`,
-    },
-    {
-      name: "Jessica T.",
-      text: "They explained the problem clearly, fixed the unsafe condition, and made the whole process feel organized and professional.",
-    },
-    {
-      name: "Daniel P.",
-      text: "Best garage door company I’ve dealt with. The door was crooked and jammed, and now it works the way it should.",
-    },
-  ];
 
   const relatedLinks = [
     {
@@ -184,9 +169,12 @@ export default async function Page({
 
           {/* RIGHT IMAGE */}
           <div className="w-full flex justify-center">
-            <img
+            <Image
               src="/images/approved/offtrack-full-card.jpg"
               alt="Off-track garage door example"
+              width={900}
+              height={900}
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="w-full max-h-[520px] object-contain rounded-2xl"
             />
           </div>
@@ -311,17 +299,7 @@ export default async function Page({
           </h2>
 
           <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {reviewCards.map((review) => (
-              <div key={review.name} className="border p-6 rounded-2xl bg-white shadow-sm">
-                <div className="flex justify-center text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} />
-                  ))}
-                </div>
-                <p className="mt-4 text-slate-600">{review.text}</p>
-                <p className="mt-5 font-bold text-slate-900">{review.name}</p>
-              </div>
-            ))}
+            <VerifiedReviewLinks />
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -115,28 +116,12 @@ export default function ContactPage() {
     })),
   };
 
-  const localBusinessSchema = {
+  const contactPageSchema = {
     "@context": "https://schema.org",
-    "@type": "GarageDoorRepair",
-    name: "SecureLifts",
+    "@type": "ContactPage",
+    name: "Contact SecureLifts",
     url: "https://securelifts.com/contact",
-    telephone: PHONE,
-    email: EMAIL,
-    areaServed: [
-      "Palm Beach County",
-      "Broward County",
-      "Miami-Dade County",
-      "South Florida",
-    ],
-    serviceType: [
-      "Garage Door Repair",
-      "Garage Door Installation",
-      "Garage Door Maintenance",
-      "Garage Door Opener Repair",
-      "Broken Spring Repair",
-      "Emergency Garage Door Repair",
-      "Commercial Garage Door Service",
-    ],
+    about: BUSINESS_SCHEMA_REFERENCE,
   };
 
   return (
@@ -147,9 +132,9 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Script
-        id="contact-business-schema"
+        id="contact-page-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
       />
 
       <main className="bg-white text-slate-900">

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
@@ -51,21 +52,6 @@ export default function GarageDoorRollerReplacementPage() {
     "We check surrounding hardware, not just the roller",
     "Clear communication throughout the service",
     "Built to improve performance and reduce wear",
-  ];
-
-  const reviews = [
-    {
-      name: "Samantha R.",
-      text: "The garage door was noisy and rough for months. After the roller replacement it runs much smoother and quieter.",
-    },
-    {
-      name: "Victor M.",
-      text: "They explained the issue clearly and the door feels much better now. Strong service and clean work.",
-    },
-    {
-      name: "Paul D.",
-      text: "SecureLifts handled the roller replacement fast and the improvement was immediate. Big difference in noise and movement.",
-    },
   ];
 
   return (
@@ -266,15 +252,7 @@ export default function GarageDoorRollerReplacementPage() {
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

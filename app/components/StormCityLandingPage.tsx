@@ -367,12 +367,6 @@ export default function StormCityLandingPage({
       <ReviewTrustSection
         heading={`Why Homeowners in ${city} Choose SecureLifts`}
         intro={`Homeowners in ${city} expect clean work, fast response, and real results.`}
-        reviews={[
-          { name: "Michael R.", text: "Fast and professional." },
-          { name: "Jessica T.", text: "Clear and reliable." },
-          { name: "Daniel P.", text: "Best company I’ve used." },
-          { name: "Alicia T.", text: "Smooth process from start to finish." },
-        ]}
       />
 
       <section className="bg-white px-6 py-20 text-center">

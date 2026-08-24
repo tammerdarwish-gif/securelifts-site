@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { isValidCitySlug } from "@/lib/cityPages";
+import { BUSINESS_SCHEMA_REFERENCE, SITE_IDENTITY } from "@/lib/siteIdentity";
 
 type Props = {
   cityName: string;
@@ -141,9 +142,77 @@ export default function LocalServiceSeoBlock({
     `${cityName} homeowners need garage door service that fits South Florida weather, daily use, local neighborhoods, and the need for fast scheduling when the door stops working.`;
   const localProblem = serviceProblem(serviceName, cityName);
   const proofLinks = portfolioLinks[citySlug] ?? [];
+  const canonical = `${SITE_IDENTITY.baseUrl}/${servicePath}/${citySlug}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${canonical}#service`,
+        name: `${serviceName} in ${cityName}, FL`,
+        url: canonical,
+        provider: BUSINESS_SCHEMA_REFERENCE,
+        areaServed: {
+          "@type": "City",
+          name: `${cityName}, FL`,
+        },
+        serviceType: serviceName,
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: `Do you serve neighborhoods around ${cityName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `Yes. SecureLifts serves ${cityName} and nearby South Florida communities with scheduling focused on the closest available route.`,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `How can I schedule ${serviceName.toLowerCase()} in ${cityName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Call SecureLifts or use the Book Service button to request service. We will confirm availability and the appropriate next step for your garage door.",
+            },
+          },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonical}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${SITE_IDENTITY.baseUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: serviceName,
+            item: `${SITE_IDENTITY.baseUrl}/${servicePath}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `${serviceName} in ${cityName}`,
+            item: canonical,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <section className="bg-slate-50 px-6 py-16 md:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
@@ -176,7 +245,7 @@ export default function LocalServiceSeoBlock({
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <h3 className="text-2xl font-black text-slate-900">Nearby {serviceName}</h3>
           <p className="mt-3 leading-7 text-slate-600">
-            Customers near {cityName} can use these local pages when the closest service area is a nearby city.
+            SecureLifts also serves nearby South Florida communities for the same garage door service.
           </p>
           <div className="mt-6 grid gap-3">
             {nearbyLinks.map(([label, slug]) => (
@@ -203,10 +272,10 @@ export default function LocalServiceSeoBlock({
               </div>
               <div>
                 <h4 className="font-bold text-slate-900">
-                  Is this the right page for {serviceName.toLowerCase()} in {cityName}?
+                  How can I schedule {serviceName.toLowerCase()} in {cityName}?
                 </h4>
                 <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Yes. This page is the preferred SecureLifts URL for {serviceName.toLowerCase()} in {cityName}, and the canonical URL points to this exact service/city page.
+                  Call SecureLifts or use the Book Service button to request service. We will confirm availability and the appropriate next step for your garage door.
                 </p>
               </div>
             </div>

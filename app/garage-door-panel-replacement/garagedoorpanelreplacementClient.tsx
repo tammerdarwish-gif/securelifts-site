@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import Image from "next/image";
 import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
@@ -66,21 +67,6 @@ export default function GarageDoorPanelReplacementPage() {
     "Hormann",
     "LiftMaster compatible systems",
     "Other major door lines when available",
-  ];
-
-  const reviews = [
-    {
-      name: "Brandon T.",
-      text: "We had a damaged panel and thought the whole door needed to be replaced. SecureLifts helped us understand the options and handled it professionally.",
-    },
-    {
-      name: "Nicole S.",
-      text: "They were honest about what could be matched and what couldn’t. The final result looked much better than expected.",
-    },
-    {
-      name: "Ray M.",
-      text: "Strong communication, clean work, and they helped us avoid unnecessary replacement. Good experience overall.",
-    },
   ];
 
   return (
@@ -338,15 +324,7 @@ export default function GarageDoorPanelReplacementPage() {
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
   FaCheckCircle,
-  FaStar,
   FaMapMarkerAlt,
   FaTools,
   FaBolt,
@@ -19,6 +18,7 @@ import {
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
 import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -167,21 +167,6 @@ export default async function CityPage({
     "Clean workmanship without wasted time",
   ];
 
-  const reviewCards = [
-    {
-      name: "Michael R.",
-      text: `Fast response, strong communication, and the repair in ${cityName} was handled the right way.`,
-    },
-    {
-      name: "Jessica T.",
-      text: "They made the whole process feel clear, professional, and much more organized than most service companies.",
-    },
-    {
-      name: "Daniel P.",
-      text: "Best garage door company I’ve dealt with. Clean work, no wasted time, and the door works like it should.",
-    },
-  ];
-
   const reasonsTitle = pageData.reasonsTitle ?? "Why SecureLifts";
   const reasonsText = pageData.reasonsText ?? "We provide reliable, fast, and professional garage door repair services that homeowners trust.";
   const nearbyTitle = pageData.nearbyTitle ?? "Nearby Areas";
@@ -282,13 +267,7 @@ export default async function CityPage({
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-              <span className="flex items-center gap-1 text-yellow-400">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </span>
+              <FaCheckCircle className="text-green-600" />
               <span>Trusted local service</span>
               <span className="text-slate-300">•</span>
               <span>Fast response in {cityName}</span>
@@ -304,7 +283,7 @@ export default async function CityPage({
 </a>
               <Link
                 href="/book-service"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-6 py-3 font-bold bg-whitetext-slate-900 transition hover:bg-slate-100"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 font-bold text-slate-900 transition hover:bg-slate-100"
               >
                 Book Us Now
                 <FaArrowRight className="text-sm" />
@@ -428,24 +407,12 @@ export default async function CityPage({
                 Customer Trust
               </p>
               <h3 className="mt-3 text-3xl font-black leading-tight md:text-4xl">
-                What customers notice about the service
+                Independent reviews and project evidence
               </h3>
             </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {reviewCards.map((review) => (
-                <div key={review.name} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <p className="mt-4 leading-7 text-slate-600">{review.text}</p>
-                  <p className="mt-5 font-bold text-slate-900">{review.name}</p>
-                </div>
-              ))}
+              <VerifiedReviewLinks />
             </div>
           </div>
         </div>

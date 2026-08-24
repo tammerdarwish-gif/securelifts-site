@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://securelifts.com/ads/garage-door-opener-repair",
   },
+  robots: { index: false, follow: true },
 };
 
 export default function GarageDoorOpenerRepairAdsPage() {

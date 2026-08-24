@@ -1,14 +1,12 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaArrowRight,
   FaTools,
   FaWarehouse,
-  FaClock,
-  FaShieldAlt,
   FaIndustry,
   FaExclamationTriangle,
   FaClipboardCheck,
@@ -159,10 +157,7 @@ export default function CommercialGarageDoorRepairPage() {
     name: "Commercial Garage Door Repair",
     serviceType: "Commercial Garage Door Repair",
     provider: {
-      "@type": "GarageDoorRepair",
-      name: "SecureLifts",
-      telephone: PHONE,
-      url: "https://securelifts.com/commercial-garage-door-repair",
+      ...BUSINESS_SCHEMA_REFERENCE,
     },
     areaServed: [
       { "@type": "Place", name: "South Florida" },

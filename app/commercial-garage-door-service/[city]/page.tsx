@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import { notFound } from "next/navigation";
 import {
   FaCheckCircle,
@@ -10,7 +11,6 @@ import {
   FaStar,
   FaTools,
   FaWarehouse,
-  FaIndustry,
   FaGoogle,
   FaArrowRight,
 } from "react-icons/fa";
@@ -455,21 +455,6 @@ export default async function CommercialGarageDoorServiceCityPage({
     `Trusted local support across ${data.county}`,
   ];
 
-  const reviews = [
-    {
-      name: `${data.city} Property Manager`,
-      text: `SecureLifts responded quickly when our commercial door failed and helped us get access restored fast in ${data.city}.`,
-    },
-    {
-      name: `${data.city} Business Owner`,
-      text: "Professional communication, solid workmanship, and a clear understanding of how important commercial access is to daily workflow.",
-    },
-    {
-      name: `${data.city} Facility Supervisor`,
-      text: "They fixed the immediate issue, explained the root cause, and gave useful guidance to reduce future downtime.",
-    },
-  ];
-
   const relatedLinks = [
     {
       href: `/commercial-garage-door-repair/${city}`,
@@ -829,15 +814,7 @@ export default async function CommercialGarageDoorServiceCityPage({
             </a>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <div className="mt-12"><VerifiedReviewLinks /></div>
         </div>
       </section>
 

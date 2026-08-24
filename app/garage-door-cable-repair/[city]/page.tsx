@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import {
@@ -10,9 +11,7 @@ import {
   FaShieldAlt,
   FaBolt,
   FaArrowRight,
-  FaStar,
   FaMapMarkerAlt,
-  FaClock,
 } from "react-icons/fa";
 
 import { getAllCitySlugs, getCityData } from "@/lib/cityPages";
@@ -21,6 +20,7 @@ import {
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
 import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 function formatCityName(slug: string) {
   return slug
@@ -153,21 +153,6 @@ export default async function Page({
     "Cleaner workmanship without wasted time",
   ];
 
-  const reviewCards = [
-    {
-      name: "Michael R.",
-      text: `SecureLifts fixed our broken garage door cable fast in ${cityName} and made sure the whole system was safe before leaving.`,
-    },
-    {
-      name: "Jessica T.",
-      text: "They explained clearly why the cable failed, fixed the issue the right way, and the door feels balanced again.",
-    },
-    {
-      name: "Daniel P.",
-      text: "Fast service, clean work, and no runaround. They fixed the cable problem before it turned into a bigger repair.",
-    },
-  ];
-
   const relatedLinks = [
     {
       href: `/garage-door-repair/${city}`,
@@ -287,13 +272,7 @@ export default async function Page({
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-300">
-              <span className="flex items-center gap-1 text-yellow-400">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </span>
+              <FaCheckCircle className="text-green-400" />
               <span>Trusted local service</span>
               <span className="text-slate-500">•</span>
               <span>Fast response in {cityName}</span>
@@ -301,8 +280,11 @@ export default async function Page({
           </div>
 
           <div className="flex justify-center mt-10 lg:mt-0">
-            <img
+            <Image
               src="/images/approved/cable-repair-full-card.jpg"
+              width={900}
+              height={900}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="w-full max-h-[500px] object-contain rounded-2xl"
               alt="Broken garage door cable"
             />
@@ -454,27 +436,12 @@ export default async function Page({
                 Customer Trust
               </p>
               <h3 className="mt-3 text-3xl font-black leading-tight md:text-4xl">
-                What customers notice about the service
+                Independent reviews and project evidence
               </h3>
             </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {reviewCards.map((review) => (
-                <div
-                  key={review.name}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <p className="mt-4 leading-7 text-slate-600">{review.text}</p>
-                  <p className="mt-5 font-bold text-slate-900">{review.name}</p>
-                </div>
-              ))}
+              <VerifiedReviewLinks />
             </div>
           </div>
         </div>

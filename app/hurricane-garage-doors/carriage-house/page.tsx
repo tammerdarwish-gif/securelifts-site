@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Carriage House Hurricane Garage Doors in South Florida | SecureLifts",
   description:
     "SecureLifts installs carriage house hurricane garage doors in South Florida with decorative wood-style design, storm-ready strength, and premium curb appeal. Call (866) 828-1818.",
+  alternates: { canonical: "https://securelifts.com/hurricane-garage-doors/carriage-house" },
   openGraph: {
     title: "Carriage House Hurricane Garage Doors in South Florida | SecureLifts",
     description:
@@ -95,25 +96,6 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
       icon: "🔧",
       title: "Built for Daily Use Too",
       text: "A new carriage house door can improve the look of the home while providing a stronger garage door system for everyday use.",
-    },
-  ];
-
-  const designOptions = [
-    {
-      title: "Crossbuck Carriage Styles",
-      text: "Classic X-pattern carriage designs for homeowners who want a timeless, estate-style appearance.",
-    },
-    {
-      title: "Wood-Look Carriage Doors",
-      text: "Add the warmth of a wood-style appearance without choosing a plain, flat garage door design.",
-    },
-    {
-      title: "Decorative Hardware Packages",
-      text: "Handles, hinges, straps, and accents can help the door feel more complete and better matched to the home.",
-    },
-    {
-      title: "Window Layout Options",
-      text: "Choose top-row windows and panel layouts that improve curb appeal while matching the house correctly.",
     },
   ];
 
@@ -1832,24 +1814,6 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
       <ReviewTrustSection
         heading="Why South Florida Homeowners Choose SecureLifts"
         intro="When South Florida homeowners invest in stronger garage doors, they want a company that communicates clearly, installs cleanly, and delivers results that actually hold up."
-        reviews={[
-          {
-            name: "Michael R.",
-            text: "Fast response, professional service, and the garage door works better than ever.",
-          },
-          {
-            name: "Jessica T.",
-            text: "They showed up on time, explained everything clearly, and got it done right.",
-          },
-          {
-            name: "Daniel P.",
-            text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
-          },
-          {
-            name: "Alicia T.",
-            text: "The whole process felt organized and professional from the estimate to the final install.",
-          },
-        ]}
       />
 
       {/* FAQ */}

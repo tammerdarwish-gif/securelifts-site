@@ -2,14 +2,8 @@ import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
-  FaArrowRight,
   FaClipboardCheck,
-  FaTools,
-  FaClock,
-  FaShieldAlt,
-  FaIndustry,
   FaExclamationTriangle,
 } from "react-icons/fa";
 

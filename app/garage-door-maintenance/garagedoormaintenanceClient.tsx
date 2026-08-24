@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
 import {
@@ -52,21 +53,6 @@ export default function GarageDoorMaintenancePage() {
     "Clear maintenance recommendations without pressure",
     "Professional inspection with attention to detail",
     "Built to protect your system long-term",
-  ];
-
-  const reviews = [
-    {
-      name: "Angela R.",
-      text: "The tune-up made a huge difference. The door is quieter, smoother, and feels much better than before.",
-    },
-    {
-      name: "Jason T.",
-      text: "They found a couple issues before they turned into major repairs. Smart service and very professional.",
-    },
-    {
-      name: "Melissa P.",
-      text: "SecureLifts cleaned everything up, adjusted the system, and explained what to watch moving forward. Great experience.",
-    },
   ];
 
   return (
@@ -282,15 +268,7 @@ export default function GarageDoorMaintenancePage() {
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaClock,
@@ -356,21 +356,6 @@ export default async function CommercialGarageDoorInstallationCityPage({
     `Trusted local service across ${data.county}`,
   ];
 
-  const reviews = [
-    {
-      name: `${data.city} Property Manager`,
-      text: `SecureLifts helped us replace an aging commercial door system and the new installation feels stronger, smoother, and better suited to our operation in ${data.city}.`,
-    },
-    {
-      name: `${data.city} Business Owner`,
-      text: "They communicated clearly, handled the installation professionally, and delivered a final result that looked and performed right.",
-    },
-    {
-      name: `${data.city} Facility Supervisor`,
-      text: "The install was organized, clean, and well executed. They paid attention to the details that actually matter on a commercial property.",
-    },
-  ];
-
   const installReasons = [
     "The current commercial door system is aging or unreliable",
     "Repair costs are stacking up too often",
@@ -378,13 +363,6 @@ export default async function CommercialGarageDoorInstallationCityPage({
     "Access, security, or appearance needs to improve",
     `You need dependable installation service in ${data.city}`,
     "You want a better long-term solution for the property",
-  ];
-
-  const operatingNeeds = [
-    "Frequent opening and closing throughout the day",
-    "Shipping and receiving access that needs to stay consistent",
-    "Security and access control that cannot be unreliable",
-    "Weather exposure that affects door performance over time",
   ];
 
   return (
@@ -633,15 +611,7 @@ export default async function CommercialGarageDoorInstallationCityPage({
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

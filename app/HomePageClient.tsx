@@ -2,6 +2,7 @@ import ServiceSchema from "./components/ServiceSchema";
 import InternalLinkCards from "./components/InternalLinkCards";
 import QuickLeadForm from "./components/QuickLeadForm";
 import ApprovedProjectShowcase from "./components/ApprovedProjectShowcase";
+import VerifiedReviewLinks from "./components/VerifiedReviewLinks";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -78,24 +79,6 @@ export default function HomePageClient() {
     "Honest pricing with no surprises",
     "Technicians who show up prepared",
     "We stand behind our work",
-  ];
-
-  const reviews = [
-    {
-      name: "Michael R.",
-      location: "Fort Lauderdale",
-      text: "Fast response, professional service, and the garage door works better than ever.",
-    },
-    {
-      name: "Jessica T.",
-      location: "Boca Raton",
-      text: "They showed up on time, explained everything clearly, and got it done right.",
-    },
-    {
-      name: "Daniel P.",
-      location: "Miami",
-      text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
-    },
   ];
 
   const proofStats = [
@@ -386,7 +369,7 @@ export default function HomePageClient() {
               Customer Feedback
             </p>
             <h2 className="text-4xl font-black md:text-5xl">
-              What Customers Say
+              Independent Reviews &amp; Project Proof
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-100">
               Good service should not leave customers guessing. These are the
@@ -395,19 +378,7 @@ export default function HomePageClient() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div
-                key={review.name}
-                className="rounded-3xl border border-slate-700 bg-slate-900 p-7"
-              >
-                <div className="mb-4 flex text-yellow-400">★★★★★</div>
-                <p className="leading-8 text-slate-100">{review.text}</p>
-                <div className="mt-5">
-                  <p className="font-bold text-white">{review.name}</p>
-                  <p className="text-sm text-slate-100">{review.location}</p>
-                </div>
-              </div>
-            ))}
+            <VerifiedReviewLinks />
           </div>
         </div>
       </section>

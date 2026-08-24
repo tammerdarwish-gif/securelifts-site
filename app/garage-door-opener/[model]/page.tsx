@@ -68,44 +68,72 @@ export default async function OpenerProductPage({ params }: PageProps) {
     notFound();
   }
 
+  const canonical = `https://securelifts.com/garage-door-opener/${product.slug}`;
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    brand: {
-      "@type": "Brand",
-      name: "LiftMaster",
-    },
-    image: `https://securelifts.com${product.image}`,
-    description: product.summary,
-    category: "Garage Door Opener",
-    url: `https://securelifts.com/garage-door-opener/${product.slug}`,
-    ...(product.discontinued
-      ? {
-          additionalProperty: {
-            "@type": "PropertyValue",
-            name: "Status",
-            value: "Discontinued",
+    "@graph": [
+      {
+        "@type": "Product",
+        name: product.name,
+        brand: {
+          "@type": "Brand",
+          name: "LiftMaster",
+        },
+        image: `https://securelifts.com${product.image}`,
+        description: product.summary,
+        category: "Garage Door Opener",
+        url: canonical,
+        ...(product.discontinued
+          ? {
+              additionalProperty: {
+                "@type": "PropertyValue",
+                name: "Status",
+                value: "Discontinued",
+              },
+            }
+          : {}),
+        ...(product.productRating
+          ? {
+              review: {
+                "@type": "Review",
+                author: {
+                  "@type": "Team",
+                  name: "SecureLifts Product Team",
+                },
+                reviewRating: {
+                  "@type": "Rating",
+                  ratingValue: product.productRating,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
+              },
+            }
+          : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://securelifts.com/",
           },
-        }
-      : {}),
-    ...(product.productRating
-      ? {
-          review: {
-            "@type": "Review",
-            author: {
-              "@type": "Team",
-              name: "SecureLifts Product Team",
-            },
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: product.productRating,
-              bestRating: 5,
-              worstRating: 1,
-            },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Garage Door Openers",
+            item: "https://securelifts.com/garage-door-opener",
           },
-        }
-      : {}),
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: product.shortName,
+            item: canonical,
+          },
+        ],
+      },
+    ],
   };
 
   const relatedProducts = openerProducts.filter(

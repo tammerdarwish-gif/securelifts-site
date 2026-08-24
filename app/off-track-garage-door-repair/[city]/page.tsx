@@ -1,9 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
   FaCheckCircle,
-  FaStar,
   FaMapMarkerAlt,
   FaTools,
   FaBolt,
@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 import { getCityData } from "@/lib/cityPages";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 function formatCityName(slug: string) {
   return slug
@@ -87,21 +88,6 @@ export default async function CityPage({
     "Professional workmanship",
     "No unnecessary replacements",
     "Reliable long-term fixes",
-  ];
-
-  const reviewCards = [
-    {
-      name: "Michael R.",
-      text: `The door came off track and SecureLifts got it straightened out fast in ${cityName}. They caught damage we would have missed.`,
-    },
-    {
-      name: "Jessica T.",
-      text: "They explained why the door came off track, fixed it properly, and made the whole process feel organized and professional.",
-    },
-    {
-      name: "Daniel P.",
-      text: "Fast service, clean work, and no runaround. The door runs smoothly again and they checked the whole system.",
-    },
   ];
 
   const faqs = [
@@ -203,13 +189,7 @@ export default async function CityPage({
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-              <span className="flex items-center gap-1 text-yellow-400">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </span>
+              <FaCheckCircle className="text-green-600" />
               <span>Trusted local service</span>
               <span className="text-slate-300">•</span>
               <span>Fast response in {cityName}</span>
@@ -272,9 +252,12 @@ export default async function CityPage({
 
           <div className="min-w-0 lg:sticky lg:top-24">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-              <img
+              <Image
                 src="/images/approved/offtrack-full-card.jpg"
                 alt={`Off-track garage door repair in ${cityName}`}
+                width={900}
+                height={840}
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="block h-[300px] w-full object-cover object-center md:h-[360px] lg:h-[420px]"
               />
             </div>
@@ -411,22 +394,7 @@ export default async function CityPage({
             </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {reviewCards.map((review) => (
-                <div
-                  key={review.name}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <p className="mt-4 leading-7 text-slate-600">{review.text}</p>
-                  <p className="mt-5 font-bold text-slate-900">{review.name}</p>
-                </div>
-              ))}
+              <VerifiedReviewLinks />
             </div>
           </div>
         </div>

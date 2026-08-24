@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Garage Door Resources, Manuals & Approvals | SecureLifts",
   description:
     "Browse SecureLifts garage door resources, opener manual guides, hurricane approvals, NOAs, and Florida Product Approvals.",
+  alternates: { canonical: "https://securelifts.com/resources" },
 };
 
 export default function HurricaneGarageDoorApprovalsPage() {

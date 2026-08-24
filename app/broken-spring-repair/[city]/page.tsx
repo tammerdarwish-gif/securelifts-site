@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
   FaCheckCircle,
-  FaStar,
   FaMapMarkerAlt,
   FaTools,
   FaBolt,
@@ -19,6 +18,7 @@ import {
   serviceCitySeoConfigs,
 } from "@/lib/serviceCitySeo";
 import LocalServiceSeoBlock from "@/app/components/LocalServiceSeoBlock";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 type PageProps = {
   params: Promise<{ city: string }>;
@@ -101,21 +101,6 @@ export default async function CityPage({
     { label: "Same-day service", value: "Available" },
     { label: "Service area", value: cityName },
     { label: "Repair focus", value: "Broken springs" },
-  ];
-
-  const reviewCards = [
-    {
-      name: "Michael R.",
-      text: `Our spring broke without warning and SecureLifts got the door working again fast in ${cityName}.`,
-    },
-    {
-      name: "Jessica T.",
-      text: "They explained the issue clearly, replaced the spring safely, and made the whole process feel organized.",
-    },
-    {
-      name: "Daniel P.",
-      text: "Fast service, clean work, and no runaround. The garage door works smoothly again.",
-    },
   ];
 
   const faqs = [
@@ -290,13 +275,7 @@ const popularServices = [
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-              <span className="flex items-center gap-1 text-yellow-400">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </span>
+              <FaCheckCircle className="text-green-600" />
               <span>Trusted local service</span>
               <span className="text-slate-300">•</span>
               <span>Fast response in {cityName}</span>
@@ -477,27 +456,12 @@ const popularServices = [
                 Customer Trust
               </p>
               <h3 className="mt-3 text-3xl font-black leading-tight md:text-4xl">
-                What customers notice about the service
+                Independent reviews and project evidence
               </h3>
             </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {reviewCards.map((review) => (
-                <div
-                  key={review.name}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-center gap-1 text-yellow-400">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <p className="mt-4 leading-7 text-slate-600">{review.text}</p>
-                  <p className="mt-5 font-bold text-slate-900">{review.name}</p>
-                </div>
-              ))}
+              <VerifiedReviewLinks />
             </div>
           </div>
         </div>

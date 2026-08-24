@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import QuickLeadForm from "../components/QuickLeadForm";
 import { motion } from "framer-motion";
 import {
@@ -48,21 +49,6 @@ export default function SpringReplacementPage() {
     "Attention to full system balance and safety",
     "Straight communication with no nonsense",
     "Focused on reliable long-term results",
-  ];
-
-  const reviews = [
-    {
-      name: "Robert M.",
-      text: "Spring broke suddenly and SecureLifts handled it fast. The door runs smooth again and the whole job felt professional.",
-    },
-    {
-      name: "Angela T.",
-      text: "They explained the issue clearly, replaced the springs, and made sure everything was balanced right before leaving.",
-    },
-    {
-      name: "Steven P.",
-      text: "Strong service, fast turnaround, and no runaround. Exactly what I needed when the garage door stopped working.",
-    },
   ];
 
   return (
@@ -320,22 +306,7 @@ export default function SpringReplacementPage() {
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {reviews.map((review, index) => (
-              <motion.div
-                key={review.name}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="rounded-3xl border border-white/10 bg-white/5 p-8"
-              >
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="leading-7 text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </motion.div>
-            ))}
-          </div>
+          <div className="mt-12"><VerifiedReviewLinks /></div>
         </div>
       </section>
 

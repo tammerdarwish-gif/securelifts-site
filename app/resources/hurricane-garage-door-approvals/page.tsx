@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Hurricane Garage Door Approvals & NOA | SecureLifts",
   description:
     "Search hosted Miami-Dade NOA and Florida Product Approval PDFs for hurricane garage doors by manufacturer, including Raynor.",
+  alternates: { canonical: "https://securelifts.com/resources/hurricane-garage-door-approvals" },
 };
 
 export default function HurricaneGarageDoorApprovalsPage() {

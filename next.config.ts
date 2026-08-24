@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { getAllCitySlugs } from "./lib/cityPages";
 
 const legacyRedirects = [
   {
@@ -294,6 +295,25 @@ const legacyRedirects = [
   },
 ]);
 
+const existingRedirectSources = new Set(
+  legacyRedirects.map((redirect) => redirect.source)
+);
+
+const cityAliasRedirects = getAllCitySlugs()
+  .flatMap((city) => [
+    {
+      source: `/${city}`,
+      destination: `/garage-door-repair/${city}`,
+      permanent: true,
+    },
+    {
+      source: `/${city}/`,
+      destination: `/garage-door-repair/${city}`,
+      permanent: true,
+    },
+  ])
+  .filter((redirect) => !existingRedirectSources.has(redirect.source));
+
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
@@ -343,6 +363,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...legacyRedirects,
+      ...cityAliasRedirects,
+      {
+        source: "/locations/:city-fl",
+        destination: "/garage-door-repair/:city",
+        permanent: true,
+      },
       {
         source: "/about-us",
         destination: "/about",

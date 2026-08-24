@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import HomePageClient from "./HomePageClient";
+import BusinessAuthoritySchema from "./components/BusinessAuthoritySchema";
 
 export const metadata: Metadata = {
   title:
@@ -30,5 +31,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomePageClient />;
+  return (
+    <>
+      <BusinessAuthoritySchema />
+      <HomePageClient />
+    </>
+  );
 }

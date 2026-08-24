@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Broken spring repair for South Florida garage doors. Get fast help for heavy doors, trapped vehicles, and doors that will not open.",
   alternates: { canonical: "https://securelifts.com/ads/broken-spring-repair" },
+  robots: { index: false, follow: true },
 };
 
 export default function BrokenSpringRepairAdsPage() {

@@ -3,7 +3,6 @@ import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import StickyCTA from "./components/StickyCTA";
-import BusinessAuthoritySchema from "./components/BusinessAuthoritySchema";
 
 const GA_MEASUREMENT_ID = "G-NRWSY3V29J";
 const ADDITIONAL_GA_MEASUREMENT_ID = "G-MM5H23RMXS";
@@ -39,20 +38,6 @@ export const metadata: Metadata = {
     "Miami-Dade rated garage doors",
     "commercial garage door service",
   ],
-  alternates: {
-    canonical: "https://securelifts.com",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -160,17 +145,8 @@ export default function RootLayout({
         var anchor = element && element.closest ? element.closest('a[href^="tel:"]') : null;
         if (!anchor || anchor.dataset.secureLiftsPhoneTracking === 'active') return;
 
-        event.preventDefault();
-        anchor.dataset.secureLiftsPhoneTracking = 'active';
-
-        var href = anchor.href;
         var label = anchor.getAttribute('data-campaign') || anchor.textContent || 'phone_click';
-        window.trackSecureLiftsPhoneConversion(label.trim()).finally(function () {
-          window.location.href = href;
-          window.setTimeout(function () {
-            delete anchor.dataset.secureLiftsPhoneTracking;
-          }, 1000);
-        });
+        window.trackSecureLiftsPhoneConversion(label.trim()).catch(function () {});
       }, true);
 
       ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (eventName) {
@@ -205,7 +181,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <BusinessAuthoritySchema />
         <script
           id="securelifts-deferred-google-tags"
           dangerouslySetInnerHTML={{ __html: deferredGoogleTags }}

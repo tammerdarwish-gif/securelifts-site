@@ -637,9 +637,11 @@ export default function GarageDoorShopPage() {
                 {selectedPreviewImage && !previewImageFailed ? (
                   <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                     <div className="relative aspect-[4/3] w-full">
-                      <img
+                      <Image
                         src={selectedPreviewImage}
                         alt={selectedDesign?.previewLabel || "Garage door preview"}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
                         className="h-full w-full object-contain"
                         onError={() => setPreviewImageFailed(true)}
                       />

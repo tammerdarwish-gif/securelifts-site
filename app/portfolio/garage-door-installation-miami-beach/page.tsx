@@ -26,15 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-const highlights = [
-  "Modern full-view glass garage doors",
-  "Wall-mount LiftMaster opener system",
-  "Clean architectural integration",
-  "High-end Miami Beach property",
-  "Quiet and smooth operation",
-  "Strong visual curb appeal upgrade",
-];
-
 const goals = [
   "Create a modern, luxury look",
   "Maximize natural light into the garage",
@@ -68,13 +59,6 @@ const features = [
     title: "Low Maintenance",
     text: "Aluminum and glass construction holds up well in coastal environments.",
   },
-];
-
-const openerBenefits = [
-  "Wall-mount design frees ceiling space",
-  "Quiet daily operation",
-  "Smart control via myQ app",
-  "Cleaner garage layout",
 ];
 
 const processSteps = [

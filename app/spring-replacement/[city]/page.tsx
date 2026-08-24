@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
@@ -160,9 +161,12 @@ export default async function Page({
         </div>
 
         <div className="rounded-3xl overflow-hidden border border-slate-200">
-          <img
+          <Image
             src="/images/approved/spring-closeup-hero.jpg"
             alt="Broken garage door spring"
+            width={1200}
+            height={800}
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="w-full h-full object-cover"
           />
         </div>

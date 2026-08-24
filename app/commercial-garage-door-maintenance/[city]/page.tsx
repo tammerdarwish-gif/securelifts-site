@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaClock,
@@ -302,21 +302,6 @@ export default async function CommercialGarageDoorMaintenanceCityPage({
     `Trusted local support across ${data.county}`,
   ];
 
-  const reviews = [
-    {
-      name: `${data.city} Property Manager`,
-      text: `SecureLifts helped us stay ahead of problems instead of constantly reacting to them. The maintenance approach in ${data.city} has been a real improvement.`,
-    },
-    {
-      name: `${data.city} Business Owner`,
-      text: "Clear reporting, professional service, and fewer interruptions. That is exactly what we wanted from a maintenance partner.",
-    },
-    {
-      name: `${data.city} Facility Supervisor`,
-      text: "They helped us organize ongoing service better and catch issues early before they turned into bigger problems.",
-    },
-  ];
-
   return (
     <main className="min-h-screen bg-white text-slate-900">
      
@@ -587,15 +572,7 @@ export default async function CommercialGarageDoorMaintenanceCityPage({
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

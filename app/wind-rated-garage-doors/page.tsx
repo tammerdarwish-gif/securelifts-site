@@ -206,6 +206,7 @@ export const metadata: Metadata = {
   title: "Wind-Rated Garage Doors in South Florida | SecureLifts",
   description:
     "SecureLifts installs wind-rated garage doors in South Florida built for stronger pressure resistance, storm protection, and premium curb appeal. Call (866) 828-1818.",
+  alternates: { canonical: "https://securelifts.com/wind-rated-garage-doors" },
   openGraph: {
     title: "Wind-Rated Garage Doors in South Florida | SecureLifts",
     description:
@@ -597,24 +598,6 @@ export default function WindRatedGarageDoorsPage() {
       <ReviewTrustSection
         heading="Why South Florida Homeowners Choose SecureLifts"
         intro="When South Florida homeowners invest in stronger garage doors, they want a company that communicates clearly, installs cleanly, and delivers results that actually hold up."
-        reviews={[
-          {
-            name: "Michael R.",
-            text: "Fast response, professional service, and the garage door works better than ever.",
-          },
-          {
-            name: "Jessica T.",
-            text: "They showed up on time, explained everything clearly, and got it done right.",
-          },
-          {
-            name: "Daniel P.",
-            text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
-          },
-          {
-            name: "Alicia T.",
-            text: "The whole process felt organized and professional from the estimate to the final install.",
-          },
-        ]}
       />
 
       <section className="bg-white px-6 py-20">

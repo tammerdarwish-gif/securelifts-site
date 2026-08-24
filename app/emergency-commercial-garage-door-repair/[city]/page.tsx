@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import { notFound, useParams } from "next/navigation";
-import { getCityData, getAllCitySlugs } from "../../lib/cityPages";
 import {
   FaCheckCircle,
   FaWarehouse,
@@ -30,8 +30,6 @@ export default function EmergencyCommercialGarageDoorRepairCityPage() {
   const citySlug = Array.isArray(params?.city) ? params.city[0] : params?.city;
 
   if (!citySlug) notFound();
-const cityData = getCityData(citySlug);
-
   const city = formatCity(citySlug);
 
   const schema = {
@@ -118,21 +116,6 @@ const cityData = getCityData(citySlug);
     "Commercial repair built around real business needs",
     "Dependable service when access cannot wait",
     "Trusted local support across South Florida",
-  ];
-
-  const reviews = [
-    {
-      name: `${city} Operations Manager`,
-      text: `SecureLifts responded fast when our commercial door failed and helped us get operations moving again in ${city}.`,
-    },
-    {
-      name: `${city} Property Manager`,
-      text: "They handled the emergency professionally, explained the issue clearly, and moved quickly without making the situation worse.",
-    },
-    {
-      name: `${city} Business Owner`,
-      text: "Fast arrival, strong communication, and real urgency. Exactly what you want when a commercial door problem affects business.",
-    },
   ];
 
   return (
@@ -377,15 +360,7 @@ const cityData = getCityData(citySlug);
             </a>
           </div>
 
-          <div className="mt-20 grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300 leading-7">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <div className="mt-20"><VerifiedReviewLinks /></div>
         </div>
       </section>
 

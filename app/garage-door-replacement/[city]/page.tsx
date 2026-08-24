@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
@@ -140,9 +141,12 @@ export default async function Page({
 
           <div className="flex justify-end">
             <div className="max-w-[500px] overflow-hidden rounded-3xl border shadow-lg">
-              <img
+              <Image
                 src="/garage-door-replacement.jpg"
                 alt={`Garage door replacement in ${cityName}`}
+                width={1000}
+                height={520}
+                sizes="(min-width: 768px) 500px, 100vw"
                 className="h-[260px] w-full object-cover"
               />
             </div>

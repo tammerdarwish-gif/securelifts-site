@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaShieldAlt,
   FaExclamationTriangle,
@@ -11,6 +11,7 @@ import {
   FaStar,
   FaTools,
 } from "react-icons/fa";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 
 export default function GarageDoorOffTrackRepairPage() {
   const signs = [
@@ -50,21 +51,6 @@ export default function GarageDoorOffTrackRepairPage() {
     "We fix the cause, not just the symptom",
     "Clear communication start to finish",
     "Built to make homeowners feel confident calling",
-  ];
-
-  const reviews = [
-    {
-      name: "Erica L.",
-      text: "The garage door came off track and looked dangerous. SecureLifts got it corrected fast and everything felt solid again.",
-    },
-    {
-      name: "Mark J.",
-      text: "They explained what caused the issue, fixed it cleanly, and made sure the door was running right before leaving.",
-    },
-    {
-      name: "Anthony P.",
-      text: "Quick response, strong work, and no nonsense. The door is smooth again and the whole service felt professional.",
-    },
   ];
 
   return (
@@ -159,9 +145,12 @@ export default function GarageDoorOffTrackRepairPage() {
           </div>
 
           <div className="relative">
-            <img
+            <Image
               src="/images/approved/offtrack-full-card.jpg"
               alt="Garage door off track problem example"
+              width={900}
+              height={840}
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="h-[420px] w-full rounded-3xl object-cover shadow-lg"
             />
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-red-600/95 px-5 py-2 text-sm font-semibold text-white shadow-md backdrop-blur">
@@ -247,15 +236,7 @@ export default function GarageDoorOffTrackRepairPage() {
             Customer Feedback
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import QuickLeadForm from "../components/QuickLeadForm";
 import ApprovedProjectShowcase from "../components/ApprovedProjectShowcase";
 import { motion } from "framer-motion";
@@ -50,21 +51,6 @@ export default function GarageDoorOpenerRepairPage() {
     "We fix the cause, not just the symptom",
     "Clear communication start to finish",
     "Built for long-term reliability",
-  ];
-
-  const reviews = [
-    {
-      name: "Daniel K.",
-      text: "Our opener stopped working and SecureLifts fixed it quickly without pushing unnecessary replacements.",
-    },
-    {
-      name: "Lisa M.",
-      text: "They diagnosed the issue fast and got everything working smoothly again.",
-    },
-    {
-      name: "Chris B.",
-      text: "Professional, efficient, and honest. The opener works perfectly now.",
-    },
   ];
 
   return (
@@ -266,15 +252,7 @@ export default function GarageDoorOpenerRepairPage() {
             Customer Feedback
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {reviews.map((r) => (
-              <div key={r.name} className="bg-white/5 p-8 rounded-3xl">
-                <div className="text-yellow-400 mb-4">★★★★★</div>
-                <p className="text-slate-300">{r.text}</p>
-                <p className="mt-6 font-bold">{r.name}</p>
-              </div>
-            ))}
-          </div>
+          <VerifiedReviewLinks />
         </div>
       </section>
 

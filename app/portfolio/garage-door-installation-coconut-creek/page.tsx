@@ -26,15 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-const highlights = [
-  "Budget-friendly installation",
-  "Clean long-panel design",
-  "Reliable everyday operation",
-  "Quick turnaround project",
-  "Improved home appearance",
-  "Strong value upgrade",
-];
-
 const goals = [
   "Replace an older worn garage door",
   "Keep the project within budget",
@@ -70,13 +61,6 @@ const features = [
   },
 ];
 
-const benefits = [
-  "Affordable upgrade option",
-  "Improved curb appeal",
-  "Better system performance",
-  "Strong everyday reliability",
-];
-
 const processSteps = [
   "Inspection of existing door",
   "Measurement confirmation",
@@ -86,25 +70,6 @@ const processSteps = [
   "System balancing",
   "Final testing and safety check",
   "Customer walkthrough",
-];
-
-const faqs = [
-  {
-    q: "Is this type of garage door a good budget option?",
-    a: "Yes. A long-panel steel door is one of the most cost-effective ways to improve both function and appearance.",
-  },
-  {
-    q: "Does a lower-cost door still perform well?",
-    a: "Yes. When installed correctly, even a budget-friendly door can provide reliable daily performance.",
-  },
-  {
-    q: "Who is this type of installation best for?",
-    a: "Homeowners who want a clean, reliable upgrade without investing in premium or custom doors.",
-  },
-  {
-    q: "Can this still improve home value?",
-    a: "Yes. Even a simple garage door upgrade can improve curb appeal and make a home look more maintained.",
-  },
 ];
 
 export default function CoconutCreekCaseStudy() {

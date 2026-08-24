@@ -2,8 +2,8 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaArrowRight,
   FaTools,
@@ -153,10 +153,7 @@ export default function CommercialGarageDoorServicesPage() {
     name: "Commercial Garage Door Services",
     serviceType: "Commercial Garage Door Services",
     provider: {
-      "@type": "GarageDoorRepair",
-      name: "SecureLifts",
-      telephone: PHONE,
-      url: "https://securelifts.com/commercial-garage-door-services",
+      ...BUSINESS_SCHEMA_REFERENCE,
     },
     areaServed: [
       {

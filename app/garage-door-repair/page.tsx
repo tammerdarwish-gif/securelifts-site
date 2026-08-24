@@ -618,24 +618,6 @@ export default function GarageDoorRepairPage() {
       <ReviewTrustSection
         heading="Why South Florida Homeowners Choose SecureLifts"
         intro="When garage doors fail, homeowners want fast communication, clean work, and real solutions. That is what gets calls converted into booked jobs."
-        reviews={[
-          {
-            name: "Michael R.",
-            text: "Fast response, professional service, and the garage door works better than ever.",
-          },
-          {
-            name: "Jessica T.",
-            text: "They showed up on time, explained everything clearly, and got it done right.",
-          },
-          {
-            name: "Daniel P.",
-            text: "Best garage door company I’ve dealt with. Clean work and excellent communication.",
-          },
-          {
-            name: "Alicia T.",
-            text: "The whole process felt organized and professional from the estimate to the final repair.",
-          },
-        ]}
       />
 
       <section className="bg-red-600 py-6 text-white">

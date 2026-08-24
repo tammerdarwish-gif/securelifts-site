@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
 import {
-  FaPhoneAlt,
   FaCheckCircle,
   FaArrowRight,
   FaDoorOpen,
-  FaWarehouse,
   FaShieldAlt,
   FaIndustry,
   FaClipboardCheck,
@@ -52,15 +51,6 @@ const whyInstallNew = [
   "Building needs a cleaner, more modern appearance",
   "Upgrading insulation, durability, or usage capacity",
   "Operator and door system no longer fit business needs",
-];
-
-const whyUs = [
-  "Commercial-first installation mindset",
-  "Clear recommendations based on real building use",
-  "Support for warehouses, storefronts, service bays, and industrial properties",
-  "Focus on fit, safety, durability, and daily performance",
-  "Straight communication without fluff or confusion",
-  "Long-term reliability, not just getting the job done fast",
 ];
 
 const propertyTypes = [
@@ -168,10 +158,7 @@ export default function CommercialGarageDoorInstallationPage() {
     name: "Commercial Garage Door Installation",
     serviceType: "Commercial Garage Door Installation",
     provider: {
-      "@type": "GarageDoorRepair",
-      name: "SecureLifts",
-      telephone: PHONE,
-      url: "https://securelifts.com/commercial-garage-door-installation",
+      ...BUSINESS_SCHEMA_REFERENCE,
     },
     areaServed: [
       { "@type": "Place", name: "South Florida" },

@@ -28,12 +28,17 @@ const baseUrl = "https://securelifts.com";
 
 const staticPaths = getAllStaticRoutes(path.join(process.cwd(), "app"));
 
-const priorityStaticPaths = [
-  "",
-  "/garage-door-repair",
+const excludedStaticPaths = new Set([
   "/ads/garage-door-repair",
   "/ads/broken-spring-repair",
   "/ads/garage-door-opener-repair",
+  "/hurricane-garage-door-in-wellington",
+  "/openers-installation-in-wellington",
+]);
+
+const priorityStaticPaths = [
+  "",
+  "/garage-door-repair",
   "/garage-door-installation",
   "/broken-spring-repair",
   "/spring-replacement",
@@ -128,17 +133,22 @@ const stormCities = [
   "port-st-lucie",
 ];
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const priorityStaticPathSet = new Set(priorityStaticPaths);
   const orderedStaticPaths = [
-    ...priorityStaticPaths.filter((path) => staticPaths.includes(path)),
-    ...staticPaths.filter((path) => !priorityStaticPathSet.has(path)).sort(),
+    ...priorityStaticPaths.filter(
+      (path) => staticPaths.includes(path) && !excludedStaticPaths.has(path)
+    ),
+    ...staticPaths
+      .filter(
+        (path) =>
+          !priorityStaticPathSet.has(path) && !excludedStaticPaths.has(path)
+      )
+      .sort(),
   ];
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = orderedStaticPaths.map((path) => ({
     url: `${baseUrl}${path}`,
-    lastModified: now,
     changeFrequency: path === "" ? "weekly" : "monthly",
     priority: priorityStaticPathSet.has(path) ? 0.9 : 0.5,
   }));
@@ -147,19 +157,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const stormCityPages: MetadataRoute.Sitemap = stormCities.flatMap((city) => [
     {
       url: `${baseUrl}/hurricane-garage-doors/${city}`,
-      lastModified: now,
     },
     {
       url: `${baseUrl}/impact-rated-garage-doors/${city}`,
-      lastModified: now,
     },
     {
       url: `${baseUrl}/wind-rated-garage-doors/${city}`,
-      lastModified: now,
     },
     {
       url: `${baseUrl}/miami-dade-rated-garage-doors/${city}`,
-      lastModified: now,
     },
   ]);
 
@@ -176,7 +182,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const coreCityPages: MetadataRoute.Sitemap = orderedCities.flatMap((city) =>
     coreServicePaths.map((servicePath) => ({
       url: `${baseUrl}/${servicePath}/${city}`,
-      lastModified: now,
       changeFrequency: "monthly" as const,
       priority: priorityCitySet.has(city) ? 0.75 : 0.45,
     }))
@@ -185,7 +190,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const openerProductPages: MetadataRoute.Sitemap = getOpenerProductSlugs().map(
     (slug) => ({
       url: `${baseUrl}/garage-door-opener/${slug}`,
-      lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.65,
     })

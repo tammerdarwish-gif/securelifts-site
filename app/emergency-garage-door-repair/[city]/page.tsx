@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   FaPhoneAlt,
@@ -251,9 +252,12 @@ export default async function EmergencyGarageDoorRepairCityPage({
           </div>
 
           <div className="w-full lg:max-w-[360px] lg:justify-self-end">
-            <img
+            <Image
               src="/garage-tech.jpg"
               alt="Emergency garage door repair team"
+              width={720}
+              height={840}
+              sizes="(min-width: 1024px) 360px, 100vw"
               className="block h-[420px] w-full rounded-2xl border border-slate-200 object-cover object-center shadow-lg"
             />
           </div>

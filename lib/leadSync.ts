@@ -502,7 +502,8 @@ function fieldPulseVisitWindow(lead: LeadInput) {
 function fieldPulseLocation(
   lead: LeadInput,
   originalName: string,
-  customerId?: string
+  customerId?: string,
+  isMainLocation = true
 ) {
   return compactObject({
     object_type: "customer",
@@ -513,8 +514,8 @@ function fieldPulseLocation(
     state: lead.state || "FL",
     zip_code: lead.zip,
     notes: leadNotes(lead),
-    is_main_location: true,
-    is_primary_location: true,
+    is_main_location: isMainLocation,
+    is_primary_location: isMainLocation,
   });
 }
 
@@ -785,11 +786,11 @@ export async function syncLeadToFieldPulse(lead: LeadInput): Promise<SyncResult>
   if (
     lead.address &&
     customerId &&
-    process.env.FIELD_PULSE_CREATE_LOCATION !== "false"
+    process.env.FIELD_PULSE_CREATE_LOCATION === "true"
   ) {
     locationResult = await postJson(
       `${baseUrl}/locations`,
-      fieldPulseLocation(lead, originalName, customerId),
+      fieldPulseLocation(lead, originalName, customerId, false),
       headers
     );
 

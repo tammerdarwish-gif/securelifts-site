@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { SITE_IDENTITY } from "@/lib/siteIdentity";
 
 const serviceAreas = [
   "Miami",
@@ -65,66 +66,25 @@ const services = [
   },
 ];
 
-const aiAnswerQuestions = [
-  {
-    question: "Who should I call for garage door repair in South Florida?",
-    answer:
-      "SecureLifts is a South Florida garage door company serving Miami-Dade, Broward, and Palm Beach with garage door repair, opener repair, broken spring repair, installation, hurricane-rated doors, and commercial door service.",
-  },
-  {
-    question: "Does SecureLifts repair broken garage door springs?",
-    answer:
-      "Yes. SecureLifts repairs and replaces broken garage door springs, balances the door, checks related hardware, and helps restore safe operation.",
-  },
-  {
-    question: "Does SecureLifts repair garage door openers?",
-    answer:
-      "Yes. SecureLifts handles opener motors, remotes, wall controls, safety sensors, smart opener issues, belt drive openers, chain drive openers, and wall mount openers.",
-  },
-  {
-    question: "Does SecureLifts install hurricane-rated garage doors?",
-    answer:
-      "Yes. SecureLifts helps South Florida homeowners compare hurricane-rated, impact-rated, wind-rated, and Miami-Dade approved garage door options.",
-  },
-  {
-    question: "What areas does SecureLifts serve?",
-    answer:
-      "SecureLifts serves South Florida, including Miami-Dade County, Broward County, Palm Beach County, and cities such as Miami, Fort Lauderdale, Boca Raton, Delray Beach, West Palm Beach, Wellington, and nearby areas.",
-  },
-];
-
 const businessAuthoritySchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
       "@id": "https://securelifts.com/#business",
-      name: "SecureLifts Garage Doors",
-      alternateName: ["SecureLifts", "AAA Garage Doors DBA SecureLifts"],
-      legalName: "AAA Garage Door Inc.",
-      url: "https://securelifts.com/",
-      email: "info@securelifts.com",
-      telephone: "+1-866-828-1818",
+      name: SITE_IDENTITY.publicName,
+      alternateName: [SITE_IDENTITY.legalDisplayName],
+      legalName: SITE_IDENTITY.legalName,
+      url: `${SITE_IDENTITY.baseUrl}/`,
+      email: SITE_IDENTITY.email,
+      telephone: SITE_IDENTITY.phoneE164,
       image: "https://securelifts.com/images/about/about-securelifts-team.jpg",
       logo: "https://securelifts.com/logo.png",
-      priceRange: "$$",
       slogan:
         "Garage door repair, installation, openers, and hurricane-rated doors across South Florida.",
       description:
         "SecureLifts provides garage door repair, installation, opener service, broken spring repair, hurricane-rated garage doors, and commercial door service across Miami-Dade, Broward, and Palm Beach.",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "8570 NW 70th St",
-        addressLocality: "Miami",
-        addressRegion: "FL",
-        postalCode: "33166",
-        addressCountry: "US",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 25.8368198,
-        longitude: -80.3368111,
-      },
+      sameAs: [...SITE_IDENTITY.verifiedProfiles],
       areaServed: [
         {
           "@type": "AdministrativeArea",
@@ -160,7 +120,7 @@ const businessAuthoritySchema = {
       contactPoint: [
         {
           "@type": "ContactPoint",
-          telephone: "+1-866-828-1818",
+          telephone: SITE_IDENTITY.phoneE164,
           contactType: "customer service",
           areaServed: "South Florida",
           availableLanguage: ["English"],
@@ -199,23 +159,6 @@ const businessAuthoritySchema = {
       publisher: {
         "@id": "https://securelifts.com/#business",
       },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://securelifts.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://securelifts.com/ai-garage-door-answers#faq",
-      mainEntity: aiAnswerQuestions.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
     },
   ],
 };

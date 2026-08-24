@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import VerifiedReviewLinks from "@/app/components/VerifiedReviewLinks";
 import { notFound } from "next/navigation";
 import {
   FaCheckCircle,
@@ -330,21 +331,6 @@ export default async function CommercialRollUpDoorRepairCityPage({
     `Trusted local support across ${data.county}`,
   ];
 
-  const reviews = [
-    {
-      name: `${data.city} Business Owner`,
-      text: `SecureLifts responded quickly when our roll-up door failed and helped us get access restored fast in ${data.city}.`,
-    },
-    {
-      name: `${data.city} Operations Supervisor`,
-      text: "Professional communication, strong workmanship, and a clear understanding of how important dependable access is to daily operations.",
-    },
-    {
-      name: `${data.city} Property Manager`,
-      text: "They fixed the issue fast, explained what caused it, and got the roll-up door working properly again without wasting time.",
-    },
-  ];
-
   const relatedLinks = [
     {
       href: `/commercial-garage-door-repair/${city}`,
@@ -653,15 +639,7 @@ export default async function CommercialRollUpDoorRepairCityPage({
             </a>
           </div>
 
-          <div className="mt-20 grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <div key={review.name} className="rounded-3xl bg-white/5 p-8">
-                <div className="mb-4 text-yellow-400">★★★★★</div>
-                <p className="text-slate-300 leading-7">{review.text}</p>
-                <p className="mt-6 font-bold">{review.name}</p>
-              </div>
-            ))}
-          </div>
+          <div className="mt-20"><VerifiedReviewLinks /></div>
         </div>
       </section>
 

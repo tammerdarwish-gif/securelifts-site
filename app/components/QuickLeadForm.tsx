@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type QuickLeadFormProps = {
   defaultService?: string;
@@ -40,6 +40,7 @@ export default function QuickLeadForm({
 }: QuickLeadFormProps) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const leadIdRef = useRef<string | null>(null);
   const visibleServiceOptions = serviceOptions.includes(defaultService)
     ? serviceOptions
     : [defaultService, ...serviceOptions];
@@ -60,6 +61,8 @@ export default function QuickLeadForm({
     const time = String(formData.get("time") || "");
     const message = String(formData.get("message") || "Quick lead form request");
     const smsOptIn = formData.get("smsOptIn") === "yes";
+    const website = String(formData.get("website") || "");
+    leadIdRef.current ||= crypto.randomUUID();
 
     try {
       const response = await fetch("/api/send", {
@@ -68,6 +71,7 @@ export default function QuickLeadForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          leadId: leadIdRef.current,
           name,
           phone,
           email,
@@ -79,6 +83,7 @@ export default function QuickLeadForm({
           time,
           message,
           smsOptIn,
+          website,
           sourcePage:
             typeof window !== "undefined" ? window.location.href : "",
           referrer:
@@ -104,10 +109,11 @@ export default function QuickLeadForm({
       }
 
       if (typeof window !== "undefined") {
-        await window.trackSecureLiftsLeadConversion?.(service);
+        void window.trackSecureLiftsLeadConversion?.(service);
       }
 
       setSubmitted(true);
+      leadIdRef.current = null;
       form.reset();
     } catch {
       alert("The request could not be sent. Please call SecureLifts now.");
@@ -155,6 +161,17 @@ export default function QuickLeadForm({
         {title}
       </h3>
       <p className="mt-3 leading-7 text-slate-600">{intro}</p>
+
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="quick-lead-website">Website</label>
+        <input
+          id="quick-lead-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <div className={`mt-6 grid gap-4 ${compact ? "" : "md:grid-cols-2"}`}>
         <input

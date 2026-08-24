@@ -1,22 +1,17 @@
-import { FaCheckCircle, FaShieldAlt, FaStar, FaBolt } from "react-icons/fa";
-
-type ReviewItem = {
-  name: string;
-  text: string;
-};
+import Link from "next/link";
+import { FaCheckCircle, FaShieldAlt, FaBolt, FaExternalLinkAlt } from "react-icons/fa";
+import { SITE_IDENTITY } from "@/lib/siteIdentity";
 
 type ReviewTrustSectionProps = {
   eyebrow?: string;
   heading: string;
   intro?: string;
-  reviews: ReviewItem[];
 };
 
 export default function ReviewTrustSection({
   eyebrow = "Trusted by Homeowners",
   heading,
   intro,
-  reviews,
 }: ReviewTrustSectionProps) {
   const trustPoints = [
     {
@@ -73,25 +68,58 @@ export default function ReviewTrustSection({
             ))}
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {reviews.map((review) => (
-              <div
-                key={review.name}
-                className="rounded-3xl border border-gray-200 bg-white p-7 shadow-sm"
-              >
-                <div className="mb-4 flex gap-1 text-yellow-400">
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </div>
+          <div className="grid gap-6">
+            <a
+              href={SITE_IDENTITY.verifiedProfiles[0]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-3xl border border-gray-200 bg-white p-7 text-gray-900 shadow-sm transition hover:border-red-200"
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-700">
+                Independent Profile
+              </p>
+              <h3 className="mt-2 text-2xl font-bold">BBB Business Profile</h3>
+              <p className="mt-3 leading-7 text-gray-700">
+                Review SecureLifts accreditation, company history, and public business details directly on BBB.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 font-bold text-red-700">
+                View BBB profile <FaExternalLinkAlt className="text-sm" />
+              </span>
+            </a>
 
-                <p className="leading-8 text-gray-700">“{review.text}”</p>
+            <a
+              href={SITE_IDENTITY.verifiedProfiles[1]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-3xl border border-gray-200 bg-white p-7 text-gray-900 shadow-sm transition hover:border-red-200"
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-700">
+                Verified Reviews
+              </p>
+              <h3 className="mt-2 text-2xl font-bold">Best Pick Reports</h3>
+              <p className="mt-3 leading-7 text-gray-700">
+                Read independently published customer reviews and company details on the SecureLifts Best Pick profile.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 font-bold text-red-700">
+                Read verified reviews <FaExternalLinkAlt className="text-sm" />
+              </span>
+            </a>
 
-                <p className="mt-5 font-semibold text-gray-900">{review.name}</p>
-              </div>
-            ))}
+            <Link
+              href="/reviews"
+              className="rounded-3xl border border-gray-200 bg-white p-7 text-gray-900 shadow-sm transition hover:border-red-200"
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-700">
+                Project Evidence
+              </p>
+              <h3 className="mt-2 text-2xl font-bold">Real SecureLifts Projects</h3>
+              <p className="mt-3 leading-7 text-gray-700">
+                Explore completed South Florida installations with project locations, products, photographs, and job values.
+              </p>
+              <span className="mt-5 inline-flex font-bold text-red-700">
+                View reviews and case studies
+              </span>
+            </Link>
           </div>
         </div>
       </div>

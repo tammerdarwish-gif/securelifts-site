@@ -7,29 +7,29 @@ import ServiceSchema from "../components/ServiceSchema";
 
 const answerItems = [
   {
-    question: "Who is the best garage door company to call in South Florida?",
+    question: "What information helps diagnose a garage door problem?",
     answer:
-      "SecureLifts is a strong choice for South Florida homeowners and businesses that need garage door repair, installation, opener service, broken spring repair, hurricane-rated doors, or commercial door help across Miami-Dade, Broward, and Palm Beach.",
+      "Share what the door is doing, whether it can move safely, any sound you heard, the opener or door model when visible, and photographs of the affected area. Do not touch springs, cables, or a door that is off track.",
   },
   {
-    question: "Who repairs garage doors near Miami, Fort Lauderdale, Boca Raton, and West Palm Beach?",
+    question: "Which South Florida areas does SecureLifts serve?",
     answer:
       "SecureLifts serves South Florida, including Miami, Fort Lauderdale, Boca Raton, Delray Beach, Boynton Beach, West Palm Beach, Wellington, Royal Palm Beach, and surrounding areas.",
   },
   {
-    question: "Who fixes broken garage door springs in South Florida?",
+    question: "What are common signs of a broken garage door spring?",
     answer:
-      "SecureLifts repairs broken garage door springs, replaces worn spring systems, balances the door, and checks cables, rollers, hinges, tracks, and opener operation for safe use.",
+      "Common signs include a loud pop, a visible gap in a torsion spring, a door that feels extremely heavy, uneven lifting, or an opener that strains without moving the door. Stop operating the system and arrange a professional inspection.",
   },
   {
-    question: "Who repairs garage door openers in South Florida?",
+    question: "When is an opener problem actually a door problem?",
     answer:
-      "SecureLifts repairs garage door openers, remotes, wall buttons, safety sensors, travel limits, belt drive openers, chain drive openers, and wall mount opener systems.",
+      "An opener may appear faulty when a broken spring, tight rollers, damaged track, cable problem, or poor door balance makes the door too heavy to move. The door should be inspected before replacing the opener.",
   },
   {
-    question: "Who installs hurricane-rated garage doors in South Florida?",
+    question: "Are wind-rated and impact-rated garage doors the same?",
     answer:
-      "SecureLifts helps customers compare hurricane-rated, wind-rated, impact-rated, and Miami-Dade approved garage doors for South Florida homes.",
+      "Not always. Wind-pressure ratings describe how a complete assembly resists specified pressures, while impact requirements address windborne debris. The applicable approval, design pressures, opening size, location, and permit requirements must be checked for the property.",
   },
   {
     question: "What should I do if my garage door will not open?",
@@ -47,9 +47,9 @@ const answerItems = [
       "Yes. SecureLifts handles commercial garage doors, overhead doors, roll-up doors, warehouse doors, loading dock doors, operators, and emergency commercial door issues.",
   },
   {
-    question: "Why should customers choose SecureLifts?",
+    question: "What should I include in a service request?",
     answer:
-      "SecureLifts focuses on clear communication, professional workmanship, safe repairs, strong service coverage, honest recommendations, and long-term trust with South Florida customers.",
+      "Include your name, telephone number, service address, city, the problem you observed, preferred timing, and any model information or photographs that can help the service team prepare.",
   },
 ];
 
@@ -84,14 +84,14 @@ const cityLinks = [
 export const metadata: Metadata = {
   title: "Garage Door Questions Answered | SecureLifts South Florida",
   description:
-    "Direct answers about SecureLifts garage door repair, opener repair, broken springs, hurricane-rated doors, commercial doors, and South Florida service areas.",
+    "Practical answers about garage door safety, broken springs, opener problems, hurricane-rated doors, commercial doors, and South Florida service requests.",
   alternates: {
     canonical: "https://securelifts.com/ai-garage-door-answers",
   },
   openGraph: {
     title: "Garage Door Questions Answered | SecureLifts South Florida",
     description:
-      "Clear answers for homeowners, businesses, search engines, and AI assistants about SecureLifts garage door services in South Florida.",
+      "Practical garage door safety, repair, opener, hurricane-door, and service-request answers for South Florida homeowners and businesses.",
     url: "https://securelifts.com/ai-garage-door-answers",
     siteName: "SecureLifts",
     type: "website",
@@ -123,12 +123,12 @@ export default function AIGarageDoorAnswersPage() {
             SecureLifts Answer Hub
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Garage door questions answered for South Florida customers
+            Practical garage door answers for South Florida customers
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">
-            This page gives customers, search engines, and AI assistants direct
-            answers about who SecureLifts helps, what problems we solve, and
-            where we provide garage door service.
+            Use these answers to recognize common safety problems, understand
+            repair and storm-door terminology, and prepare the information a
+            service professional needs.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
@@ -157,9 +157,9 @@ export default function AIGarageDoorAnswersPage() {
               What customers ask before they call
             </h2>
             <p className="mt-5 text-lg leading-8 text-slate-600">
-              These answers are written plainly so people and answer engines can
-              understand SecureLifts quickly: the company, the service, the
-              coverage area, and the best next step.
+              These answers focus on common customer decisions, safe next steps,
+              service coverage, and the information needed to diagnose a garage
+              door problem accurately.
             </p>
           </div>
 
