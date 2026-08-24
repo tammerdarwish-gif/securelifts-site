@@ -80,6 +80,32 @@ export default async function OpenerProductPage({ params }: PageProps) {
     description: product.summary,
     category: "Garage Door Opener",
     url: `https://securelifts.com/garage-door-opener/${product.slug}`,
+    ...(product.discontinued
+      ? {
+          additionalProperty: {
+            "@type": "PropertyValue",
+            name: "Status",
+            value: "Discontinued",
+          },
+        }
+      : {}),
+    ...(product.productRating
+      ? {
+          review: {
+            "@type": "Review",
+            author: {
+              "@type": "Team",
+              name: "SecureLifts Product Team",
+            },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: product.productRating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          },
+        }
+      : {}),
   };
 
   const relatedProducts = openerProducts.filter(
@@ -109,9 +135,21 @@ export default async function OpenerProductPage({ params }: PageProps) {
               <h1 className="mt-4 max-w-4xl text-4xl font-black tracking-tight md:text-5xl xl:text-6xl">
                 {product.shortName} / {product.pairedName}
               </h1>
-              <p className="mt-4 inline-flex rounded-full border border-red-300/25 bg-white/10 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-red-100">
-                Same matched opener family, private-label naming
-              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <p className="inline-flex rounded-full border border-red-300/25 bg-white/10 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-red-100">
+                  Same matched opener family, private-label naming
+                </p>
+                {product.discontinued ? (
+                  <p className="inline-flex rounded-full border border-amber-300/40 bg-amber-300/15 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-amber-100">
+                    Discontinued
+                  </p>
+                ) : null}
+                {product.productRating ? (
+                  <p className="inline-flex rounded-full border border-yellow-300/40 bg-yellow-300/15 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-yellow-100">
+                    ★ {product.productRating} out of 5
+                  </p>
+                ) : null}
+              </div>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
                 {product.summary}
               </p>

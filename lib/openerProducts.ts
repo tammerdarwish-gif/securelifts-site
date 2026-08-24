@@ -6,6 +6,8 @@ export type OpenerProduct = {
   category: string;
   raynorMatch: string;
   currentStatus?: string;
+  discontinued?: boolean;
+  productRating?: number;
   summary: string;
   bestFor: string[];
   highlights: string[];
@@ -361,6 +363,7 @@ export const openerProducts: OpenerProduct[] = [
     raynorMatch: "Raynor Sentinel 360 BBU opener family",
     currentStatus:
       "This model remains a useful Secure View search page. When customers want current model-number comparisons, SecureLifts may also show the 6690L or 6580L family.",
+    productRating: 4.8,
     summary:
       "A quiet smart belt-drive opener option for homeowners who want camera visibility, LED lighting, and app-based control.",
     bestFor: [
@@ -472,7 +475,9 @@ export const openerProducts: OpenerProduct[] = [
     category: "Older chain-drive model support",
     raynorMatch: "Older Raynor/LiftMaster chain-drive service family",
     currentStatus:
-      "This is an older model-number support page. It should capture legacy searches, then guide customers to repair, compatible parts, or a newer opener family when replacement is smarter.",
+      "The LiftMaster 8365-267 is discontinued. SecureLifts supports existing units with diagnosis and compatible repairs when practical, or recommends a current replacement when that is the smarter option.",
+    discontinued: true,
+    productRating: 4.6,
     summary:
       "Support for homeowners searching an older LiftMaster 8365-267 opener, including diagnosis, compatible repair when practical, or a modern replacement recommendation.",
     bestFor: [

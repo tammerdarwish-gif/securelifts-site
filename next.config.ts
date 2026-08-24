@@ -133,6 +133,154 @@ const legacyRedirects = [
     source: "/garage-door-spring-repair",
     destination: "/broken-spring-repair",
   },
+  {
+    source: "/raynor-energycore-series",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/privacy-policy-2",
+    destination: "/privacy-policy",
+  },
+  {
+    source: "/steelweave-metal-mesh-grille",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/Content/Install/SafetySensors.htm",
+    destination: "/resources/garage-door-opener-manuals",
+  },
+  {
+    source: "/Content/Misc/Accessories.htm",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/Content/UG/UG_AdjustmentSafetyPHX.htm",
+    destination: "/resources/garage-door-opener-manuals",
+  },
+  {
+    source: "/Content/UG/UG_ProtectorSystem.htm",
+    destination: "/resources/garage-door-opener-manuals",
+  },
+  {
+    source: "/portfolio",
+    destination: "/garage-door-installation",
+  },
+  {
+    source: "/crossinggard",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/terms-and-conditions",
+    destination: "/terms-of-service",
+  },
+  {
+    source: "/portfolio/garage-door-installation-in-pinecrest/feed",
+    destination: "/portfolio/garage-door-installation-pinecrest",
+  },
+  {
+    source: "/west-miami",
+    destination: "/garage-door-repair/miami",
+  },
+  {
+    source: "/heavy-duty-5015-rolling-grille",
+    destination: "/commercial-roll-up-door-repair",
+  },
+  {
+    source: "/firecoil",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/hialeah",
+    destination: "/garage-door-repair/hialeah",
+  },
+  {
+    source: "/miami-beach",
+    destination: "/garage-door-repair/miami-beach",
+  },
+  {
+    source: "/careers",
+    destination: "/about",
+  },
+  {
+    source: "/buildmark",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/giveaway",
+    destination: "/garage-door",
+  },
+  {
+    source: "/product/garage-door-giveaway",
+    destination: "/garage-door",
+  },
+  {
+    source: "/liftmaster-87802-chain-drive-opener",
+    destination: "/garage-door-opener",
+  },
+  {
+    source: "/liftmaster-wall-mount-openers",
+    destination: "/garage-door-opener/liftmaster-98022",
+  },
+  {
+    source: "/liftmaster-81650-garage-door-opener",
+    destination: "/garage-door-opener/liftmaster-81600",
+  },
+  {
+    source: "/liftmaster-81550-garage-door-opener",
+    destination: "/garage-door-opener/liftmaster-81600",
+  },
+  {
+    source: "/liftmaster-87504-267-belt-drive-opener",
+    destination: "/garage-door-opener/liftmaster-87504-267",
+  },
+  {
+    source: "/legacyview-garage-door",
+    destination: "/hurricane-garage-doors/modern/full-view-aluminum-glass",
+  },
+  {
+    source: "/gallery-steel",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/architectural-series-steel",
+    destination: "/hurricane-garage-doors/modern/modern-steel-with-windows",
+  },
+  {
+    source: "/extreme-1024",
+    destination: "/hurricane-garage-doors",
+  },
+  {
+    source: "/energy-series",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/wynwood-garage-door",
+    destination: "/hurricane-garage-doors/modern/modern-steel-with-windows",
+  },
+  {
+    source: "/th160-series",
+    destination: "/hurricane-garage-doors/traditional",
+  },
+  {
+    source: "/canyon-ridge-brochure",
+    destination: "/hurricane-garage-doors/carriage-house",
+  },
+  {
+    source: "/liftmaster-81600w-garage-door-opener",
+    destination: "/garage-door-opener/liftmaster-81600",
+  },
+  {
+    source: "/commercial",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/deeringcraft-garage-door",
+    destination: "/hurricane-garage-doors/carriage-house",
+  },
+  {
+    source: "/search/:path*",
+    destination: "/",
+  },
 ].flatMap(({ source, destination }) => [
   {
     source,
@@ -159,6 +307,26 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/resources/approvals/:file*.pdf",
+        headers: [
+          {
+            key: "Link",
+            value:
+              '<https://securelifts.com/resources/approvals/:file*.pdf>; rel="canonical"',
+          },
+        ],
+      },
+      {
+        source: "/resources/manuals/:file*.pdf",
+        headers: [
+          {
+            key: "Link",
+            value:
+              '<https://securelifts.com/resources/manuals/:file*.pdf>; rel="canonical"',
           },
         ],
       },
