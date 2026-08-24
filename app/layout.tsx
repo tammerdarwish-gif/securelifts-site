@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
@@ -216,12 +215,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {children}
         <SiteFooter />
         <StickyCTA />
-        <script
-          id="chatBT"
-          data-chat-key="iNTvyxQDHOng6busC7Ym"
-          src="https://nowl.ink/1791z3115a"
-          type="text/javascript"
-        /> 
       </body>
     </html>
   );
