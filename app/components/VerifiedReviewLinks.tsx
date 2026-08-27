@@ -4,8 +4,8 @@ import { SITE_IDENTITY } from "@/lib/siteIdentity";
 
 const externalProfiles = [
   {
-    label: "BBB Business Profile",
-    text: "Review SecureLifts accreditation, history, and public company information directly on BBB.",
+    label: SITE_IDENTITY.bbbRatingDisplay,
+    text: "View SecureLifts' A+ rating, business history, and public company information directly on BBB.",
     href: SITE_IDENTITY.verifiedProfiles[0],
   },
   {

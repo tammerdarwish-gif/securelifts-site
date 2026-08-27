@@ -55,6 +55,23 @@ try {
   assert.ok([301, 308].includes(slashRedirect.status), "/contact/ must normalize permanently");
   assert.equal(new URL(slashRedirect.headers.get("location"), localOrigin).pathname, "/contact");
 
+  const homepage = await fetch(localOrigin);
+  const homepageHtml = await homepage.text();
+  assert.match(homepageHtml, /8570 NW 70th St, Miami, FL 33166/);
+  assert.match(homepageHtml, /"streetAddress":"8570 NW 70th St"/);
+  assert.match(homepageHtml, /"telephone":"\+18668281818"/);
+  assert.match(homepageHtml, /"opens":"08:00","closes":"17:00"/);
+  assert.match(homepageHtml, /"opens":"09:00","closes":"16:00"/);
+  assert.match(homepageHtml, /BBB A\+ Rated/);
+  assert.equal(homepageHtml.includes("BBB Accredited"), false);
+
+  const contact = await fetch(`${localOrigin}/contact`);
+  const contactHtml = await contact.text();
+  assert.match(contactHtml, /8570 NW 70th St, Miami, FL 33166/);
+  assert.match(contactHtml, /Monday–Friday: 8:00 AM–5:00 PM/);
+  assert.match(contactHtml, /Saturday: 9:00 AM–4:00 PM/);
+  assert.match(contactHtml, /Sunday: Closed/);
+
   const missing = await fetch(`${localOrigin}/this-page-should-not-exist-987654`);
   const missingHtml = await missing.text();
   assert.equal(missing.status, 404);

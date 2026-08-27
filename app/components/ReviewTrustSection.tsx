@@ -78,9 +78,11 @@ export default function ReviewTrustSection({
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-700">
                 Independent Profile
               </p>
-              <h3 className="mt-2 text-2xl font-bold">BBB Business Profile</h3>
+              <h3 className="mt-2 text-2xl font-bold">
+                {SITE_IDENTITY.bbbRatingDisplay}
+              </h3>
               <p className="mt-3 leading-7 text-gray-700">
-                Review SecureLifts accreditation, company history, and public business details directly on BBB.
+                View SecureLifts&apos; A+ rating, company history, and public business details directly on BBB.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 font-bold text-red-700">
                 View BBB profile <FaExternalLinkAlt className="text-sm" />

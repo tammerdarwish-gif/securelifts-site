@@ -36,6 +36,7 @@ Do not store passwords in docs, sheets, or chat. Enter passwords and verificatio
 - Website: `https://securelifts.com/`
 - Booking URL: `https://securelifts.com/book-service`
 - Email: `info@securelifts.com`
+- Hours: Monday-Friday `8:00 AM-5:00 PM`; Saturday `9:00 AM-4:00 PM`; Sunday closed.
 - Service area: Miami-Dade County, Broward County, Palm Beach County, and South Florida.
 
 ## Description Pack
@@ -113,6 +114,7 @@ Before marking a profile complete:
 - Public name shows `SecureLifts`.
 - Phone shows `(866) 828-1818`.
 - Address matches `8570 NW 70th ST., Miami, FL 33166` unless the platform is set to service area only.
+- Hours match Monday-Friday `8:00 AM-5:00 PM`, Saturday `9:00 AM-4:00 PM`, and Sunday closed.
 - Website or booking URL is correct.
 - Primary category is `Garage Door Supplier` when available.
 - Description does not show `AAA Garage Door Inc.` as the public name.

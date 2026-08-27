@@ -15,6 +15,7 @@ Use this NAP direction unless ownership confirms a different official listing fo
 - Email: `info@securelifts.com`
 - Website: `https://securelifts.com/`
 - Booking URL: `https://securelifts.com/book-service`
+- Hours: Monday-Friday `8:00 AM-5:00 PM`; Saturday `9:00 AM-4:00 PM`; Sunday closed.
 - Service area: Miami-Dade County, Broward County, Palm Beach County, and South Florida.
 - Primary category: garage door supplier.
 - Supporting categories/services: garage door repair, garage door installation, commercial door service, garage door opener service, hurricane-rated garage doors.
@@ -189,7 +190,7 @@ Photo set needed:
 - Main category matches garage door repair or garage door service.
 - Secondary categories match installation, opener, commercial, and hurricane-rated services when available.
 - Photos are real and current.
-- Hours and emergency availability are accurate.
+- Hours match Monday-Friday `8:00 AM-5:00 PM`, Saturday `9:00 AM-4:00 PM`, and Sunday closed; emergency availability is not claimed unless separately confirmed.
 - No duplicate listing with older phone or address.
 - Review replies are current.
 - GHL source tag exists before traffic is expected from the platform.

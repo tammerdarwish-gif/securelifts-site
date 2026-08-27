@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { SITE_IDENTITY } from "@/lib/siteIdentity";
 
 const serviceAreas = [
@@ -78,6 +77,21 @@ const businessAuthoritySchema = {
       url: `${SITE_IDENTITY.baseUrl}/`,
       email: SITE_IDENTITY.email,
       telephone: SITE_IDENTITY.phoneE164,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_IDENTITY.primaryLocation.streetAddress,
+        addressLocality: SITE_IDENTITY.primaryLocation.addressLocality,
+        addressRegion: SITE_IDENTITY.primaryLocation.addressRegion,
+        postalCode: SITE_IDENTITY.primaryLocation.postalCode,
+        addressCountry: SITE_IDENTITY.primaryLocation.addressCountry,
+      },
+      hasMap: SITE_IDENTITY.primaryLocation.mapsUrl,
+      openingHoursSpecification: SITE_IDENTITY.businessHours.schema.map((hours) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: hours.dayOfWeek,
+        opens: hours.opens,
+        closes: hours.closes,
+      })),
       image: "https://securelifts.com/images/about/about-securelifts-team.jpg",
       logo: "https://securelifts.com/logo.png",
       slogan:
@@ -165,10 +179,9 @@ const businessAuthoritySchema = {
 
 export default function BusinessAuthoritySchema() {
   return (
-    <Script
+    <script
       id="securelifts-business-authority-schema"
       type="application/ld+json"
-      strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(businessAuthoritySchema),
       }}

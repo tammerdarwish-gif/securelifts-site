@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import type { Metadata } from "next";
-import { BUSINESS_SCHEMA_REFERENCE } from "@/lib/siteIdentity";
+import { BUSINESS_SCHEMA_REFERENCE, SITE_IDENTITY } from "@/lib/siteIdentity";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -11,10 +11,10 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-const PHONE = "(866) 828-1818";
-const PHONE_HREF = "tel:+18668281818";
-const EMAIL = "info@securelifts.com";
-const EMAIL_HREF = "mailto:info@securelifts.com";
+const PHONE = SITE_IDENTITY.phoneDisplay;
+const PHONE_HREF = SITE_IDENTITY.phoneHref;
+const EMAIL = SITE_IDENTITY.email;
+const EMAIL_HREF = SITE_IDENTITY.emailHref;
 
 export const metadata: Metadata = {
   title: "Contact SecureLifts | Garage Door Service in South Florida",
@@ -50,10 +50,10 @@ const contactMethods = [
   },
   {
     icon: <FaMapMarkerAlt className="h-5 w-5" />,
-    title: "Service Area",
-    text: "We serve South Florida with residential and commercial garage door service, including Palm Beach, Broward, Miami-Dade, and nearby areas.",
-    action: "View Service Areas",
-    href: "/locations",
+    title: SITE_IDENTITY.primaryLocation.label,
+    text: "Visit our staffed Miami location or use the directions link to plan your visit.",
+    action: SITE_IDENTITY.primaryLocation.displayAddress,
+    href: SITE_IDENTITY.primaryLocation.mapsUrl,
   },
 ];
 
@@ -299,9 +299,11 @@ export default function ContactPage() {
                         Hours
                       </p>
                       <p className="mt-1 text-base leading-7 text-slate-700">
-                        Call for current availability and scheduling.
-                        Emergency-related garage door issues should be reported
-                        as soon as possible.
+                        {SITE_IDENTITY.businessHours.weekdayDisplay}
+                        <br />
+                        {SITE_IDENTITY.businessHours.saturdayDisplay}
+                        <br />
+                        {SITE_IDENTITY.businessHours.sundayDisplay}
                       </p>
                     </div>
                   </div>
@@ -312,11 +314,18 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm font-black uppercase tracking-wide text-slate-500">
-                        Coverage
+                        Miami office
                       </p>
-                      <p className="mt-1 text-base leading-7 text-slate-700">
-                        SecureLifts serves homeowners and businesses throughout
-                        South Florida.
+                      <a
+                        href={SITE_IDENTITY.primaryLocation.mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-1 inline-block text-base font-bold leading-7 text-slate-900 hover:text-red-600"
+                      >
+                        {SITE_IDENTITY.primaryLocation.displayAddress}
+                      </a>
+                      <p className="mt-2 text-base leading-7 text-slate-700">
+                        Staffed location serving customers across South Florida.
                       </p>
                     </div>
                   </div>
