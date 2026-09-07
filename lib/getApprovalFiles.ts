@@ -67,6 +67,8 @@ function buildPrettyTitle(file: string) {
 }
 
 export function getApprovalFiles(manufacturer: string): ApprovalFile[] {
+  // Only a single directory name may be selected from the public library.
+  if (!manufacturer || manufacturer === "." || manufacturer === ".." || /[/\\]/.test(manufacturer)) return [];
   const dirPath = path.join(
     process.cwd(),
     "public",
@@ -85,7 +87,7 @@ export function getApprovalFiles(manufacturer: string): ApprovalFile[] {
     .map((file) => ({
       name: file,
       title: buildPrettyTitle(file),
-      url: `/resources/approvals/${manufacturer}/${file}`,
+      url: `/resources/approvals/${encodeURIComponent(manufacturer)}/${encodeURIComponent(file)}`,
     }))
     .sort((a, b) => a.title.localeCompare(b.title));
 }

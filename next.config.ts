@@ -43,6 +43,10 @@ const legacyRedirects = [
     destination: "/garage-door-opener/liftmaster-85870",
   },
   {
+    source: "/liftmaster-85870-ac-chain-drive-wi-fi-garage-door-opener",
+    destination: "/garage-door-opener/liftmaster-85870",
+  },
+  {
     source: "/garage-door-repair-in-palm-beach",
     destination: "/garage-door-repair/west-palm-beach",
   },

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema";
-import ResourceSearchClient from "../../components/ResourceSearchClient";
-import { approvalRecords } from "../../../data/approvals";
+import AutoApprovalLibraryClient from "../../components/AutoApprovalLibraryClient";
+import { getAllApprovalFiles } from "@/lib/getAllApprovalFiles";
 
 export const metadata: Metadata = {
   title: "Hurricane Garage Door Approvals & NOA | SecureLifts",
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function HurricaneGarageDoorApprovalsPage() {
+  const records = getAllApprovalFiles();
   return (
     <main className="bg-white text-gray-900">
       <BreadcrumbSchema
@@ -45,8 +46,8 @@ export default function HurricaneGarageDoorApprovalsPage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-white/85">
-            Search hosted approval packets by manufacturer, product series, and
-            source database. Use this library to compare official Florida Product
+            Search available approval packets by manufacturer and document name.
+            Use this library to compare Florida Product
             Approval and Miami-Dade NOA documents for hurricane garage doors.
           </p>
         </div>
@@ -54,7 +55,7 @@ export default function HurricaneGarageDoorApprovalsPage() {
 
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          <ResourceSearchClient records={approvalRecords} />
+          <AutoApprovalLibraryClient records={records} />
         </div>
       </section>
 
@@ -76,9 +77,8 @@ export default function HurricaneGarageDoorApprovalsPage() {
             </p>
 
             <p className="text-lg leading-8 text-gray-700">
-              This setup gives you a fast searchable library on your own site,
-              while still preserving direct links to the official approval
-              records.
+              Check the approval number, expiration date, door size, and installation
+              requirements against the official record before selecting a door.
             </p>
           </div>
 

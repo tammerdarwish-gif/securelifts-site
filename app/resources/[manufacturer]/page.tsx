@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema";
 import { getApprovalFiles } from "@/lib/getApprovalFiles";
@@ -19,11 +20,13 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
+  if (getApprovalFiles(resolvedParams.manufacturer).length === 0) notFound();
   const name = formatName(resolvedParams.manufacturer);
 
   return {
     title: `${name} Garage Door Approvals | SecureLifts`,
     description: `Browse ${name} hurricane garage door approval PDFs and technical documents.`,
+    alternates: { canonical: `https://securelifts.com/resources/${encodeURIComponent(resolvedParams.manufacturer)}` },
   };
 }
 
@@ -32,6 +35,7 @@ export default async function ManufacturerPage({ params }: PageProps) {
   const slug = resolvedParams.manufacturer;
   const name = formatName(slug);
   const files = getApprovalFiles(slug);
+  if (files.length === 0) notFound();
 
   return (
     <main className="bg-white text-gray-900">

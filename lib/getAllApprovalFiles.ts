@@ -102,7 +102,7 @@ export function getAllApprovalFiles(): ApprovalFileRecord[] {
         manufacturerSlug,
         fileName,
         title: formatTitle(fileName),
-        url: `/resources/approvals/${manufacturerSlug}/${fileName}`,
+        url: `/resources/approvals/${encodeURIComponent(manufacturerSlug)}/${encodeURIComponent(fileName)}`,
       });
     }
   }

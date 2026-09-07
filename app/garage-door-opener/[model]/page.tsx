@@ -97,7 +97,7 @@ export default async function OpenerProductPage({ params }: PageProps) {
               review: {
                 "@type": "Review",
                 author: {
-                  "@type": "Team",
+                  "@type": "Organization",
                   name: "SecureLifts Product Team",
                 },
                 reviewRating: {

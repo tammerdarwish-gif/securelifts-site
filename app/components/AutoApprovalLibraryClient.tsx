@@ -38,6 +38,7 @@ export default function AutoApprovalLibraryClient({ records }: Props) {
       <div className="grid gap-4 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm md:grid-cols-[1.6fr_0.8fr]">
         <input
           type="text"
+          aria-label="Search approval documents"
           placeholder="Search documents (series, specs, etc.)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -45,6 +46,7 @@ export default function AutoApprovalLibraryClient({ records }: Props) {
         />
 
         <select
+          aria-label="Filter by manufacturer"
           value={manufacturer}
           onChange={(e) => setManufacturer(e.target.value)}
           className="rounded-xl border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:border-red-500"
@@ -67,7 +69,7 @@ export default function AutoApprovalLibraryClient({ records }: Props) {
                 {file.manufacturer}
               </p>
 
-              <h3 className="`min-h-20` text-lg font-semibold text-gray-900 group-hover:text-red-600">
+              <h3 className="min-h-20 text-lg font-semibold text-gray-900 group-hover:text-red-600">
                 {file.title}
               </h3>
 
