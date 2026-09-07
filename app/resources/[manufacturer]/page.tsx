@@ -10,6 +10,7 @@ type PageProps = {
 };
 
 function formatName(slug: string) {
+  if (slug === "dab-hurricane-naster") return "DAB Hurricane Master";
   return slug
     .split("-")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))

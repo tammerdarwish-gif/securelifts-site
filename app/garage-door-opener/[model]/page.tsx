@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -73,6 +72,14 @@ export default async function OpenerProductPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        name: product.name,
+        description: product.summary,
+        url: canonical,
+      },
+      // Product snippets require a real offer, review, or aggregate rating.
+      // Pages without one retain descriptive WebPage and breadcrumb markup.
+      ...(product.productRating ? [{
         "@type": "Product",
         name: product.name,
         brand: {
@@ -109,7 +116,7 @@ export default async function OpenerProductPage({ params }: PageProps) {
               },
             }
           : {}),
-      },
+      }] : []),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -143,10 +150,10 @@ export default async function OpenerProductPage({ params }: PageProps) {
 
   return (
     <>
-      <Script
+      <script
         id={`${product.slug}-product-schema`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
 
       <main className="bg-white text-slate-900">

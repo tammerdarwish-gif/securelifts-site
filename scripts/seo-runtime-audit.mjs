@@ -106,6 +106,7 @@ try {
 
   const approvals = await fetch(`${localOrigin}/resources/hurricane-garage-door-approvals`);
   const approvalHtml = await approvals.text();
+  assert.doesNotMatch(approvalHtml, /annual(?:%20|\s)+report/i, "Corporate reports are not door approval documents");
   const pdfPaths = [...new Set([...approvalHtml.matchAll(/href="([^"<>]+\.pdf)"/gi)].map(m => m[1].replace(/&amp;/g, "&").replace(/&#x27;/g, "'")))];
   assert.ok(pdfPaths.length > 10, "The approval library must expose real documents");
   for (const pathname of pdfPaths) {
@@ -120,6 +121,10 @@ try {
     assert.match(html, /"author":\{"@type":"Organization","name":"SecureLifts Product Team"\}/);
     assert.doesNotMatch(html, /"@type":"Team"/);
   }
+  const unratedOpener = await fetch(`${localOrigin}/garage-door-opener/liftmaster-98022`);
+  const unratedHtml = await unratedOpener.text();
+  assert.match(unratedHtml, /"@type":"WebPage"/);
+  assert.doesNotMatch(unratedHtml, /"@type":"Product"/, "Do not emit incomplete product-snippet markup without an offer or rating");
 
   const sitemapResponse = await fetch(`${localOrigin}/sitemap.xml`);
   assert.equal(sitemapResponse.status, 200);

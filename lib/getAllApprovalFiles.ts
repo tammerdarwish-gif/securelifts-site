@@ -10,6 +10,7 @@ export type ApprovalFileRecord = {
 };
 
 function formatManufacturerName(slug: string) {
+  if (slug === "dab-hurricane-naster") return "DAB Hurricane Master";
   return slug
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -91,7 +92,7 @@ export function getAllApprovalFiles(): ApprovalFileRecord[] {
 
     const pdfs = fs
       .readdirSync(manufacturerDir, { withFileTypes: true })
-      .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".pdf"))
+      .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".pdf") && !/annual\s+report/i.test(entry.name))
       .map((entry) => entry.name);
 
     const manufacturer = formatManufacturerName(manufacturerSlug);

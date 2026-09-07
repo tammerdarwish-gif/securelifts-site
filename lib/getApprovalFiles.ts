@@ -81,7 +81,7 @@ export function getApprovalFiles(manufacturer: string): ApprovalFile[] {
 
   const files = fs
     .readdirSync(dirPath)
-    .filter((file) => file.toLowerCase().endsWith(".pdf"));
+    .filter((file) => file.toLowerCase().endsWith(".pdf") && !/annual\s+report/i.test(file));
 
   return files
     .map((file) => ({
