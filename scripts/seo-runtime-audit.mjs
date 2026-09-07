@@ -42,6 +42,8 @@ try {
     ["/doral", "/garage-door-repair/doral"],
     ["/wellington", "/garage-door-repair/wellington"],
     ["/boca-raton", "/garage-door-repair/boca-raton"],
+    ["/heavy-duty-5015-rolling-grille", "/commercial-garage-door-services"],
+    ["/commercial-roll-up-door-repair", "/commercial-garage-door-services"],
   ]) {
     const redirect = await manual(source);
     assert.ok([301, 308].includes(redirect.status), `${source} must permanently redirect`);

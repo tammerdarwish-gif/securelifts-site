@@ -200,7 +200,11 @@ const legacyRedirects = [
   },
   {
     source: "/heavy-duty-5015-rolling-grille",
-    destination: "/commercial-roll-up-door-repair",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/commercial-roll-up-door-repair",
+    destination: "/commercial-garage-door-services",
   },
   {
     source: "/firecoil",
