@@ -77,19 +77,6 @@ export default async function ManufacturerPage({ params }: PageProps) {
 
       <section className="px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          {files.length === 0 ? (
-            <div className="rounded-3xl border border-gray-200 bg-gray-50 px-6 py-16 text-center">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                No approval PDFs found
-              </h2>
-              <p className="mt-3 text-gray-600">
-                Drop PDF files into this folder to make them appear automatically:
-              </p>
-              <p className="mt-2 inline-block rounded-xl bg-white px-4 py-3 font-mono text-sm text-gray-800">
-                public/resources/approvals/{slug}
-              </p>
-            </div>
-          ) : (
             <>
               <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div>
@@ -123,7 +110,7 @@ export default async function ManufacturerPage({ params }: PageProps) {
                           {name}
                         </p>
 
-                        <h3 className="`min-h-21` text-xl font-semibold leading-8 text-gray-900 transition group-hover:text-red-600">
+                        <h3 className="min-h-21 text-xl font-semibold leading-8 text-gray-900 transition group-hover:text-red-600">
                           {file.title}
                         </h3>
                       </div>
@@ -159,7 +146,6 @@ export default async function ManufacturerPage({ params }: PageProps) {
                 ))}
               </div>
             </>
-          )}
         </div>
       </section>
 

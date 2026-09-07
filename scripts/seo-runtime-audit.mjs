@@ -79,6 +79,48 @@ try {
   assert.equal(/rel="canonical"/i.test(missingHtml), false);
   assert.equal(/"@type":"(FAQPage|Service|LocalBusiness|HomeAndConstructionBusiness)"/i.test(missingHtml), false);
 
+  // Search Console regression coverage for pages outside the primary sitemap.
+  for (const route of [
+    "garage-door-replacement", "commercial-garage-door-maintenance",
+    "commercial-garage-door-repair", "emergency-commercial-garage-door-repair",
+    "industrial-door-installation", "industrial-door-repair", "loading-dock-door-repair",
+    "warehouse-door-repair", "off-track-garage-door-repair",
+  ]) {
+    const pathname = `/${route}/west-palm-beach`;
+    const response = await manual(pathname);
+    assert.equal(response.status, 200, pathname);
+    const page = metadata(await response.text());
+    const canonicalRoute = route === "off-track-garage-door-repair" ? "garage-door-off-track-repair" : route;
+    assert.equal(page.canonical, `${productionOrigin}/${canonicalRoute}/west-palm-beach`, pathname);
+    assert.match(page.title, /West Palm Beach/, pathname);
+    assert.equal(page.noindex, false, pathname);
+  }
+
+  const legacyOpener = await manual("/liftmaster-85870-ac-chain-drive-wi-fi-garage-door-opener");
+  assert.equal(legacyOpener.status, 308);
+  assert.equal(new URL(legacyOpener.headers.get("location"), localOrigin).pathname, "/garage-door-opener/liftmaster-85870");
+
+  const unknownManufacturer = await manual("/resources/not-a-real-manufacturer");
+  assert.equal(unknownManufacturer.status, 404);
+  assert.equal(metadata(await unknownManufacturer.text()).noindex, true);
+
+  const approvals = await fetch(`${localOrigin}/resources/hurricane-garage-door-approvals`);
+  const approvalHtml = await approvals.text();
+  const pdfPaths = [...new Set([...approvalHtml.matchAll(/href="([^"<>]+\.pdf)"/gi)].map(m => m[1].replace(/&amp;/g, "&").replace(/&#x27;/g, "'")))];
+  assert.ok(pdfPaths.length > 10, "The approval library must expose real documents");
+  for (const pathname of pdfPaths) {
+    const pdf = await fetch(new URL(pathname, localOrigin));
+    assert.equal(pdf.status, 200, pathname);
+    assert.match(pdf.headers.get("content-type") || "", /application\/pdf/, pathname);
+    await pdf.body?.cancel();
+  }
+  for (const model of ["liftmaster-84505r", "liftmaster-8365-267"]) {
+    const response = await fetch(`${localOrigin}/garage-door-opener/${model}`);
+    const html = await response.text();
+    assert.match(html, /"author":\{"@type":"Organization","name":"SecureLifts Product Team"\}/);
+    assert.doesNotMatch(html, /"@type":"Team"/);
+  }
+
   const sitemapResponse = await fetch(`${localOrigin}/sitemap.xml`);
   assert.equal(sitemapResponse.status, 200);
   const sitemapXml = await sitemapResponse.text();
@@ -113,7 +155,7 @@ try {
   }));
 
   assert.deepEqual(failures, []);
-  console.log(`Runtime SEO audit passed for ${urls.length} sitemap URLs, redirects, and the 404 route.`);
+  console.log(`Runtime SEO audit passed for ${urls.length} sitemap URLs, redirects, city metadata, approval PDFs, review authors, and 404 routes.`);
 } finally {
   server.kill("SIGTERM");
 }

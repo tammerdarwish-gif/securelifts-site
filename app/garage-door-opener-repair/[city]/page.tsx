@@ -167,7 +167,7 @@ export default async function CityPage({
   },
   
   {
-    href: `/off-track-garage-door-repair/${city}`,
+    href: `/garage-door-off-track-repair/${city}`,
     label: `Off-Track Garage Door Repair in ${cityName}`,
   },
   {

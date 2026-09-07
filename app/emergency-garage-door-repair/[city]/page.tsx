@@ -110,7 +110,7 @@ export default async function EmergencyGarageDoorRepairCityPage({
       label: `Garage Door Opener Repair in ${cityName}`,
     },
     {
-      href: `/off-track-garage-door-repair/${city}`,
+      href: `/garage-door-off-track-repair/${city}`,
       label: `Off-Track Garage Door Repair in ${cityName}`,
     },
     {

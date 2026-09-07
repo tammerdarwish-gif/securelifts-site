@@ -13,7 +13,7 @@ export const serviceRoutes = {
   garageDoorReplacement: "/garage-door-replacement",
   brokenSpringRepair: "/broken-spring-repair",
   emergencyGarageDoorRepair: "/emergency-garage-door-repair",
-  offTrackGarageDoorRepair: "/off-track-garage-door-repair",
+  offTrackGarageDoorRepair: "/garage-door-off-track-repair",
   garageDoorCableRepair: "/garage-door-cable-repair",
   garageDoorOpenerRepair: "/garage-door-opener-repair",
   garageDoorPanelReplacement: "/garage-door-panel-replacement",

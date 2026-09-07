@@ -3,6 +3,18 @@ import { getAllCitySlugs } from "./lib/cityPages";
 
 const legacyRedirects = [
   {
+    source: "/commercial-garage-doors",
+    destination: "/commercial-garage-door-services",
+  },
+  {
+    source: "/liftmaster-83650-267-chain-drive-opener",
+    destination: "/garage-door-opener/liftmaster-8365-267",
+  },
+  {
+    source: "/garage-door-repair-in-loxahatchee-groves",
+    destination: "/garage-door-repair/loxahatchee",
+  },
+  {
     source: "/belt-drive-garage-door-openers",
     destination: "/garage-door-opener#belt-drive-openers",
   },
@@ -281,10 +293,6 @@ const legacyRedirects = [
   {
     source: "/deeringcraft-garage-door",
     destination: "/hurricane-garage-doors/carriage-house",
-  },
-  {
-    source: "/search/:path*",
-    destination: "/",
   },
 ].flatMap(({ source, destination }) => [
   {
