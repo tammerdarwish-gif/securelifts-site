@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { after } from "next/server";
 import { syncLead } from "@/lib/leadSync";
 import { normalizeAndValidateLead } from "@/lib/leadRequest";
+import { getLeadNotificationEmail } from "@/lib/leadDelivery";
 
 const MAX_REQUEST_BYTES = 32_000;
 const recentLeads = new Map<string, "processing" | "complete">();
@@ -85,8 +86,9 @@ export async function POST(req: Request) {
   recentLeads.set(lead.leadId, "processing");
 
   const resend = new Resend(apiKey);
+  const notificationEmail = getLeadNotificationEmail();
   const emailPayload = {
-    to: "info@securelifts.com",
+    to: notificationEmail,
     replyTo: lead.email || undefined,
     subject: `New ${lead.service} Lead - SecureLifts`,
     html: `
@@ -117,6 +119,12 @@ export async function POST(req: Request) {
       const result = await resend.emails.send({ from, ...emailPayload });
       if (!result.error) {
         emailSent = true;
+        console.info("LEAD EMAIL ACCEPTED", {
+          leadId: lead.leadId,
+          from,
+          to: notificationEmail,
+          emailId: result.data?.id,
+        });
         break;
       }
       console.error("RESEND API ERROR", { leadId: lead.leadId, from, error: result.error });

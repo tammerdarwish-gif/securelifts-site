@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type QuickLeadFormProps = {
   defaultService?: string;
@@ -40,13 +40,27 @@ export default function QuickLeadForm({
 }: QuickLeadFormProps) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const leadIdRef = useRef<string | null>(null);
+  const statusRef = useRef<HTMLDivElement>(null);
   const visibleServiceOptions = serviceOptions.includes(defaultService)
     ? serviceOptions
     : [defaultService, ...serviceOptions];
 
+  useEffect(() => {
+    if (!submitted && !errorMessage) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      statusRef.current?.focus({ preventScroll: true });
+      statusRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [submitted, errorMessage]);
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setErrorMessage("");
     setLoading(true);
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -104,7 +118,10 @@ export default function QuickLeadForm({
       };
 
       if (!response.ok || !data.success) {
-        alert(data.error || "Something went wrong. Please call SecureLifts.");
+        setErrorMessage(
+          data.error ||
+            "Your request could not be sent. Please call SecureLifts at (866) 828-1818."
+        );
         return;
       }
 
@@ -116,7 +133,9 @@ export default function QuickLeadForm({
       leadIdRef.current = null;
       form.reset();
     } catch {
-      alert("The request could not be sent. Please call SecureLifts now.");
+      setErrorMessage(
+        "Your request could not be sent. Please call SecureLifts at (866) 828-1818."
+      );
     } finally {
       setLoading(false);
     }
@@ -124,7 +143,13 @@ export default function QuickLeadForm({
 
   if (submitted) {
     return (
-      <div className="rounded-3xl border border-slate-200 bg-white p-7 !text-slate-950 shadow-xl">
+      <div
+        ref={statusRef}
+        role="status"
+        aria-live="polite"
+        tabIndex={-1}
+        className="rounded-3xl border border-green-200 bg-white p-7 !text-slate-950 shadow-xl outline-none"
+      >
         <div className="flex items-start gap-3">
           <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-black !text-white">
             ✓
@@ -152,6 +177,7 @@ export default function QuickLeadForm({
   return (
     <form
       onSubmit={handleSubmit}
+      aria-busy={loading}
       className="rounded-3xl border border-slate-200 bg-white p-6 pb-28 shadow-xl md:p-7"
     >
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-700">
@@ -282,6 +308,17 @@ export default function QuickLeadForm({
           .
         </span>
       </label>
+
+      {errorMessage ? (
+        <div
+          ref={statusRef}
+          role="alert"
+          tabIndex={-1}
+          className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-semibold text-red-800 outline-none"
+        >
+          {errorMessage}
+        </div>
+      ) : null}
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto]">
         <button

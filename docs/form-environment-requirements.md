@@ -15,6 +15,7 @@ No secret values belong in this document.
 | Variable | Purpose |
 |---|---|
 | `RESEND_FROM_EMAIL` | Verified Resend sender identity. The application retains verified-domain fallback senders. |
+| `LEAD_NOTIFICATION_EMAIL` | Destination for new lead alerts. Defaults to the active `info@aaagds.com` mailbox. |
 | `FIELD_PULSE_API_KEY` | Enables FieldPulse customer/job synchronization. |
 | `HIGHLEVEL_PRIVATE_INTEGRATION_TOKEN` | Enables GoHighLevel contact/opportunity synchronization. |
 
@@ -36,4 +37,3 @@ Separate location creation is disabled unless `FIELD_PULSE_CREATE_LOCATION=true`
 - Responses do not expose provider payloads, credentials or stack traces.
 - Honeypot and stable lead IDs reduce obvious spam and repeated submissions.
 - Automated tests validate pure normalization only and never contact real providers.
-
