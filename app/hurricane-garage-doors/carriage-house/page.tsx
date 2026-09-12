@@ -1076,7 +1076,7 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                                 <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 px-4 py-8 target:flex">
                                   <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged Canyon Ridge Modern design preview" />
                                   <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white">×</a>
+                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white" aria-label="Close enlarged preview">×</a>
                                     <div className="relative h-[40vh] min-h-[240px] w-full bg-white md:h-[46vh]">
                                       <Image src={design.image} alt={design.title} fill className="object-contain p-10" sizes="100vw" />
                                     </div>
@@ -1112,7 +1112,7 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                                 <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 px-4 py-8 target:flex">
                                   <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged Canyon Ridge Modern glass preview" />
                                   <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white">×</a>
+                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white" aria-label="Close enlarged preview">×</a>
                                     <div className="relative h-[40vh] min-h-[240px] w-full bg-white md:h-[46vh]">
                                       <Image src={glass.image} alt={glass.title} fill className="object-contain p-10" sizes="100vw" />
                                     </div>
@@ -1148,7 +1148,7 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                                 <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 px-4 py-8 target:flex">
                                   <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged Canyon Ridge Modern finish preview" />
                                   <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white">×</a>
+                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white" aria-label="Close enlarged preview">×</a>
                                     <div className="relative h-[40vh] min-h-[240px] w-full bg-white md:h-[46vh]">
                                       <Image src={finish.image} alt={finish.title} fill className="object-contain p-10" sizes="100vw" />
                                     </div>
@@ -1355,9 +1355,9 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                                 </a>
 
                                 <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 px-4 py-8 target:flex">
-                                  <a href="#showroom-selector" className="absolute inset-0" />
+                                  <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged preview" />
                                   <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white">×</a>
+                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-xl font-bold text-white" aria-label="Close enlarged preview">×</a>
                                     <div className="relative h-[40vh] min-h-[240px] w-full bg-white">
                                       <Image src={design.image} alt={design.title} fill className="object-contain p-10" />
                                     </div>
@@ -1387,9 +1387,9 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                                 </a>
 
                                 <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 target:flex">
-                                  <a href="#showroom-selector" className="absolute inset-0" />
+                                  <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged preview" />
                                   <div className="relative w-full max-w-2xl bg-white rounded-3xl">
-                                    <a href="#showroom-selector" className="absolute right-4 top-4 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full">×</a>
+                                    <a href="#showroom-selector" className="absolute right-4 top-4 z-20 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Close enlarged preview">×</a>
                                     <div className="relative h-[40vh] w-full">
                                       <Image src={top.image} alt={top.title} fill className="object-contain p-10" />
                                     </div>
@@ -1635,9 +1635,9 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                           </a>
 
                           <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 px-4 py-8 target:flex">
-                            <a href="#showroom-selector" className="absolute inset-0" />
+                            <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged preview" />
                             <div className="relative z-10 w-full max-w-2xl rounded-3xl bg-white">
-                              <a href="#showroom-selector" className="absolute right-4 top-4 text-xl text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full">×</a>
+                              <a href="#showroom-selector" className="absolute right-4 top-4 z-20 text-xl text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Close enlarged preview">×</a>
                               <div className="relative h-[40vh] w-full">
                                 <Image src={design.image} alt={design.title} fill className="object-contain p-10" />
                               </div>
@@ -1668,9 +1668,9 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                           </a>
 
                           <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 target:flex">
-                            <a href="#showroom-selector" className="absolute inset-0" />
+                            <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged preview" />
                             <div className="relative w-full max-w-2xl bg-white rounded-3xl">
-                              <a href="#showroom-selector" className="absolute right-4 top-4 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full">×</a>
+                              <a href="#showroom-selector" className="absolute right-4 top-4 z-20 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Close enlarged preview">×</a>
                               <div className="relative h-[40vh] w-full">
                                 <Image src={top.image} alt={top.title} fill className="object-contain p-10" />
                               </div>
@@ -1701,9 +1701,9 @@ export default function CarriageHouseHurricaneGarageDoorsPage() {
                           </a>
 
                           <div id={modalId} className="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 target:flex">
-                            <a href="#showroom-selector" className="absolute inset-0" />
+                            <a href="#showroom-selector" className="absolute inset-0" aria-label="Close enlarged preview" />
                             <div className="relative w-full max-w-2xl bg-white rounded-3xl">
-                              <a href="#showroom-selector" className="absolute right-4 top-4 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full">×</a>
+                              <a href="#showroom-selector" className="absolute right-4 top-4 z-20 text-white bg-black/70 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Close enlarged preview">×</a>
                               <div className="relative h-[40vh] w-full">
                                 <Image src={finish.image} alt={finish.title} fill className="object-contain p-10" />
                               </div>
